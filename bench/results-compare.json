@@ -1,0 +1,7770 @@
+{
+ "env": {
+  "quillwork": "0.0.3",
+  "adeu": "3.0.7",
+  "docx-scalpel (Docxodus client)": "0.9.0",
+  "python-docx": "1.2.0",
+  "lxml": "6.1.3",
+  "tiktoken": "0.14.0",
+  "python": "3.12.13",
+  "os": "Darwin 25.6.0 arm64 (macOS 26.6.2)",
+  "date": "2026-10-27"
+ },
+ "edit_mode": {
+  "quillwork": "tracked (replace_text)",
+  "adeu": "tracked (ModifyText)",
+  "docxodus": "tracked (RENDER_INLINE)",
+  "python-docx": "overwrite (no tracked-change API)"
+ },
+ "rows": [
+  {
+   "file": "corpus/synthetic/doc200.docx",
+   "bytes": 188139,
+   "word": "Artikel",
+   "target_paragraph": 0,
+   "engines": {
+    "quillwork": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.009
+     },
+     "noop": {
+      "file_identical": true,
+      "entries_identical": 17,
+      "parts_identical": 17,
+      "entries": 17
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 17,
+      "parts_total": 17,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "note": "byte-identical to input"
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.074
+     },
+     "edit": {
+      "other_entries_changed": [],
+      "paragraphs_changed": [
+       0
+      ],
+      "paragraphs": 3391,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 3391,
+      "paragraph_count_after": 3391
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    },
+    "adeu": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.111
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 15,
+      "entries": 17
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 17,
+      "parts_total": 17,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.634
+     },
+     "edit": {
+      "other_entries_changed": [
+       "word/fontTable.xml",
+       "word/webSettings.xml"
+      ],
+      "paragraphs_changed": [
+       0
+      ],
+      "paragraphs": 3391,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 3391,
+      "paragraph_count_after": 3391
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": false,
+       "decision": "failed",
+       "new_errors": [
+        {
+         "code": "openxml.sch_undeclaredattribute",
+         "category": "openXml",
+         "disposition": "new",
+         "message": "Open XML validation Schema 'Sch_UndeclaredAttribute' at '/w:document[1]/w:body[1]/w:p[1]/w:del[1]' on '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}del'.",
+         "owningPartUri": "/word/document.xml"
+        },
+        {
+         "code": "openxml.sch_undeclaredattribute",
+         "category": "openXml",
+         "disposition": "new",
+         "message": "Open XML validation Schema 'Sch_UndeclaredAttribute' at '/w:document[1]/w:body[1]/w:p[1]/w:ins[1]' on '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}ins'.",
+         "owningPartUri": "/word/document.xml"
+        }
+       ],
+       "new_error_count": 2
+      }
+     }
+    },
+    "docxodus": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.193
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 14,
+      "entries": 17
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 17,
+      "parts_total": 17,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.856
+     },
+     "edit": {
+      "other_entries_changed": [
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       0,
+       3,
+       5,
+       6,
+       7,
+       8,
+       9,
+       13,
+       15,
+       17,
+       18,
+       19,
+       21,
+       22,
+       24,
+       26,
+       29,
+       31,
+       33,
+       34,
+       35,
+       36,
+       41,
+       46,
+       47,
+       48,
+       51,
+       52,
+       53,
+       54,
+       55,
+       59,
+       60,
+       61,
+       62,
+       63,
+       64,
+       65,
+       69,
+       70,
+       71,
+       72,
+       75,
+       76,
+       77,
+       79,
+       83,
+       84,
+       109,
+       111,
+       112,
+       113,
+       114,
+       115,
+       120,
+       123,
+       124,
+       125,
+       126,
+       127,
+       128,
+       130,
+       131,
+       132,
+       134,
+       135,
+       136,
+       137,
+       140,
+       141,
+       144,
+       146,
+       147,
+       148,
+       149,
+       152,
+       153,
+       157,
+       158,
+       162,
+       163,
+       164,
+       165,
+       169,
+       170,
+       171,
+       173,
+       178,
+       180,
+       182,
+       183,
+       184,
+       185,
+       188,
+       190,
+       191,
+       192,
+       193,
+       218,
+       220,
+       222,
+       223,
+       224,
+       225,
+       228,
+       229,
+       230,
+       234,
+       235,
+       236,
+       239,
+       241,
+       242,
+       243,
+       246,
+       247,
+       248,
+       249,
+       252,
+       254,
+       255,
+       257,
+       258,
+       259,
+       260,
+       266,
+       267,
+       268,
+       269,
+       273,
+       274,
+       275,
+       276,
+       280,
+       281,
+       282,
+       283,
+       284,
+       287,
+       288,
+       294,
+       300,
+       301,
+       303,
+       307,
+       308,
+       309,
+       312,
+       314,
+       315,
+       316,
+       341,
+       347,
+       348,
+       349,
+       350,
+       355,
+       357,
+       359,
+       361,
+       362,
+       363,
+       364,
+       365,
+       368,
+       371,
+       375,
+       377,
+       378,
+       381,
+       382,
+       383,
+       384,
+       388,
+       389,
+       394,
+       395,
+       400,
+       401,
+       402,
+       406,
+       408,
+       409,
+       412,
+       415,
+       416,
+       417,
+       418,
+       422,
+       423,
+       427,
+       430,
+       455,
+       459,
+       460,
+       461,
+       462,
+       465,
+       466,
+       467,
+       470,
+       471,
+       472,
+       475,
+       476,
+       477,
+       478,
+       483,
+       486,
+       490,
+       491,
+       492,
+       493,
+       497,
+       499,
+       500,
+       501,
+       502,
+       507,
+       511,
+       512,
+       513,
+       517,
+       518,
+       521,
+       522,
+       525,
+       527,
+       528,
+       529,
+       530,
+       534,
+       535,
+       540,
+       541,
+       542,
+       567,
+       570,
+       574,
+       576,
+       577,
+       581,
+       583,
+       584,
+       587,
+       589,
+       590,
+       592,
+       593,
+       594,
+       596,
+       598,
+       602,
+       604,
+       605,
+       606,
+       607,
+       612,
+       613,
+       614,
+       617,
+       619,
+       620,
+       621,
+       622,
+       625,
+       626,
+       627,
+       628,
+       629,
+       631,
+       632,
+       633,
+       634,
+       640,
+       641,
+       642,
+       643,
+       648,
+       649,
+       650,
+       651,
+       654,
+       655,
+       656,
+       657,
+       660,
+       685,
+       689,
+       690,
+       691,
+       694,
+       695,
+       697,
+       701,
+       702,
+       703,
+       704,
+       705,
+       708,
+       709,
+       710,
+       711,
+       714,
+       715,
+       717,
+       720,
+       721,
+       725,
+       726,
+       727,
+       728,
+       731,
+       732,
+       733,
+       734,
+       735,
+       740,
+       741,
+       742,
+       748,
+       749,
+       750,
+       752,
+       756,
+       757,
+       758,
+       759,
+       761,
+       763,
+       764,
+       767,
+       768,
+       769,
+       770,
+       775,
+       776,
+       777,
+       778,
+       779,
+       782,
+       783,
+       784,
+       785,
+       810,
+       813,
+       814,
+       820,
+       821,
+       822,
+       825,
+       826,
+       828,
+       830,
+       831,
+       832,
+       835,
+       836,
+       838,
+       839,
+       840,
+       844,
+       845,
+       846,
+       847,
+       852,
+       853,
+       856,
+       857,
+       858,
+       859,
+       863,
+       864,
+       865,
+       868,
+       870,
+       871,
+       873,
+       874,
+       875,
+       880,
+       881,
+       885,
+       886,
+       887,
+       889,
+       891,
+       892,
+       893,
+       918,
+       921,
+       923,
+       924,
+       925,
+       928,
+       930,
+       931,
+       932,
+       937,
+       938,
+       939,
+       944,
+       945,
+       946,
+       947,
+       948,
+       952,
+       954,
+       955,
+       956,
+       958,
+       959,
+       960,
+       961,
+       962,
+       963,
+       966,
+       967,
+       968,
+       972,
+       973,
+       974,
+       980,
+       981,
+       982,
+       983,
+       989,
+       990,
+       991,
+       993,
+       996,
+       997,
+       1001,
+       1003,
+       1004,
+       1005,
+       1006,
+       1011,
+       1012,
+       1015,
+       1016,
+       1017,
+       1020,
+       1021,
+       1022,
+       1047,
+       1050,
+       1052,
+       1053,
+       1054,
+       1055,
+       1058,
+       1059,
+       1060,
+       1064,
+       1065,
+       1066,
+       1070,
+       1071,
+       1072,
+       1073,
+       1076,
+       1077,
+       1078,
+       1079,
+       1083,
+       1084,
+       1086,
+       1090,
+       1091,
+       1096,
+       1097,
+       1098,
+       1099,
+       1101,
+       1102,
+       1104,
+       1105,
+       1108,
+       1114,
+       1115,
+       1117,
+       1118,
+       1122,
+       1123,
+       1124,
+       1125,
+       1126,
+       1127,
+       1128,
+       1129,
+       1154,
+       1156,
+       1157,
+       1158,
+       1159,
+       1162,
+       1163,
+       1164,
+       1165,
+       1166,
+       1168,
+       1170,
+       1171,
+       1172,
+       1173,
+       1174,
+       1175,
+       1178,
+       1179,
+       1180,
+       1181,
+       1182,
+       1183,
+       1184,
+       1185,
+       1186,
+       1187,
+       1190,
+       1191,
+       1192,
+       1193,
+       1194,
+       1199,
+       1200,
+       1206,
+       1207,
+       1208,
+       1209,
+       1211,
+       1212,
+       1213,
+       1216,
+       1217,
+       1218,
+       1219,
+       1220,
+       1223,
+       1226,
+       1227,
+       1230,
+       1231,
+       1232,
+       1233,
+       1236,
+       1242,
+       1243,
+       1244,
+       1269,
+       1272,
+       1276,
+       1277,
+       1278,
+       1281,
+       1282,
+       1285,
+       1286,
+       1287,
+       1288,
+       1290,
+       1291,
+       1293,
+       1294,
+       1295,
+       1296,
+       1299,
+       1300,
+       1304,
+       1305,
+       1309,
+       1310,
+       1311,
+       1312,
+       1315,
+       1316,
+       1317,
+       1318,
+       1322,
+       1323,
+       1324,
+       1327,
+       1328,
+       1329,
+       1330,
+       1335,
+       1336,
+       1337,
+       1338,
+       1339,
+       1340,
+       1343,
+       1347,
+       1348,
+       1350,
+       1352,
+       1353,
+       1354,
+       1379,
+       1384,
+       1385,
+       1386,
+       1391,
+       1392,
+       1393,
+       1394,
+       1395,
+       1396,
+       1399,
+       1400,
+       1401,
+       1406,
+       1407,
+       1410,
+       1412,
+       1413,
+       1414,
+       1417,
+       1418,
+       1419,
+       1420,
+       1422,
+       1423,
+       1424,
+       1430,
+       1431,
+       1436,
+       1440,
+       1441,
+       1442,
+       1443,
+       1446,
+       1447,
+       1448,
+       1452,
+       1453,
+       1454,
+       1459,
+       1460,
+       1461,
+       1462,
+       1463,
+       1466,
+       1467,
+       1468,
+       1472,
+       1473,
+       1474,
+       1499,
+       1500,
+       1503,
+       1505,
+       1506,
+       1507,
+       1508,
+       1511,
+       1512,
+       1513,
+       1514,
+       1519,
+       1521,
+       1524,
+       1525,
+       1527,
+       1528,
+       1529,
+       1530,
+       1536,
+       1541,
+       1542,
+       1543,
+       1549,
+       1550,
+       1551,
+       1554,
+       1555,
+       1560,
+       1561,
+       1562,
+       1563,
+       1566,
+       1567,
+       1568,
+       1573,
+       1574,
+       1575,
+       1581,
+       1582,
+       1585,
+       1586,
+       1588,
+       1591,
+       1616,
+       1619,
+       1620,
+       1621,
+       1622,
+       1623,
+       1626,
+       1627,
+       1633,
+       1634,
+       1635,
+       1636,
+       1638,
+       1639,
+       1640,
+       1641,
+       1644,
+       1645,
+       1646,
+       1647,
+       1650,
+       1651,
+       1652,
+       1653,
+       1658,
+       1659,
+       1660,
+       1664,
+       1665,
+       1666,
+       1672,
+       1673,
+       1674,
+       1675,
+       1677,
+       1678,
+       1680,
+       1681,
+       1683,
+       1686,
+       1687,
+       1688,
+       1689,
+       1693,
+       1694,
+       1695,
+       1698,
+       1699,
+       1700,
+       1701,
+       1702,
+       1707,
+       1708,
+       1709,
+       1737,
+       1738,
+       1740,
+       1741,
+       1742,
+       1743,
+       1744,
+       1746,
+       1747,
+       1748,
+       1749,
+       1751,
+       1752,
+       1753,
+       1754,
+       1755,
+       1758,
+       1759,
+       1765,
+       1766,
+       1767,
+       1768,
+       1770,
+       1771,
+       1772,
+       1773,
+       1775,
+       1777,
+       1778,
+       1779,
+       1783,
+       1784,
+       1788,
+       1789,
+       1790,
+       1791,
+       1794,
+       1795,
+       1797,
+       1798,
+       1799,
+       1800,
+       1801,
+       1804,
+       1805,
+       1806,
+       1807,
+       1809,
+       1810,
+       1811,
+       1816,
+       1818,
+       1819,
+       1821,
+       1822,
+       1847,
+       1852,
+       1853,
+       1854,
+       1855,
+       1859,
+       1860,
+       1861,
+       1863,
+       1867,
+       1868,
+       1871,
+       1872,
+       1874,
+       1877,
+       1878,
+       1879,
+       1882,
+       1883,
+       1884,
+       1885,
+       1886,
+       1889,
+       1890,
+       1891,
+       1892,
+       1894,
+       1897,
+       1901,
+       1902,
+       1903,
+       1908,
+       1909,
+       1910,
+       1911,
+       1916,
+       1917,
+       1918,
+       1919,
+       1924,
+       1925,
+       1926,
+       1927,
+       1930,
+       1931,
+       1932,
+       1936,
+       1937,
+       1938,
+       1939,
+       1942,
+       1943,
+       1944,
+       1969,
+       1971,
+       1974,
+       1975,
+       1981,
+       1983,
+       1986,
+       1987,
+       1988,
+       1989,
+       1992,
+       1993,
+       1994,
+       1995,
+       1997,
+       1998,
+       1999,
+       2000,
+       2001,
+       2003,
+       2004,
+       2005,
+       2010,
+       2011,
+       2016,
+       2018,
+       2020,
+       2021,
+       2022,
+       2023,
+       2024,
+       2025,
+       2027,
+       2029,
+       2030,
+       2031,
+       2033,
+       2036,
+       2037,
+       2038,
+       2041,
+       2042,
+       2043,
+       2044,
+       2049,
+       2054,
+       2055,
+       2056,
+       2057,
+       2058,
+       2087,
+       2092,
+       2093,
+       2094,
+       2098,
+       2099,
+       2100,
+       2104,
+       2105,
+       2106,
+       2107,
+       2110,
+       2111,
+       2112,
+       2113,
+       2115,
+       2116,
+       2117,
+       2118,
+       2120,
+       2121,
+       2122,
+       2123,
+       2124,
+       2129,
+       2130,
+       2131,
+       2132,
+       2134,
+       2135,
+       2136,
+       2137,
+       2139,
+       2140,
+       2141,
+       2142,
+       2145,
+       2148,
+       2149,
+       2152,
+       2153,
+       2154,
+       2155,
+       2158,
+       2159,
+       2161,
+       2162,
+       2164,
+       2168,
+       2169,
+       2170,
+       2174,
+       2175,
+       2176,
+       2201,
+       2202,
+       2206,
+       2207,
+       2208,
+       2211,
+       2212,
+       2217,
+       2218,
+       2223,
+       2224,
+       2225,
+       2226,
+       2228,
+       2229,
+       2230,
+       2231,
+       2232,
+       2235,
+       2236,
+       2239,
+       2240,
+       2246,
+       2247,
+       2253,
+       2256,
+       2257,
+       2260,
+       2262,
+       2263,
+       2264,
+       2265,
+       2266,
+       2269,
+       2272,
+       2274,
+       2275,
+       2276,
+       2277,
+       2280,
+       2281,
+       2282,
+       2286,
+       2311,
+       2314,
+       2317,
+       2318,
+       2319,
+       2320,
+       2322,
+       2324,
+       2325,
+       2328,
+       2329,
+       2330,
+       2331,
+       2335,
+       2336,
+       2337,
+       2338,
+       2340,
+       2342,
+       2343,
+       2344,
+       2345,
+       2349,
+       2350,
+       2353,
+       2354,
+       2355,
+       2356,
+       2360,
+       2361,
+       2364,
+       2366,
+       2368,
+       2371,
+       2374,
+       2375,
+       2376,
+       2377,
+       2381,
+       2382,
+       2383,
+       2387,
+       2388,
+       2389,
+       2390,
+       2393,
+       2395,
+       2396,
+       2423,
+       2427,
+       2428,
+       2432,
+       2433,
+       2434,
+       2435,
+       2440,
+       2441,
+       2442,
+       2443,
+       2446,
+       2448,
+       2451,
+       2452,
+       2453,
+       2458,
+       2459,
+       2460,
+       2464,
+       2465,
+       2466,
+       2467,
+       2468,
+       2473,
+       2474,
+       2475,
+       2478,
+       2479,
+       2480,
+       2483,
+       2484,
+       2485,
+       2488,
+       2489,
+       2490,
+       2491,
+       2495,
+       2497,
+       2498,
+       2499,
+       2500,
+       2506,
+       2511,
+       2512,
+       2513,
+       2514,
+       2519,
+       2544,
+       2546,
+       2550,
+       2552,
+       2554,
+       2555,
+       2561,
+       2562,
+       2563,
+       2564,
+       2566,
+       2569,
+       2570,
+       2571,
+       2572,
+       2573,
+       2575,
+       2578,
+       2579,
+       2585,
+       2586,
+       2587,
+       2590,
+       2591,
+       2592,
+       2593,
+       2595,
+       2596,
+       2597,
+       2598,
+       2601,
+       2602,
+       2603,
+       2607,
+       2608,
+       2609,
+       2613,
+       2615,
+       2616,
+       2617,
+       2618,
+       2620,
+       2624,
+       2626,
+       2627,
+       2628,
+       2629,
+       2631,
+       2632,
+       2633,
+       2634,
+       2635,
+       2639,
+       2640,
+       2641,
+       2666,
+       2667,
+       2670,
+       2671,
+       2672,
+       2673,
+       2674,
+       2675,
+       2677,
+       2678,
+       2681,
+       2682,
+       2684,
+       2685,
+       2686,
+       2687,
+       2688,
+       2689,
+       2694,
+       2695,
+       2696,
+       2699,
+       2700,
+       2701,
+       2704,
+       2707,
+       2708,
+       2709,
+       2711,
+       2713,
+       2714,
+       2715,
+       2716,
+       2717,
+       2719,
+       2720,
+       2722,
+       2723,
+       2724,
+       2726,
+       2728,
+       2729,
+       2732,
+       2733,
+       2735,
+       2736,
+       2740,
+       2741,
+       2743,
+       2746,
+       2747,
+       2748,
+       2773,
+       2778,
+       2779,
+       2781,
+       2783,
+       2784,
+       2785,
+       2787,
+       2788,
+       2790,
+       2791,
+       2792,
+       2796,
+       2798,
+       2799,
+       2800,
+       2801,
+       2803,
+       2804,
+       2805,
+       2806,
+       2807,
+       2810,
+       2811,
+       2812,
+       2813,
+       2816,
+       2817,
+       2821,
+       2822,
+       2824,
+       2825,
+       2827,
+       2828,
+       2830,
+       2831,
+       2834,
+       2836,
+       2838,
+       2839,
+       2840,
+       2841,
+       2842,
+       2844,
+       2847,
+       2848,
+       2849,
+       2850,
+       2852,
+       2855,
+       2856,
+       2857,
+       2882,
+       2884,
+       2885,
+       2888,
+       2891,
+       2892,
+       2893,
+       2897,
+       2898,
+       2899,
+       2903,
+       2904,
+       2909,
+       2910,
+       2913,
+       2916,
+       2917,
+       2919,
+       2922,
+       2927,
+       2928,
+       2929,
+       2930,
+       2933,
+       2934,
+       2935,
+       2941,
+       2942,
+       2945,
+       2947,
+       2948,
+       2949,
+       2950,
+       2955,
+       2956,
+       2957,
+       2960,
+       2961,
+       2962,
+       2965,
+       2966,
+       2992,
+       2993,
+       2994,
+       2995,
+       2997,
+       2998,
+       2999,
+       3000,
+       3001,
+       3005,
+       3006,
+       3012,
+       3013,
+       3014,
+       3015,
+       3017,
+       3018,
+       3019,
+       3021,
+       3022,
+       3023,
+       3024,
+       3027,
+       3028,
+       3029,
+       3030,
+       3033,
+       3035,
+       3036,
+       3042,
+       3043,
+       3044,
+       3047,
+       3048,
+       3051,
+       3053,
+       3054,
+       3059,
+       3064,
+       3065,
+       3066,
+       3070,
+       3072,
+       3073,
+       3075,
+       3077,
+       3079,
+       3080,
+       3081,
+       3082,
+       3107,
+       3109,
+       3111,
+       3112,
+       3117,
+       3118,
+       3123,
+       3124,
+       3125,
+       3126,
+       3130,
+       3131,
+       3132,
+       3133,
+       3137,
+       3138,
+       3139,
+       3143,
+       3144,
+       3145,
+       3147,
+       3148,
+       3149,
+       3154,
+       3155,
+       3157,
+       3158,
+       3159,
+       3164,
+       3165,
+       3167,
+       3168,
+       3170,
+       3172,
+       3173,
+       3174,
+       3175,
+       3180,
+       3181,
+       3182,
+       3183,
+       3184,
+       3185,
+       3188,
+       3190,
+       3191,
+       3192,
+       3193,
+       3194,
+       3220,
+       3223,
+       3225,
+       3226,
+       3229,
+       3230,
+       3231,
+       3232,
+       3233,
+       3236,
+       3237,
+       3239,
+       3240,
+       3241,
+       3245,
+       3246,
+       3251,
+       3254,
+       3256,
+       3257,
+       3258,
+       3262,
+       3263,
+       3264,
+       3265,
+       3266,
+       3270,
+       3271,
+       3272,
+       3276,
+       3280,
+       3281,
+       3284,
+       3288,
+       3289,
+       3290,
+       3291,
+       3294,
+       3297,
+       3300,
+       3302,
+       3303,
+       3304,
+       3329,
+       3335,
+       3336,
+       3337,
+       3338,
+       3340,
+       3341,
+       3343,
+       3345,
+       3346,
+       3347,
+       3351,
+       3352,
+       3353,
+       3359,
+       3360,
+       3361,
+       3364,
+       3365,
+       3366,
+       3367,
+       3369,
+       3370,
+       3371,
+       3372,
+       3373,
+       3374,
+       3375,
+       3378,
+       3383,
+       3384,
+       3385,
+       3389,
+       3390
+      ],
+      "paragraphs": 3391,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [
+       "word/settings.xml"
+      ],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 3391,
+      "paragraph_count_after": 3391
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    },
+    "python-docx": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.024
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 17,
+      "entries": 17
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 17,
+      "parts_total": 17,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.026
+     },
+     "edit": {
+      "other_entries_changed": [],
+      "paragraphs_changed": [
+       0
+      ],
+      "paragraphs": 3391,
+      "target_ok": true,
+      "kind": "overwrite",
+      "new_w_ins": 0,
+      "new_w_del": 0,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 3391,
+      "paragraph_count_after": 3391
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    }
+   },
+   "tokens": {
+    "document_xml": 274413,
+    "quillwork": 152917,
+    "adeu": 139661,
+    "docxodus": 209297,
+    "python-docx": 134158
+   }
+  },
+  {
+   "file": "corpus/synthetic/doc50.docx",
+   "bytes": 75257,
+   "word": "Artikel",
+   "target_paragraph": 0,
+   "engines": {
+    "quillwork": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.004
+     },
+     "noop": {
+      "file_identical": true,
+      "entries_identical": 17,
+      "parts_identical": 17,
+      "entries": 17
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 17,
+      "parts_total": 17,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "note": "byte-identical to input"
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.034
+     },
+     "edit": {
+      "other_entries_changed": [],
+      "paragraphs_changed": [
+       0
+      ],
+      "paragraphs": 853,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 853,
+      "paragraph_count_after": 853
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    },
+    "adeu": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.039
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 15,
+      "entries": 17
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 17,
+      "parts_total": 17,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.102
+     },
+     "edit": {
+      "other_entries_changed": [
+       "word/fontTable.xml",
+       "word/webSettings.xml"
+      ],
+      "paragraphs_changed": [
+       0
+      ],
+      "paragraphs": 853,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 853,
+      "paragraph_count_after": 853
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": false,
+       "decision": "failed",
+       "new_errors": [
+        {
+         "code": "openxml.sch_undeclaredattribute",
+         "category": "openXml",
+         "disposition": "new",
+         "message": "Open XML validation Schema 'Sch_UndeclaredAttribute' at '/w:document[1]/w:body[1]/w:p[1]/w:del[1]' on '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}del'.",
+         "owningPartUri": "/word/document.xml"
+        },
+        {
+         "code": "openxml.sch_undeclaredattribute",
+         "category": "openXml",
+         "disposition": "new",
+         "message": "Open XML validation Schema 'Sch_UndeclaredAttribute' at '/w:document[1]/w:body[1]/w:p[1]/w:ins[1]' on '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}ins'.",
+         "owningPartUri": "/word/document.xml"
+        }
+       ],
+       "new_error_count": 2
+      }
+     }
+    },
+    "docxodus": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.053
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 14,
+      "entries": 17
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 17,
+      "parts_total": 17,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.089
+     },
+     "edit": {
+      "other_entries_changed": [
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       0,
+       3,
+       5,
+       6,
+       7,
+       8,
+       9,
+       13,
+       15,
+       17,
+       18,
+       19,
+       21,
+       22,
+       24,
+       26,
+       29,
+       31,
+       33,
+       34,
+       35,
+       36,
+       41,
+       46,
+       47,
+       48,
+       51,
+       52,
+       53,
+       54,
+       55,
+       59,
+       60,
+       61,
+       62,
+       63,
+       64,
+       65,
+       69,
+       70,
+       71,
+       72,
+       75,
+       76,
+       77,
+       79,
+       83,
+       84,
+       109,
+       111,
+       112,
+       113,
+       114,
+       115,
+       120,
+       123,
+       124,
+       125,
+       126,
+       127,
+       128,
+       130,
+       131,
+       132,
+       134,
+       135,
+       136,
+       137,
+       140,
+       141,
+       144,
+       146,
+       147,
+       148,
+       149,
+       152,
+       153,
+       157,
+       158,
+       162,
+       163,
+       164,
+       165,
+       169,
+       170,
+       171,
+       173,
+       178,
+       180,
+       182,
+       183,
+       184,
+       185,
+       188,
+       190,
+       191,
+       192,
+       193,
+       218,
+       220,
+       222,
+       223,
+       224,
+       225,
+       228,
+       229,
+       230,
+       234,
+       235,
+       236,
+       239,
+       241,
+       242,
+       243,
+       246,
+       247,
+       248,
+       249,
+       252,
+       254,
+       255,
+       257,
+       258,
+       259,
+       260,
+       266,
+       267,
+       268,
+       269,
+       273,
+       274,
+       275,
+       276,
+       280,
+       281,
+       282,
+       283,
+       284,
+       287,
+       288,
+       294,
+       300,
+       301,
+       303,
+       307,
+       308,
+       309,
+       312,
+       314,
+       315,
+       316,
+       341,
+       347,
+       348,
+       349,
+       350,
+       355,
+       357,
+       359,
+       361,
+       362,
+       363,
+       364,
+       365,
+       368,
+       371,
+       375,
+       377,
+       378,
+       381,
+       382,
+       383,
+       384,
+       388,
+       389,
+       394,
+       395,
+       400,
+       401,
+       402,
+       406,
+       408,
+       409,
+       412,
+       415,
+       416,
+       417,
+       418,
+       422,
+       423,
+       427,
+       430,
+       455,
+       459,
+       460,
+       461,
+       462,
+       465,
+       466,
+       467,
+       470,
+       471,
+       472,
+       475,
+       476,
+       477,
+       478,
+       483,
+       486,
+       490,
+       491,
+       492,
+       493,
+       497,
+       499,
+       500,
+       501,
+       502,
+       507,
+       511,
+       512,
+       513,
+       517,
+       518,
+       521,
+       522,
+       525,
+       527,
+       528,
+       529,
+       530,
+       534,
+       535,
+       540,
+       541,
+       542,
+       567,
+       570,
+       574,
+       576,
+       577,
+       581,
+       583,
+       584,
+       587,
+       589,
+       590,
+       592,
+       593,
+       594,
+       596,
+       598,
+       602,
+       604,
+       605,
+       606,
+       607,
+       612,
+       613,
+       614,
+       617,
+       619,
+       620,
+       621,
+       622,
+       625,
+       626,
+       627,
+       628,
+       629,
+       631,
+       632,
+       633,
+       634,
+       640,
+       641,
+       642,
+       643,
+       648,
+       649,
+       650,
+       651,
+       654,
+       655,
+       656,
+       657,
+       660,
+       685,
+       689,
+       690,
+       691,
+       694,
+       695,
+       697,
+       701,
+       702,
+       703,
+       704,
+       705,
+       708,
+       709,
+       710,
+       711,
+       714,
+       715,
+       717,
+       720,
+       721,
+       725,
+       726,
+       727,
+       728,
+       731,
+       732,
+       733,
+       734,
+       735,
+       740,
+       741,
+       742,
+       748,
+       749,
+       750,
+       752,
+       756,
+       757,
+       758,
+       759,
+       761,
+       763,
+       764,
+       767,
+       768,
+       769,
+       770,
+       775,
+       776,
+       777,
+       778,
+       779,
+       782,
+       783,
+       784,
+       785,
+       810,
+       813,
+       814,
+       820,
+       821,
+       822,
+       825,
+       826,
+       828,
+       830,
+       831,
+       832,
+       835,
+       836,
+       838,
+       839,
+       840,
+       844,
+       845,
+       846,
+       847,
+       852
+      ],
+      "paragraphs": 853,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [
+       "word/settings.xml"
+      ],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 853,
+      "paragraph_count_after": 853
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    },
+    "python-docx": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.011
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 17,
+      "entries": 17
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 17,
+      "parts_total": 17,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.012
+     },
+     "edit": {
+      "other_entries_changed": [],
+      "paragraphs_changed": [
+       0
+      ],
+      "paragraphs": 853,
+      "target_ok": true,
+      "kind": "overwrite",
+      "new_w_ins": 0,
+      "new_w_del": 0,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 853,
+      "paragraph_count_after": 853
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    }
+   },
+   "tokens": {
+    "document_xml": 68939,
+    "quillwork": 38717,
+    "adeu": 34905,
+    "docxodus": 52663,
+    "python-docx": 33554
+   }
+  },
+  {
+   "file": "corpus/fixtures/01-run-formatting.docx",
+   "bytes": 4695,
+   "word": "plain",
+   "target_paragraph": 0,
+   "engines": {
+    "quillwork": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.0
+     },
+     "noop": {
+      "file_identical": true,
+      "entries_identical": 8,
+      "parts_identical": 8,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "note": "byte-identical to input"
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "edit": {
+      "other_entries_changed": [],
+      "paragraphs_changed": [
+       0
+      ],
+      "paragraphs": 6,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 6,
+      "paragraph_count_after": 6
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    },
+    "adeu": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.002
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 1,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.003
+     },
+     "edit": {
+      "other_entries_changed": [
+       "[Content_Types].xml",
+       "_rels/.rels",
+       "docProps/core.xml",
+       "word/_rels/document.xml.rels",
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       0
+      ],
+      "paragraphs": 6,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 6,
+      "paragraph_count_after": 6
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": false,
+       "decision": "failed",
+       "new_errors": [
+        {
+         "code": "openxml.sch_undeclaredattribute",
+         "category": "openXml",
+         "disposition": "new",
+         "message": "Open XML validation Schema 'Sch_UndeclaredAttribute' at '/w:document[1]/w:body[1]/w:p[1]/w:del[1]' on '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}del'.",
+         "owningPartUri": "/word/document.xml"
+        },
+        {
+         "code": "openxml.sch_undeclaredattribute",
+         "category": "openXml",
+         "disposition": "new",
+         "message": "Open XML validation Schema 'Sch_UndeclaredAttribute' at '/w:document[1]/w:body[1]/w:p[1]/w:ins[1]' on '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}ins'.",
+         "owningPartUri": "/word/document.xml"
+        }
+       ],
+       "new_error_count": 2
+      }
+     }
+    },
+    "docxodus": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.002
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 5,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.003
+     },
+     "edit": {
+      "other_entries_changed": [
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       0,
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "paragraphs": 6,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [
+       "word/settings.xml"
+      ],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 6,
+      "paragraph_count_after": 6
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    },
+    "python-docx": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 1,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "edit": {
+      "other_entries_changed": [
+       "[Content_Types].xml",
+       "_rels/.rels",
+       "docProps/core.xml",
+       "word/_rels/document.xml.rels",
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       0
+      ],
+      "paragraphs": 6,
+      "target_ok": true,
+      "kind": "overwrite",
+      "new_w_ins": 0,
+      "new_w_del": 0,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 6,
+      "paragraph_count_after": 6
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    }
+   },
+   "tokens": {
+    "document_xml": 1509,
+    "quillwork": 178,
+    "adeu": 87,
+    "docxodus": 252,
+    "python-docx": 77
+   }
+  },
+  {
+   "file": "corpus/fixtures/02-headings.docx",
+   "bytes": 4380,
+   "word": "Document",
+   "target_paragraph": 0,
+   "engines": {
+    "quillwork": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.0
+     },
+     "noop": {
+      "file_identical": true,
+      "entries_identical": 8,
+      "parts_identical": 8,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "note": "byte-identical to input"
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "edit": {
+      "other_entries_changed": [],
+      "paragraphs_changed": [
+       0
+      ],
+      "paragraphs": 8,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 8,
+      "paragraph_count_after": 8
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    },
+    "adeu": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 1,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.002
+     },
+     "edit": {
+      "other_entries_changed": [
+       "[Content_Types].xml",
+       "_rels/.rels",
+       "docProps/core.xml",
+       "word/_rels/document.xml.rels",
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       0
+      ],
+      "paragraphs": 8,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 8,
+      "paragraph_count_after": 8
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": false,
+       "decision": "failed",
+       "new_errors": [
+        {
+         "code": "openxml.sch_undeclaredattribute",
+         "category": "openXml",
+         "disposition": "new",
+         "message": "Open XML validation Schema 'Sch_UndeclaredAttribute' at '/w:document[1]/w:body[1]/w:p[1]/w:del[1]' on '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}del'.",
+         "owningPartUri": "/word/document.xml"
+        },
+        {
+         "code": "openxml.sch_undeclaredattribute",
+         "category": "openXml",
+         "disposition": "new",
+         "message": "Open XML validation Schema 'Sch_UndeclaredAttribute' at '/w:document[1]/w:body[1]/w:p[1]/w:ins[1]' on '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}ins'.",
+         "owningPartUri": "/word/document.xml"
+        }
+       ],
+       "new_error_count": 2
+      }
+     }
+    },
+    "docxodus": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.003
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 5,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.003
+     },
+     "edit": {
+      "other_entries_changed": [
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       0,
+       2,
+       4,
+       6,
+       7
+      ],
+      "paragraphs": 8,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [
+       "word/settings.xml"
+      ],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 8,
+      "paragraph_count_after": 8
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    },
+    "python-docx": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 1,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "edit": {
+      "other_entries_changed": [
+       "[Content_Types].xml",
+       "_rels/.rels",
+       "docProps/core.xml",
+       "word/_rels/document.xml.rels",
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       0
+      ],
+      "paragraphs": 8,
+      "target_ok": true,
+      "kind": "overwrite",
+      "new_w_ins": 0,
+      "new_w_del": 0,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 8,
+      "paragraph_count_after": 8
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    }
+   },
+   "tokens": {
+    "document_xml": 923,
+    "quillwork": 189,
+    "adeu": 50,
+    "docxodus": 255,
+    "python-docx": 45
+   }
+  },
+  {
+   "file": "corpus/fixtures/03-lists.docx",
+   "bytes": 5314,
+   "word": "Numbered",
+   "target_paragraph": 0,
+   "engines": {
+    "quillwork": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.0
+     },
+     "noop": {
+      "file_identical": true,
+      "entries_identical": 9,
+      "parts_identical": 9,
+      "entries": 9
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 9,
+      "parts_total": 9,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "note": "byte-identical to input"
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "edit": {
+      "other_entries_changed": [],
+      "paragraphs_changed": [
+       0
+      ],
+      "paragraphs": 15,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 15,
+      "paragraph_count_after": 15
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    },
+    "adeu": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.003
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 1,
+      "entries": 9
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 9,
+      "parts_total": 9,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.003
+     },
+     "edit": {
+      "other_entries_changed": [
+       "[Content_Types].xml",
+       "_rels/.rels",
+       "docProps/core.xml",
+       "word/_rels/document.xml.rels",
+       "word/numbering.xml",
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       0
+      ],
+      "paragraphs": 15,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 15,
+      "paragraph_count_after": 15
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": false,
+       "decision": "failed",
+       "new_errors": [
+        {
+         "code": "openxml.sch_undeclaredattribute",
+         "category": "openXml",
+         "disposition": "new",
+         "message": "Open XML validation Schema 'Sch_UndeclaredAttribute' at '/w:document[1]/w:body[1]/w:p[1]/w:del[1]' on '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}del'.",
+         "owningPartUri": "/word/document.xml"
+        },
+        {
+         "code": "openxml.sch_undeclaredattribute",
+         "category": "openXml",
+         "disposition": "new",
+         "message": "Open XML validation Schema 'Sch_UndeclaredAttribute' at '/w:document[1]/w:body[1]/w:p[1]/w:ins[1]' on '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}ins'.",
+         "owningPartUri": "/word/document.xml"
+        }
+       ],
+       "new_error_count": 2
+      }
+     }
+    },
+    "docxodus": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.003
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 6,
+      "entries": 9
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 9,
+      "parts_total": 9,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.004
+     },
+     "edit": {
+      "other_entries_changed": [
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       0,
+       1,
+       2,
+       3,
+       4,
+       5,
+       6,
+       8,
+       9,
+       10,
+       11,
+       13,
+       14
+      ],
+      "paragraphs": 15,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [
+       "word/settings.xml"
+      ],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 15,
+      "paragraph_count_after": 15
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    },
+    "python-docx": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 1,
+      "entries": 9
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 9,
+      "parts_total": 9,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "edit": {
+      "other_entries_changed": [
+       "[Content_Types].xml",
+       "_rels/.rels",
+       "docProps/core.xml",
+       "word/_rels/document.xml.rels",
+       "word/numbering.xml",
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       0
+      ],
+      "paragraphs": 15,
+      "target_ok": true,
+      "kind": "overwrite",
+      "new_w_ins": 0,
+      "new_w_del": 0,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 15,
+      "paragraph_count_after": 15
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    }
+   },
+   "tokens": {
+    "document_xml": 1663,
+    "quillwork": 205,
+    "adeu": 80,
+    "docxodus": 468,
+    "python-docx": 52
+   }
+  },
+  {
+   "file": "corpus/fixtures/04-tables.docx",
+   "bytes": 4565,
+   "word": "Before",
+   "target_paragraph": 0,
+   "engines": {
+    "quillwork": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.0
+     },
+     "noop": {
+      "file_identical": true,
+      "entries_identical": 8,
+      "parts_identical": 8,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "note": "byte-identical to input"
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "edit": {
+      "other_entries_changed": [],
+      "paragraphs_changed": [
+       0
+      ],
+      "paragraphs": 15,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 15,
+      "paragraph_count_after": 15
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    },
+    "adeu": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.002
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 1,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.002
+     },
+     "edit": {
+      "other_entries_changed": [
+       "[Content_Types].xml",
+       "_rels/.rels",
+       "docProps/core.xml",
+       "word/_rels/document.xml.rels",
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       0,
+       6,
+       13
+      ],
+      "paragraphs": 15,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 15,
+      "paragraph_count_after": 15
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": false,
+       "decision": "failed",
+       "new_errors": [
+        {
+         "code": "openxml.sch_undeclaredattribute",
+         "category": "openXml",
+         "disposition": "new",
+         "message": "Open XML validation Schema 'Sch_UndeclaredAttribute' at '/w:document[1]/w:body[1]/w:p[1]/w:del[1]' on '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}del'.",
+         "owningPartUri": "/word/document.xml"
+        },
+        {
+         "code": "openxml.sch_undeclaredattribute",
+         "category": "openXml",
+         "disposition": "new",
+         "message": "Open XML validation Schema 'Sch_UndeclaredAttribute' at '/w:document[1]/w:body[1]/w:p[1]/w:ins[1]' on '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}ins'.",
+         "owningPartUri": "/word/document.xml"
+        }
+       ],
+       "new_error_count": 2
+      }
+     }
+    },
+    "docxodus": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.002
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 5,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.003
+     },
+     "edit": {
+      "other_entries_changed": [
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       0
+      ],
+      "paragraphs": 15,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [
+       "word/settings.xml"
+      ],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 15,
+      "paragraph_count_after": 15
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    },
+    "python-docx": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 1,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "edit": {
+      "other_entries_changed": [
+       "[Content_Types].xml",
+       "_rels/.rels",
+       "docProps/core.xml",
+       "word/_rels/document.xml.rels",
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       0,
+       6,
+       13
+      ],
+      "paragraphs": 15,
+      "target_ok": true,
+      "kind": "overwrite",
+      "new_w_ins": 0,
+      "new_w_del": 0,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 15,
+      "paragraph_count_after": 15
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    }
+   },
+   "tokens": {
+    "document_xml": 1795,
+    "quillwork": 189,
+    "adeu": 146,
+    "docxodus": 104,
+    "python-docx": 8
+   }
+  },
+  {
+   "file": "corpus/fixtures/05-headers-footers.docx",
+   "bytes": 7974,
+   "word": "Page",
+   "target_paragraph": 0,
+   "engines": {
+    "quillwork": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.0
+     },
+     "noop": {
+      "file_identical": true,
+      "entries_identical": 14,
+      "parts_identical": 14,
+      "entries": 14
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 14,
+      "parts_total": 14,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "note": "byte-identical to input"
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "edit": {
+      "other_entries_changed": [],
+      "paragraphs_changed": [
+       0
+      ],
+      "paragraphs": 3,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 3,
+      "paragraph_count_after": 3
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    },
+    "adeu": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.002
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 1,
+      "entries": 14
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 14,
+      "parts_total": 14,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.004
+     },
+     "edit": {
+      "other_entries_changed": [
+       "[Content_Types].xml",
+       "_rels/.rels",
+       "docProps/core.xml",
+       "word/_rels/document.xml.rels",
+       "word/footer1.xml",
+       "word/footer2.xml",
+       "word/footer3.xml",
+       "word/header1.xml",
+       "word/header2.xml",
+       "word/header3.xml",
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       0
+      ],
+      "paragraphs": 3,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 3,
+      "paragraph_count_after": 3
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": false,
+       "decision": "failed",
+       "new_errors": [
+        {
+         "code": "openxml.sch_undeclaredattribute",
+         "category": "openXml",
+         "disposition": "new",
+         "message": "Open XML validation Schema 'Sch_UndeclaredAttribute' at '/w:document[1]/w:body[1]/w:p[1]/w:del[1]' on '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}del'.",
+         "owningPartUri": "/word/document.xml"
+        },
+        {
+         "code": "openxml.sch_undeclaredattribute",
+         "category": "openXml",
+         "disposition": "new",
+         "message": "Open XML validation Schema 'Sch_UndeclaredAttribute' at '/w:document[1]/w:body[1]/w:p[1]/w:ins[1]' on '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}ins'.",
+         "owningPartUri": "/word/document.xml"
+        }
+       ],
+       "new_error_count": 2
+      }
+     }
+    },
+    "docxodus": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.004
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 5,
+      "entries": 14
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 14,
+      "parts_total": 14,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.004
+     },
+     "edit": {
+      "other_entries_changed": [
+       "word/footer1.xml",
+       "word/footer2.xml",
+       "word/footer3.xml",
+       "word/header1.xml",
+       "word/header2.xml",
+       "word/header3.xml",
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       0,
+       1,
+       2
+      ],
+      "paragraphs": 3,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [
+       "word/settings.xml"
+      ],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 3,
+      "paragraph_count_after": 3
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    },
+    "python-docx": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 1,
+      "entries": 14
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 14,
+      "parts_total": 14,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "edit": {
+      "other_entries_changed": [
+       "[Content_Types].xml",
+       "_rels/.rels",
+       "docProps/core.xml",
+       "word/_rels/document.xml.rels",
+       "word/footer1.xml",
+       "word/footer2.xml",
+       "word/footer3.xml",
+       "word/header1.xml",
+       "word/header2.xml",
+       "word/header3.xml",
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       0
+      ],
+      "paragraphs": 3,
+      "target_ok": true,
+      "kind": "overwrite",
+      "new_w_ins": 0,
+      "new_w_del": 0,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 3,
+      "paragraph_count_after": 3
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    }
+   },
+   "tokens": {
+    "document_xml": 771,
+    "quillwork": 262,
+    "adeu": 62,
+    "docxodus": 353,
+    "python-docx": 29
+   }
+  },
+  {
+   "file": "corpus/fixtures/06-notes.docx",
+   "bytes": 5783,
+   "word": "sentence",
+   "target_paragraph": 0,
+   "engines": {
+    "quillwork": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.0
+     },
+     "noop": {
+      "file_identical": true,
+      "entries_identical": 10,
+      "parts_identical": 10,
+      "entries": 10
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 10,
+      "parts_total": 10,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "note": "byte-identical to input"
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "edit": {
+      "other_entries_changed": [],
+      "paragraphs_changed": [
+       0
+      ],
+      "paragraphs": 2,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 2,
+      "paragraph_count_after": 2
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    },
+    "adeu": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.002
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 1,
+      "entries": 10
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 10,
+      "parts_total": 10,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.002
+     },
+     "edit": {
+      "other_entries_changed": [
+       "[Content_Types].xml",
+       "_rels/.rels",
+       "docProps/core.xml",
+       "word/_rels/document.xml.rels",
+       "word/endnotes.xml",
+       "word/footnotes.xml",
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       0
+      ],
+      "paragraphs": 2,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 2,
+      "paragraph_count_after": 2
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": false,
+       "decision": "failed",
+       "new_errors": [
+        {
+         "code": "openxml.sch_undeclaredattribute",
+         "category": "openXml",
+         "disposition": "new",
+         "message": "Open XML validation Schema 'Sch_UndeclaredAttribute' at '/w:document[1]/w:body[1]/w:p[1]/w:del[1]' on '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}del'.",
+         "owningPartUri": "/word/document.xml"
+        },
+        {
+         "code": "openxml.sch_undeclaredattribute",
+         "category": "openXml",
+         "disposition": "new",
+         "message": "Open XML validation Schema 'Sch_UndeclaredAttribute' at '/w:document[1]/w:body[1]/w:p[1]/w:ins[1]' on '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}ins'.",
+         "owningPartUri": "/word/document.xml"
+        }
+       ],
+       "new_error_count": 2
+      }
+     }
+    },
+    "docxodus": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.003
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 5,
+      "entries": 10
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 10,
+      "parts_total": 10,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.003
+     },
+     "edit": {
+      "other_entries_changed": [
+       "word/endnotes.xml",
+       "word/footnotes.xml",
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       0,
+       1
+      ],
+      "paragraphs": 2,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [
+       "word/settings.xml"
+      ],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 2,
+      "paragraph_count_after": 2
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    },
+    "python-docx": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 3,
+      "entries": 10
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 10,
+      "parts_total": 10,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "edit": {
+      "other_entries_changed": [
+       "[Content_Types].xml",
+       "_rels/.rels",
+       "docProps/core.xml",
+       "word/_rels/document.xml.rels",
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       0
+      ],
+      "paragraphs": 2,
+      "target_ok": true,
+      "kind": "overwrite",
+      "new_w_ins": 0,
+      "new_w_del": 0,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 2,
+      "paragraph_count_after": 2
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    }
+   },
+   "tokens": {
+    "document_xml": 709,
+    "quillwork": 142,
+    "adeu": 73,
+    "docxodus": 156,
+    "python-docx": 17
+   }
+  },
+  {
+   "file": "corpus/fixtures/07-comments.docx",
+   "bytes": 7440,
+   "word": "Revenue",
+   "target_paragraph": 0,
+   "engines": {
+    "quillwork": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.0
+     },
+     "noop": {
+      "file_identical": true,
+      "entries_identical": 13,
+      "parts_identical": 13,
+      "entries": 13
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 13,
+      "parts_total": 13,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "note": "byte-identical to input"
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "edit": {
+      "other_entries_changed": [],
+      "paragraphs_changed": [
+       0
+      ],
+      "paragraphs": 2,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 2,
+      "paragraph_count_after": 2
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    },
+    "adeu": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.002
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 1,
+      "entries": 13
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 13,
+      "parts_total": 13,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.003
+     },
+     "edit": {
+      "other_entries_changed": [
+       "[Content_Types].xml",
+       "_rels/.rels",
+       "docProps/core.xml",
+       "word/_rels/document.xml.rels",
+       "word/comments.xml",
+       "word/commentsExtended.xml",
+       "word/commentsExtensible.xml",
+       "word/commentsIds.xml",
+       "word/people.xml",
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       0
+      ],
+      "paragraphs": 2,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 2,
+      "paragraph_count_after": 2
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": false,
+       "decision": "failed",
+       "new_errors": [
+        {
+         "code": "openxml.sch_undeclaredattribute",
+         "category": "openXml",
+         "disposition": "new",
+         "message": "Open XML validation Schema 'Sch_UndeclaredAttribute' at '/w:document[1]/w:body[1]/w:p[1]/w:del[1]' on '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}del'.",
+         "owningPartUri": "/word/document.xml"
+        },
+        {
+         "code": "openxml.sch_undeclaredattribute",
+         "category": "openXml",
+         "disposition": "new",
+         "message": "Open XML validation Schema 'Sch_UndeclaredAttribute' at '/w:document[1]/w:body[1]/w:p[1]/w:ins[1]' on '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}ins'.",
+         "owningPartUri": "/word/document.xml"
+        }
+       ],
+       "new_error_count": 2
+      }
+     }
+    },
+    "docxodus": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.004
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 6,
+      "entries": 13
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 13,
+      "parts_total": 13,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.005
+     },
+     "edit": {
+      "other_entries_changed": [
+       "word/comments.xml",
+       "word/commentsExtended.xml",
+       "word/commentsIds.xml",
+       "word/people.xml",
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       0,
+       1
+      ],
+      "paragraphs": 2,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [
+       "word/settings.xml"
+      ],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 2,
+      "paragraph_count_after": 2
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    },
+    "python-docx": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 5,
+      "entries": 13
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 13,
+      "parts_total": 13,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "edit": {
+      "other_entries_changed": [
+       "[Content_Types].xml",
+       "_rels/.rels",
+       "docProps/core.xml",
+       "word/_rels/document.xml.rels",
+       "word/comments.xml",
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       0
+      ],
+      "paragraphs": 2,
+      "target_ok": true,
+      "kind": "overwrite",
+      "new_w_ins": 0,
+      "new_w_del": 0,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 2,
+      "paragraph_count_after": 2
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    }
+   },
+   "tokens": {
+    "document_xml": 825,
+    "quillwork": 150,
+    "adeu": 117,
+    "docxodus": 240,
+    "python-docx": 19
+   }
+  },
+  {
+   "file": "corpus/fixtures/08-tracked-changes.docx",
+   "bytes": 4644,
+   "word": "quick",
+   "target_paragraph": 0,
+   "engines": {
+    "quillwork": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.0
+     },
+     "noop": {
+      "file_identical": true,
+      "entries_identical": 8,
+      "parts_identical": 8,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "note": "byte-identical to input"
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "edit": {
+      "other_entries_changed": [],
+      "paragraphs_changed": [
+       0
+      ],
+      "paragraphs": 8,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 8,
+      "paragraph_count_after": 8
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    },
+    "adeu": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.002
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 1,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.003
+     },
+     "edit": {
+      "other_entries_changed": [
+       "[Content_Types].xml",
+       "_rels/.rels",
+       "docProps/core.xml",
+       "word/_rels/document.xml.rels",
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       0
+      ],
+      "paragraphs": 8,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 8,
+      "paragraph_count_after": 8
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": false,
+       "decision": "failed",
+       "new_errors": [
+        {
+         "code": "openxml.sch_undeclaredattribute",
+         "category": "openXml",
+         "disposition": "new",
+         "message": "Open XML validation Schema 'Sch_UndeclaredAttribute' at '/w:document[1]/w:body[1]/w:p[1]/w:del[1]' on '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}del'.",
+         "owningPartUri": "/word/document.xml"
+        },
+        {
+         "code": "openxml.sch_undeclaredattribute",
+         "category": "openXml",
+         "disposition": "new",
+         "message": "Open XML validation Schema 'Sch_UndeclaredAttribute' at '/w:document[1]/w:body[1]/w:p[1]/w:ins[1]' on '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}ins'.",
+         "owningPartUri": "/word/document.xml"
+        }
+       ],
+       "new_error_count": 2
+      }
+     }
+    },
+    "docxodus": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.002
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 5,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.003
+     },
+     "edit": {
+      "other_entries_changed": [
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       0,
+       1,
+       2,
+       3,
+       4,
+       5,
+       6
+      ],
+      "paragraphs": 8,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [
+       "word/settings.xml"
+      ],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 8,
+      "paragraph_count_after": 8
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    },
+    "python-docx": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 1,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "edit": {
+      "other_entries_changed": [
+       "[Content_Types].xml",
+       "_rels/.rels",
+       "docProps/core.xml",
+       "word/_rels/document.xml.rels",
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       0
+      ],
+      "paragraphs": 8,
+      "target_ok": true,
+      "kind": "overwrite",
+      "new_w_ins": 0,
+      "new_w_del": 0,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 8,
+      "paragraph_count_after": 8
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    }
+   },
+   "tokens": {
+    "document_xml": 1508,
+    "quillwork": 126,
+    "adeu": 125,
+    "docxodus": 242,
+    "python-docx": 25
+   }
+  },
+  {
+   "file": "corpus/fixtures/09-images.docx",
+   "bytes": 5753,
+   "word": "inline",
+   "target_paragraph": 0,
+   "engines": {
+    "quillwork": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.0
+     },
+     "noop": {
+      "file_identical": true,
+      "entries_identical": 10,
+      "parts_identical": 10,
+      "entries": 10
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 10,
+      "parts_total": 10,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "note": "byte-identical to input"
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "edit": {
+      "other_entries_changed": [],
+      "paragraphs_changed": [
+       0
+      ],
+      "paragraphs": 3,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 3,
+      "paragraph_count_after": 3
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    },
+    "adeu": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 3,
+      "entries": 10
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 10,
+      "parts_total": 10,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.002
+     },
+     "edit": {
+      "other_entries_changed": [
+       "[Content_Types].xml",
+       "_rels/.rels",
+       "docProps/core.xml",
+       "word/_rels/document.xml.rels",
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       0
+      ],
+      "paragraphs": 3,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 3,
+      "paragraph_count_after": 3
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": false,
+       "decision": "failed",
+       "new_errors": [
+        {
+         "code": "openxml.sch_undeclaredattribute",
+         "category": "openXml",
+         "disposition": "new",
+         "message": "Open XML validation Schema 'Sch_UndeclaredAttribute' at '/w:document[1]/w:body[1]/w:p[1]/w:del[1]' on '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}del'.",
+         "owningPartUri": "/word/document.xml"
+        },
+        {
+         "code": "openxml.sch_undeclaredattribute",
+         "category": "openXml",
+         "disposition": "new",
+         "message": "Open XML validation Schema 'Sch_UndeclaredAttribute' at '/w:document[1]/w:body[1]/w:p[1]/w:ins[1]' on '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}ins'.",
+         "owningPartUri": "/word/document.xml"
+        }
+       ],
+       "new_error_count": 2
+      }
+     }
+    },
+    "docxodus": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.004
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 7,
+      "entries": 10
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 10,
+      "parts_total": 10,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.004
+     },
+     "edit": {
+      "other_entries_changed": [
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       0,
+       1
+      ],
+      "paragraphs": 3,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [
+       "word/settings.xml"
+      ],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 3,
+      "paragraph_count_after": 3
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    },
+    "python-docx": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 3,
+      "entries": 10
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 10,
+      "parts_total": 10,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "edit": {
+      "other_entries_changed": [
+       "[Content_Types].xml",
+       "_rels/.rels",
+       "docProps/core.xml",
+       "word/_rels/document.xml.rels",
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       0
+      ],
+      "paragraphs": 3,
+      "target_ok": true,
+      "kind": "overwrite",
+      "new_w_ins": 0,
+      "new_w_del": 0,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 3,
+      "paragraph_count_after": 3
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    }
+   },
+   "tokens": {
+    "document_xml": 1389,
+    "quillwork": 114,
+    "adeu": 49,
+    "docxodus": 107,
+    "python-docx": 24
+   }
+  },
+  {
+   "file": "corpus/fixtures/10-textbox.docx",
+   "bytes": 5065,
+   "word": "Another",
+   "target_paragraph": 1,
+   "engines": {
+    "quillwork": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.0
+     },
+     "noop": {
+      "file_identical": true,
+      "entries_identical": 8,
+      "parts_identical": 8,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "note": "byte-identical to input"
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "edit": {
+      "other_entries_changed": [],
+      "paragraphs_changed": [
+       1
+      ],
+      "paragraphs": 2,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       1
+      ],
+      "paragraph_count_before": 2,
+      "paragraph_count_after": 2
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    },
+    "adeu": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 1,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.002
+     },
+     "edit": {
+      "other_entries_changed": [
+       "[Content_Types].xml",
+       "_rels/.rels",
+       "docProps/core.xml",
+       "word/_rels/document.xml.rels",
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       1
+      ],
+      "paragraphs": 2,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       1
+      ],
+      "paragraph_count_before": 2,
+      "paragraph_count_after": 2
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": false,
+       "decision": "failed",
+       "new_errors": [
+        {
+         "code": "openxml.sch_undeclaredattribute",
+         "category": "openXml",
+         "disposition": "new",
+         "message": "Open XML validation Schema 'Sch_UndeclaredAttribute' at '/w:document[1]/w:body[1]/w:p[2]/w:del[1]' on '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}del'.",
+         "owningPartUri": "/word/document.xml"
+        },
+        {
+         "code": "openxml.sch_undeclaredattribute",
+         "category": "openXml",
+         "disposition": "new",
+         "message": "Open XML validation Schema 'Sch_UndeclaredAttribute' at '/w:document[1]/w:body[1]/w:p[2]/w:ins[1]' on '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}ins'.",
+         "owningPartUri": "/word/document.xml"
+        }
+       ],
+       "new_error_count": 2
+      }
+     }
+    },
+    "docxodus": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.003
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 5,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.003
+     },
+     "edit": {
+      "other_entries_changed": [
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       0,
+       1
+      ],
+      "paragraphs": 2,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [
+       "word/settings.xml"
+      ],
+      "paragraphs_canonically_changed": [
+       1
+      ],
+      "paragraph_count_before": 2,
+      "paragraph_count_after": 2
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    },
+    "python-docx": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 1,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "edit": {
+      "other_entries_changed": [
+       "[Content_Types].xml",
+       "_rels/.rels",
+       "docProps/core.xml",
+       "word/_rels/document.xml.rels",
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       1
+      ],
+      "paragraphs": 2,
+      "target_ok": true,
+      "kind": "overwrite",
+      "new_w_ins": 0,
+      "new_w_del": 0,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       1
+      ],
+      "paragraph_count_before": 2,
+      "paragraph_count_after": 2
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    }
+   },
+   "tokens": {
+    "document_xml": 1339,
+    "quillwork": 103,
+    "adeu": 27,
+    "docxodus": 62,
+    "python-docx": 11
+   }
+  },
+  {
+   "file": "corpus/fixtures/11-fields.docx",
+   "bytes": 4661,
+   "word": "Here",
+   "target_paragraph": 5,
+   "engines": {
+    "quillwork": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.0
+     },
+     "noop": {
+      "file_identical": true,
+      "entries_identical": 8,
+      "parts_identical": 8,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "note": "byte-identical to input"
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "edit": {
+      "other_entries_changed": [],
+      "paragraphs_changed": [
+       5
+      ],
+      "paragraphs": 7,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       5
+      ],
+      "paragraph_count_before": 7,
+      "paragraph_count_after": 7
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    },
+    "adeu": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.002
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 1,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.003
+     },
+     "edit": {
+      "other_entries_changed": [
+       "[Content_Types].xml",
+       "_rels/.rels",
+       "docProps/core.xml",
+       "word/_rels/document.xml.rels",
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       0,
+       5
+      ],
+      "paragraphs": 7,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       5
+      ],
+      "paragraph_count_before": 7,
+      "paragraph_count_after": 7
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": false,
+       "decision": "failed",
+       "new_errors": [
+        {
+         "code": "openxml.sch_undeclaredattribute",
+         "category": "openXml",
+         "disposition": "new",
+         "message": "Open XML validation Schema 'Sch_UndeclaredAttribute' at '/w:document[1]/w:body[1]/w:p[6]/w:del[1]' on '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}del'.",
+         "owningPartUri": "/word/document.xml"
+        },
+        {
+         "code": "openxml.sch_undeclaredattribute",
+         "category": "openXml",
+         "disposition": "new",
+         "message": "Open XML validation Schema 'Sch_UndeclaredAttribute' at '/w:document[1]/w:body[1]/w:p[6]/w:ins[1]' on '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}ins'.",
+         "owningPartUri": "/word/document.xml"
+        }
+       ],
+       "new_error_count": 2
+      }
+     }
+    },
+    "docxodus": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.002
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 5,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.003
+     },
+     "edit": {
+      "other_entries_changed": [
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       0,
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "paragraphs": 7,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [
+       "word/settings.xml"
+      ],
+      "paragraphs_canonically_changed": [
+       5
+      ],
+      "paragraph_count_before": 7,
+      "paragraph_count_after": 7
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    },
+    "python-docx": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 1,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "edit": {
+      "other_entries_changed": [
+       "[Content_Types].xml",
+       "_rels/.rels",
+       "docProps/core.xml",
+       "word/_rels/document.xml.rels",
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       0,
+       5
+      ],
+      "paragraphs": 7,
+      "target_ok": true,
+      "kind": "overwrite",
+      "new_w_ins": 0,
+      "new_w_del": 0,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       5
+      ],
+      "paragraph_count_before": 7,
+      "paragraph_count_after": 7
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    }
+   },
+   "tokens": {
+    "document_xml": 1590,
+    "quillwork": 182,
+    "adeu": 131,
+    "docxodus": 317,
+    "python-docx": 28
+   }
+  },
+  {
+   "file": "corpus/fixtures/12-content-controls.docx",
+   "bytes": 4653,
+   "word": "Start",
+   "target_paragraph": 1,
+   "engines": {
+    "quillwork": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.0
+     },
+     "noop": {
+      "file_identical": true,
+      "entries_identical": 8,
+      "parts_identical": 8,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "note": "byte-identical to input"
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "edit": {
+      "other_entries_changed": [],
+      "paragraphs_changed": [
+       1
+      ],
+      "paragraphs": 4,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       1
+      ],
+      "paragraph_count_before": 4,
+      "paragraph_count_after": 4
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    },
+    "adeu": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.002
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 1,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.002
+     },
+     "edit": {
+      "other_entries_changed": [
+       "[Content_Types].xml",
+       "_rels/.rels",
+       "docProps/core.xml",
+       "word/_rels/document.xml.rels",
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       1
+      ],
+      "paragraphs": 4,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       1
+      ],
+      "paragraph_count_before": 4,
+      "paragraph_count_after": 4
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": false,
+       "decision": "failed",
+       "new_errors": [
+        {
+         "code": "openxml.sch_undeclaredattribute",
+         "category": "openXml",
+         "disposition": "new",
+         "message": "Open XML validation Schema 'Sch_UndeclaredAttribute' at '/w:document[1]/w:body[1]/w:p[1]/w:del[1]' on '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}del'.",
+         "owningPartUri": "/word/document.xml"
+        },
+        {
+         "code": "openxml.sch_undeclaredattribute",
+         "category": "openXml",
+         "disposition": "new",
+         "message": "Open XML validation Schema 'Sch_UndeclaredAttribute' at '/w:document[1]/w:body[1]/w:p[1]/w:ins[1]' on '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}ins'.",
+         "owningPartUri": "/word/document.xml"
+        }
+       ],
+       "new_error_count": 2
+      }
+     }
+    },
+    "docxodus": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.003
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 5,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.003
+     },
+     "edit": {
+      "other_entries_changed": [
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       1,
+       2,
+       3
+      ],
+      "paragraphs": 4,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [
+       "word/settings.xml"
+      ],
+      "paragraphs_canonically_changed": [
+       1
+      ],
+      "paragraph_count_before": 4,
+      "paragraph_count_after": 4
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    },
+    "python-docx": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 1,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "edit": {
+      "other_entries_changed": [
+       "[Content_Types].xml",
+       "_rels/.rels",
+       "docProps/core.xml",
+       "word/_rels/document.xml.rels",
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       1
+      ],
+      "paragraphs": 4,
+      "target_ok": true,
+      "kind": "overwrite",
+      "new_w_ins": 0,
+      "new_w_del": 0,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       1
+      ],
+      "paragraph_count_before": 4,
+      "paragraph_count_after": 4
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    }
+   },
+   "tokens": {
+    "document_xml": 1166,
+    "quillwork": 224,
+    "adeu": 150,
+    "docxodus": 98,
+    "python-docx": 10
+   }
+  },
+  {
+   "file": "corpus/fixtures/13-hidden-text.docx",
+   "bytes": 4476,
+   "word": "Visible",
+   "target_paragraph": 0,
+   "engines": {
+    "quillwork": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.0
+     },
+     "noop": {
+      "file_identical": true,
+      "entries_identical": 8,
+      "parts_identical": 8,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "note": "byte-identical to input"
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "edit": {
+      "other_entries_changed": [],
+      "paragraphs_changed": [
+       0
+      ],
+      "paragraphs": 6,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 6,
+      "paragraph_count_after": 6
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    },
+    "adeu": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.002
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 1,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.002
+     },
+     "edit": {
+      "other_entries_changed": [
+       "[Content_Types].xml",
+       "_rels/.rels",
+       "docProps/core.xml",
+       "word/_rels/document.xml.rels",
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       0
+      ],
+      "paragraphs": 6,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 6,
+      "paragraph_count_after": 6
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": false,
+       "decision": "failed",
+       "new_errors": [
+        {
+         "code": "openxml.sch_undeclaredattribute",
+         "category": "openXml",
+         "disposition": "new",
+         "message": "Open XML validation Schema 'Sch_UndeclaredAttribute' at '/w:document[1]/w:body[1]/w:p[1]/w:del[1]' on '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}del'.",
+         "owningPartUri": "/word/document.xml"
+        },
+        {
+         "code": "openxml.sch_undeclaredattribute",
+         "category": "openXml",
+         "disposition": "new",
+         "message": "Open XML validation Schema 'Sch_UndeclaredAttribute' at '/w:document[1]/w:body[1]/w:p[1]/w:ins[1]' on '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}ins'.",
+         "owningPartUri": "/word/document.xml"
+        }
+       ],
+       "new_error_count": 2
+      }
+     }
+    },
+    "docxodus": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.002
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 5,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.003
+     },
+     "edit": {
+      "other_entries_changed": [
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       0,
+       1,
+       2,
+       4
+      ],
+      "paragraphs": 6,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [
+       "word/settings.xml"
+      ],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 6,
+      "paragraph_count_after": 6
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    },
+    "python-docx": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 1,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "edit": {
+      "other_entries_changed": [
+       "[Content_Types].xml",
+       "_rels/.rels",
+       "docProps/core.xml",
+       "word/_rels/document.xml.rels",
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       0
+      ],
+      "paragraphs": 6,
+      "target_ok": true,
+      "kind": "overwrite",
+      "new_w_ins": 0,
+      "new_w_del": 0,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 6,
+      "paragraph_count_after": 6
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    }
+   },
+   "tokens": {
+    "document_xml": 911,
+    "quillwork": 201,
+    "adeu": 50,
+    "docxodus": 199,
+    "python-docx": 50
+   }
+  },
+  {
+   "file": "corpus/fixtures/14-rtl.docx",
+   "bytes": 4459,
+   "word": "Left",
+   "target_paragraph": 3,
+   "engines": {
+    "quillwork": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.0
+     },
+     "noop": {
+      "file_identical": true,
+      "entries_identical": 8,
+      "parts_identical": 8,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "note": "byte-identical to input"
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "edit": {
+      "other_entries_changed": [],
+      "paragraphs_changed": [
+       3
+      ],
+      "paragraphs": 4,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       3
+      ],
+      "paragraph_count_before": 4,
+      "paragraph_count_after": 4
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    },
+    "adeu": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.002
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 1,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.002
+     },
+     "edit": {
+      "other_entries_changed": [
+       "[Content_Types].xml",
+       "_rels/.rels",
+       "docProps/core.xml",
+       "word/_rels/document.xml.rels",
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       3
+      ],
+      "paragraphs": 4,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       3
+      ],
+      "paragraph_count_before": 4,
+      "paragraph_count_after": 4
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": false,
+       "decision": "failed",
+       "new_errors": [
+        {
+         "code": "openxml.sch_undeclaredattribute",
+         "category": "openXml",
+         "disposition": "new",
+         "message": "Open XML validation Schema 'Sch_UndeclaredAttribute' at '/w:document[1]/w:body[1]/w:p[4]/w:del[1]' on '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}del'.",
+         "owningPartUri": "/word/document.xml"
+        },
+        {
+         "code": "openxml.sch_undeclaredattribute",
+         "category": "openXml",
+         "disposition": "new",
+         "message": "Open XML validation Schema 'Sch_UndeclaredAttribute' at '/w:document[1]/w:body[1]/w:p[4]/w:ins[1]' on '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}ins'.",
+         "owningPartUri": "/word/document.xml"
+        }
+       ],
+       "new_error_count": 2
+      }
+     }
+    },
+    "docxodus": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.002
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 5,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.003
+     },
+     "edit": {
+      "other_entries_changed": [
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       0,
+       1,
+       2,
+       3
+      ],
+      "paragraphs": 4,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [
+       "word/settings.xml"
+      ],
+      "paragraphs_canonically_changed": [
+       3
+      ],
+      "paragraph_count_before": 4,
+      "paragraph_count_after": 4
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    },
+    "python-docx": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 1,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "edit": {
+      "other_entries_changed": [
+       "[Content_Types].xml",
+       "_rels/.rels",
+       "docProps/core.xml",
+       "word/_rels/document.xml.rels",
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       3
+      ],
+      "paragraphs": 4,
+      "target_ok": true,
+      "kind": "overwrite",
+      "new_w_ins": 0,
+      "new_w_del": 0,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       3
+      ],
+      "paragraph_count_before": 4,
+      "paragraph_count_after": 4
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    }
+   },
+   "tokens": {
+    "document_xml": 961,
+    "quillwork": 98,
+    "adeu": 24,
+    "docxodus": 125,
+    "python-docx": 24
+   }
+  },
+  {
+   "file": "corpus/fixtures/15-cjk.docx",
+   "bytes": 4478,
+   "word": "Mixed",
+   "target_paragraph": 3,
+   "engines": {
+    "quillwork": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.0
+     },
+     "noop": {
+      "file_identical": true,
+      "entries_identical": 8,
+      "parts_identical": 8,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "note": "byte-identical to input"
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "edit": {
+      "other_entries_changed": [],
+      "paragraphs_changed": [
+       3
+      ],
+      "paragraphs": 4,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       3
+      ],
+      "paragraph_count_before": 4,
+      "paragraph_count_after": 4
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    },
+    "adeu": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 1,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.002
+     },
+     "edit": {
+      "other_entries_changed": [
+       "[Content_Types].xml",
+       "_rels/.rels",
+       "docProps/core.xml",
+       "word/_rels/document.xml.rels",
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       3
+      ],
+      "paragraphs": 4,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       3
+      ],
+      "paragraph_count_before": 4,
+      "paragraph_count_after": 4
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": false,
+       "decision": "failed",
+       "new_errors": [
+        {
+         "code": "openxml.sch_undeclaredattribute",
+         "category": "openXml",
+         "disposition": "new",
+         "message": "Open XML validation Schema 'Sch_UndeclaredAttribute' at '/w:document[1]/w:body[1]/w:p[4]/w:del[1]' on '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}del'.",
+         "owningPartUri": "/word/document.xml"
+        },
+        {
+         "code": "openxml.sch_undeclaredattribute",
+         "category": "openXml",
+         "disposition": "new",
+         "message": "Open XML validation Schema 'Sch_UndeclaredAttribute' at '/w:document[1]/w:body[1]/w:p[4]/w:ins[1]' on '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}ins'.",
+         "owningPartUri": "/word/document.xml"
+        }
+       ],
+       "new_error_count": 2
+      }
+     }
+    },
+    "docxodus": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.002
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 5,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.003
+     },
+     "edit": {
+      "other_entries_changed": [
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       0,
+       1,
+       2,
+       3
+      ],
+      "paragraphs": 4,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [
+       "word/settings.xml"
+      ],
+      "paragraphs_canonically_changed": [
+       3
+      ],
+      "paragraph_count_before": 4,
+      "paragraph_count_after": 4
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    },
+    "python-docx": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 1,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "edit": {
+      "other_entries_changed": [
+       "[Content_Types].xml",
+       "_rels/.rels",
+       "docProps/core.xml",
+       "word/_rels/document.xml.rels",
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       3
+      ],
+      "paragraphs": 4,
+      "target_ok": true,
+      "kind": "overwrite",
+      "new_w_ins": 0,
+      "new_w_del": 0,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       3
+      ],
+      "paragraph_count_before": 4,
+      "paragraph_count_after": 4
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    }
+   },
+   "tokens": {
+    "document_xml": 864,
+    "quillwork": 98,
+    "adeu": 23,
+    "docxodus": 131,
+    "python-docx": 23
+   }
+  },
+  {
+   "file": "corpus/fixtures/16-libreoffice-style.docx",
+   "bytes": 6318,
+   "word": "Written",
+   "target_paragraph": 0,
+   "engines": {
+    "quillwork": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.0
+     },
+     "noop": {
+      "file_identical": true,
+      "entries_identical": 8,
+      "parts_identical": 8,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "note": "byte-identical to input"
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "edit": {
+      "other_entries_changed": [],
+      "paragraphs_changed": [
+       0
+      ],
+      "paragraphs": 3,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 3,
+      "paragraph_count_after": 3
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    },
+    "adeu": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 1,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.002
+     },
+     "edit": {
+      "other_entries_changed": [
+       "[Content_Types].xml",
+       "_rels/.rels",
+       "docProps/core.xml",
+       "word/_rels/document.xml.rels",
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       0,
+       1,
+       2
+      ],
+      "paragraphs": 3,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 3,
+      "paragraph_count_after": 3
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": false,
+       "decision": "failed",
+       "new_errors": [
+        {
+         "code": "openxml.sch_undeclaredattribute",
+         "category": "openXml",
+         "disposition": "new",
+         "message": "Open XML validation Schema 'Sch_UndeclaredAttribute' at '/w:document[1]/w:body[1]/w:p[1]/w:del[1]' on '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}del'.",
+         "owningPartUri": "/word/document.xml"
+        },
+        {
+         "code": "openxml.sch_undeclaredattribute",
+         "category": "openXml",
+         "disposition": "new",
+         "message": "Open XML validation Schema 'Sch_UndeclaredAttribute' at '/w:document[1]/w:body[1]/w:p[1]/w:ins[1]' on '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}ins'.",
+         "owningPartUri": "/word/document.xml"
+        }
+       ],
+       "new_error_count": 2
+      }
+     }
+    },
+    "docxodus": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.002
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 5,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.003
+     },
+     "edit": {
+      "other_entries_changed": [
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       0,
+       1,
+       2
+      ],
+      "paragraphs": 3,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [
+       "word/settings.xml"
+      ],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 3,
+      "paragraph_count_after": 3
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    },
+    "python-docx": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 1,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "edit": {
+      "other_entries_changed": [
+       "[Content_Types].xml",
+       "_rels/.rels",
+       "docProps/core.xml",
+       "word/_rels/document.xml.rels",
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       0,
+       1,
+       2
+      ],
+      "paragraphs": 3,
+      "target_ok": true,
+      "kind": "overwrite",
+      "new_w_ins": 0,
+      "new_w_del": 0,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 3,
+      "paragraph_count_after": 3
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    }
+   },
+   "tokens": {
+    "document_xml": 745,
+    "quillwork": 97,
+    "adeu": 25,
+    "docxodus": 104,
+    "python-docx": 25
+   }
+  },
+  {
+   "file": "corpus/fixtures/18-crlf-bom.docx",
+   "bytes": 4419,
+   "word": "leading",
+   "target_paragraph": 0,
+   "engines": {
+    "quillwork": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.0
+     },
+     "noop": {
+      "file_identical": true,
+      "entries_identical": 8,
+      "parts_identical": 8,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "note": "byte-identical to input"
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "edit": {
+      "other_entries_changed": [],
+      "paragraphs_changed": [
+       0
+      ],
+      "paragraphs": 3,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 3,
+      "paragraph_count_after": 3
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    },
+    "adeu": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.002
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 0,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.003
+     },
+     "edit": {
+      "other_entries_changed": [
+       "[Content_Types].xml",
+       "_rels/.rels",
+       "docProps/app.xml",
+       "docProps/core.xml",
+       "word/_rels/document.xml.rels",
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       0,
+       1,
+       2
+      ],
+      "paragraphs": 3,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 3,
+      "paragraph_count_after": 3
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": false,
+       "decision": "failed",
+       "new_errors": [
+        {
+         "code": "openxml.sch_undeclaredattribute",
+         "category": "openXml",
+         "disposition": "new",
+         "message": "Open XML validation Schema 'Sch_UndeclaredAttribute' at '/w:document[1]/w:body[1]/w:p[1]/w:del[1]' on '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}del'.",
+         "owningPartUri": "/word/document.xml"
+        },
+        {
+         "code": "openxml.sch_undeclaredattribute",
+         "category": "openXml",
+         "disposition": "new",
+         "message": "Open XML validation Schema 'Sch_UndeclaredAttribute' at '/w:document[1]/w:body[1]/w:p[1]/w:ins[1]' on '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}ins'.",
+         "owningPartUri": "/word/document.xml"
+        }
+       ],
+       "new_error_count": 2
+      }
+     }
+    },
+    "docxodus": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.002
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 5,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.003
+     },
+     "edit": {
+      "other_entries_changed": [
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       0,
+       1,
+       2
+      ],
+      "paragraphs": 3,
+      "target_ok": true,
+      "kind": "tracked",
+      "new_w_ins": 1,
+      "new_w_del": 1,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [
+       "word/settings.xml"
+      ],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 3,
+      "paragraph_count_after": 3
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    },
+    "python-docx": {
+     "noop_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "noop": {
+      "file_identical": false,
+      "entries_identical": 0,
+      "parts_identical": 1,
+      "entries": 8
+     },
+     "noop_canonical": {
+      "parts_canonically_identical": 8,
+      "parts_total": 8,
+      "canonically_changed": [],
+      "parts_added": []
+     },
+     "noop_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     },
+     "edit_run": {
+      "ok": true,
+      "seconds": 0.001
+     },
+     "edit": {
+      "other_entries_changed": [
+       "[Content_Types].xml",
+       "_rels/.rels",
+       "docProps/core.xml",
+       "word/_rels/document.xml.rels",
+       "word/settings.xml",
+       "word/styles.xml"
+      ],
+      "paragraphs_changed": [
+       0,
+       1,
+       2
+      ],
+      "paragraphs": 3,
+      "target_ok": true,
+      "kind": "overwrite",
+      "new_w_ins": 0,
+      "new_w_del": 0,
+      "target_text_ok": true,
+      "other_paragraph_text_changed": []
+     },
+     "edit_canonical": {
+      "other_entries_canonically_changed": [],
+      "paragraphs_canonically_changed": [
+       0
+      ],
+      "paragraph_count_before": 3,
+      "paragraph_count_after": 3
+     },
+     "edit_valid": {
+      "zip_ok": true,
+      "xml_parse_errors": [],
+      "python_docx_loads": true,
+      "ooxml": {
+       "ok": true,
+       "decision": "passed",
+       "new_errors": [],
+       "new_error_count": 0
+      }
+     }
+    }
+   },
+   "tokens": {
+    "document_xml": 695,
+    "quillwork": 98,
+    "adeu": 23,
+    "docxodus": 102,
+    "python-docx": 24
+   }
+  }
+ ]
+}
