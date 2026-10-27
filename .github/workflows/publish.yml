@@ -1,6 +1,6 @@
 # Publishes a tagged release to PyPI (quillwork, quillwork-server) and crates.io (quillwork-core).
 #
-# Run it by hand: Actions > publish > Run workflow, and pick the release tag (v0.0.2, ...) as the
+# Run it by hand: Actions > publish > Run workflow, and pick the release tag (v0.0.3, ...) as the
 # ref. It refuses any ref that is not a v* tag, or a tag that does not match the versions in
 # Cargo.toml and python/quillwork_server/pyproject.toml.
 #
