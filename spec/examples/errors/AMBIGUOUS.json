@@ -1,0 +1,25 @@
+{
+  "spec_version": "0.1.0",
+  "ok": false,
+  "error": {
+    "code": "AMBIGUOUS",
+    "message": "\"werknemer\" occurs 2 times in b10f; give occurrence.",
+    "retryable": true,
+    "version": 42,
+    "op_index": 0,
+    "op": "replace_text",
+    "anchor": "b10f",
+    "candidates": [
+      {
+        "anchor": "b10f",
+        "occurrence": 1,
+        "context": "…betaalt het salaris aan werknemer uiterlijk op de laatste…"
+      },
+      {
+        "anchor": "b10f",
+        "occurrence": 2,
+        "context": "…werkdag van de maand; werknemer ontvangt daarbij een…"
+      }
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "spec_version": "0.1.0",
+  "ok": false,
+  "error": {
+    "code": "CONFLICT",
+    "message": "Another transaction committed while this one ran; retry on v42.",
+    "retryable": true,
+    "version": 42,
+    "op_index": null
+  }
+}

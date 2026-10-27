@@ -1,0 +1,108 @@
+{
+  "spec_version": "0.1.0",
+  "ok": true,
+  "base_version": 41,
+  "version": 42,
+  "change_set": "cs_7",
+  "changed": [
+    "[b106] Werknemer treedt op ⟪CTL tag=\"startdatum\" → \"1 maart 2027\"⟫ in dienst als pedagogisch medewerker{>>c1<<} voor {--40--}{++38++}⟨r12,13 AI⟩ uur per week."
+  ],
+  "removed": [],
+  "outline": null,
+  "patch": {
+    "spec_version": "0.1.0",
+    "base_version": 41,
+    "version": 42,
+    "removes": [],
+    "moves": [],
+    "upserts": [
+      {
+        "story": "b",
+        "after": "b105",
+        "block": {
+          "id": "b106",
+          "kind": "p",
+          "section": "s1",
+          "style": "Normal",
+          "inlines": [
+            {
+              "t": "Werknemer treedt op "
+            },
+            {
+              "t": "1 maart 2027",
+              "control": {
+                "tag": "startdatum",
+                "alias": "Startdatum",
+                "type": "date",
+                "bound": false,
+                "locked": false
+              }
+            },
+            {
+              "t": " in dienst als "
+            },
+            {
+              "t": "pedagogisch medewerker",
+              "comments": [
+                "c1"
+              ]
+            },
+            {
+              "t": " voor "
+            },
+            {
+              "t": "40",
+              "rev": {
+                "id": 12,
+                "type": "del",
+                "author": "AI-assistent",
+                "date": "2027-01-21T09:15:40Z",
+                "cs": "cs_7"
+              }
+            },
+            {
+              "t": "38",
+              "rev": {
+                "id": 13,
+                "type": "ins",
+                "author": "AI-assistent",
+                "date": "2027-01-21T09:15:40Z",
+                "cs": "cs_7"
+              }
+            },
+            {
+              "t": " uur per week."
+            }
+          ],
+          "fmt": {
+            "align": "both",
+            "spacing": {
+              "after": 120,
+              "line": 276,
+              "lineRule": "auto"
+            },
+            "font": "Calibri",
+            "size": 22
+          }
+        }
+      }
+    ],
+    "changeSets": [
+      {
+        "id": "cs_7",
+        "label": "Arbeidsduur naar 38 uur",
+        "author": "AI-assistent",
+        "turn": "turn_0193",
+        "version": 42,
+        "revisions": [
+          12,
+          13
+        ],
+        "untracked": [],
+        "status": "open"
+      }
+    ]
+  },
+  "lint": [],
+  "warnings": []
+}

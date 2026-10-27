@@ -1,0 +1,174 @@
+{
+  "spec_version": "0.1.0",
+  "version": 1,
+  "meta": {
+    "title": "Content controls",
+    "lang": "en-US",
+    "trackChanges": false,
+    "labels": [],
+    "pagesEstimate": 1,
+    "readOnly": null,
+    "flags": [],
+    "fonts": {
+      "Calibri": "Carlito"
+    }
+  },
+  "sections": [
+    {
+      "id": "s1",
+      "page": {
+        "w": 11906,
+        "h": 16838,
+        "margins": {
+          "top": 1440,
+          "right": 1440,
+          "bottom": 1440,
+          "left": 1440,
+          "header": 708,
+          "footer": 708
+        },
+        "cols": 1
+      },
+      "headers": {
+        "default": null,
+        "first": null,
+        "even": null
+      },
+      "footers": {
+        "default": null,
+        "first": null,
+        "even": null
+      },
+      "titlePage": false
+    }
+  ],
+  "blocks": [
+    {
+      "kind": "p",
+      "id": "b100",
+      "section": "s1",
+      "style": "Normal",
+      "styleName": "Normal",
+      "fmt": {
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Acme B.V."
+        }
+      ],
+      "control": {
+        "tag": "client",
+        "alias": "Client name",
+        "type": "plainText"
+      }
+    },
+    {
+      "kind": "p",
+      "id": "b101",
+      "section": "s1",
+      "style": "Normal",
+      "styleName": "Normal",
+      "fmt": {
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Start date: "
+        },
+        {
+          "k": "text",
+          "t": "1-2-2026",
+          "control": {
+            "tag": "start",
+            "alias": "Start date",
+            "type": "date"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b102",
+      "section": "s1",
+      "style": "Normal",
+      "styleName": "Normal",
+      "fmt": {
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Contract type: "
+        },
+        {
+          "k": "text",
+          "t": "Full-time",
+          "control": {
+            "tag": "ctype",
+            "alias": "Contract type",
+            "type": "dropdown"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b103",
+      "section": "s1",
+      "style": "Normal",
+      "styleName": "Normal",
+      "fmt": {
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "☐",
+          "marks": {
+            "font": "MS Gothic"
+          },
+          "control": {
+            "tag": null,
+            "alias": null,
+            "type": "checkbox"
+          }
+        },
+        {
+          "k": "text",
+          "t": " Agreed"
+        }
+      ]
+    }
+  ],
+  "stories": {},
+  "comments": [],
+  "changeSets": [],
+  "assets": {}
+}

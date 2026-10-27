@@ -1,0 +1,13 @@
+{
+ "body": null,
+ "error_codes": [
+  "oracle.not_a_zip"
+ ],
+ "features": [
+  "not a zip"
+ ],
+ "fixture": "not-a-zip.docx",
+ "pages": 1,
+ "paragraph_count": null,
+ "valid": false
+}

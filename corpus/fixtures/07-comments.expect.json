@@ -1,0 +1,51 @@
+{
+ "body": {
+  "accept": [
+   "Revenue grew as shown in the figure below.",
+   "A second paragraph with a tpyo in it."
+  ],
+  "markup": [
+   "Revenue grew as shown in the figure below.",
+   "A second paragraph with a tpyo in it."
+  ],
+  "reject": [
+   "Revenue grew as shown in the figure below.",
+   "A second paragraph with a tpyo in it."
+  ]
+ },
+ "comments": [
+  {
+   "anchor": "figure below",
+   "author": "Alice Reviewer",
+   "id": "0",
+   "parent": null,
+   "text": "Please check this figure."
+  },
+  {
+   "anchor": "figure below",
+   "author": "Bob Author",
+   "id": "1",
+   "parent": "0",
+   "text": "Checked, it is correct."
+  },
+  {
+   "anchor": "tpyo",
+   "author": "Alice Reviewer",
+   "id": "2",
+   "parent": null,
+   "text": "Typo here?"
+  }
+ ],
+ "features": [
+  "comments",
+  "reply (paraIdParent)",
+  "commentsExtended",
+  "commentsIds",
+  "commentsExtensible",
+  "people.xml"
+ ],
+ "fixture": "07-comments.docx",
+ "pages": 1,
+ "paragraph_count": 2,
+ "valid": true
+}

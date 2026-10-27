@@ -1,0 +1,12 @@
+{
+  "spec_version": "0.1.0",
+  "base_version": 42,
+  "label": "Wijzigingen uit Word",
+  "ops": [
+    {
+      "op": "compare",
+      "other": "upl_8f3a2c",
+      "author": "M. Jansen"
+    }
+  ]
+}

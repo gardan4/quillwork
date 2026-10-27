@@ -1,0 +1,101 @@
+## {"op":"list_changes"}
+{
+  "change_sets": [],
+  "revisions": []
+}
+
+## {"op":"list_comments"}
+{
+  "comments": []
+}
+
+## {"op":"list_images"}
+{
+  "images": []
+}
+
+## {"op":"list_fields"}
+{
+  "controls": [
+    {
+      "alias": "Client name",
+      "anchor": "b100",
+      "bound": false,
+      "items": [],
+      "locked": false,
+      "tag": "client",
+      "type": "plainText",
+      "value": "Acme B.V."
+    },
+    {
+      "alias": "Start date",
+      "anchor": "b101",
+      "bound": false,
+      "items": [],
+      "locked": false,
+      "tag": "start",
+      "type": "date",
+      "value": "1-2-2026"
+    },
+    {
+      "alias": "Contract type",
+      "anchor": "b102",
+      "bound": false,
+      "items": [
+        "Full-time",
+        "Part-time"
+      ],
+      "locked": false,
+      "tag": "ctype",
+      "type": "dropdown",
+      "value": "Full-time"
+    },
+    {
+      "alias": null,
+      "anchor": "b103",
+      "bound": false,
+      "items": [],
+      "locked": false,
+      "tag": null,
+      "type": "checkbox",
+      "value": false
+    }
+  ],
+  "placeholders": []
+}
+
+## {"op":"lint"}
+§ lint: none
+
+## {"anchor":"b100","op":"get_block"}
+{
+  "block": {
+    "control": {
+      "alias": "Client name",
+      "tag": "client",
+      "type": "plainText"
+    },
+    "fmt": {
+      "font": "Calibri",
+      "size": 22,
+      "spacing": {
+        "after": 160,
+        "line": 259,
+        "lineRule": "auto"
+      }
+    },
+    "id": "b100",
+    "inlines": [
+      {
+        "k": "text",
+        "t": "Acme B.V."
+      }
+    ],
+    "kind": "p",
+    "section": "s1",
+    "style": "Normal",
+    "styleName": "Normal"
+  },
+  "story": "b"
+}
+

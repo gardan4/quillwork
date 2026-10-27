@@ -1,0 +1,88 @@
+## {"op":"list_changes"}
+{
+  "change_sets": [],
+  "revisions": []
+}
+
+## {"op":"list_comments"}
+{
+  "comments": [
+    {
+      "anchor": "b100",
+      "author": "Alice Reviewer",
+      "done": false,
+      "id": "c1",
+      "on": "figure below",
+      "replies": [
+        {
+          "author": "Bob Author",
+          "id": "c2",
+          "text": "Checked, it is correct."
+        }
+      ],
+      "text": "Please check this figure."
+    },
+    {
+      "anchor": "b101",
+      "author": "Alice Reviewer",
+      "done": false,
+      "id": "c3",
+      "on": "tpyo",
+      "replies": [],
+      "text": "Typo here?"
+    }
+  ]
+}
+
+## {"op":"list_images"}
+{
+  "images": []
+}
+
+## {"op":"list_fields"}
+{
+  "controls": [],
+  "placeholders": []
+}
+
+## {"op":"lint"}
+§ lint: none
+
+## {"anchor":"b100","op":"get_block"}
+{
+  "block": {
+    "fmt": {
+      "font": "Calibri",
+      "size": 22,
+      "spacing": {
+        "after": 160,
+        "line": 259,
+        "lineRule": "auto"
+      }
+    },
+    "id": "b100",
+    "inlines": [
+      {
+        "k": "text",
+        "t": "Revenue grew as shown in the "
+      },
+      {
+        "comments": [
+          "c1"
+        ],
+        "k": "text",
+        "t": "figure below"
+      },
+      {
+        "k": "text",
+        "t": "."
+      }
+    ],
+    "kind": "p",
+    "section": "s1",
+    "style": "Normal",
+    "styleName": "Normal"
+  },
+  "story": "b"
+}
+

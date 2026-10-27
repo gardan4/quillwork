@@ -1,0 +1,78 @@
+## {"op":"list_changes"}
+{
+  "change_sets": [],
+  "revisions": []
+}
+
+## {"op":"list_comments"}
+{
+  "comments": []
+}
+
+## {"op":"list_images"}
+{
+  "images": []
+}
+
+## {"op":"list_fields"}
+{
+  "controls": [],
+  "placeholders": []
+}
+
+## {"op":"lint"}
+§ lint: none
+
+## {"anchor":"b100","op":"get_block"}
+{
+  "block": {
+    "fmt": {
+      "font": "Calibri",
+      "size": 22,
+      "spacing": {
+        "after": 100,
+        "line": 259,
+        "lineRule": "auto"
+      }
+    },
+    "id": "b100",
+    "inlines": [
+      {
+        "k": "text",
+        "link": {
+          "bookmark": "_Toc100"
+        },
+        "marks": {
+          "color": "#0563C1",
+          "u": "single"
+        },
+        "style": "Hyperlink",
+        "t": "Introduction"
+      },
+      {
+        "k": "tab",
+        "link": {
+          "bookmark": "_Toc100"
+        }
+      },
+      {
+        "field": {
+          "editable": false,
+          "instr": "PAGEREF _Toc100 \\h",
+          "type": "PAGEREF"
+        },
+        "k": "field",
+        "link": {
+          "bookmark": "_Toc100"
+        },
+        "t": "1"
+      }
+    ],
+    "kind": "p",
+    "section": "s1",
+    "style": "TOC1",
+    "styleName": "toc 1"
+  },
+  "story": "b"
+}
+

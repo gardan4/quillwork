@@ -1,0 +1,168 @@
+{
+  "spec_version": "0.1.0",
+  "version": 1,
+  "meta": {
+    "title": "Images",
+    "lang": "en-US",
+    "trackChanges": false,
+    "labels": [],
+    "pagesEstimate": 1,
+    "readOnly": null,
+    "flags": [],
+    "fonts": {
+      "Calibri": "Carlito"
+    }
+  },
+  "sections": [
+    {
+      "id": "s1",
+      "page": {
+        "w": 11906,
+        "h": 16838,
+        "margins": {
+          "top": 1440,
+          "right": 1440,
+          "bottom": 1440,
+          "left": 1440,
+          "header": 708,
+          "footer": 708
+        },
+        "cols": 1
+      },
+      "headers": {
+        "default": null,
+        "first": null,
+        "even": null
+      },
+      "footers": {
+        "default": null,
+        "first": null,
+        "even": null
+      },
+      "titlePage": false
+    }
+  ],
+  "blocks": [
+    {
+      "kind": "p",
+      "id": "b100",
+      "section": "s1",
+      "style": "Normal",
+      "styleName": "Normal",
+      "fmt": {
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "An inline picture: "
+        },
+        {
+          "k": "image",
+          "image": {
+            "id": "img1",
+            "drawing": "picture",
+            "asset": "a_bc9854f99dbe38c1",
+            "w": 914400,
+            "h": 914400,
+            "wrap": "inline",
+            "alt": "A small gradient square",
+            "decorative": false,
+            "crop": null,
+            "rotation": 0
+          }
+        },
+        {
+          "k": "text",
+          "t": " sits in the text."
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b101",
+      "section": "s1",
+      "style": "Normal",
+      "styleName": "Normal",
+      "fmt": {
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "image",
+          "image": {
+            "id": "img2",
+            "drawing": "picture",
+            "asset": "a_a1d36585d17e7e40",
+            "w": 914400,
+            "h": 914400,
+            "wrap": "square",
+            "alt": "An orange square floating right",
+            "decorative": false,
+            "crop": null,
+            "rotation": 0
+          }
+        },
+        {
+          "k": "text",
+          "t": "This paragraph has an anchored picture floating at the right."
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b102",
+      "section": "s1",
+      "style": "Normal",
+      "styleName": "Normal",
+      "fmt": {
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "The end."
+        }
+      ]
+    }
+  ],
+  "stories": {},
+  "comments": [],
+  "changeSets": [],
+  "assets": {
+    "a_a1d36585d17e7e40": {
+      "mime": "image/png",
+      "px": [
+        16,
+        16
+      ],
+      "bytes": 177
+    },
+    "a_bc9854f99dbe38c1": {
+      "mime": "image/png",
+      "px": [
+        16,
+        16
+      ],
+      "bytes": 463
+    }
+  }
+}

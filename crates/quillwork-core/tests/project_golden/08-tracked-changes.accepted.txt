@@ -1,0 +1,11 @@
+§ doc "Tracked changes" · v1 · 1 page (est.) · en-US · tracked changes: off · 0 open comments · 10 open revisions · flags: foreign_deletions · view: accepted
+§ outline: (none)
+§ window b100..b107 (blocks 1–8 of 8)
+
+[b100] The quick red fox jumps.
+[b101] This word is **now bold**.
+[b102] Centred paragraph (was left).
+[b103] Before.
+[b104] After. Moved sentence.
+[b105] Inserted paragraph.
+[b107] Final paragraph.

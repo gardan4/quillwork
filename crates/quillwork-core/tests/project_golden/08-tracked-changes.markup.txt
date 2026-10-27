@@ -1,0 +1,12 @@
+§ doc "Tracked changes" · v1 · 1 page (est.) · en-US · tracked changes: off · 0 open comments · 10 open revisions · flags: foreign_deletions · view: markup
+§ outline: (none)
+§ window b100..b107 (blocks 1–8 of 8)
+
+[b100] The quick {--brown --}{++red ++}⟨r101,102 Other Author⟩fox jumps.
+[b101] This word is {==**now bold**==}⟨fmt +bold r103 Other Author⟩.
+[b102] Centred paragraph (was left).
+[b103] Before.{-- Moved sentence.--}⟨r105 Other Author⟩
+[b104] After.{++ Moved sentence.++}⟨r106 Other Author moved from b103⟩
+[b105] {++Inserted paragraph.¶++}⟨r107,108 Other Author⟩
+[b106] {--Deleted paragraph.¶--}⟨r109,110 Other Author⟩
+[b107] Final paragraph.

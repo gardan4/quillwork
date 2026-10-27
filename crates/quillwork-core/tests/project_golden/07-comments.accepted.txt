@@ -1,0 +1,11 @@
+§ doc "Comments" · v1 · 1 page (est.) · en-US · tracked changes: off · 2 open comments · 0 open revisions · view: accepted
+§ outline: (none)
+§ window b100..b101 (blocks 1–2 of 2)
+
+[b100] Revenue grew as shown in the figure below{>>c1<<}.
+[b101] A second paragraph with a tpyo{>>c3<<} in it.
+
+§ comments:
+  [c1 Alice Reviewer, open, on "figure below"] Please check this figure.
+    [c2 Bob Author] Checked, it is correct.
+  [c3 Alice Reviewer, open, on "tpyo"] Typo here?

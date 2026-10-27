@@ -1,0 +1,330 @@
+{
+  "spec_version": "0.1.0",
+  "version": 1,
+  "meta": {
+    "title": "Tracked changes",
+    "lang": "en-US",
+    "trackChanges": false,
+    "labels": [],
+    "pagesEstimate": 1,
+    "readOnly": null,
+    "flags": [],
+    "fonts": {
+      "Calibri": "Carlito"
+    }
+  },
+  "sections": [
+    {
+      "id": "s1",
+      "page": {
+        "w": 11906,
+        "h": 16838,
+        "margins": {
+          "top": 1440,
+          "right": 1440,
+          "bottom": 1440,
+          "left": 1440,
+          "header": 708,
+          "footer": 708
+        },
+        "cols": 1
+      },
+      "headers": {
+        "default": null,
+        "first": null,
+        "even": null
+      },
+      "footers": {
+        "default": null,
+        "first": null,
+        "even": null
+      },
+      "titlePage": false
+    }
+  ],
+  "blocks": [
+    {
+      "kind": "p",
+      "id": "b100",
+      "section": "s1",
+      "style": "Normal",
+      "styleName": "Normal",
+      "fmt": {
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "The quick "
+        },
+        {
+          "k": "text",
+          "t": "brown ",
+          "rev": {
+            "id": 101,
+            "type": "del",
+            "author": "Other Author",
+            "date": "2026-01-02T10:00:00Z",
+            "cs": null
+          }
+        },
+        {
+          "k": "text",
+          "t": "red ",
+          "rev": {
+            "id": 102,
+            "type": "ins",
+            "author": "Other Author",
+            "date": "2026-01-02T10:00:00Z",
+            "cs": null
+          }
+        },
+        {
+          "k": "text",
+          "t": "fox jumps."
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b101",
+      "section": "s1",
+      "style": "Normal",
+      "styleName": "Normal",
+      "fmt": {
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "This word is "
+        },
+        {
+          "k": "text",
+          "t": "now bold",
+          "marks": {
+            "b": true
+          },
+          "fmtChange": {
+            "id": 103,
+            "type": "fmt",
+            "author": "Other Author",
+            "date": "2026-01-02T10:00:00Z",
+            "cs": null,
+            "old": "+bold"
+          }
+        },
+        {
+          "k": "text",
+          "t": "."
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b102",
+      "section": "s1",
+      "style": "Normal",
+      "styleName": "Normal",
+      "fmt": {
+        "align": "center",
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Centred paragraph (was left)."
+        }
+      ],
+      "pprChange": {
+        "id": 104,
+        "type": "pfmt",
+        "author": "Other Author",
+        "date": "2026-01-02T10:00:00Z",
+        "cs": null
+      }
+    },
+    {
+      "kind": "p",
+      "id": "b103",
+      "section": "s1",
+      "style": "Normal",
+      "styleName": "Normal",
+      "fmt": {
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Before."
+        },
+        {
+          "k": "text",
+          "t": " Moved sentence.",
+          "rev": {
+            "id": 105,
+            "type": "moveFrom",
+            "author": "Other Author",
+            "date": "2026-01-02T10:00:00Z",
+            "cs": null
+          }
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b104",
+      "section": "s1",
+      "style": "Normal",
+      "styleName": "Normal",
+      "fmt": {
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "After."
+        },
+        {
+          "k": "text",
+          "t": " Moved sentence.",
+          "rev": {
+            "id": 106,
+            "type": "moveTo",
+            "author": "Other Author",
+            "date": "2026-01-02T10:00:00Z",
+            "cs": null
+          }
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b105",
+      "section": "s1",
+      "style": "Normal",
+      "styleName": "Normal",
+      "fmt": {
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Inserted paragraph.",
+          "rev": {
+            "id": 107,
+            "type": "ins",
+            "author": "Other Author",
+            "date": "2026-01-02T10:00:00Z",
+            "cs": null
+          }
+        }
+      ],
+      "mark": {
+        "id": 108,
+        "type": "ins",
+        "author": "Other Author",
+        "date": "2026-01-02T10:00:00Z",
+        "cs": null
+      }
+    },
+    {
+      "kind": "p",
+      "id": "b106",
+      "section": "s1",
+      "style": "Normal",
+      "styleName": "Normal",
+      "fmt": {
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Deleted paragraph.",
+          "rev": {
+            "id": 109,
+            "type": "del",
+            "author": "Other Author",
+            "date": "2026-01-02T10:00:00Z",
+            "cs": null
+          }
+        }
+      ],
+      "mark": {
+        "id": 110,
+        "type": "del",
+        "author": "Other Author",
+        "date": "2026-01-02T10:00:00Z",
+        "cs": null
+      }
+    },
+    {
+      "kind": "p",
+      "id": "b107",
+      "section": "s1",
+      "style": "Normal",
+      "styleName": "Normal",
+      "fmt": {
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Final paragraph."
+        }
+      ]
+    }
+  ],
+  "stories": {},
+  "comments": [],
+  "changeSets": [],
+  "assets": {}
+}

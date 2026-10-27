@@ -1,0 +1,14 @@
+{
+  "spec_version": "0.1.0",
+  "ok": false,
+  "error": {
+    "code": "CONFIRM_REQUIRED",
+    "message": "insert_column is beta in track mode; Word shows tracked column inserts unevenly. Repeat with confirm: true.",
+    "retryable": true,
+    "version": 42,
+    "op_index": 0,
+    "op": "insert_column",
+    "anchor": "t1",
+    "reason": "beta"
+  }
+}

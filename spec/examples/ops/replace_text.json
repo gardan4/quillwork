@@ -1,0 +1,16 @@
+{
+  "spec_version": "0.1.0",
+  "base_version": 42,
+  "label": "Functienaam volgens cao",
+  "ops": [
+    {
+      "op": "replace_text",
+      "anchor": "b106",
+      "find": "pedagogisch medewerker",
+      "replace": "pedagogisch professional",
+      "expect": {
+        "text": "Werknemer treedt op 1 maart 2027 in dienst als pedagogisch medewerker voor 38 uur per week."
+      }
+    }
+  ]
+}

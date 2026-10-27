@@ -1,0 +1,132 @@
+# Checks every pull request and every push to main. The commands match CONTRIBUTING.md.
+# Only public files are tested: QUILLWORK_PRIVATE_CORPUS points at an empty directory, so the
+# private-corpus cases skip. Actions are pinned to commit SHAs; the tag is in the trailing comment.
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+env:
+  CARGO_TERM_COLOR: always
+  QUILLWORK_PRIVATE_CORPUS: ${{ github.workspace }}/../no-private-corpus
+
+jobs:
+  rust:
+    name: rust (fmt, clippy, test)
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Toolchain
+        run: rustup toolchain install stable --profile minimal --component rustfmt,clippy && rustup default stable
+      - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2.9.2
+      - run: mkdir -p "$QUILLWORK_PRIVATE_CORPUS"
+      - run: cargo fmt --all --check
+      - run: cargo clippy --workspace --all-targets -- -D warnings
+      - run: cargo test --workspace
+      - name: Rust example
+        run: |
+          python3 -m venv /tmp/sample && /tmp/sample/bin/pip install -q python-docx
+          /tmp/sample/bin/python examples/make_sample.py /tmp/sample.docx
+          cargo run -q -p quillwork-core --example quickstart -- /tmp/sample.docx /tmp/sample.edited.docx
+
+  msrv:
+    name: rust 1.88 (MSRV)
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - run: rustup toolchain install 1.88 --profile minimal && rustup default 1.88
+      - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2.9.2
+      - run: cargo check --workspace --lib
+
+  python:
+    name: python (binding, spec, server, examples, bench)
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - run: rustup toolchain install stable --profile minimal && rustup default stable
+      - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2.9.2
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
+        with:
+          version: "0.11.16"
+          enable-cache: false
+      - name: Environment
+        run: |
+          mkdir -p "$QUILLWORK_PRIVATE_CORPUS"
+          uv venv --python 3.12 .venv
+          echo "VIRTUAL_ENV=$PWD/.venv" >> "$GITHUB_ENV"
+          echo "$PWD/.venv/bin" >> "$GITHUB_PATH"
+      - name: Install
+        run: |
+          uv pip install maturin==1.15.0 pytest jsonschema mypy ruff python-docx tiktoken
+          maturin develop --uv -m crates/quillwork-py/Cargo.toml
+          uv pip install -e 'python/quillwork_server[test]'
+      - name: Binding and spec tests
+        run: pytest crates/quillwork-py/tests spec/tests
+      - name: Binding types
+        run: mypy --strict crates/quillwork-py/python/quillwork crates/quillwork-py/examples
+      - name: Server
+        working-directory: python/quillwork_server
+        run: |
+          pytest
+          ruff check .
+          ruff format --check .
+          mypy
+      - name: Examples
+        run: |
+          ruff check examples bench
+          python examples/make_sample.py "$RUNNER_TEMP/sample-contract.docx"
+          python examples/edit_contract.py "$RUNNER_TEMP/sample-contract.docx"
+      - name: Benchmark
+        run: python bench/fidelity.py --json "$RUNNER_TEMP/bench.json"
+
+  viewer:
+    name: viewer (typecheck, test, build)
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: js/viewer
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: js/viewer/package-lock.json
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+
+  oracle:
+    name: oracle tests
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
+        with:
+          version: "0.11.16"
+          enable-cache: false
+      # The validator (Docxodus) and the renderer (Gotenberg) are not available here, so those
+      # tests skip; the rest of the oracle runs.
+      - run: mkdir -p "$RUNNER_TEMP/no-docxodus"
+      - run: QUILLWORK_DOCXODUS="$RUNNER_TEMP/no-docxodus" uv run --project tools/oracle pytest tools/oracle/tests

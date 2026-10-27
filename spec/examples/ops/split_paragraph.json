@@ -1,0 +1,12 @@
+{
+  "spec_version": "0.1.0",
+  "base_version": 42,
+  "ops": [
+    {
+      "op": "split_paragraph",
+      "anchor": "b10f",
+      "at_text": "werknemer ontvangt",
+      "occurrence": 1
+    }
+  ]
+}

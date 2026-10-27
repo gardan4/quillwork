@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://quillwork.example/spec/v0/common.schema.json",
+  "title": "Quillwork shared definitions",
+  "description": "Identifier grammars shared by every other schema. The patterns are the normative form of spec/anchors.md.",
+  "$defs": {
+    "SpecVersion": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$",
+      "description": "Semver of the spec this payload conforms to."
+    },
+    "Version": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Document version. Upload creates version 1; every committed transaction adds one."
+    },
+    "StoryId": {
+      "type": "string",
+      "pattern": "^(b|(h|f|fn|en|c|tb)[1-9][0-9]*)$",
+      "description": "b = main body; h<n> header, f<n> footer, fn<n> footnote, en<n> endnote, c<n> comment, tb<n> text box."
+    },
+    "BlockAnchor": {
+      "type": "string",
+      "pattern": "^(b[0-9a-hjkmnp-tv-z]{3,}|(h|f|fn|en|c|tb)[1-9][0-9]*-[0-9a-hjkmnp-tv-z]+)$",
+      "description": "A paragraph handle: story + Crockford base32 serial (b1dk, h1-02, fn3-1)."
+    },
+    "TableAnchor": {"type": "string", "pattern": "^t[1-9][0-9]*$"},
+    "RowAnchor": {"type": "string", "pattern": "^t[1-9][0-9]*\\.r[1-9][0-9]*$"},
+    "CellAnchor": {"type": "string", "pattern": "^t[1-9][0-9]*\\.r[1-9][0-9]*\\.c[1-9][0-9]*$"},
+    "ImageAnchor": {"type": "string", "pattern": "^img[1-9][0-9]*$"},
+    "CommentId": {"type": "string", "pattern": "^c[1-9][0-9]*$"},
+    "SectionId": {"type": "string", "pattern": "^s[1-9][0-9]*$"},
+    "Anchor": {
+      "type": "string",
+      "pattern": "^(b[0-9a-hjkmnp-tv-z]{3,}|(h|f|fn|en|c|tb)[1-9][0-9]*-[0-9a-hjkmnp-tv-z]+|t[1-9][0-9]*(\\.r[1-9][0-9]*(\\.c[1-9][0-9]*)?)?|img[1-9][0-9]*|c[1-9][0-9]*)$",
+      "description": "Any addressable thing: block, table, row, cell, image or comment."
+    },
+    "AnchorOrRange": {
+      "type": "string",
+      "pattern": "^(b[0-9a-hjkmnp-tv-z]{3,}|(h|f|fn|en|c|tb)[1-9][0-9]*-[0-9a-hjkmnp-tv-z]+|t[1-9][0-9]*(\\.r[1-9][0-9]*(\\.c[1-9][0-9]*)?)?|img[1-9][0-9]*)(\\.\\.(b[0-9a-hjkmnp-tv-z]{3,}|(h|f|fn|en|c|tb)[1-9][0-9]*-[0-9a-hjkmnp-tv-z]+|t[1-9][0-9]*|img[1-9][0-9]*))?$",
+      "description": "One anchor, or an inclusive range a..b of top-level blocks in one story."
+    },
+    "Selection": {
+      "type": "string",
+      "pattern": "^((b[0-9a-hjkmnp-tv-z]{3,}|(h|f|fn|en|c|tb)[1-9][0-9]*-[0-9a-hjkmnp-tv-z]+|t[1-9][0-9]*(\\.r[1-9][0-9]*(\\.c[1-9][0-9]*)?)?|img[1-9][0-9]*|c[1-9][0-9]*)(\\.\\.((b[0-9a-hjkmnp-tv-z]{3,}|(h|f|fn|en|c|tb)[1-9][0-9]*-[0-9a-hjkmnp-tv-z]+|t[1-9][0-9]*|img[1-9][0-9]*))?)?)(,((b[0-9a-hjkmnp-tv-z]{3,}|(h|f|fn|en|c|tb)[1-9][0-9]*-[0-9a-hjkmnp-tv-z]+|t[1-9][0-9]*(\\.r[1-9][0-9]*(\\.c[1-9][0-9]*)?)?|img[1-9][0-9]*|c[1-9][0-9]*)(\\.\\.((b[0-9a-hjkmnp-tv-z]{3,}|(h|f|fn|en|c|tb)[1-9][0-9]*-[0-9a-hjkmnp-tv-z]+|t[1-9][0-9]*|img[1-9][0-9]*))?)?))*$",
+      "description": "What read_document's range accepts: comma-separated anchors, closed ranges a..b and open ranges a.. (one window from a)."
+    },
+    "RevisionId": {"type": "integer", "minimum": 0, "description": "The w:id of a w:ins/w:del/w:*Change element."},
+    "RevisionRef": {"type": "string", "pattern": "^r(0|[1-9][0-9]*)$"},
+    "ChangeSetId": {"type": "string", "pattern": "^cs_[0-9a-z]+$"},
+    "AssetId": {"type": "string", "pattern": "^a_[0-9a-f]{16}$", "description": "a_ + the first 16 hex digits of sha256(bytes)."},
+    "ReviewTarget": {
+      "type": "string",
+      "pattern": "^(cs_[0-9a-z]+|r(0|[1-9][0-9]*)|author:.+|all)$"
+    },
+    "Expect": {
+      "description": "Guard on the target block's current accepted-mode text (NFC). text = the whole text; hash = sha256: + at least 12 lowercase hex digits of sha256(UTF-8 text).",
+      "type": "object",
+      "oneOf": [
+        {"properties": {"text": {"type": "string"}}, "required": ["text"], "additionalProperties": false},
+        {"properties": {"hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{12,64}$"}}, "required": ["hash"], "additionalProperties": false}
+      ]
+    },
+    "Mode": {"type": "string", "enum": ["track", "direct"]},
+    "ProjectionMode": {"type": "string", "enum": ["accepted", "markup"]},
+    "ProjectionLine": {
+      "type": "string",
+      "pattern": "^(§ |\\[|  )",
+      "description": "One line of the LLM projection (spec/projection.md), without the trailing newline."
+    },
+    "Twips": {"type": "integer", "description": "1/20 pt; 1440 per inch."},
+    "Emu": {"type": "integer", "minimum": 0, "description": "914 400 per inch, 360 000 per cm."},
+    "HalfPoints": {"type": "integer", "minimum": 1, "description": "Font size in half points (22 = 11 pt)."},
+    "Color": {"type": "string", "pattern": "^#[0-9A-F]{6}$"},
+    "DateTime": {"type": "string", "format": "date-time"},
+    "LintFinding": {
+      "type": "object",
+      "properties": {
+        "rule": {"type": "string", "enum": ["broken_ref", "stale_article_number", "numbering_gap", "leftover_placeholder", "inconsistent_term", "double_space", "missing_alt", "heading_order", "empty_paragraph", "invalid_markup"]},
+        "severity": {"type": "string", "enum": ["info", "warning"]},
+        "anchor": {"$ref": "#/$defs/Anchor"},
+        "message": {"type": "string"}
+      },
+      "required": ["rule", "severity", "anchor", "message"],
+      "additionalProperties": false
+    },
+    "StoryKeyId": {
+      "type": "string",
+      "pattern": "^(h|f|fn|en|tb)[1-9][0-9]*$",
+      "description": "A story that lives in the view model's stories map: every story but the body (b) and comments (c<n>, which live in comments[])."
+    },
+    "TextSelection": {
+      "type": "object",
+      "description": "A text range as the viewer reports it. Offsets count UTF-16 code units in the text model (spec/projection.md §10): accepted text, \\t per tab, \\n per line break, a field's result, nothing for deletions, list labels, note marks or images.",
+      "properties": {
+        "anchor": {"$ref": "#/$defs/AnchorOrRange", "description": "The block, or the range of blocks, the selection spans."},
+        "start": {"type": "integer", "minimum": 0, "description": "Offset into the first paragraph's text."},
+        "end": {"type": "integer", "minimum": 0, "description": "Offset into the last paragraph's text (exclusive)."},
+        "text": {"type": "string", "description": "The selected text in the text model; paragraphs joined with \\n."},
+        "startBlock": {"$ref": "#/$defs/BlockAnchor", "description": "The paragraph start indexes, when anchor is a range, table or row."},
+        "endBlock": {"$ref": "#/$defs/BlockAnchor", "description": "The paragraph end indexes, when anchor is a range, table or row."}
+      },
+      "required": ["anchor", "start", "end", "text"],
+      "additionalProperties": false
+    }
+  }
+}

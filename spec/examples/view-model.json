@@ -1,0 +1,751 @@
+{
+  "spec_version": "0.1.0",
+  "version": 42,
+  "meta": {
+    "title": "Arbeidsovereenkomst voor bepaalde tijd — P. Bakker",
+    "lang": "nl-NL",
+    "trackChanges": true,
+    "labels": [
+      "Vertrouwelijk"
+    ],
+    "pagesEstimate": 2,
+    "readOnly": null,
+    "flags": [
+      "hidden_text"
+    ],
+    "fonts": {
+      "Calibri": "Carlito",
+      "Cambria": "Caladea"
+    }
+  },
+  "sections": [
+    {
+      "id": "s1",
+      "page": {
+        "w": 11906,
+        "h": 16838,
+        "orient": "portrait",
+        "margins": {
+          "top": 1417,
+          "right": 1417,
+          "bottom": 1417,
+          "left": 1417,
+          "header": 708,
+          "footer": 708,
+          "gutter": 0
+        },
+        "cols": 1
+      },
+      "headers": {
+        "default": "h1",
+        "first": null,
+        "even": null
+      },
+      "footers": {
+        "default": "f1",
+        "first": null,
+        "even": null
+      },
+      "titlePage": false,
+      "breakType": "nextPage"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "b100",
+      "kind": "p",
+      "section": "s1",
+      "style": "Heading1",
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Arbeidsovereenkomst voor bepaalde tijd"
+        }
+      ],
+      "heading": 1,
+      "fmt": {
+        "spacing": {
+          "before": 240,
+          "after": 60,
+          "line": 276,
+          "lineRule": "auto"
+        },
+        "font": "Cambria",
+        "size": 32,
+        "color": "#1F3864",
+        "b": true,
+        "keepNext": true
+      }
+    },
+    {
+      "id": "b101",
+      "kind": "p",
+      "section": "s1",
+      "style": "Normal",
+      "inlines": [
+        {
+          "k": "text",
+          "t": "De ondergetekenden:"
+        }
+      ],
+      "fmt": {
+        "align": "both",
+        "spacing": {
+          "after": 120,
+          "line": 276,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      }
+    },
+    {
+      "id": "b102",
+      "kind": "p",
+      "section": "s1",
+      "style": "ListParagraph",
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Lindehof Kinderopvang B.V.",
+          "marks": {
+            "b": true
+          }
+        },
+        {
+          "k": "text",
+          "t": ", gevestigd te Utrecht, hierna \"werkgever\";"
+        }
+      ],
+      "list": {
+        "label": "1.",
+        "level": 0,
+        "numId": 5
+      },
+      "fmt": {
+        "align": "both",
+        "spacing": {
+          "after": 120,
+          "line": 276,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      }
+    },
+    {
+      "id": "b103",
+      "kind": "p",
+      "section": "s1",
+      "style": "ListParagraph",
+      "inlines": [
+        {
+          "k": "text",
+          "t": "P. Bakker, wonende te Amersfoort, hierna \"werknemer\","
+        }
+      ],
+      "list": {
+        "label": "2.",
+        "level": 0,
+        "numId": 5
+      },
+      "fmt": {
+        "align": "both",
+        "spacing": {
+          "after": 120,
+          "line": 276,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      }
+    },
+    {
+      "id": "b104",
+      "kind": "p",
+      "section": "s1",
+      "style": "Normal",
+      "inlines": [
+        {
+          "k": "text",
+          "t": "komen het volgende overeen:"
+        },
+        {
+          "k": "text",
+          "t": "concept v3",
+          "flags": [
+            "hidden"
+          ]
+        }
+      ],
+      "fmt": {
+        "align": "both",
+        "spacing": {
+          "after": 120,
+          "line": 276,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      }
+    },
+    {
+      "id": "b105",
+      "kind": "p",
+      "section": "s1",
+      "style": "Heading2",
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Functie en arbeidsduur"
+        }
+      ],
+      "heading": 2,
+      "list": {
+        "label": "1",
+        "level": 0,
+        "numId": 3
+      },
+      "fmt": {
+        "spacing": {
+          "before": 240,
+          "after": 60,
+          "line": 276,
+          "lineRule": "auto"
+        },
+        "font": "Cambria",
+        "size": 26,
+        "color": "#1F3864",
+        "b": true,
+        "keepNext": true
+      }
+    },
+    {
+      "id": "b106",
+      "kind": "p",
+      "section": "s1",
+      "style": "Normal",
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Werknemer treedt op "
+        },
+        {
+          "k": "text",
+          "t": "1 maart 2027",
+          "control": {
+            "tag": "startdatum",
+            "alias": "Startdatum",
+            "type": "date",
+            "bound": false,
+            "locked": false
+          }
+        },
+        {
+          "k": "text",
+          "t": " in dienst als "
+        },
+        {
+          "k": "text",
+          "t": "pedagogisch medewerker",
+          "comments": [
+            "c1"
+          ]
+        },
+        {
+          "k": "text",
+          "t": " voor "
+        },
+        {
+          "k": "text",
+          "t": "40",
+          "rev": {
+            "id": 12,
+            "type": "del",
+            "author": "AI-assistent",
+            "date": "2027-01-21T09:15:40Z",
+            "cs": "cs_7"
+          }
+        },
+        {
+          "k": "text",
+          "t": "38",
+          "rev": {
+            "id": 13,
+            "type": "ins",
+            "author": "AI-assistent",
+            "date": "2027-01-21T09:15:40Z",
+            "cs": "cs_7"
+          }
+        },
+        {
+          "k": "text",
+          "t": " uur per week."
+        }
+      ],
+      "fmt": {
+        "align": "both",
+        "spacing": {
+          "after": 120,
+          "line": 276,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      }
+    },
+    {
+      "id": "b107",
+      "kind": "p",
+      "section": "s1",
+      "style": "Heading2",
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Salaris"
+        }
+      ],
+      "heading": 2,
+      "list": {
+        "label": "2",
+        "level": 0,
+        "numId": 3
+      },
+      "fmt": {
+        "spacing": {
+          "before": 240,
+          "after": 60,
+          "line": 276,
+          "lineRule": "auto"
+        },
+        "font": "Cambria",
+        "size": 26,
+        "color": "#1F3864",
+        "b": true,
+        "keepNext": true
+      }
+    },
+    {
+      "id": "b108",
+      "kind": "p",
+      "section": "s1",
+      "style": "Normal",
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Het salaris bedraagt bij aanvang:"
+        }
+      ],
+      "fmt": {
+        "align": "both",
+        "spacing": {
+          "after": 120,
+          "line": 276,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      }
+    },
+    {
+      "id": "t1",
+      "kind": "table",
+      "section": "s1",
+      "style": "TableGrid",
+      "caption": "Salaris",
+      "grid": [
+        3005,
+        3005,
+        3005
+      ],
+      "rows": [
+        {
+          "id": "t1.r1",
+          "header": true,
+          "height": null,
+          "rev": null,
+          "cells": [
+            {
+              "id": "t1.r1.c1",
+              "span": 1,
+              "vmerge": null,
+              "width": 3005,
+              "shade": "#E8F0E0",
+              "blocks": [
+                {
+                  "id": "b109",
+                  "kind": "p",
+                  "section": "s1",
+                  "style": "TableText",
+                  "inlines": [
+                    {
+                      "k": "text",
+                      "t": "Schaal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "t1.r1.c2",
+              "span": 1,
+              "vmerge": null,
+              "width": 3005,
+              "shade": "#E8F0E0",
+              "blocks": [
+                {
+                  "id": "b10a",
+                  "kind": "p",
+                  "section": "s1",
+                  "style": "TableText",
+                  "inlines": [
+                    {
+                      "k": "text",
+                      "t": "Trede"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "t1.r1.c3",
+              "span": 1,
+              "vmerge": null,
+              "width": 3005,
+              "shade": "#E8F0E0",
+              "blocks": [
+                {
+                  "id": "b10b",
+                  "kind": "p",
+                  "section": "s1",
+                  "style": "TableText",
+                  "inlines": [
+                    {
+                      "k": "text",
+                      "t": "Bruto per maand"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "t1.r2",
+          "header": false,
+          "height": null,
+          "rev": null,
+          "cells": [
+            {
+              "id": "t1.r2.c1",
+              "span": 1,
+              "vmerge": null,
+              "width": 3005,
+              "shade": null,
+              "blocks": [
+                {
+                  "id": "b10c",
+                  "kind": "p",
+                  "section": "s1",
+                  "style": "TableText",
+                  "inlines": [
+                    {
+                      "k": "text",
+                      "t": "6"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "t1.r2.c2",
+              "span": 1,
+              "vmerge": null,
+              "width": 3005,
+              "shade": null,
+              "blocks": [
+                {
+                  "id": "b10d",
+                  "kind": "p",
+                  "section": "s1",
+                  "style": "TableText",
+                  "inlines": [
+                    {
+                      "k": "text",
+                      "t": "4"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "t1.r2.c3",
+              "span": 1,
+              "vmerge": null,
+              "width": 3005,
+              "shade": null,
+              "blocks": [
+                {
+                  "id": "b10e",
+                  "kind": "p",
+                  "section": "s1",
+                  "style": "TableText",
+                  "inlines": [
+                    {
+                      "k": "text",
+                      "t": "€ 2.912,00"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b10f",
+      "kind": "p",
+      "section": "s1",
+      "style": "Normal",
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Werkgever betaalt het salaris aan werknemer uiterlijk op de laatste werkdag van de maand; werknemer ontvangt daarbij een"
+        },
+        {
+          "k": "text",
+          "t": " digitale",
+          "rev": {
+            "id": 9,
+            "type": "ins",
+            "author": "M. Jansen",
+            "date": "2027-01-20T14:02:11Z",
+            "cs": null
+          }
+        },
+        {
+          "k": "text",
+          "t": " loonstrook."
+        }
+      ],
+      "fmt": {
+        "align": "both",
+        "spacing": {
+          "after": 120,
+          "line": 276,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      }
+    },
+    {
+      "id": "b10g",
+      "kind": "p",
+      "section": "s1",
+      "style": "Heading2",
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Ondertekening"
+        }
+      ],
+      "heading": 2,
+      "list": {
+        "label": "3",
+        "level": 0,
+        "numId": 3
+      },
+      "fmt": {
+        "spacing": {
+          "before": 240,
+          "after": 60,
+          "line": 276,
+          "lineRule": "auto"
+        },
+        "font": "Cambria",
+        "size": 26,
+        "color": "#1F3864",
+        "b": true,
+        "keepNext": true
+      }
+    },
+    {
+      "id": "b10h",
+      "kind": "p",
+      "section": "s1",
+      "style": "Normal",
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Aldus overeengekomen te Utrecht op "
+        },
+        {
+          "k": "field",
+          "t": "1 februari 2027",
+          "field": {
+            "type": "DATE",
+            "instr": "DATE \\@ \"d MMMM yyyy\"",
+            "editable": false,
+            "dirty": true
+          }
+        },
+        {
+          "k": "text",
+          "t": ", met inachtneming van artikel "
+        },
+        {
+          "k": "field",
+          "t": "1",
+          "field": {
+            "type": "REF",
+            "instr": "REF _Ref4711 \\r \\h",
+            "editable": true,
+            "dirty": false
+          }
+        },
+        {
+          "k": "text",
+          "t": "."
+        }
+      ],
+      "fmt": {
+        "align": "both",
+        "spacing": {
+          "after": 120,
+          "line": 276,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      }
+    }
+  ],
+  "stories": {
+    "h1": {
+      "kind": "header",
+      "blocks": [
+        {
+          "id": "img1",
+          "kind": "image",
+          "para": "h1-00",
+          "rev": null,
+          "drawing": "picture",
+          "asset": "a_3c9e1f0a7b2d4e65",
+          "external": false,
+          "w": 1440000,
+          "h": 540000,
+          "wrap": "inline",
+          "align": "right",
+          "alt": "Logo Lindehof Kinderopvang",
+          "title": null,
+          "decorative": false,
+          "crop": null,
+          "rotation": 0,
+          "flipH": false,
+          "flipV": false,
+          "caption": null
+        }
+      ]
+    },
+    "f1": {
+      "kind": "footer",
+      "blocks": [
+        {
+          "id": "f1-00",
+          "kind": "p",
+          "style": "Footer",
+          "inlines": [
+            {
+              "k": "text",
+              "t": "Pagina "
+            },
+            {
+              "k": "field",
+              "t": "1",
+              "field": {
+                "type": "PAGE",
+                "instr": "PAGE",
+                "editable": false
+              }
+            },
+            {
+              "k": "text",
+              "t": " van "
+            },
+            {
+              "k": "field",
+              "t": "2",
+              "field": {
+                "type": "NUMPAGES",
+                "instr": "NUMPAGES",
+                "editable": false
+              }
+            }
+          ],
+          "fmt": {
+            "align": "center",
+            "size": 18
+          }
+        }
+      ]
+    }
+  },
+  "comments": [
+    {
+      "id": "c1",
+      "parent": null,
+      "author": "M. Jansen",
+      "initials": "MJ",
+      "date": "2027-01-20T14:02:11Z",
+      "done": false,
+      "agent": false,
+      "anchor": {
+        "start": "b106",
+        "end": "b106",
+        "text": "pedagogisch medewerker",
+        "startOffset": 47,
+        "endOffset": 69
+      },
+      "blocks": [
+        {
+          "id": "c1-0",
+          "kind": "p",
+          "style": "CommentText",
+          "inlines": [
+            {
+              "k": "text",
+              "t": "Klopt de functienaam met de cao?"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "changeSets": [
+    {
+      "id": "cs_7",
+      "label": "Arbeidsduur naar 38 uur",
+      "author": "AI-assistent",
+      "turn": "turn_0193",
+      "version": 42,
+      "revisions": [
+        12,
+        13
+      ],
+      "untracked": [],
+      "status": "open"
+    }
+  ],
+  "assets": {
+    "a_3c9e1f0a7b2d4e65": {
+      "mime": "image/png",
+      "px": [
+        472,
+        177
+      ],
+      "bytes": 18342
+    }
+  }
+}

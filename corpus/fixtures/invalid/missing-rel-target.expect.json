@@ -1,0 +1,23 @@
+{
+ "body": {
+  "accept": [
+   "A relationship points at a part that is not there."
+  ],
+  "markup": [
+   "A relationship points at a part that is not there."
+  ],
+  "reject": [
+   "A relationship points at a part that is not there."
+  ]
+ },
+ "error_codes": [
+  "package.missing_target"
+ ],
+ "features": [
+  "relationship target missing"
+ ],
+ "fixture": "missing-rel-target.docx",
+ "pages": 1,
+ "paragraph_count": 1,
+ "valid": false
+}

@@ -1,0 +1,10 @@
+§ doc "Content controls" · v1 · 1 page (est.) · en-US · tracked changes: off · 0 open comments · 0 open revisions · view: markup
+§ outline: (none)
+§ window b100..b103 (blocks 1–4 of 4)
+
+[b100] Acme B.V.
+[b101] Start date: ⟪CTL tag="start" → "1-2-2026"⟫
+[b102] Contract type: ⟪CTL tag="ctype" → "Full-time"⟫
+[b103] ⟪CTL → ☐⟫ Agreed
+
+§ fields: ⟪CTL tag="client"⟫ plainText in b100 = "Acme B.V." · ⟪CTL tag="start"⟫ date in b101 = "1-2-2026" · ⟪CTL tag="ctype"⟫ dropdown in b102 = "Full-time" · ⟪CTL⟫ checkbox in b103 = ☐

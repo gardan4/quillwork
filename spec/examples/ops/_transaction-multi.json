@@ -1,0 +1,32 @@
+{
+  "spec_version": "0.1.0",
+  "base_version": 42,
+  "mode": "track",
+  "label": "Salarisartikel bijgewerkt",
+  "author": "AI-assistent",
+  "turn": "turn_0194",
+  "projection_mode": "accepted",
+  "ops": [
+    {
+      "op": "set_cell",
+      "cell": "t1.r2.c3",
+      "text": "€ 2.950,00"
+    },
+    {
+      "op": "replace_text",
+      "anchor": "b108",
+      "find": "bij aanvang",
+      "replace": "per 1 maart 2027"
+    },
+    {
+      "op": "add_comment",
+      "anchor": "b108",
+      "text": "Bedrag aangepast aan de cao-verhoging van januari."
+    },
+    {
+      "op": "set_track_changes",
+      "on": true,
+      "mode": "direct"
+    }
+  ]
+}

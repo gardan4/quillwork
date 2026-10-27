@@ -1,0 +1,39 @@
+{
+ "body": {
+  "accept": [
+   "A plain paragraph with no formatting at all.",
+   "Mixed bold, italic and bold italic underlined runs.",
+   "Inside one word: unbreakable, E=mc2, H2O and words.",
+   "Colour red, size large, font Courier, highlighted, strike and small caps.",
+   "Tab\tseparated and a line\nbreak in one paragraph.",
+   "Paragraph formatting: centred, spaced, indented."
+  ],
+  "markup": [
+   "A plain paragraph with no formatting at all.",
+   "Mixed bold, italic and bold italic underlined runs.",
+   "Inside one word: unbreakable, E=mc2, H2O and words.",
+   "Colour red, size large, font Courier, highlighted, strike and small caps.",
+   "Tab\tseparated and a line\nbreak in one paragraph.",
+   "Paragraph formatting: centred, spaced, indented."
+  ],
+  "reject": [
+   "A plain paragraph with no formatting at all.",
+   "Mixed bold, italic and bold italic underlined runs.",
+   "Inside one word: unbreakable, E=mc2, H2O and words.",
+   "Colour red, size large, font Courier, highlighted, strike and small caps.",
+   "Tab\tseparated and a line\nbreak in one paragraph.",
+   "Paragraph formatting: centred, spaced, indented."
+  ]
+ },
+ "features": [
+  "run formatting",
+  "bold/italic inside a word",
+  "superscript/subscript",
+  "tab",
+  "line break"
+ ],
+ "fixture": "01-run-formatting.docx",
+ "pages": 1,
+ "paragraph_count": 6,
+ "valid": true
+}

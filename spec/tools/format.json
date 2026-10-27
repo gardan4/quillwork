@@ -1,0 +1,31 @@
+{
+  "name": "format",
+  "description": "Change formatting, tracked. Null fields stay as they are.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "base_version": {"type": "integer"},
+      "label": {"type": ["string", "null"]},
+      "ops": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "anchor": {"type": "string", "description": "anchor or range a..b"},
+            "find": {"type": ["string", "null"], "description": "text to format; null = whole block"},
+            "occurrence": {"type": ["integer", "null"]},
+            "marks": {"type": ["string", "null"], "description": "e.g. '+bold -italic +underline'"},
+            "style": {"type": ["string", "null"], "description": "P, H1-H9, LI or a style name"},
+            "align": {"type": ["string", "null"], "enum": ["left", "center", "right", "justify", null]},
+            "list": {"type": ["string", "null"], "description": "bullet, numbered, none, continue:<anchor> or restart:<n>"},
+            "level": {"type": ["integer", "null"], "description": "list level 0-8"}
+          },
+          "required": ["anchor", "find", "occurrence", "marks", "style", "align", "list", "level"],
+          "additionalProperties": false
+        }
+      }
+    },
+    "required": ["base_version", "label", "ops"],
+    "additionalProperties": false
+  }
+}

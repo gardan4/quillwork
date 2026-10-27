@@ -1,0 +1,14 @@
+{
+  "spec_version": "0.1.0",
+  "ok": false,
+  "error": {
+    "code": "UNSUPPORTED",
+    "message": "merge_cells cannot be tracked in Word; repeat it with mode \"direct\".",
+    "retryable": true,
+    "version": 42,
+    "op_index": 0,
+    "op": "merge_cells",
+    "anchor": "t1.r1.c1",
+    "reason": "direct_only"
+  }
+}

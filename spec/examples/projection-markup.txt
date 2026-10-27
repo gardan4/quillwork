@@ -1,0 +1,30 @@
+§ doc "Arbeidsovereenkomst voor bepaalde tijd — P. Bakker" · v42 · 2 pages (est.) · nl-NL · tracked changes: on · 1 open comment · 3 open revisions · flags: hidden_text · view: markup
+§ outline: [b100] Arbeidsovereenkomst voor bepaalde tijd · [b105] 1 Functie en arbeidsduur · [b107] 2 Salaris · [b10g] 3 Ondertekening
+§ window b100..b10h (blocks 1–13 of 13)
+
+[b100 H1] Arbeidsovereenkomst voor bepaalde tijd
+[b101] De ondergetekenden:
+[b102 #1.] **Lindehof Kinderopvang B.V.**, gevestigd te Utrecht, hierna "werkgever";
+[b103 #2.] P. Bakker, wonende te Amersfoort, hierna "werknemer",
+[b104] komen het volgende overeen:⟦hidden⟧concept v3⟦/⟧
+[b105 H2 #1] Functie en arbeidsduur
+[b106] Werknemer treedt op ⟪CTL tag="startdatum" → "1 maart 2027"⟫ in dienst als pedagogisch medewerker{>>c1<<} voor {--40--}{++38++}⟨r12,13 AI⟩ uur per week.
+[b107 H2 #2] Salaris
+[b108] Het salaris bedraagt bij aanvang:
+[t1 TABLE 2×3 "Salaris"]
+  [t1.r1 hdr] Schaal | Trede | Bruto per maand
+  [t1.r2] 6 | 4 | € 2.912,00
+[b10f] Werkgever betaalt het salaris aan werknemer uiterlijk op de laatste werkdag van de maand; werknemer ontvangt daarbij een{++ digitale++}⟨r9 M. Jansen⟩ loonstrook.
+[b10g H2 #3] Ondertekening
+[b10h] Aldus overeengekomen te Utrecht op ⟪DATE \@ "d MMMM yyyy" → "1 februari 2027"⟫, met inachtneming van artikel ⟪REF _Ref4711 \r \h → "1"⟫.
+
+§ h1 header · s1 default
+[img1 IMAGE inline 4.0×1.5cm right alt="Logo Lindehof Kinderopvang"]
+§ f1 footer · s1 default
+[f1-00] Pagina ⟪PAGE → "1"⟫ van ⟪NUMPAGES → "2"⟫
+
+§ terms: "werkgever" → b102 · "werknemer" → b103
+§ refs: REF _Ref4711 in b10h → b105 "1"
+§ fields: ⟪CTL tag="startdatum"⟫ date in b106 = "1 maart 2027"
+§ comments:
+  [c1 M. Jansen, open, on "pedagogisch medewerker"] Klopt de functienaam met de cao?

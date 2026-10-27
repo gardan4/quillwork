@@ -1,0 +1,303 @@
+{
+  "spec_version": "0.1.0",
+  "version": 1,
+  "meta": {
+    "title": "Headers and footers",
+    "lang": "en-US",
+    "trackChanges": false,
+    "labels": [],
+    "pagesEstimate": 1,
+    "readOnly": null,
+    "flags": [],
+    "fonts": {
+      "Calibri": "Carlito"
+    }
+  },
+  "sections": [
+    {
+      "id": "s1",
+      "page": {
+        "w": 11906,
+        "h": 16838,
+        "margins": {
+          "top": 1440,
+          "right": 1440,
+          "bottom": 1440,
+          "left": 1440,
+          "header": 708,
+          "footer": 708
+        },
+        "cols": 1
+      },
+      "headers": {
+        "default": "h1",
+        "first": "h2",
+        "even": "h3"
+      },
+      "footers": {
+        "default": "f1",
+        "first": "f2",
+        "even": "f3"
+      },
+      "titlePage": true
+    }
+  ],
+  "blocks": [
+    {
+      "kind": "p",
+      "id": "b100",
+      "section": "s1",
+      "style": "Normal",
+      "styleName": "Normal",
+      "fmt": {
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Page one: first-page header and footer."
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b101",
+      "section": "s1",
+      "style": "Normal",
+      "styleName": "Normal",
+      "fmt": {
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22,
+        "pageBreakBefore": true
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Page two: even-page header and footer."
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b102",
+      "section": "s1",
+      "style": "Normal",
+      "styleName": "Normal",
+      "fmt": {
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22,
+        "pageBreakBefore": true
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Page three: default (odd) header and footer."
+        }
+      ]
+    }
+  ],
+  "stories": {
+    "f1": {
+      "kind": "footer",
+      "blocks": [
+        {
+          "kind": "p",
+          "id": "f1-00",
+          "style": "Footer",
+          "styleName": "footer",
+          "fmt": {
+            "spacing": {
+              "after": 0,
+              "line": 240,
+              "lineRule": "auto"
+            },
+            "font": "Calibri",
+            "size": 22
+          },
+          "inlines": [
+            {
+              "k": "text",
+              "t": "Default footer, page "
+            },
+            {
+              "k": "field",
+              "t": "1",
+              "field": {
+                "type": "PAGE",
+                "instr": "PAGE   \\* MERGEFORMAT",
+                "editable": false
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "f2": {
+      "kind": "footer",
+      "blocks": [
+        {
+          "kind": "p",
+          "id": "f2-00",
+          "style": "Footer",
+          "styleName": "footer",
+          "fmt": {
+            "spacing": {
+              "after": 0,
+              "line": 240,
+              "lineRule": "auto"
+            },
+            "font": "Calibri",
+            "size": 22
+          },
+          "inlines": [
+            {
+              "k": "text",
+              "t": "First page footer, page "
+            },
+            {
+              "k": "field",
+              "t": "1",
+              "field": {
+                "type": "PAGE",
+                "instr": "PAGE   \\* MERGEFORMAT",
+                "editable": false
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "f3": {
+      "kind": "footer",
+      "blocks": [
+        {
+          "kind": "p",
+          "id": "f3-00",
+          "style": "Footer",
+          "styleName": "footer",
+          "fmt": {
+            "spacing": {
+              "after": 0,
+              "line": 240,
+              "lineRule": "auto"
+            },
+            "font": "Calibri",
+            "size": 22
+          },
+          "inlines": [
+            {
+              "k": "text",
+              "t": "Even page footer, page "
+            },
+            {
+              "k": "field",
+              "t": "1",
+              "field": {
+                "type": "PAGE",
+                "instr": "PAGE   \\* MERGEFORMAT",
+                "editable": false
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "h1": {
+      "kind": "header",
+      "blocks": [
+        {
+          "kind": "p",
+          "id": "h1-00",
+          "style": "Header",
+          "styleName": "header",
+          "fmt": {
+            "spacing": {
+              "after": 0,
+              "line": 240,
+              "lineRule": "auto"
+            },
+            "font": "Calibri",
+            "size": 22
+          },
+          "inlines": [
+            {
+              "k": "text",
+              "t": "Default header"
+            }
+          ]
+        }
+      ]
+    },
+    "h2": {
+      "kind": "header",
+      "blocks": [
+        {
+          "kind": "p",
+          "id": "h2-00",
+          "style": "Header",
+          "styleName": "header",
+          "fmt": {
+            "spacing": {
+              "after": 0,
+              "line": 240,
+              "lineRule": "auto"
+            },
+            "font": "Calibri",
+            "size": 22
+          },
+          "inlines": [
+            {
+              "k": "text",
+              "t": "First page header"
+            }
+          ]
+        }
+      ]
+    },
+    "h3": {
+      "kind": "header",
+      "blocks": [
+        {
+          "kind": "p",
+          "id": "h3-00",
+          "style": "Header",
+          "styleName": "header",
+          "fmt": {
+            "spacing": {
+              "after": 0,
+              "line": 240,
+              "lineRule": "auto"
+            },
+            "font": "Calibri",
+            "size": 22
+          },
+          "inlines": [
+            {
+              "k": "text",
+              "t": "Even page header"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "comments": [],
+  "changeSets": [],
+  "assets": {}
+}

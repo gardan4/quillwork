@@ -1,0 +1,210 @@
+## {"op":"list_changes"}
+{
+  "change_sets": [],
+  "revisions": [
+    {
+      "agent": false,
+      "anchors": [
+        "b100"
+      ],
+      "author": "Other Author",
+      "change_set": null,
+      "date": "2026-01-02T10:00:00Z",
+      "id": 101,
+      "story": "b",
+      "text": "brown ",
+      "type": "del"
+    },
+    {
+      "agent": false,
+      "anchors": [
+        "b100"
+      ],
+      "author": "Other Author",
+      "change_set": null,
+      "date": "2026-01-02T10:00:00Z",
+      "id": 102,
+      "story": "b",
+      "text": "red ",
+      "type": "ins"
+    },
+    {
+      "agent": false,
+      "anchors": [
+        "b101"
+      ],
+      "author": "Other Author",
+      "change_set": null,
+      "date": "2026-01-02T10:00:00Z",
+      "id": 103,
+      "old": "+bold",
+      "story": "b",
+      "text": "now bold",
+      "type": "fmt"
+    },
+    {
+      "agent": false,
+      "anchors": [
+        "b102"
+      ],
+      "author": "Other Author",
+      "change_set": null,
+      "date": "2026-01-02T10:00:00Z",
+      "id": 104,
+      "story": "b",
+      "text": "",
+      "type": "pfmt"
+    },
+    {
+      "agent": false,
+      "anchors": [
+        "b103"
+      ],
+      "author": "Other Author",
+      "change_set": null,
+      "date": "2026-01-02T10:00:00Z",
+      "id": 105,
+      "story": "b",
+      "text": " Moved sentence.",
+      "type": "moveFrom"
+    },
+    {
+      "agent": false,
+      "anchors": [
+        "b104"
+      ],
+      "author": "Other Author",
+      "change_set": null,
+      "date": "2026-01-02T10:00:00Z",
+      "id": 106,
+      "story": "b",
+      "text": " Moved sentence.",
+      "type": "moveTo"
+    },
+    {
+      "agent": false,
+      "anchors": [
+        "b105"
+      ],
+      "author": "Other Author",
+      "change_set": null,
+      "date": "2026-01-02T10:00:00Z",
+      "id": 107,
+      "story": "b",
+      "text": "Inserted paragraph.",
+      "type": "ins"
+    },
+    {
+      "agent": false,
+      "anchors": [
+        "b105"
+      ],
+      "author": "Other Author",
+      "change_set": null,
+      "date": "2026-01-02T10:00:00Z",
+      "id": 108,
+      "story": "b",
+      "text": "",
+      "type": "ins"
+    },
+    {
+      "agent": false,
+      "anchors": [
+        "b106"
+      ],
+      "author": "Other Author",
+      "change_set": null,
+      "date": "2026-01-02T10:00:00Z",
+      "id": 109,
+      "story": "b",
+      "text": "Deleted paragraph.",
+      "type": "del"
+    },
+    {
+      "agent": false,
+      "anchors": [
+        "b106"
+      ],
+      "author": "Other Author",
+      "change_set": null,
+      "date": "2026-01-02T10:00:00Z",
+      "id": 110,
+      "story": "b",
+      "text": "",
+      "type": "del"
+    }
+  ]
+}
+
+## {"op":"list_comments"}
+{
+  "comments": []
+}
+
+## {"op":"list_images"}
+{
+  "images": []
+}
+
+## {"op":"list_fields"}
+{
+  "controls": [],
+  "placeholders": []
+}
+
+## {"op":"lint"}
+§ lint: none
+
+## {"anchor":"b100","op":"get_block"}
+{
+  "block": {
+    "fmt": {
+      "font": "Calibri",
+      "size": 22,
+      "spacing": {
+        "after": 160,
+        "line": 259,
+        "lineRule": "auto"
+      }
+    },
+    "id": "b100",
+    "inlines": [
+      {
+        "k": "text",
+        "t": "The quick "
+      },
+      {
+        "k": "text",
+        "rev": {
+          "author": "Other Author",
+          "cs": null,
+          "date": "2026-01-02T10:00:00Z",
+          "id": 101,
+          "type": "del"
+        },
+        "t": "brown "
+      },
+      {
+        "k": "text",
+        "rev": {
+          "author": "Other Author",
+          "cs": null,
+          "date": "2026-01-02T10:00:00Z",
+          "id": 102,
+          "type": "ins"
+        },
+        "t": "red "
+      },
+      {
+        "k": "text",
+        "t": "fox jumps."
+      }
+    ],
+    "kind": "p",
+    "section": "s1",
+    "style": "Normal",
+    "styleName": "Normal"
+  },
+  "story": "b"
+}
+

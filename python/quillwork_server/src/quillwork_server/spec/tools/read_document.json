@@ -1,0 +1,13 @@
+{
+  "name": "read_document",
+  "description": "Read the document as anchored lines. range null: header, outline and first window. Else 'b1dk..b1fr', 'b1fs..' (next window) or 'b1dk,t2'.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "range": {"type": ["string", "null"]},
+      "mode": {"type": ["string", "null"], "enum": ["accepted", "markup", null], "description": "markup shows all tracked changes; default accepted"}
+    },
+    "required": ["range", "mode"],
+    "additionalProperties": false
+  }
+}

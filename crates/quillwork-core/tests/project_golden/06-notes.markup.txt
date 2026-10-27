@@ -1,0 +1,12 @@
+§ doc "Footnotes and endnotes" · v1 · 1 page (est.) · en-US · tracked changes: off · 0 open comments · 0 open revisions · view: markup
+§ outline: (none)
+§ window b100..b101 (blocks 1–2 of 2)
+
+[b100] A sentence with a footnote.[^fn1] And another.[^fn2]
+[b101] A sentence with an endnote.[^en1]
+
+§ footnotes:
+  [fn1-0] First footnote.
+  [fn2-0] Second footnote.
+§ endnotes:
+  [en1-0] The only endnote.

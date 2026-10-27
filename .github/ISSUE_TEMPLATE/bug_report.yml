@@ -1,0 +1,65 @@
+name: Bug report
+description: Something Quillwork does wrong, crashes on, or writes a broken file for.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. **Never attach a confidential document.** Reproduce the problem on a
+        synthetic file (`python examples/make_sample.py sample.docx`, or a minimal file you made in
+        Word or LibreOffice). If you cannot, describe the document's structure with the text
+        replaced. Security problems go to
+        [private vulnerability reporting](https://github.com/gardan4/quillwork/security/advisories/new),
+        not here.
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component
+      options:
+        - quillwork (Python binding)
+        - quillwork-core (Rust)
+        - quillwork-server (agent tools, MCP, HTTP)
+        - "@quillwork/viewer"
+        - spec
+        - not sure
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: "`python -c 'import quillwork; print(quillwork.__version__)'`, or the commit."
+    validations:
+      required: true
+  - type: input
+    id: platform
+    attributes:
+      label: Platform
+      placeholder: macOS 15 arm64, Python 3.12.13
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: The ops or tool call you sent, the error or result, and what you expected.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: How to reproduce
+      description: A short script plus a synthetic `.docx` (attach it, or say how to make it).
+    validations:
+      required: true
+  - type: textarea
+    id: word
+    attributes:
+      label: How Word or LibreOffice shows the result
+      description: If the saved file opens wrongly, what you see and in which application.
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Confirmation
+      options:
+        - label: Nothing I attached or pasted is confidential.
+          required: true

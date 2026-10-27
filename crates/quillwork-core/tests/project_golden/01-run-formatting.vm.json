@@ -1,0 +1,350 @@
+{
+  "spec_version": "0.1.0",
+  "version": 1,
+  "meta": {
+    "title": "Run formatting",
+    "lang": "en-US",
+    "trackChanges": false,
+    "labels": [],
+    "pagesEstimate": 1,
+    "readOnly": null,
+    "flags": [],
+    "fonts": {
+      "Calibri": "Carlito",
+      "Courier New": "Liberation Mono"
+    }
+  },
+  "sections": [
+    {
+      "id": "s1",
+      "page": {
+        "w": 11906,
+        "h": 16838,
+        "margins": {
+          "top": 1440,
+          "right": 1440,
+          "bottom": 1440,
+          "left": 1440,
+          "header": 708,
+          "footer": 708
+        },
+        "cols": 1
+      },
+      "headers": {
+        "default": null,
+        "first": null,
+        "even": null
+      },
+      "footers": {
+        "default": null,
+        "first": null,
+        "even": null
+      },
+      "titlePage": false
+    }
+  ],
+  "blocks": [
+    {
+      "kind": "p",
+      "id": "b100",
+      "section": "s1",
+      "style": "Normal",
+      "styleName": "Normal",
+      "fmt": {
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "A plain paragraph with no formatting at all."
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b101",
+      "section": "s1",
+      "style": "Normal",
+      "styleName": "Normal",
+      "fmt": {
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Mixed "
+        },
+        {
+          "k": "text",
+          "t": "bold",
+          "marks": {
+            "b": true
+          }
+        },
+        {
+          "k": "text",
+          "t": ", "
+        },
+        {
+          "k": "text",
+          "t": "italic",
+          "marks": {
+            "i": true
+          }
+        },
+        {
+          "k": "text",
+          "t": " and "
+        },
+        {
+          "k": "text",
+          "t": "bold italic underlined",
+          "marks": {
+            "b": true,
+            "i": true,
+            "u": "single"
+          }
+        },
+        {
+          "k": "text",
+          "t": " runs."
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b102",
+      "section": "s1",
+      "style": "Normal",
+      "styleName": "Normal",
+      "fmt": {
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Inside one word: un"
+        },
+        {
+          "k": "text",
+          "t": "break",
+          "marks": {
+            "b": true
+          }
+        },
+        {
+          "k": "text",
+          "t": "able, E=mc"
+        },
+        {
+          "k": "text",
+          "t": "2",
+          "marks": {
+            "sup": true
+          }
+        },
+        {
+          "k": "text",
+          "t": ", H"
+        },
+        {
+          "k": "text",
+          "t": "2",
+          "marks": {
+            "sub": true
+          }
+        },
+        {
+          "k": "text",
+          "t": "O and wo"
+        },
+        {
+          "k": "text",
+          "t": "rd",
+          "marks": {
+            "i": true
+          }
+        },
+        {
+          "k": "text",
+          "t": "s."
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b103",
+      "section": "s1",
+      "style": "Normal",
+      "styleName": "Normal",
+      "fmt": {
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Colour "
+        },
+        {
+          "k": "text",
+          "t": "red",
+          "marks": {
+            "color": "#C00000"
+          }
+        },
+        {
+          "k": "text",
+          "t": ", size "
+        },
+        {
+          "k": "text",
+          "t": "large",
+          "marks": {
+            "size": 32
+          }
+        },
+        {
+          "k": "text",
+          "t": ", font "
+        },
+        {
+          "k": "text",
+          "t": "Courier",
+          "marks": {
+            "font": "Courier New"
+          }
+        },
+        {
+          "k": "text",
+          "t": ", "
+        },
+        {
+          "k": "text",
+          "t": "highlighted",
+          "marks": {
+            "highlight": "yellow"
+          }
+        },
+        {
+          "k": "text",
+          "t": ", "
+        },
+        {
+          "k": "text",
+          "t": "strike",
+          "marks": {
+            "strike": true
+          }
+        },
+        {
+          "k": "text",
+          "t": " and "
+        },
+        {
+          "k": "text",
+          "t": "small caps",
+          "marks": {
+            "smallCaps": true
+          }
+        },
+        {
+          "k": "text",
+          "t": "."
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b104",
+      "section": "s1",
+      "style": "Normal",
+      "styleName": "Normal",
+      "fmt": {
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Tab"
+        },
+        {
+          "k": "tab"
+        },
+        {
+          "k": "text",
+          "t": "separated and a line"
+        },
+        {
+          "k": "br",
+          "br": "line"
+        },
+        {
+          "k": "text",
+          "t": "break in one paragraph."
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b105",
+      "section": "s1",
+      "style": "Normal",
+      "styleName": "Normal",
+      "fmt": {
+        "align": "center",
+        "indent": {
+          "left": 720,
+          "right": 720
+        },
+        "spacing": {
+          "before": 120,
+          "after": 120,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Paragraph formatting: centred, spaced, indented."
+        }
+      ]
+    }
+  ],
+  "stories": {},
+  "comments": [],
+  "changeSets": [],
+  "assets": {}
+}

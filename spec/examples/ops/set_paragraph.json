@@ -1,0 +1,14 @@
+{
+  "spec_version": "0.1.0",
+  "base_version": 42,
+  "ops": [
+    {
+      "op": "set_paragraph",
+      "anchor": "b108..b10f",
+      "align": "justify",
+      "spacing": {
+        "after": 120
+      }
+    }
+  ]
+}

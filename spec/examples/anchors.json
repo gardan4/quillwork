@@ -1,0 +1,31 @@
+{
+  "description": "Valid and invalid strings per anchor kind (common.schema.json#/$defs/<kind>). spec/tests checks every entry.",
+  "valid": {
+    "BlockAnchor": ["b100", "b1dk", "b1az", "bzzz", "b1000", "h1-00", "h12-0z", "f1-00", "fn3-1", "en2-0", "c5-0", "tb1-0"],
+    "TableAnchor": ["t1", "t2", "t40"],
+    "RowAnchor": ["t2.r1", "t2.r14"],
+    "CellAnchor": ["t2.r2.c3", "t1.r1.c1"],
+    "ImageAnchor": ["img1", "img4", "img120"],
+    "CommentId": ["c1", "c5", "c31"],
+    "StoryId": ["b", "h1", "f2", "fn3", "en1", "c5", "tb1"],
+    "AnchorOrRange": ["b1dk", "b1dk..b1fr", "t2..b1fr", "h1-00..h1-03", "img4"],
+    "Selection": ["b1dk", "b1dk..b1fr", "b1fs..", "b1dk,t2", "b1dk..b1fr,t2.r3,img4", "c5"],
+    "ReviewTarget": ["cs_7", "r12", "author:M. Jansen", "all"],
+    "ChangeSetId": ["cs_7", "cs_1a"],
+    "AssetId": ["a_3c9e1f0a7b2d4e65"]
+  },
+  "invalid": {
+    "BlockAnchor": ["b1", "b10", "B1DK", "b1di", "b1dl", "b1do", "b1du", "h1", "h0-00", "h01-00", "h1_00", "fn-1", "1dk", "b 1dk", "x1-00"],
+    "TableAnchor": ["t0", "t", "t01", "T2"],
+    "RowAnchor": ["t2.r0", "t2r1", "t2.c1"],
+    "CellAnchor": ["t2.r2", "t2.r2.c0", "t2.c3.r2"],
+    "ImageAnchor": ["img0", "img", "image4", "i4"],
+    "CommentId": ["c0", "c", "c5-0"],
+    "StoryId": ["h", "h0", "x1"],
+    "AnchorOrRange": ["b1dk..", "..b1fr", "b1dk...b1fr", "b1dk-b1fr"],
+    "Selection": ["", "b1dk,", ",b1dk", "b1dk ,t2", "b1dk..b1fr..b1fs"],
+    "ReviewTarget": ["cs7", "r", "author:", "ALL"],
+    "ChangeSetId": ["cs_", "cs-7", "CS_7"],
+    "AssetId": ["a_3c9e", "a_3C9E1F0A7B2D4E65", "3c9e1f0a7b2d4e65"]
+  }
+}

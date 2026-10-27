@@ -1,0 +1,40 @@
+# Weekly, grouped dependency updates. GitHub Actions stay pinned to commit SHAs; Dependabot
+# updates the SHA and the version comment together.
+version: 2
+updates:
+  - package-ecosystem: cargo
+    directory: /
+    schedule: { interval: weekly }
+    open-pull-requests-limit: 5
+    groups:
+      cargo: { patterns: ["*"] }
+
+  - package-ecosystem: pip
+    directories:
+      - /crates/quillwork-py
+      - /python/quillwork_server
+    schedule: { interval: weekly }
+    open-pull-requests-limit: 5
+    groups:
+      python: { patterns: ["*"] }
+
+  - package-ecosystem: uv
+    directory: /tools/oracle
+    schedule: { interval: weekly }
+    open-pull-requests-limit: 5
+    groups:
+      oracle: { patterns: ["*"] }
+
+  - package-ecosystem: npm
+    directory: /js/viewer
+    schedule: { interval: weekly }
+    open-pull-requests-limit: 5
+    groups:
+      viewer: { patterns: ["*"] }
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule: { interval: weekly }
+    open-pull-requests-limit: 5
+    groups:
+      actions: { patterns: ["*"] }

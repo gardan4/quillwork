@@ -1,0 +1,31 @@
+{
+  "name": "edit",
+  "description": "Edit text as one tracked change set, all or nothing. Write plain text; **bold** *italic* allowed. Returns the changed lines and the new version.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "base_version": {"type": "integer", "description": "version of your last read or edit"},
+      "label": {"type": ["string", "null"], "description": "short summary for the reviewer"},
+      "ops": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "op": {"type": "string", "enum": ["replace", "insert_after", "insert_before", "delete", "move_after", "move_before", "split", "merge"], "description": "split: before find; merge: with the next block"},
+            "anchor": {"type": "string"},
+            "find": {"type": ["string", "null"], "description": "exact text in the block; null = whole block"},
+            "occurrence": {"type": ["integer", "null"], "description": "1-based, if find repeats"},
+            "text": {"type": ["string", "null"], "description": "new text; a newline starts a new paragraph"},
+            "style": {"type": ["string", "null"], "description": "for inserts: P, H1-H9, LI or a style name; null = like anchor"},
+            "target": {"type": ["string", "null"], "description": "destination anchor for moves"},
+            "expect": {"type": ["string", "null"], "description": "current block text; only if base_version is old"}
+          },
+          "required": ["op", "anchor", "find", "occurrence", "text", "style", "target", "expect"],
+          "additionalProperties": false
+        }
+      }
+    },
+    "required": ["base_version", "label", "ops"],
+    "additionalProperties": false
+  }
+}

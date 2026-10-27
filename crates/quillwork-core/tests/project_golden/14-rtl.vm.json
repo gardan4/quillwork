@@ -1,0 +1,174 @@
+{
+  "spec_version": "0.1.0",
+  "version": 1,
+  "meta": {
+    "title": "Right to left",
+    "lang": "en-US",
+    "trackChanges": false,
+    "labels": [],
+    "pagesEstimate": 1,
+    "readOnly": null,
+    "flags": [],
+    "fonts": {
+      "Arial": "Liberation Sans",
+      "Calibri": "Carlito"
+    }
+  },
+  "sections": [
+    {
+      "id": "s1",
+      "page": {
+        "w": 11906,
+        "h": 16838,
+        "margins": {
+          "top": 1440,
+          "right": 1440,
+          "bottom": 1440,
+          "left": 1440,
+          "header": 708,
+          "footer": 708
+        },
+        "cols": 1
+      },
+      "headers": {
+        "default": null,
+        "first": null,
+        "even": null
+      },
+      "footers": {
+        "default": null,
+        "first": null,
+        "even": null
+      },
+      "titlePage": false
+    }
+  ],
+  "blocks": [
+    {
+      "kind": "p",
+      "id": "b100",
+      "section": "s1",
+      "style": "Normal",
+      "styleName": "Normal",
+      "fmt": {
+        "bidi": true,
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "مرحبا بالعالم",
+          "marks": {
+            "font": "Arial",
+            "rtl": true
+          }
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b101",
+      "section": "s1",
+      "style": "Normal",
+      "styleName": "Normal",
+      "fmt": {
+        "bidi": true,
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "שלום עולם",
+          "marks": {
+            "font": "Arial",
+            "rtl": true
+          }
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b102",
+      "section": "s1",
+      "style": "Normal",
+      "styleName": "Normal",
+      "fmt": {
+        "bidi": true,
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "المادة ",
+          "marks": {
+            "font": "Arial",
+            "rtl": true
+          }
+        },
+        {
+          "k": "text",
+          "t": "2",
+          "marks": {
+            "rtl": true
+          }
+        },
+        {
+          "k": "text",
+          "t": " من ",
+          "marks": {
+            "font": "Arial",
+            "rtl": true
+          }
+        },
+        {
+          "k": "text",
+          "t": "Contract v2"
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b103",
+      "section": "s1",
+      "style": "Normal",
+      "styleName": "Normal",
+      "fmt": {
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Left-to-right paragraph for contrast."
+        }
+      ]
+    }
+  ],
+  "stories": {},
+  "comments": [],
+  "changeSets": [],
+  "assets": {}
+}

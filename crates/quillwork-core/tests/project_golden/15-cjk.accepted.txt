@@ -1,0 +1,8 @@
+§ doc "CJK" · v1 · 1 page (est.) · en-US · tracked changes: off · 0 open comments · 0 open revisions · view: accepted
+§ outline: (none)
+§ window b100..b103 (blocks 1–4 of 4)
+
+[b100] 日本語の文章です。
+[b101] 这是中文段落。
+[b102] 한국어 문단입니다.
+[b103] Mixed: 東京 is Tokyo.

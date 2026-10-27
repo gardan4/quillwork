@@ -1,0 +1,52 @@
+## {"op":"list_changes"}
+{
+  "change_sets": [],
+  "revisions": []
+}
+
+## {"op":"list_comments"}
+{
+  "comments": []
+}
+
+## {"op":"list_images"}
+{
+  "images": []
+}
+
+## {"op":"list_fields"}
+{
+  "controls": [],
+  "placeholders": []
+}
+
+## {"op":"lint"}
+§ lint: none
+
+## {"anchor":"b100","op":"get_block"}
+{
+  "block": {
+    "fmt": {
+      "font": "Calibri",
+      "size": 22,
+      "spacing": {
+        "after": 160,
+        "line": 259,
+        "lineRule": "auto"
+      }
+    },
+    "id": "b100",
+    "inlines": [
+      {
+        "k": "text",
+        "t": "  two leading spaces and two trailing  "
+      }
+    ],
+    "kind": "p",
+    "section": "s1",
+    "style": "Normal",
+    "styleName": "Normal"
+  },
+  "story": "b"
+}
+

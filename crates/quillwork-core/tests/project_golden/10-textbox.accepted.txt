@@ -1,0 +1,9 @@
+§ doc "Text box" · v1 · 1 page (est.) · en-US · tracked changes: off · 0 open comments · 0 open revisions · view: accepted
+§ outline: (none)
+§ window b100..b101 (blocks 1–2 of 2)
+
+[b100] ![](img1 → tb1)The paragraph that anchors a text box.
+[b101] Another paragraph.
+
+§ tb1 textbox
+[tb1-0] Text inside the box.

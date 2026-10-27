@@ -1,0 +1,47 @@
+{
+ "body": {
+  "accept": [
+   "Written the way LibreOffice writes it.",
+   "Attributes in a non-Word order.",
+   "Namespace re-declared on this paragraph. "
+  ],
+  "markup": [
+   "Written the way LibreOffice writes it.",
+   "Attributes in a non-Word order.",
+   "Namespace re-declared on this paragraph. "
+  ],
+  "reject": [
+   "Written the way LibreOffice writes it.",
+   "Attributes in a non-Word order.",
+   "Namespace re-declared on this paragraph. "
+  ]
+ },
+ "features": [
+  "non-Word producer namespace set/order",
+  "mc:Ignorable=\"w14 wp14 w15\"",
+  "no paraIds",
+  "empty <w:rPr></w:rPr> pairs",
+  "non-Word attribute order",
+  "namespace re-declared on child",
+  "stored zip entries",
+  "data descriptors"
+ ],
+ "fixture": "16-libreoffice-style.docx",
+ "pages": 1,
+ "paragraph_count": 3,
+ "valid": true,
+ "zip": {
+  "data_descriptor": [
+   "word/document.xml",
+   "word/styles.xml",
+   "word/_rels/document.xml.rels",
+   "docProps/app.xml"
+  ],
+  "stored": [
+   "[Content_Types].xml",
+   "_rels/.rels",
+   "word/settings.xml",
+   "docProps/core.xml"
+  ]
+ }
+}

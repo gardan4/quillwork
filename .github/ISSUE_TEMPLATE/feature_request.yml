@@ -1,0 +1,27 @@
+name: Feature request
+description: A new op, a document feature Quillwork should handle, or a better agent tool.
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you trying to do?
+      description: The task, and where Quillwork gets in the way today.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What would help
+      description: |
+        For a new op: what the agent would send and what should appear in Word. Op proposals
+        are easiest to discuss as a JSON example in the style of `spec/examples/`.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: What you tried instead
+  - type: markdown
+    attributes:
+      value: Please do not attach confidential documents. A synthetic example is enough.

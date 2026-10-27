@@ -1,0 +1,14 @@
+{
+  "spec_version": "0.1.0",
+  "base_version": 42,
+  "ops": [
+    {
+      "op": "set_text_format",
+      "anchor": "b106",
+      "find": "38",
+      "marks": {
+        "bold": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+§ doc "Macro-enabled document" · v1 · 1 page (est.) · en-US · tracked changes: off · 0 open comments · 0 open revisions · flags: macros · view: markup
+§ outline: (none)
+§ window b100..b100 (blocks 1–1 of 1)
+
+[b100] A macro-enabled document. The VBA project is a dummy and must be preserved, never run.

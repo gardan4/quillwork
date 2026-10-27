@@ -1,0 +1,14 @@
+{
+  "name": "review",
+  "description": "Accept or reject tracked changes.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "base_version": {"type": "integer"},
+      "action": {"type": "string", "enum": ["accept", "reject"]},
+      "targets": {"type": "array", "items": {"type": "string"}, "description": "change sets (cs_7), revisions (r12), author:<name> or all"}
+    },
+    "required": ["base_version", "action", "targets"],
+    "additionalProperties": false
+  }
+}

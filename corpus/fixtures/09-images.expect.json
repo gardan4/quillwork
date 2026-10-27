@@ -1,0 +1,34 @@
+{
+ "body": {
+  "accept": [
+   "An inline picture:  sits in the text.",
+   "This paragraph has an anchored picture floating at the right.",
+   "The end."
+  ],
+  "markup": [
+   "An inline picture:  sits in the text.",
+   "This paragraph has an anchored picture floating at the right.",
+   "The end."
+  ],
+  "reject": [
+   "An inline picture:  sits in the text.",
+   "This paragraph has an anchored picture floating at the right.",
+   "The end."
+  ]
+ },
+ "features": [
+  "inline picture (wp:inline)",
+  "anchored picture (wp:anchor)",
+  "PNG media parts",
+  "alt text"
+ ],
+ "fixture": "09-images.docx",
+ "images": {
+  "anchor": 1,
+  "inline": 1,
+  "pictures": 2
+ },
+ "pages": 1,
+ "paragraph_count": 3,
+ "valid": true
+}

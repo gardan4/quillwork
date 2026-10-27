@@ -1,0 +1,11 @@
+{
+  "spec_version": "0.1.0",
+  "base_version": 42,
+  "ops": [
+    {
+      "op": "resolve_comment",
+      "comment": "c1",
+      "done": true
+    }
+  ]
+}

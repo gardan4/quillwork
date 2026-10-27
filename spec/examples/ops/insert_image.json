@@ -1,0 +1,13 @@
+{
+  "spec_version": "0.1.0",
+  "base_version": 42,
+  "ops": [
+    {
+      "op": "insert_image",
+      "after": "b10h",
+      "asset": "a_7d1e0c55b9a24f30",
+      "width": 5.0,
+      "alt": "Stempel Lindehof Kinderopvang"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+# Bulk formatting commits that `git blame` should skip.
+# Enable with: git config blame.ignoreRevsFile .git-blame-ignore-revs
+
+# style(rust): format the workspace with rustfmt
+1f697459fb5b60402e7d937a3a4239bcfae0df9f
+
+# style(rust): collapse nested ifs into let chains and use as_chunks
+44be77a03137c8544650cf0ff8bf9bfc867438ce

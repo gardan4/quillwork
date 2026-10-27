@@ -1,0 +1,36 @@
+{
+  "base_version": 42,
+  "label": "Functienaam en arbeidsduur",
+  "ops": [
+    {
+      "op": "replace",
+      "anchor": "b106",
+      "find": "pedagogisch medewerker",
+      "occurrence": null,
+      "text": "pedagogisch professional",
+      "style": null,
+      "target": null,
+      "expect": null
+    },
+    {
+      "op": "insert_after",
+      "anchor": "b10f",
+      "find": null,
+      "occurrence": null,
+      "text": "Werknemer heeft recht op een eindejaarsuitkering van 8,3%.",
+      "style": null,
+      "target": null,
+      "expect": null
+    },
+    {
+      "op": "replace",
+      "anchor": "t1.r2.c3",
+      "find": null,
+      "occurrence": null,
+      "text": "€ 2.950,00",
+      "style": null,
+      "target": null,
+      "expect": null
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "spec_version": "0.1.0",
+  "ok": false,
+  "error": {
+    "code": "PROTECTED",
+    "message": "The document is digitally signed; editing it would break the signature.",
+    "retryable": false,
+    "version": 42,
+    "op_index": 0,
+    "op": "replace_text",
+    "reason": "signed"
+  }
+}

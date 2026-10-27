@@ -1,0 +1,31 @@
+{
+ "body": {
+  "accept": [
+   "  two leading spaces and two trailing  ",
+   "Euro € and © via character references & an entity.",
+   "Tab\tafter tab."
+  ],
+  "markup": [
+   "  two leading spaces and two trailing  ",
+   "Euro € and © via character references & an entity.",
+   "Tab\tafter tab."
+  ],
+  "reject": [
+   "  two leading spaces and two trailing  ",
+   "Euro € and © via character references & an entity.",
+   "Tab\tafter tab."
+  ]
+ },
+ "bom": true,
+ "features": [
+  "UTF-8 BOM",
+  "CRLF between elements",
+  "indentation whitespace",
+  "xml:space=preserve",
+  "numeric character references"
+ ],
+ "fixture": "18-crlf-bom.docx",
+ "pages": 1,
+ "paragraph_count": 3,
+ "valid": true
+}

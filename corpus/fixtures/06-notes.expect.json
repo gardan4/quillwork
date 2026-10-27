@@ -1,0 +1,38 @@
+{
+ "body": {
+  "accept": [
+   "A sentence with a footnote. And another.",
+   "A sentence with an endnote."
+  ],
+  "markup": [
+   "A sentence with a footnote. And another.",
+   "A sentence with an endnote."
+  ],
+  "reject": [
+   "A sentence with a footnote. And another.",
+   "A sentence with an endnote."
+  ]
+ },
+ "endnotes": 1,
+ "features": [
+  "footnotes",
+  "endnotes",
+  "separator notes"
+ ],
+ "fixture": "06-notes.docx",
+ "footnotes": 2,
+ "pages": 1,
+ "paragraph_count": 2,
+ "stories": {
+  "word/endnotes.xml#1": [
+   " The only endnote."
+  ],
+  "word/footnotes.xml#1": [
+   " First footnote."
+  ],
+  "word/footnotes.xml#2": [
+   " Second footnote."
+  ]
+ },
+ "valid": true
+}

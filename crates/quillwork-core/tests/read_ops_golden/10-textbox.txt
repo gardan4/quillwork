@@ -1,0 +1,88 @@
+## {"op":"list_changes"}
+{
+  "change_sets": [],
+  "revisions": []
+}
+
+## {"op":"list_comments"}
+{
+  "comments": []
+}
+
+## {"op":"list_images"}
+{
+  "images": [
+    {
+      "alt": null,
+      "asset": null,
+      "crop": null,
+      "decorative": false,
+      "drawing": "shape",
+      "h": 457200,
+      "id": "img1",
+      "media": null,
+      "para": "b100",
+      "rotation": 0,
+      "story": "b",
+      "textbox": "tb1",
+      "w": 2286000,
+      "wrap": "square"
+    }
+  ]
+}
+
+## {"op":"list_fields"}
+{
+  "controls": [],
+  "placeholders": []
+}
+
+## {"op":"lint"}
+§ lint: none
+
+## {"anchor":"b100","op":"get_block"}
+{
+  "block": {
+    "fmt": {
+      "font": "Calibri",
+      "size": 22,
+      "spacing": {
+        "after": 160,
+        "line": 259,
+        "lineRule": "auto"
+      }
+    },
+    "id": "b100",
+    "inlines": [
+      {
+        "image": {
+          "alt": null,
+          "asset": null,
+          "crop": null,
+          "decorative": false,
+          "drawing": "shape",
+          "h": 457200,
+          "id": "img1",
+          "rotation": 0,
+          "textbox": "tb1",
+          "w": 2286000,
+          "wrap": "square"
+        },
+        "k": "image"
+      },
+      {
+        "k": "text",
+        "t": "The paragraph that anchors a text box."
+      }
+    ],
+    "kind": "p",
+    "section": "s1",
+    "style": "Normal",
+    "styleName": "Normal"
+  },
+  "story": "b"
+}
+
+## {"image":"img1","op":"get_image"}
+! UNSUPPORTED img1 has no picture (a shape, chart or text box)
+

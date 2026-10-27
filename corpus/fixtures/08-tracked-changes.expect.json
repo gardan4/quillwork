@@ -1,0 +1,57 @@
+{
+ "body": {
+  "accept": [
+   "The quick red fox jumps.",
+   "This word is now bold.",
+   "Centred paragraph (was left).",
+   "Before.",
+   "After. Moved sentence.",
+   "Inserted paragraph.",
+   "Final paragraph."
+  ],
+  "markup": [
+   "The quick {-brown -}{+red +}fox jumps.",
+   "This word is now bold.",
+   "Centred paragraph (was left).",
+   "Before.{m- Moved sentence.-m}",
+   "After.{m+ Moved sentence.+m}",
+   "{+Inserted paragraph.+}{+¶+}",
+   "{-Deleted paragraph.-}{-¶-}",
+   "Final paragraph."
+  ],
+  "reject": [
+   "The quick brown fox jumps.",
+   "This word is now bold.",
+   "Centred paragraph (was left).",
+   "Before. Moved sentence.",
+   "After.",
+   "Deleted paragraph.",
+   "Final paragraph."
+  ]
+ },
+ "features": [
+  "w:ins",
+  "w:del",
+  "rPrChange",
+  "pPrChange",
+  "moveFrom/moveTo with ranges",
+  "inserted paragraph mark",
+  "deleted paragraph mark",
+  "author other than ours"
+ ],
+ "fixture": "08-tracked-changes.docx",
+ "pages": 1,
+ "paragraph_count": 8,
+ "revisions": {
+  "authors": [
+   "Other Author"
+  ],
+  "del": 3,
+  "ins": 3,
+  "moveFrom": 1,
+  "moveTo": 1,
+  "pPrChange": 1,
+  "rPrChange": 1
+ },
+ "valid": true
+}

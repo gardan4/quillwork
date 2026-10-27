@@ -1,0 +1,123 @@
+# Publishes a tagged release to PyPI (quillwork, quillwork-server) and crates.io (quillwork-core).
+#
+# Run it by hand: Actions > publish > Run workflow, and pick the release tag (v0.0.2, ...) as the
+# ref. It refuses any ref that is not a v* tag, or a tag that does not match the versions in
+# Cargo.toml and python/quillwork_server/pyproject.toml.
+#
+# No API tokens are stored. Both registries use trusted publishing (OIDC): the registry trusts
+# this repository, this workflow file and the named GitHub environment. Set-up, once:
+# - PyPI: add a (pending) trusted publisher for `quillwork` and for `quillwork-server`:
+#   owner gardan4, repository quillwork, workflow publish.yml, environment pypi.
+# - crates.io: the crate has to exist first (publish the first version once by hand with `cargo publish`),
+#   then add a trusted publisher on the crate's settings page: workflow publish.yml,
+#   environment crates-io.
+# - GitHub: create the environments `pypi` and `crates-io` (Settings > Environments), ideally
+#   with a required reviewer and limited to v* tags.
+# Actions are pinned to commit SHAs; the tag each SHA was taken from is in the trailing comment.
+name: publish
+
+on:
+  workflow_dispatch:
+    inputs:
+      pypi:
+        description: Publish quillwork and quillwork-server to PyPI
+        type: boolean
+        default: true
+      crates:
+        description: Publish quillwork-core to crates.io
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish
+  cancel-in-progress: false
+
+jobs:
+  check:
+    name: check tag and versions
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Tag matches package versions
+        env:
+          REF: ${{ github.ref }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          case "$REF" in refs/tags/v*) ;; *) echo "::error::run this from a v* tag, not $REF"; exit 1 ;; esac
+          want="${TAG#v}"
+          cargo_v=$(sed -n 's/^version = "\(.*\)"/\1/p' Cargo.toml | head -1)
+          server_v=$(sed -n 's/^version = "\(.*\)"/\1/p' python/quillwork_server/pyproject.toml | head -1)
+          echo "tag $want, Cargo.toml $cargo_v, quillwork-server $server_v"
+          test "$cargo_v" = "$want" && test "$server_v" = "$want"
+
+  build:
+    needs: check
+    uses: ./.github/workflows/wheels.yml
+    # wheels.yml declares contents: write for its release job, and a called workflow may not ask
+    # for more than its caller grants. That job only runs on a tag push, so here it is skipped.
+    permissions:
+      contents: write
+
+  pypi-quillwork:
+    name: PyPI quillwork
+    if: inputs.pypi
+    needs: build
+    runs-on: ubuntu-24.04
+    environment:
+      name: pypi
+      url: https://pypi.org/p/quillwork
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          pattern: py-quillwork-*
+          path: dist
+          merge-multiple: true
+      - run: ls -l dist/
+      - uses: pypa/gh-action-pypi-publish@dc37677b2e1c63e2034f94d8a5b11f265b73ba33 # v1.14.2
+
+  pypi-server:
+    name: PyPI quillwork-server
+    if: inputs.pypi
+    # quillwork-server depends on quillwork, so quillwork goes first.
+    needs: pypi-quillwork
+    runs-on: ubuntu-24.04
+    environment:
+      name: pypi
+      url: https://pypi.org/p/quillwork-server
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: py-server
+          path: dist
+      - run: ls -l dist/
+      - uses: pypa/gh-action-pypi-publish@dc37677b2e1c63e2034f94d8a5b11f265b73ba33 # v1.14.2
+
+  crates:
+    name: crates.io quillwork-core
+    if: inputs.crates
+    needs: check
+    runs-on: ubuntu-24.04
+    environment:
+      name: crates-io
+      url: https://crates.io/crates/quillwork-core
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - run: rustup toolchain install stable --profile minimal && rustup default stable
+      - uses: rust-lang/crates-io-auth-action@c6f97d42243bad5fab37ca0427f495c86d5b1a18 # v1.0.5
+        id: auth
+      - run: cargo publish -p quillwork-core --locked
+        env:
+          CARGO_REGISTRY_TOKEN: ${{ steps.auth.outputs.token }}

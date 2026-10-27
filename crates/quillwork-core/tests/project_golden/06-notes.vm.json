@@ -1,0 +1,193 @@
+{
+  "spec_version": "0.1.0",
+  "version": 1,
+  "meta": {
+    "title": "Footnotes and endnotes",
+    "lang": "en-US",
+    "trackChanges": false,
+    "labels": [],
+    "pagesEstimate": 1,
+    "readOnly": null,
+    "flags": [],
+    "fonts": {
+      "Calibri": "Carlito"
+    }
+  },
+  "sections": [
+    {
+      "id": "s1",
+      "page": {
+        "w": 11906,
+        "h": 16838,
+        "margins": {
+          "top": 1440,
+          "right": 1440,
+          "bottom": 1440,
+          "left": 1440,
+          "header": 708,
+          "footer": 708
+        },
+        "cols": 1
+      },
+      "headers": {
+        "default": null,
+        "first": null,
+        "even": null
+      },
+      "footers": {
+        "default": null,
+        "first": null,
+        "even": null
+      },
+      "titlePage": false
+    }
+  ],
+  "blocks": [
+    {
+      "kind": "p",
+      "id": "b100",
+      "section": "s1",
+      "style": "Normal",
+      "styleName": "Normal",
+      "fmt": {
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "A sentence with a footnote."
+        },
+        {
+          "k": "note",
+          "note": "fn1",
+          "label": "1"
+        },
+        {
+          "k": "text",
+          "t": " And another."
+        },
+        {
+          "k": "note",
+          "note": "fn2",
+          "label": "2"
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b101",
+      "section": "s1",
+      "style": "Normal",
+      "styleName": "Normal",
+      "fmt": {
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "A sentence with an endnote."
+        },
+        {
+          "k": "note",
+          "note": "en1",
+          "label": "1"
+        }
+      ]
+    }
+  ],
+  "stories": {
+    "en1": {
+      "kind": "endnote",
+      "blocks": [
+        {
+          "kind": "p",
+          "id": "en1-0",
+          "style": "EndnoteText",
+          "styleName": "endnote text",
+          "fmt": {
+            "spacing": {
+              "after": 0,
+              "line": 240,
+              "lineRule": "auto"
+            },
+            "font": "Calibri",
+            "size": 20
+          },
+          "inlines": [
+            {
+              "k": "text",
+              "t": " The only endnote."
+            }
+          ]
+        }
+      ]
+    },
+    "fn1": {
+      "kind": "footnote",
+      "blocks": [
+        {
+          "kind": "p",
+          "id": "fn1-0",
+          "style": "FootnoteText",
+          "styleName": "footnote text",
+          "fmt": {
+            "spacing": {
+              "after": 0,
+              "line": 240,
+              "lineRule": "auto"
+            },
+            "font": "Calibri",
+            "size": 20
+          },
+          "inlines": [
+            {
+              "k": "text",
+              "t": " First footnote."
+            }
+          ]
+        }
+      ]
+    },
+    "fn2": {
+      "kind": "footnote",
+      "blocks": [
+        {
+          "kind": "p",
+          "id": "fn2-0",
+          "style": "FootnoteText",
+          "styleName": "footnote text",
+          "fmt": {
+            "spacing": {
+              "after": 0,
+              "line": 240,
+              "lineRule": "auto"
+            },
+            "font": "Calibri",
+            "size": 20
+          },
+          "inlines": [
+            {
+              "k": "text",
+              "t": " Second footnote."
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "comments": [],
+  "changeSets": [],
+  "assets": {}
+}

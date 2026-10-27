@@ -1,0 +1,28 @@
+[package]
+name = "quillwork-core"
+description = "Lossless, AI-friendly editing of Office Open XML documents"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+repository.workspace = true
+homepage.workspace = true
+readme = "README.md"
+keywords = ["docx", "word", "ooxml", "llm", "tracked-changes"]
+categories = ["text-processing", "parser-implementations"]
+include = ["/src", "/examples", "/README.md", "/LICENSE", "/NOTICE"]
+
+[dependencies]
+quick-xml.workspace = true
+zip.workspace = true
+flate2.workspace = true
+crc32fast.workspace = true
+thiserror.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+sha2 = "0.10"
+regex = "1"
+
+[dev-dependencies]
+roxmltree = "0.21.2"
+jsonschema = { version = "0.33", default-features = false }

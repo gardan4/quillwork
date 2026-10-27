@@ -1,0 +1,138 @@
+{
+  "spec_version": "0.1.0",
+  "version": 1,
+  "meta": {
+    "title": "Text box",
+    "lang": "en-US",
+    "trackChanges": false,
+    "labels": [],
+    "pagesEstimate": 1,
+    "readOnly": null,
+    "flags": [],
+    "fonts": {
+      "Calibri": "Carlito"
+    }
+  },
+  "sections": [
+    {
+      "id": "s1",
+      "page": {
+        "w": 11906,
+        "h": 16838,
+        "margins": {
+          "top": 1440,
+          "right": 1440,
+          "bottom": 1440,
+          "left": 1440,
+          "header": 708,
+          "footer": 708
+        },
+        "cols": 1
+      },
+      "headers": {
+        "default": null,
+        "first": null,
+        "even": null
+      },
+      "footers": {
+        "default": null,
+        "first": null,
+        "even": null
+      },
+      "titlePage": false
+    }
+  ],
+  "blocks": [
+    {
+      "kind": "p",
+      "id": "b100",
+      "section": "s1",
+      "style": "Normal",
+      "styleName": "Normal",
+      "fmt": {
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "image",
+          "image": {
+            "id": "img1",
+            "drawing": "shape",
+            "asset": null,
+            "w": 2286000,
+            "h": 457200,
+            "wrap": "square",
+            "alt": null,
+            "decorative": false,
+            "crop": null,
+            "rotation": 0,
+            "textbox": "tb1"
+          }
+        },
+        {
+          "k": "text",
+          "t": "The paragraph that anchors a text box."
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b101",
+      "section": "s1",
+      "style": "Normal",
+      "styleName": "Normal",
+      "fmt": {
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Another paragraph."
+        }
+      ]
+    }
+  ],
+  "stories": {
+    "tb1": {
+      "kind": "textbox",
+      "blocks": [
+        {
+          "kind": "p",
+          "id": "tb1-0",
+          "style": "Normal",
+          "styleName": "Normal",
+          "fmt": {
+            "spacing": {
+              "after": 160,
+              "line": 259,
+              "lineRule": "auto"
+            },
+            "font": "Calibri",
+            "size": 22
+          },
+          "inlines": [
+            {
+              "k": "text",
+              "t": "Text inside the box."
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "comments": [],
+  "changeSets": [],
+  "assets": {}
+}

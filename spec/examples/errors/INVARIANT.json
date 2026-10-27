@@ -1,0 +1,14 @@
+{
+  "spec_version": "0.1.0",
+  "ok": false,
+  "error": {
+    "code": "INVARIANT",
+    "message": "The op would leave a comment reference without its range start.",
+    "retryable": false,
+    "version": 42,
+    "op_index": 0,
+    "op": "delete_block",
+    "anchor": "b106",
+    "invariant": "comment_ranges_balanced"
+  }
+}

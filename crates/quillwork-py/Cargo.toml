@@ -1,0 +1,27 @@
+[package]
+name = "quillwork-py"
+description = "Python binding for Quillwork (PyO3, abi3)"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+publish = false
+
+[lib]
+# The extension module is `quillwork._native` (see pyproject.toml); the Python package around it
+# lives in python/quillwork.
+name = "quillwork"
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+quillwork-core = { path = "../quillwork-core" }
+# Wheels are abi3-py312 (one wheel per platform for CPython 3.12+): pyproject.toml turns on
+# `pyo3/abi3-py312` for maturin builds only, so a plain `cargo test --workspace` links whatever
+# python3 is on PATH. maturin sets PYO3_BUILD_EXTENSION_MODULE, so the deprecated
+# `extension-module` feature is not needed.
+pyo3 = "0.30.1"
+serde.workspace = true
+serde_json.workspace = true
+
+[build-dependencies]
+pyo3-build-config = "0.30.1"

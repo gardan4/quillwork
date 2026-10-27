@@ -1,0 +1,68 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "quillwork-server"
+version = "0.0.2"
+description = "Reference service for Quillwork: document versions, agent tools, an MCP server and an HTTP API"
+requires-python = ">=3.12"
+license = "Apache-2.0"
+readme = "README.md"
+keywords = ["docx", "word", "mcp", "tracked-changes", "llm", "agents"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Topic :: Office/Business :: Office Suites",
+    "Programming Language :: Python :: 3 :: Only",
+    "Typing :: Typed",
+]
+# The library core (quillwork_server.core, quillwork_server.tools) needs only quillwork.
+# The front ends pull in their own extras so a host that embeds the library stays lean.
+dependencies = ["quillwork~=0.0.2"]  # same release line; 0.0.x may break between versions
+
+[project.urls]
+Homepage = "https://github.com/gardan4/quillwork"
+Documentation = "https://github.com/gardan4/quillwork/blob/main/docs/SERVER.md"
+Issues = "https://github.com/gardan4/quillwork/issues"
+Changelog = "https://github.com/gardan4/quillwork/blob/main/CHANGELOG.md"
+
+[project.optional-dependencies]
+mcp = ["mcp>=2.3,<3"]
+http = ["starlette>=0.47", "uvicorn>=0.30", "anyio>=4"]
+all = ["quillwork-server[mcp,http]"]
+test = [
+    "quillwork-server[all]",
+    "pytest>=8",
+    "httpx>=0.27",
+    "jsonschema>=4.23",
+    "types-jsonschema>=4.23",
+    "referencing>=0.35",
+    "ruff>=0.6",
+    "mypy>=1.13",
+]
+
+[project.scripts]
+quillwork-mcp = "quillwork_server.mcp_server:main"
+quillwork-server = "quillwork_server.http_app:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/quillwork_server"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM", "RUF"]
+ignore = ["RUF001", "RUF002", "RUF003"]  # the projection uses typographic characters on purpose
+
+[tool.mypy]
+strict = true
+python_version = "3.12"
+mypy_path = "src"
+packages = ["quillwork_server"]

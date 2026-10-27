@@ -1,0 +1,54 @@
+{
+ "body": {
+  "accept": [
+   "Introduction\t1",
+   "Details\t1",
+   "Introduction",
+   "See the important clause below.",
+   "Details",
+   "Here is the important clause.",
+   "This is page 1."
+  ],
+  "markup": [
+   "Introduction\t1",
+   "Details\t1",
+   "Introduction",
+   "See the important clause below.",
+   "Details",
+   "Here is the important clause.",
+   "This is page 1."
+  ],
+  "reject": [
+   "Introduction\t1",
+   "Details\t1",
+   "Introduction",
+   "See the important clause below.",
+   "Details",
+   "Here is the important clause.",
+   "This is page 1."
+  ]
+ },
+ "bookmarks": [
+  "_Toc100",
+  "_Toc101",
+  "ImportantClause"
+ ],
+ "features": [
+  "TOC complex field with hyperlinks",
+  "nested PAGEREF",
+  "REF to bookmark",
+  "fldSimple PAGE",
+  "bookmarks"
+ ],
+ "fields": [
+  "TOC \\o \"1-3\" \\h \\z \\u",
+  "PAGEREF _Toc100 \\h",
+  "PAGEREF _Toc101 \\h",
+  "REF ImportantClause \\h",
+  "PAGE"
+ ],
+ "fixture": "11-fields.docx",
+ "pages": 1,
+ "paragraph_count": 7,
+ "valid": true
+}

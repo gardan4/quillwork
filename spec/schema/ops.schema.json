@@ -1,0 +1,2425 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://quillwork.example/spec/v0/ops.schema.json",
+  "title": "Quillwork operations",
+  "description": "Every op of the catalogue (DESIGN §6.2, §8.3), the transaction envelope, read requests and results. Errors: error.schema.json. The agent-facing tools in spec/tools map onto these.",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/Transaction"
+    },
+    {
+      "$ref": "#/$defs/ReadOp"
+    }
+  ],
+  "$defs": {
+    "Guards": {
+      "description": "Common guard fields every mutating op accepts. base_version and mode default to the transaction's.",
+      "type": "object",
+      "properties": {
+        "expect": {
+          "$ref": "common.schema.json#/$defs/Expect"
+        },
+        "base_version": {
+          "$ref": "common.schema.json#/$defs/Version"
+        },
+        "mode": {
+          "$ref": "common.schema.json#/$defs/Mode"
+        }
+      }
+    },
+    "ReadCommon": {
+      "description": "Fields every read request accepts.",
+      "type": "object",
+      "properties": {
+        "spec_version": {
+          "$ref": "common.schema.json#/$defs/SpecVersion"
+        }
+      }
+    },
+    "Transaction": {
+      "description": "apply([op...]): atomic. On any error nothing changes. One committed transaction = one version = one change set.",
+      "type": "object",
+      "properties": {
+        "spec_version": {
+          "$ref": "common.schema.json#/$defs/SpecVersion"
+        },
+        "base_version": {
+          "$ref": "common.schema.json#/$defs/Version"
+        },
+        "ops": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/MutatingOp"
+          },
+          "minItems": 1
+        },
+        "mode": {
+          "$ref": "common.schema.json#/$defs/Mode",
+          "description": "Default for every op; track unless set."
+        },
+        "label": {
+          "type": "string",
+          "description": "Change-set label shown on the review card."
+        },
+        "author": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Revision author; defaults to the engine's configured agent author."
+        },
+        "turn": {
+          "type": "string",
+          "description": "Host chat-turn id the change set links to."
+        },
+        "projection_mode": {
+          "$ref": "common.schema.json#/$defs/ProjectionMode",
+          "description": "Mode of the changed lines in the result; default accepted."
+        }
+      },
+      "required": [
+        "base_version",
+        "ops"
+      ],
+      "additionalProperties": false
+    },
+    "MutatingOp": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/Op_replace_text"
+        },
+        {
+          "$ref": "#/$defs/Op_find_and_replace"
+        },
+        {
+          "$ref": "#/$defs/Op_insert_paragraph"
+        },
+        {
+          "$ref": "#/$defs/Op_delete_block"
+        },
+        {
+          "$ref": "#/$defs/Op_move_block"
+        },
+        {
+          "$ref": "#/$defs/Op_split_paragraph"
+        },
+        {
+          "$ref": "#/$defs/Op_merge_paragraphs"
+        },
+        {
+          "$ref": "#/$defs/Op_set_text_format"
+        },
+        {
+          "$ref": "#/$defs/Op_set_paragraph"
+        },
+        {
+          "$ref": "#/$defs/Op_insert_break"
+        },
+        {
+          "$ref": "#/$defs/Op_insert_footnote"
+        },
+        {
+          "$ref": "#/$defs/Op_set_hyperlink"
+        },
+        {
+          "$ref": "#/$defs/Op_insert_field"
+        },
+        {
+          "$ref": "#/$defs/Op_set_list"
+        },
+        {
+          "$ref": "#/$defs/Op_restart_numbering"
+        },
+        {
+          "$ref": "#/$defs/Op_change_level"
+        },
+        {
+          "$ref": "#/$defs/Op_insert_table"
+        },
+        {
+          "$ref": "#/$defs/Op_insert_row"
+        },
+        {
+          "$ref": "#/$defs/Op_delete_row"
+        },
+        {
+          "$ref": "#/$defs/Op_set_cell"
+        },
+        {
+          "$ref": "#/$defs/Op_insert_column"
+        },
+        {
+          "$ref": "#/$defs/Op_delete_column"
+        },
+        {
+          "$ref": "#/$defs/Op_merge_cells"
+        },
+        {
+          "$ref": "#/$defs/Op_split_cell"
+        },
+        {
+          "$ref": "#/$defs/Op_insert_image"
+        },
+        {
+          "$ref": "#/$defs/Op_replace_image"
+        },
+        {
+          "$ref": "#/$defs/Op_resize_image"
+        },
+        {
+          "$ref": "#/$defs/Op_set_alt_text"
+        },
+        {
+          "$ref": "#/$defs/Op_delete_image"
+        },
+        {
+          "$ref": "#/$defs/Op_anchor_image"
+        },
+        {
+          "$ref": "#/$defs/Op_add_comment"
+        },
+        {
+          "$ref": "#/$defs/Op_reply_comment"
+        },
+        {
+          "$ref": "#/$defs/Op_edit_comment"
+        },
+        {
+          "$ref": "#/$defs/Op_resolve_comment"
+        },
+        {
+          "$ref": "#/$defs/Op_delete_comment"
+        },
+        {
+          "$ref": "#/$defs/Op_accept"
+        },
+        {
+          "$ref": "#/$defs/Op_reject"
+        },
+        {
+          "$ref": "#/$defs/Op_compare"
+        },
+        {
+          "$ref": "#/$defs/Op_fill"
+        },
+        {
+          "$ref": "#/$defs/Op_set_properties"
+        },
+        {
+          "$ref": "#/$defs/Op_set_track_changes"
+        }
+      ]
+    },
+    "ReadOp": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/Op_outline"
+        },
+        {
+          "$ref": "#/$defs/Op_read"
+        },
+        {
+          "$ref": "#/$defs/Op_find"
+        },
+        {
+          "$ref": "#/$defs/Op_get_block"
+        },
+        {
+          "$ref": "#/$defs/Op_list_changes"
+        },
+        {
+          "$ref": "#/$defs/Op_list_comments"
+        },
+        {
+          "$ref": "#/$defs/Op_list_images"
+        },
+        {
+          "$ref": "#/$defs/Op_get_image"
+        },
+        {
+          "$ref": "#/$defs/Op_lint"
+        },
+        {
+          "$ref": "#/$defs/Op_list_fields"
+        },
+        {
+          "$ref": "#/$defs/Op_help"
+        }
+      ]
+    },
+    "OpResult": {
+      "description": "Result of a committed transaction: a diff, never the document (DESIGN §6.1).",
+      "type": "object",
+      "properties": {
+        "spec_version": {
+          "$ref": "common.schema.json#/$defs/SpecVersion"
+        },
+        "ok": {
+          "const": true
+        },
+        "base_version": {
+          "$ref": "common.schema.json#/$defs/Version"
+        },
+        "version": {
+          "$ref": "common.schema.json#/$defs/Version"
+        },
+        "change_set": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "common.schema.json#/$defs/ChangeSetId"
+            }
+          ],
+          "description": "Null when nothing tracked was written (direct mode, accept/reject)."
+        },
+        "changed": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/ProjectionLine"
+          },
+          "description": "Projection lines of every block whose line changed, renumbered list items included, in document order."
+        },
+        "removed": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/Anchor"
+          },
+          "description": "Anchors that no longer exist (direct deletes, accepted deletions, rejected insertions)."
+        },
+        "outline": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "common.schema.json#/$defs/ProjectionLine"
+            }
+          ],
+          "description": "The new outline line when headings changed, else null."
+        },
+        "patch": {
+          "$ref": "patch.schema.json"
+        },
+        "lint": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/LintFinding"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "spec_version",
+        "ok",
+        "base_version",
+        "version",
+        "change_set",
+        "changed",
+        "removed",
+        "outline",
+        "patch",
+        "lint",
+        "warnings"
+      ],
+      "additionalProperties": false
+    },
+    "ReadResult": {
+      "description": "Result of a read op.",
+      "type": "object",
+      "properties": {
+        "spec_version": {
+          "$ref": "common.schema.json#/$defs/SpecVersion"
+        },
+        "ok": {
+          "const": true
+        },
+        "version": {
+          "$ref": "common.schema.json#/$defs/Version"
+        },
+        "text": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Projection text (outline, read, find, lint, help)."
+        },
+        "data": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "description": "Structured result (get_block, list_*, get_image)."
+        },
+        "next": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "common.schema.json#/$defs/Selection"
+            }
+          ],
+          "description": "Open range of the next window when read stopped at its budget."
+        }
+      },
+      "required": [
+        "spec_version",
+        "ok",
+        "version",
+        "text",
+        "data",
+        "next"
+      ],
+      "additionalProperties": false
+    },
+    "Op_replace_text": {
+      "type": "object",
+      "description": "Word-level diff of the old and new text; surviving tokens keep their runs, inserted words take the left neighbour's rPr (DESIGN §7.2).",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Guards"
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "replace_text"
+        },
+        "anchor": {
+          "$ref": "common.schema.json#/$defs/Anchor"
+        },
+        "find": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Exact text inside the block (accepted mode). Absent = the whole block."
+        },
+        "occurrence": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "1-based; needed when find occurs more than once, else AMBIGUOUS."
+        },
+        "replace": {
+          "type": "string",
+          "description": "May be empty (a pure deletion). Inline marks of spec/projection.md are allowed."
+        }
+      },
+      "required": [
+        "op",
+        "anchor",
+        "replace"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_find_and_replace": {
+      "type": "object",
+      "description": "Replace every occurrence of find (accepted-mode text of the body, or of one block or range) with the same word-level diff as replace_text. count is the number of occurrences the agent expects: any other number is INVALID_OP at /count, naming the blocks it does occur in, so nothing changes by surprise.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Guards"
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "find_and_replace"
+        },
+        "find": {
+          "type": "string",
+          "minLength": 1
+        },
+        "replace": {
+          "type": "string",
+          "description": "May be empty (a pure deletion)."
+        },
+        "count": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Expected number of occurrences (at most 200)."
+        },
+        "anchor": {
+          "$ref": "common.schema.json#/$defs/AnchorOrRange",
+          "description": "Limit the search to this block or range. Absent = the main body (table cells included)."
+        }
+      },
+      "required": [
+        "op",
+        "find",
+        "replace",
+        "count"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_insert_paragraph": {
+      "type": "object",
+      "description": "New paragraph(s) cloning the anchor's pPr; each newline in text starts another paragraph.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Guards"
+        },
+        {
+          "oneOf": [
+            {
+              "required": [
+                "after"
+              ]
+            },
+            {
+              "required": [
+                "before"
+              ]
+            }
+          ]
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "insert_paragraph"
+        },
+        "after": {
+          "$ref": "common.schema.json#/$defs/Anchor"
+        },
+        "before": {
+          "$ref": "common.schema.json#/$defs/Anchor"
+        },
+        "text": {
+          "type": "string",
+          "description": "Inline marks allowed; \\n separates paragraphs."
+        },
+        "style": {
+          "type": "string",
+          "minLength": 1,
+          "description": "\"inherit\" (default: clone the anchor's pPr), a projection KIND (P, H1-H9, LI) or a style id or name."
+        },
+        "list": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "continue",
+                "none"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "level": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 8
+                }
+              },
+              "required": [
+                "level"
+              ],
+              "additionalProperties": false
+            }
+          ],
+          "description": "Default continue when the anchor is a list item."
+        }
+      },
+      "required": [
+        "op",
+        "text"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_delete_block": {
+      "type": "object",
+      "description": "Tracked delete of a paragraph, table or drawing-only paragraph, paragraph mark included (DESIGN §6.2).",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Guards"
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "delete_block"
+        },
+        "anchor": {
+          "$ref": "common.schema.json#/$defs/Anchor"
+        }
+      },
+      "required": [
+        "op",
+        "anchor"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_move_block": {
+      "type": "object",
+      "description": "v1: tracked delete + tracked insert. The moved block keeps its anchor.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Guards"
+        },
+        {
+          "oneOf": [
+            {
+              "required": [
+                "after"
+              ]
+            },
+            {
+              "required": [
+                "before"
+              ]
+            }
+          ]
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "move_block"
+        },
+        "anchor": {
+          "$ref": "common.schema.json#/$defs/Anchor"
+        },
+        "after": {
+          "$ref": "common.schema.json#/$defs/Anchor"
+        },
+        "before": {
+          "$ref": "common.schema.json#/$defs/Anchor"
+        }
+      },
+      "required": [
+        "op",
+        "anchor"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_split_paragraph": {
+      "type": "object",
+      "description": "Insert a paragraph mark right before at_text; the new second paragraph gets a new anchor.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Guards"
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "split_paragraph"
+        },
+        "anchor": {
+          "$ref": "common.schema.json#/$defs/BlockAnchor"
+        },
+        "at_text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "occurrence": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "1-based; needed when find occurs more than once, else AMBIGUOUS."
+        }
+      },
+      "required": [
+        "op",
+        "anchor",
+        "at_text"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_merge_paragraphs": {
+      "type": "object",
+      "description": "Delete first's paragraph mark so second joins it; second must directly follow first.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Guards"
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "merge_paragraphs"
+        },
+        "first": {
+          "$ref": "common.schema.json#/$defs/BlockAnchor"
+        },
+        "second": {
+          "$ref": "common.schema.json#/$defs/BlockAnchor"
+        }
+      },
+      "required": [
+        "op",
+        "first",
+        "second"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_set_text_format": {
+      "type": "object",
+      "description": "Tracked run formatting (w:rPrChange with the old rPr). null clears direct formatting for that mark.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Guards"
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "set_text_format"
+        },
+        "anchor": {
+          "$ref": "common.schema.json#/$defs/AnchorOrRange"
+        },
+        "find": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Exact text inside the block (accepted mode). Absent = the whole block."
+        },
+        "occurrence": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "1-based; needed when find occurs more than once, else AMBIGUOUS."
+        },
+        "marks": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": false,
+          "properties": {
+            "bold": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "italic": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "underline": {
+              "type": [
+                "boolean",
+                "string",
+                "null"
+              ],
+              "description": "true = single, or an underline style."
+            },
+            "strike": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "superscript": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "subscript": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "caps": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "small_caps": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "highlight": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Word highlight colour name (yellow, green, ...)."
+            },
+            "color": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "common.schema.json#/$defs/Color"
+                }
+              ]
+            },
+            "size": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 1,
+              "description": "Points."
+            },
+            "font": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        }
+      },
+      "required": [
+        "op",
+        "anchor",
+        "marks"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_set_paragraph": {
+      "type": "object",
+      "description": "Tracked paragraph properties (w:pPrChange). Lengths in twips.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Guards"
+        },
+        {
+          "anyOf": [
+            {
+              "required": [
+                "style"
+              ]
+            },
+            {
+              "required": [
+                "align"
+              ]
+            },
+            {
+              "required": [
+                "indent"
+              ]
+            },
+            {
+              "required": [
+                "spacing"
+              ]
+            },
+            {
+              "required": [
+                "keep_with_next"
+              ]
+            },
+            {
+              "required": [
+                "page_break_before"
+              ]
+            }
+          ]
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "set_paragraph"
+        },
+        "anchor": {
+          "$ref": "common.schema.json#/$defs/AnchorOrRange"
+        },
+        "style": {
+          "type": "string",
+          "minLength": 1,
+          "description": "\"inherit\" (default: clone the anchor's pPr), a projection KIND (P, H1-H9, LI) or a style id or name."
+        },
+        "align": {
+          "type": "string",
+          "enum": [
+            "left",
+            "center",
+            "right",
+            "justify"
+          ]
+        },
+        "indent": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "left": {
+              "type": "integer"
+            },
+            "right": {
+              "type": "integer"
+            },
+            "first_line": {
+              "type": "integer"
+            },
+            "hanging": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        "spacing": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "before": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "after": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "line": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "line_rule": {
+              "type": "string",
+              "enum": [
+                "auto",
+                "exact",
+                "at_least"
+              ]
+            }
+          }
+        },
+        "keep_with_next": {
+          "type": "boolean"
+        },
+        "page_break_before": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "op",
+        "anchor"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_insert_break": {
+      "type": "object",
+      "description": "Page or column break after a block, or a section break (copies the current sectPr; sectPrChange where trackable).",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Guards"
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "insert_break"
+        },
+        "after": {
+          "$ref": "common.schema.json#/$defs/Anchor"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "page",
+            "column",
+            "section"
+          ]
+        },
+        "section_type": {
+          "type": "string",
+          "enum": [
+            "next",
+            "continuous",
+            "even",
+            "odd"
+          ],
+          "description": "Only for kind section; default next."
+        }
+      },
+      "required": [
+        "op",
+        "after",
+        "kind"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_insert_footnote": {
+      "type": "object",
+      "description": "Footnote (or endnote) reference in a tracked run right after find; the note becomes story fn<n> / en<n>.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Guards"
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "insert_footnote"
+        },
+        "anchor": {
+          "$ref": "common.schema.json#/$defs/BlockAnchor"
+        },
+        "find": {
+          "type": "string",
+          "minLength": 1
+        },
+        "occurrence": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "1-based; needed when find occurs more than once, else AMBIGUOUS."
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "endnote": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "op",
+        "anchor",
+        "find",
+        "text"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_set_hyperlink": {
+      "type": "object",
+      "description": "Wrap find in a w:hyperlink (new external rel), point it at a bookmark, or remove the link.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Guards"
+        },
+        {
+          "oneOf": [
+            {
+              "required": [
+                "url"
+              ]
+            },
+            {
+              "required": [
+                "bookmark"
+              ]
+            },
+            {
+              "required": [
+                "remove"
+              ]
+            }
+          ]
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "set_hyperlink"
+        },
+        "anchor": {
+          "$ref": "common.schema.json#/$defs/BlockAnchor"
+        },
+        "find": {
+          "type": "string",
+          "minLength": 1
+        },
+        "occurrence": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "1-based; needed when find occurs more than once, else AMBIGUOUS."
+        },
+        "url": {
+          "type": "string",
+          "pattern": "^(https?://|mailto:)",
+          "maxLength": 2048
+        },
+        "bookmark": {
+          "type": "string",
+          "pattern": "^[A-Za-z_][A-Za-z0-9_]{0,39}$"
+        },
+        "remove": {
+          "const": true
+        }
+      },
+      "required": [
+        "op",
+        "anchor",
+        "find"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_insert_field": {
+      "type": "object",
+      "description": "Complex field after find (or at the block end). The cached result is computed where possible.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Guards"
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "insert_field"
+        },
+        "anchor": {
+          "$ref": "common.schema.json#/$defs/BlockAnchor"
+        },
+        "find": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Exact text inside the block (accepted mode). Absent = the whole block."
+        },
+        "occurrence": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "1-based; needed when find occurs more than once, else AMBIGUOUS."
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "PAGE",
+            "NUMPAGES",
+            "DATE",
+            "REF",
+            "TOC"
+          ]
+        },
+        "args": {
+          "type": "string",
+          "description": "Instruction arguments and switches, e.g. \"_Ref123 \\\\h\" for REF or \"\\\\@ \\\"d MMMM yyyy\\\"\" for DATE."
+        }
+      },
+      "required": [
+        "op",
+        "anchor",
+        "kind"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_set_list": {
+      "type": "object",
+      "description": "Reuses a w:num with the same look (abstractNum signature) before minting one; never edits a shared abstractNum.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Guards"
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "set_list"
+        },
+        "anchor": {
+          "$ref": "common.schema.json#/$defs/AnchorOrRange"
+        },
+        "list": {
+          "type": "string",
+          "pattern": "^(bullet|numbered|none|continue:.+)$",
+          "description": "bullet, numbered, none or continue:<anchor of a list item>."
+        },
+        "level": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 8
+        }
+      },
+      "required": [
+        "op",
+        "anchor",
+        "list"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_restart_numbering": {
+      "type": "object",
+      "description": "New w:num with lvlOverride/startOverride from this item on.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Guards"
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "restart_numbering"
+        },
+        "anchor": {
+          "$ref": "common.schema.json#/$defs/BlockAnchor"
+        },
+        "start": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "op",
+        "anchor",
+        "start"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_change_level": {
+      "type": "object",
+      "description": "w:ilvl via pPrChange. Give delta or level.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Guards"
+        },
+        {
+          "oneOf": [
+            {
+              "required": [
+                "delta"
+              ]
+            },
+            {
+              "required": [
+                "level"
+              ]
+            }
+          ]
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "change_level"
+        },
+        "anchor": {
+          "$ref": "common.schema.json#/$defs/AnchorOrRange"
+        },
+        "delta": {
+          "type": "integer",
+          "minimum": -8,
+          "maximum": 8
+        },
+        "level": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 8
+        }
+      },
+      "required": [
+        "op",
+        "anchor"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_insert_table": {
+      "type": "object",
+      "description": "Inherits the document's most-used table style; width = text width; tracked per row.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Guards"
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "insert_table"
+        },
+        "after": {
+          "$ref": "common.schema.json#/$defs/Anchor"
+        },
+        "rows": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "cols": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "header_row": {
+          "type": "boolean"
+        },
+        "style": {
+          "type": "string",
+          "minLength": 1,
+          "description": "\"inherit\" (default: clone the anchor's pPr), a projection KIND (P, H1-H9, LI) or a style id or name."
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "description": "Cell texts per row; shorter rows are padded with empty cells."
+        }
+      },
+      "required": [
+        "op",
+        "after",
+        "rows",
+        "cols"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_insert_row": {
+      "type": "object",
+      "description": "Tracked row insert (w:trPr/w:ins); clones the reference row's trPr/tcPr.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Guards"
+        },
+        {
+          "oneOf": [
+            {
+              "required": [
+                "after"
+              ]
+            },
+            {
+              "required": [
+                "before"
+              ]
+            }
+          ]
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "insert_row"
+        },
+        "after": {
+          "$ref": "common.schema.json#/$defs/RowAnchor"
+        },
+        "before": {
+          "$ref": "common.schema.json#/$defs/RowAnchor"
+        },
+        "cells": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "op"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_delete_row": {
+      "type": "object",
+      "description": "Tracked row delete (w:trPr/w:del).",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Guards"
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "delete_row"
+        },
+        "row": {
+          "$ref": "common.schema.json#/$defs/RowAnchor"
+        }
+      },
+      "required": [
+        "op",
+        "row"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_set_cell": {
+      "type": "object",
+      "description": "Replaces a cell's text; delegates to replace_text / insert_paragraph inside the cell.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Guards"
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "set_cell"
+        },
+        "cell": {
+          "$ref": "common.schema.json#/$defs/CellAnchor"
+        },
+        "text": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "op",
+        "cell",
+        "text"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_insert_column": {
+      "type": "object",
+      "description": "Beta. Per-row w:cellIns plus tblGridChange.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Guards"
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "insert_column"
+        },
+        "table": {
+          "$ref": "common.schema.json#/$defs/TableAnchor"
+        },
+        "at": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "1-based index the new column gets."
+        },
+        "cells": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "confirm": {
+          "const": true,
+          "description": "Required in track mode: Word's support for tracked cell insertion is uneven (CONFIRM_REQUIRED)."
+        }
+      },
+      "required": [
+        "op",
+        "table",
+        "at"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_delete_column": {
+      "type": "object",
+      "description": "Beta. Per-row w:cellDel plus tblGridChange.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Guards"
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "delete_column"
+        },
+        "table": {
+          "$ref": "common.schema.json#/$defs/TableAnchor"
+        },
+        "column": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "confirm": {
+          "const": true,
+          "description": "Required in track mode: Word's support for tracked cell insertion is uneven (CONFIRM_REQUIRED)."
+        }
+      },
+      "required": [
+        "op",
+        "table",
+        "column"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_merge_cells": {
+      "type": "object",
+      "description": "Not trackable in Word: direct mode only (UNSUPPORTED reason direct_only otherwise).",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Guards"
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "merge_cells"
+        },
+        "from": {
+          "$ref": "common.schema.json#/$defs/CellAnchor"
+        },
+        "to": {
+          "$ref": "common.schema.json#/$defs/CellAnchor"
+        }
+      },
+      "required": [
+        "op",
+        "from",
+        "to"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_split_cell": {
+      "type": "object",
+      "description": "Not trackable in Word: direct mode only.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Guards"
+        },
+        {
+          "anyOf": [
+            {
+              "required": [
+                "rows"
+              ]
+            },
+            {
+              "required": [
+                "cols"
+              ]
+            }
+          ]
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "split_cell"
+        },
+        "cell": {
+          "$ref": "common.schema.json#/$defs/CellAnchor"
+        },
+        "rows": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "cols": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "op",
+        "cell"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_insert_image": {
+      "type": "object",
+      "description": "Inline picture from an asset the host already holds; deduped by hash; clamped to the text width. Alt text is required unless decorative.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Guards"
+        },
+        {
+          "oneOf": [
+            {
+              "required": [
+                "after"
+              ]
+            },
+            {
+              "required": [
+                "anchor"
+              ]
+            }
+          ]
+        },
+        {
+          "if": {
+            "properties": {
+              "decorative": {
+                "const": true
+              }
+            },
+            "required": [
+              "decorative"
+            ]
+          },
+          "else": {
+            "required": [
+              "alt"
+            ]
+          }
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "insert_image"
+        },
+        "after": {
+          "$ref": "common.schema.json#/$defs/Anchor"
+        },
+        "anchor": {
+          "$ref": "common.schema.json#/$defs/BlockAnchor"
+        },
+        "find": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Exact text inside the block (accepted mode). Absent = the whole block."
+        },
+        "occurrence": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "1-based; needed when find occurs more than once, else AMBIGUOUS."
+        },
+        "asset": {
+          "$ref": "common.schema.json#/$defs/AssetId"
+        },
+        "width": {
+          "oneOf": [
+            {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "description": "Centimetres."
+            },
+            {
+              "type": "string",
+              "enum": [
+                "text-width",
+                "original"
+              ]
+            }
+          ]
+        },
+        "alt": {
+          "type": "string",
+          "minLength": 1
+        },
+        "decorative": {
+          "type": "boolean"
+        },
+        "wrap": {
+          "const": "inline"
+        }
+      },
+      "required": [
+        "op",
+        "asset"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_replace_image": {
+      "type": "object",
+      "description": "Swap the picture; tracked as delete + insert of the drawing run.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Guards"
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "replace_image"
+        },
+        "image": {
+          "$ref": "common.schema.json#/$defs/ImageAnchor"
+        },
+        "asset": {
+          "$ref": "common.schema.json#/$defs/AssetId"
+        },
+        "fit": {
+          "type": "string",
+          "enum": [
+            "keep-box",
+            "keep-width",
+            "natural"
+          ]
+        }
+      },
+      "required": [
+        "op",
+        "image",
+        "asset"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_resize_image": {
+      "type": "object",
+      "description": "Keeps aspect; wp:extent and a:ext together. Untracked in Word: recorded in the change set sidecar.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Guards"
+        },
+        {
+          "oneOf": [
+            {
+              "required": [
+                "width"
+              ]
+            },
+            {
+              "required": [
+                "height"
+              ]
+            },
+            {
+              "required": [
+                "scale"
+              ]
+            }
+          ]
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "resize_image"
+        },
+        "image": {
+          "$ref": "common.schema.json#/$defs/ImageAnchor"
+        },
+        "width": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "cm"
+        },
+        "height": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "cm"
+        },
+        "scale": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      },
+      "required": [
+        "op",
+        "image"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_set_alt_text": {
+      "type": "object",
+      "description": "wp:docPr descr/title; untracked (Word does not track it).",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Guards"
+        },
+        {
+          "anyOf": [
+            {
+              "required": [
+                "alt"
+              ]
+            },
+            {
+              "required": [
+                "decorative"
+              ]
+            }
+          ]
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "set_alt_text"
+        },
+        "image": {
+          "$ref": "common.schema.json#/$defs/ImageAnchor"
+        },
+        "alt": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "decorative": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "op",
+        "image"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_delete_image": {
+      "type": "object",
+      "description": "Tracked: the drawing run in w:del.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Guards"
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "delete_image"
+        },
+        "image": {
+          "$ref": "common.schema.json#/$defs/ImageAnchor"
+        }
+      },
+      "required": [
+        "op",
+        "image"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_anchor_image": {
+      "type": "object",
+      "description": "P2. Inline <-> anchored.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Guards"
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "anchor_image"
+        },
+        "image": {
+          "$ref": "common.schema.json#/$defs/ImageAnchor"
+        },
+        "wrap": {
+          "type": "string",
+          "enum": [
+            "inline",
+            "square",
+            "tight",
+            "topAndBottom",
+            "none",
+            "behind"
+          ]
+        },
+        "align": {
+          "type": "string",
+          "enum": [
+            "left",
+            "center",
+            "right"
+          ]
+        }
+      },
+      "required": [
+        "op",
+        "image",
+        "wrap"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_add_comment": {
+      "type": "object",
+      "description": "Range + reference + all four comment parts and people.xml (DESIGN §6.2).",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Guards"
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "add_comment"
+        },
+        "anchor": {
+          "$ref": "common.schema.json#/$defs/Anchor"
+        },
+        "find": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Exact text inside the block (accepted mode). Absent = the whole block."
+        },
+        "occurrence": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "1-based; needed when find occurs more than once, else AMBIGUOUS."
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "author": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Defaults to the transaction author."
+        }
+      },
+      "required": [
+        "op",
+        "anchor",
+        "text"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_reply_comment": {
+      "type": "object",
+      "description": "w15:paraIdParent.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Guards"
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "reply_comment"
+        },
+        "comment": {
+          "$ref": "common.schema.json#/$defs/CommentId"
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "author": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Defaults to the transaction author."
+        }
+      },
+      "required": [
+        "op",
+        "comment",
+        "text"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_edit_comment": {
+      "type": "object",
+      "description": "Replace a comment's body; author, date and threading are kept.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Guards"
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "edit_comment"
+        },
+        "comment": {
+          "$ref": "common.schema.json#/$defs/CommentId"
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "op",
+        "comment",
+        "text"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_resolve_comment": {
+      "type": "object",
+      "description": "w15:done; done false reopens.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Guards"
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "resolve_comment"
+        },
+        "comment": {
+          "$ref": "common.schema.json#/$defs/CommentId"
+        },
+        "done": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "op",
+        "comment",
+        "done"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_delete_comment": {
+      "type": "object",
+      "description": "Range, reference and all four part entries; replies go with it.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Guards"
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "delete_comment"
+        },
+        "comment": {
+          "$ref": "common.schema.json#/$defs/CommentId"
+        }
+      },
+      "required": [
+        "op",
+        "comment"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_accept": {
+      "type": "object",
+      "description": "Structural accept per revision type (DESIGN §7.4). Always applied directly.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Guards"
+        },
+        {
+          "oneOf": [
+            {
+              "required": [
+                "change_set"
+              ]
+            },
+            {
+              "required": [
+                "revision_ids"
+              ]
+            },
+            {
+              "required": [
+                "author"
+              ]
+            },
+            {
+              "required": [
+                "all"
+              ]
+            }
+          ]
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "accept"
+        },
+        "change_set": {
+          "$ref": "common.schema.json#/$defs/ChangeSetId",
+          "description": "The engine resolves the change set to its revision ids from the session log before applying; an unknown id is NOT_FOUND (what: change_set)."
+        },
+        "revision_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/RevisionId"
+          },
+          "minItems": 1
+        },
+        "author": {
+          "type": "string",
+          "minLength": 1
+        },
+        "all": {
+          "const": true
+        }
+      },
+      "required": [
+        "op"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_reject": {
+      "type": "object",
+      "description": "Structural reject per revision type (DESIGN §7.4). Always applied directly.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Guards"
+        },
+        {
+          "oneOf": [
+            {
+              "required": [
+                "change_set"
+              ]
+            },
+            {
+              "required": [
+                "revision_ids"
+              ]
+            },
+            {
+              "required": [
+                "author"
+              ]
+            },
+            {
+              "required": [
+                "all"
+              ]
+            }
+          ]
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "reject"
+        },
+        "change_set": {
+          "$ref": "common.schema.json#/$defs/ChangeSetId",
+          "description": "The engine resolves the change set to its revision ids from the session log before applying; an unknown id is NOT_FOUND (what: change_set)."
+        },
+        "revision_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/RevisionId"
+          },
+          "minItems": 1
+        },
+        "author": {
+          "type": "string",
+          "minLength": 1
+        },
+        "all": {
+          "const": true
+        }
+      },
+      "required": [
+        "op"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_compare": {
+      "type": "object",
+      "description": "Produce the change set that turns this version into other (DESIGN §11.3), authored as author.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Guards"
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "compare"
+        },
+        "other": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Host reference to the other .docx (an upload id)."
+        },
+        "author": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Defaults to the transaction author."
+        }
+      },
+      "required": [
+        "op",
+        "other"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_fill": {
+      "type": "object",
+      "description": "Fill {placeholder} tokens and content controls (by tag or alias, data-bound ones too).",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Guards"
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "fill"
+        },
+        "values": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "op",
+        "values"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_set_properties": {
+      "type": "object",
+      "description": "docProps/core.xml.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Guards"
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "set_properties"
+        },
+        "properties": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": false,
+          "properties": {
+            "title": {
+              "type": "string"
+            },
+            "subject": {
+              "type": "string"
+            },
+            "keywords": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "category": {
+              "type": "string"
+            },
+            "creator": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "required": [
+        "op",
+        "properties"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_set_track_changes": {
+      "type": "object",
+      "description": "w:settings/w:trackRevisions. Always direct.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Guards"
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "set_track_changes"
+        },
+        "on": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "op",
+        "on"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_outline": {
+      "type": "object",
+      "description": "Header and outline lines.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/ReadCommon"
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "outline"
+        }
+      },
+      "required": [
+        "op"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_read": {
+      "type": "object",
+      "description": "Projection of a selection; no selection = header, outline and first window.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/ReadCommon"
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "read"
+        },
+        "range": {
+          "$ref": "common.schema.json#/$defs/Selection"
+        },
+        "mode": {
+          "$ref": "common.schema.json#/$defs/ProjectionMode"
+        },
+        "budget": {
+          "type": "integer",
+          "minimum": 500,
+          "description": "Token budget; default 8000."
+        }
+      },
+      "required": [
+        "op"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_find": {
+      "type": "object",
+      "description": "Matching blocks as projection lines, in document order.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/ReadCommon"
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "find"
+        },
+        "query": {
+          "type": "string",
+          "minLength": 1
+        },
+        "regex": {
+          "type": "boolean"
+        },
+        "story": {
+          "$ref": "common.schema.json#/$defs/StoryId"
+        },
+        "mode": {
+          "$ref": "common.schema.json#/$defs/ProjectionMode"
+        }
+      },
+      "required": [
+        "op",
+        "query"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_get_block": {
+      "type": "object",
+      "description": "Full formatting detail of one block, as a view-model block in data.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/ReadCommon"
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "get_block"
+        },
+        "anchor": {
+          "$ref": "common.schema.json#/$defs/Anchor"
+        }
+      },
+      "required": [
+        "op",
+        "anchor"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_list_changes": {
+      "type": "object",
+      "description": "Revisions and change sets, filtered.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/ReadCommon"
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "list_changes"
+        },
+        "change_set": {
+          "$ref": "common.schema.json#/$defs/ChangeSetId"
+        },
+        "author": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "open",
+            "accepted",
+            "rejected",
+            "partial"
+          ]
+        }
+      },
+      "required": [
+        "op"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_list_comments": {
+      "type": "object",
+      "description": "Comment threads.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/ReadCommon"
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "list_comments"
+        },
+        "open_only": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "op"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_list_images": {
+      "type": "object",
+      "description": "Every drawing with anchor, asset, size and alt text.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/ReadCommon"
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "list_images"
+        }
+      },
+      "required": [
+        "op"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_get_image": {
+      "type": "object",
+      "description": "The image bytes (base64 in data) so a vision model can look at it.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/ReadCommon"
+        },
+        {
+          "oneOf": [
+            {
+              "required": [
+                "image"
+              ]
+            },
+            {
+              "required": [
+                "asset"
+              ]
+            }
+          ]
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "get_image"
+        },
+        "image": {
+          "$ref": "common.schema.json#/$defs/ImageAnchor"
+        },
+        "asset": {
+          "$ref": "common.schema.json#/$defs/AssetId"
+        }
+      },
+      "required": [
+        "op"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_lint": {
+      "type": "object",
+      "description": "Document-level checks (DESIGN §10).",
+      "allOf": [
+        {
+          "$ref": "#/$defs/ReadCommon"
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "lint"
+        }
+      },
+      "required": [
+        "op"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_list_fields": {
+      "type": "object",
+      "description": "Placeholders and content controls with type and allowed values.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/ReadCommon"
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "list_fields"
+        }
+      },
+      "required": [
+        "op"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Op_help": {
+      "type": "object",
+      "description": "One-line signatures of every op, or of one.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/ReadCommon"
+        }
+      ],
+      "properties": {
+        "op": {
+          "const": "help"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "op"
+      ],
+      "unevaluatedProperties": false
+    }
+  }
+}

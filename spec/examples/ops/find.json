@@ -1,0 +1,5 @@
+{
+  "op": "find",
+  "query": "werknemer",
+  "regex": false
+}

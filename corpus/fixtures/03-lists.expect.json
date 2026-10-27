@@ -1,0 +1,118 @@
+{
+ "body": {
+  "accept": [
+   "Numbered list:",
+   "First item",
+   "Second item",
+   "Sub item a",
+   "Sub item b",
+   "Sub-sub item i",
+   "Third item",
+   "Bulleted list:",
+   "Bullet one",
+   "Nested bullet",
+   "Deeper bullet",
+   "Bullet two",
+   "Restarted numbering:",
+   "Restart one",
+   "Restart two"
+  ],
+  "markup": [
+   "Numbered list:",
+   "First item",
+   "Second item",
+   "Sub item a",
+   "Sub item b",
+   "Sub-sub item i",
+   "Third item",
+   "Bulleted list:",
+   "Bullet one",
+   "Nested bullet",
+   "Deeper bullet",
+   "Bullet two",
+   "Restarted numbering:",
+   "Restart one",
+   "Restart two"
+  ],
+  "reject": [
+   "Numbered list:",
+   "First item",
+   "Second item",
+   "Sub item a",
+   "Sub item b",
+   "Sub-sub item i",
+   "Third item",
+   "Bulleted list:",
+   "Bullet one",
+   "Nested bullet",
+   "Deeper bullet",
+   "Bullet two",
+   "Restarted numbering:",
+   "Restart one",
+   "Restart two"
+  ]
+ },
+ "features": [
+  "numbering.xml",
+  "multi-level decimal list",
+  "multi-level bullets",
+  "restart via lvlOverride"
+ ],
+ "fixture": "03-lists.docx",
+ "numbering": [
+  null,
+  [
+   1,
+   0
+  ],
+  [
+   1,
+   0
+  ],
+  [
+   1,
+   1
+  ],
+  [
+   1,
+   1
+  ],
+  [
+   1,
+   2
+  ],
+  [
+   1,
+   0
+  ],
+  null,
+  [
+   2,
+   0
+  ],
+  [
+   2,
+   1
+  ],
+  [
+   2,
+   2
+  ],
+  [
+   2,
+   0
+  ],
+  null,
+  [
+   3,
+   0
+  ],
+  [
+   3,
+   0
+  ]
+ ],
+ "pages": 1,
+ "paragraph_count": 15,
+ "valid": true
+}

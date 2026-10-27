@@ -1,0 +1,12 @@
+{
+  "spec_version": "0.1.0",
+  "base_version": 42,
+  "ops": [
+    {
+      "op": "set_list",
+      "anchor": "b108",
+      "list": "numbered",
+      "level": 0
+    }
+  ]
+}

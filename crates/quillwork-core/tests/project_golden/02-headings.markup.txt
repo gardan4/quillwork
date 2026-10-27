@@ -1,0 +1,12 @@
+§ doc "Headings" · v1 · 1 page (est.) · en-US · tracked changes: off · 0 open comments · 0 open revisions · view: markup
+§ outline: [b100] Document title · [b102] Section 1.1 · [b104] Section 1.1.1 · [b106] Direct outline level 1 on a Normal paragraph · [b107] Second chapter
+§ window b100..b107 (blocks 1–8 of 8)
+
+[b100 H1] Document title
+[b101] Intro text under heading one.
+[b102 H2] Section 1.1
+[b103] Text under heading two.
+[b104 H3] Section 1.1.1
+[b105] Text under heading three.
+[b106 H2] Direct outline level 1 on a Normal paragraph
+[b107 H1] Second chapter

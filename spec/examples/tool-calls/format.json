@@ -1,0 +1,26 @@
+{
+  "base_version": 42,
+  "label": null,
+  "ops": [
+    {
+      "anchor": "b106",
+      "find": "38",
+      "occurrence": null,
+      "marks": "+bold",
+      "style": null,
+      "align": null,
+      "list": null,
+      "level": null
+    },
+    {
+      "anchor": "b108..b10f",
+      "find": null,
+      "occurrence": null,
+      "marks": null,
+      "style": null,
+      "align": "justify",
+      "list": null,
+      "level": null
+    }
+  ]
+}

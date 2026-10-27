@@ -1,0 +1,39 @@
+{
+ "bidi": [
+  true,
+  true,
+  true,
+  false
+ ],
+ "body": {
+  "accept": [
+   "مرحبا بالعالم",
+   "שלום עולם",
+   "المادة 2 من Contract v2",
+   "Left-to-right paragraph for contrast."
+  ],
+  "markup": [
+   "مرحبا بالعالم",
+   "שלום עולם",
+   "المادة 2 من Contract v2",
+   "Left-to-right paragraph for contrast."
+  ],
+  "reject": [
+   "مرحبا بالعالم",
+   "שלום עולם",
+   "المادة 2 من Contract v2",
+   "Left-to-right paragraph for contrast."
+  ]
+ },
+ "features": [
+  "w:bidi paragraphs",
+  "w:rtl runs",
+  "Arabic",
+  "Hebrew",
+  "mixed RTL/LTR with digits"
+ ],
+ "fixture": "14-rtl.docx",
+ "pages": 1,
+ "paragraph_count": 4,
+ "valid": true
+}

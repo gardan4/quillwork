@@ -1,0 +1,13 @@
+{
+ "body": null,
+ "error_codes": [
+  "package.malformed_xml"
+ ],
+ "features": [
+  "document.xml not well-formed"
+ ],
+ "fixture": "malformed-xml.docx",
+ "pages": 1,
+ "paragraph_count": null,
+ "valid": false
+}

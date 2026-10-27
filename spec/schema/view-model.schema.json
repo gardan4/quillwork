@@ -1,0 +1,1540 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://quillwork.example/spec/v0/view-model.schema.json",
+  "title": "Quillwork view model",
+  "description": "A resolved, render-ready tree of one document version for the viewer (DESIGN §5.3). The viewer never sees XML. Lengths keep their OOXML units (twips, EMU, half points) so nothing is rounded twice.",
+  "type": "object",
+  "properties": {
+    "spec_version": {
+      "$ref": "common.schema.json#/$defs/SpecVersion"
+    },
+    "version": {
+      "$ref": "common.schema.json#/$defs/Version"
+    },
+    "meta": {
+      "$ref": "#/$defs/Meta"
+    },
+    "sections": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Section"
+      },
+      "minItems": 1
+    },
+    "blocks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Block"
+      },
+      "description": "The main body story (b), in document order."
+    },
+    "stories": {
+      "type": "object",
+      "description": "Every other story with its own blocks, keyed by story id (h1, f1, fn1, en1, tb1). Comments live in comments[].",
+      "propertyNames": {
+        "$ref": "common.schema.json#/$defs/StoryKeyId"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/Story"
+      }
+    },
+    "comments": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Comment"
+      }
+    },
+    "changeSets": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ChangeSet"
+      }
+    },
+    "assets": {
+      "type": "object",
+      "description": "Every image asset the view model references, keyed by asset id. Served by the host at /assets/{id}.",
+      "propertyNames": {
+        "pattern": "^a_[0-9a-f]{16}$"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/Asset"
+      }
+    }
+  },
+  "required": [
+    "spec_version",
+    "version",
+    "meta",
+    "sections",
+    "blocks",
+    "stories",
+    "comments",
+    "changeSets",
+    "assets"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "Meta": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "lang": {
+          "type": "string",
+          "description": "BCP 47 tag of the document's default language."
+        },
+        "trackChanges": {
+          "type": "boolean",
+          "description": "w:settings/w:trackRevisions."
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Sensitivity labels (MIP), surfaced for host policy."
+        },
+        "pagesEstimate": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "readOnly": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "signed",
+            "strict",
+            "protected",
+            null
+          ],
+          "description": "Why ops are refused, if they are."
+        },
+        "flags": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "macros",
+              "external_links",
+              "active_content",
+              "suspicious_vba",
+              "embedded_fonts",
+              "hidden_text",
+              "tiny_text",
+              "white_text"
+            ]
+          },
+          "description": "Security-relevant findings for the host (DESIGN §12). tiny_text = text under 2 pt; white_text = white text on no or white shading. Both are fenced in the projection like hidden text."
+        },
+        "fonts": {
+          "type": "object",
+          "description": "Document font name → web font the viewer uses (Calibri → Carlito ...).",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "title",
+        "lang",
+        "trackChanges",
+        "labels",
+        "flags"
+      ],
+      "additionalProperties": false
+    },
+    "Section": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/SectionId"
+        },
+        "page": {
+          "type": "object",
+          "properties": {
+            "w": {
+              "$ref": "common.schema.json#/$defs/Twips"
+            },
+            "h": {
+              "$ref": "common.schema.json#/$defs/Twips"
+            },
+            "orient": {
+              "type": "string",
+              "enum": [
+                "portrait",
+                "landscape"
+              ]
+            },
+            "margins": {
+              "type": "object",
+              "properties": {
+                "top": {
+                  "type": "integer"
+                },
+                "right": {
+                  "type": "integer"
+                },
+                "bottom": {
+                  "type": "integer"
+                },
+                "left": {
+                  "type": "integer"
+                },
+                "header": {
+                  "type": "integer"
+                },
+                "footer": {
+                  "type": "integer"
+                },
+                "gutter": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "top",
+                "right",
+                "bottom",
+                "left"
+              ],
+              "additionalProperties": false
+            },
+            "cols": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          "required": [
+            "w",
+            "h",
+            "margins",
+            "cols"
+          ],
+          "additionalProperties": false
+        },
+        "headers": {
+          "$ref": "#/$defs/HeaderFooterRefs"
+        },
+        "footers": {
+          "$ref": "#/$defs/HeaderFooterRefs"
+        },
+        "titlePage": {
+          "type": "boolean"
+        },
+        "breakType": {
+          "type": "string",
+          "enum": [
+            "nextPage",
+            "continuous",
+            "evenPage",
+            "oddPage",
+            "nextColumn"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "page",
+        "headers",
+        "footers",
+        "titlePage"
+      ],
+      "additionalProperties": false
+    },
+    "HeaderFooterRefs": {
+      "type": "object",
+      "properties": {
+        "default": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^(h|f)[1-9][0-9]*$"
+        },
+        "first": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^(h|f)[1-9][0-9]*$"
+        },
+        "even": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^(h|f)[1-9][0-9]*$"
+        }
+      },
+      "required": [
+        "default",
+        "first",
+        "even"
+      ],
+      "additionalProperties": false
+    },
+    "Story": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "header",
+            "footer",
+            "footnote",
+            "endnote",
+            "textbox"
+          ]
+        },
+        "blocks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Block"
+          }
+        }
+      },
+      "required": [
+        "kind",
+        "blocks"
+      ],
+      "additionalProperties": false
+    },
+    "Block": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/Paragraph"
+        },
+        {
+          "$ref": "#/$defs/Table"
+        },
+        {
+          "$ref": "#/$defs/ImageBlock"
+        }
+      ]
+    },
+    "Paragraph": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/BlockAnchor"
+        },
+        "kind": {
+          "const": "p"
+        },
+        "section": {
+          "$ref": "common.schema.json#/$defs/SectionId",
+          "description": "Section of a body block; absent outside the body."
+        },
+        "style": {
+          "type": "string",
+          "description": "w:pStyle id (Normal when absent)."
+        },
+        "styleName": {
+          "type": "string"
+        },
+        "heading": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "maximum": 9,
+          "description": "Outline level 1-9, or null."
+        },
+        "list": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "label": {
+              "type": "string",
+              "description": "Displayed label, computed (3.1, b), •)."
+            },
+            "level": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 8
+            },
+            "numId": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "label",
+            "level"
+          ],
+          "additionalProperties": false
+        },
+        "fmt": {
+          "$ref": "#/$defs/ParagraphFormat"
+        },
+        "inlines": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Inline"
+          }
+        },
+        "mark": {
+          "description": "Tracked change on the paragraph mark itself (inserted or deleted paragraph).",
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/Revision"
+            }
+          ]
+        },
+        "pprChange": {
+          "description": "Tracked paragraph-property change (w:pPrChange), if any.",
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/Revision"
+            }
+          ]
+        },
+        "control": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/ContentControl"
+            }
+          ],
+          "description": "Block-level content control wrapping this paragraph."
+        },
+        "sectionEnd": {
+          "type": "boolean",
+          "description": "This paragraph ends a section that is not the last one (pPr/sectPr). The final section's properties sit on the body and never set this."
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "style",
+        "inlines"
+      ],
+      "additionalProperties": false
+    },
+    "ParagraphFormat": {
+      "type": "object",
+      "description": "Effective (fully resolved) paragraph properties, plus the paragraph's resolved run formatting (font, size, color, b, i, caps) that inline marks are relative to. Absent = viewer default (false for booleans).",
+      "properties": {
+        "align": {
+          "type": "string",
+          "enum": [
+            "left",
+            "center",
+            "right",
+            "both",
+            "distribute"
+          ]
+        },
+        "bidi": {
+          "type": "boolean"
+        },
+        "indent": {
+          "type": "object",
+          "properties": {
+            "left": {
+              "type": "integer"
+            },
+            "right": {
+              "type": "integer"
+            },
+            "firstLine": {
+              "type": "integer"
+            },
+            "hanging": {
+              "type": "integer"
+            }
+          },
+          "additionalProperties": false
+        },
+        "spacing": {
+          "type": "object",
+          "properties": {
+            "before": {
+              "type": "integer"
+            },
+            "after": {
+              "type": "integer"
+            },
+            "line": {
+              "type": "integer"
+            },
+            "lineRule": {
+              "type": "string",
+              "enum": [
+                "auto",
+                "exact",
+                "atLeast"
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "font": {
+          "type": "string"
+        },
+        "size": {
+          "$ref": "common.schema.json#/$defs/HalfPoints"
+        },
+        "color": {
+          "$ref": "common.schema.json#/$defs/Color"
+        },
+        "shade": {
+          "$ref": "common.schema.json#/$defs/Color"
+        },
+        "b": {
+          "type": "boolean",
+          "description": "Paragraph-level bold (style or paragraph mark run properties)."
+        },
+        "i": {
+          "type": "boolean"
+        },
+        "caps": {
+          "type": "boolean"
+        },
+        "keepNext": {
+          "type": "boolean"
+        },
+        "pageBreakBefore": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Marks": {
+      "type": "object",
+      "description": "Run formatting that differs from the paragraph's resolved formatting.",
+      "properties": {
+        "b": {
+          "type": "boolean"
+        },
+        "i": {
+          "type": "boolean"
+        },
+        "u": {
+          "type": "string",
+          "description": "Underline style (single, double, ...)."
+        },
+        "strike": {
+          "type": "boolean"
+        },
+        "dstrike": {
+          "type": "boolean"
+        },
+        "sup": {
+          "type": "boolean"
+        },
+        "sub": {
+          "type": "boolean"
+        },
+        "caps": {
+          "type": "boolean"
+        },
+        "smallCaps": {
+          "type": "boolean"
+        },
+        "font": {
+          "type": "string"
+        },
+        "size": {
+          "$ref": "common.schema.json#/$defs/HalfPoints"
+        },
+        "color": {
+          "$ref": "common.schema.json#/$defs/Color"
+        },
+        "highlight": {
+          "type": "string"
+        },
+        "rtl": {
+          "type": "boolean"
+        },
+        "lang": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Revision": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/RevisionId"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "ins",
+            "del",
+            "fmt",
+            "pfmt",
+            "moveFrom",
+            "moveTo",
+            "rowIns",
+            "rowDel",
+            "cellIns",
+            "cellDel"
+          ]
+        },
+        "author": {
+          "type": "string"
+        },
+        "date": {
+          "$ref": "common.schema.json#/$defs/DateTime"
+        },
+        "cs": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "common.schema.json#/$defs/ChangeSetId"
+            }
+          ],
+          "description": "Change set from the sidecar; null for revisions we did not make or whose sidecar was lost."
+        },
+        "old": {
+          "type": "string",
+          "description": "For fmt/pfmt: what changed, in projection notation (+bold -italic, style Heading2→Normal)."
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "author",
+        "cs"
+      ],
+      "additionalProperties": false
+    },
+    "Inline": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/TextInline"
+        },
+        {
+          "$ref": "#/$defs/TabInline"
+        },
+        {
+          "$ref": "#/$defs/BreakInline"
+        },
+        {
+          "$ref": "#/$defs/FieldInline"
+        },
+        {
+          "$ref": "#/$defs/ImageInline"
+        },
+        {
+          "$ref": "#/$defs/NoteRefInline"
+        }
+      ]
+    },
+    "InlineCommon": {
+      "type": "object",
+      "properties": {
+        "rev": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/Revision"
+            }
+          ],
+          "description": "Insertion, deletion or move this inline sits in."
+        },
+        "fmtChange": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/Revision"
+            }
+          ],
+          "description": "Tracked format change (w:rPrChange)."
+        },
+        "comments": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/CommentId"
+          },
+          "description": "Comment ranges covering this inline."
+        },
+        "link": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "url": {
+              "type": "string",
+              "description": "http(s) or mailto only; anything else is shown unlinked."
+            },
+            "bookmark": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "flags": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "hidden",
+              "white",
+              "tiny",
+              "zw"
+            ]
+          },
+          "description": "Untrusted-content markers (DESIGN §5.2, §12): the viewer shows them, the projection fences them."
+        },
+        "control": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/ContentControl"
+            }
+          ]
+        }
+      }
+    },
+    "TextInline": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/InlineCommon"
+        }
+      ],
+      "properties": {
+        "k": {
+          "const": "text",
+          "description": "Optional on input: an inline without k is text. Quillwork always writes it."
+        },
+        "t": {
+          "type": "string",
+          "minLength": 1
+        },
+        "marks": {
+          "$ref": "#/$defs/Marks"
+        },
+        "style": {
+          "type": "string",
+          "description": "w:rStyle id."
+        }
+      },
+      "required": [
+        "t"
+      ],
+      "unevaluatedProperties": false
+    },
+    "TabInline": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/InlineCommon"
+        }
+      ],
+      "properties": {
+        "k": {
+          "const": "tab"
+        }
+      },
+      "required": [
+        "k"
+      ],
+      "unevaluatedProperties": false
+    },
+    "BreakInline": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/InlineCommon"
+        }
+      ],
+      "properties": {
+        "k": {
+          "const": "br"
+        },
+        "br": {
+          "type": "string",
+          "enum": [
+            "line",
+            "page",
+            "column"
+          ]
+        }
+      },
+      "required": [
+        "k",
+        "br"
+      ],
+      "unevaluatedProperties": false
+    },
+    "FieldInline": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/InlineCommon"
+        }
+      ],
+      "properties": {
+        "k": {
+          "const": "field"
+        },
+        "t": {
+          "type": "string",
+          "description": "Cached result as Word displays it."
+        },
+        "marks": {
+          "$ref": "#/$defs/Marks"
+        },
+        "field": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "Instruction keyword: PAGE, NUMPAGES, REF, MERGEFIELD, HYPERLINK, TOC, DATE, ..."
+            },
+            "instr": {
+              "type": "string",
+              "description": "Full instruction text."
+            },
+            "editable": {
+              "type": "boolean",
+              "description": "MERGEFIELD, REF and HYPERLINK only."
+            },
+            "dirty": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "type",
+            "instr",
+            "editable"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "k",
+        "t",
+        "field"
+      ],
+      "unevaluatedProperties": false
+    },
+    "ImageInline": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/InlineCommon"
+        }
+      ],
+      "properties": {
+        "k": {
+          "const": "image"
+        },
+        "image": {
+          "$ref": "#/$defs/Image"
+        }
+      },
+      "required": [
+        "k",
+        "image"
+      ],
+      "unevaluatedProperties": false,
+      "description": "A drawing inside a line of text. The image fields sit under `image`; an ImageBlock (a paragraph holding only one drawing) carries the same ImageBase fields flattened into the block. Both shapes are intentional: the inline one keeps InlineCommon (rev, comments) apart from the picture, the block one stands in for the paragraph."
+    },
+    "NoteRefInline": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/InlineCommon"
+        }
+      ],
+      "properties": {
+        "k": {
+          "const": "note"
+        },
+        "note": {
+          "type": "string",
+          "pattern": "^(fn|en)[1-9][0-9]*$"
+        },
+        "label": {
+          "type": "string",
+          "description": "Displayed mark (1, 2, *, ...)."
+        }
+      },
+      "required": [
+        "k",
+        "note",
+        "label"
+      ],
+      "unevaluatedProperties": false
+    },
+    "ContentControl": {
+      "type": "object",
+      "properties": {
+        "tag": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "alias": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "plainText",
+            "richText",
+            "date",
+            "dropdown",
+            "comboBox",
+            "checkbox",
+            "picture",
+            "group",
+            "other"
+          ]
+        },
+        "bound": {
+          "type": "boolean",
+          "description": "Data-bound (w:dataBinding)."
+        },
+        "locked": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "tag",
+        "alias",
+        "type"
+      ],
+      "additionalProperties": false
+    },
+    "ImageBlock": {
+      "description": "A paragraph whose only content is one drawing; the image anchor stands in for the paragraph (anchors.md §Images). Same ImageBase fields as ImageInline.image, flattened.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/ImageBase"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "const": "image"
+        },
+        "para": {
+          "$ref": "common.schema.json#/$defs/BlockAnchor"
+        },
+        "section": {
+          "$ref": "common.schema.json#/$defs/SectionId"
+        },
+        "rev": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/Revision"
+            }
+          ]
+        }
+      },
+      "required": [
+        "kind",
+        "para"
+      ],
+      "unevaluatedProperties": false
+    },
+    "Table": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/TableAnchor"
+        },
+        "kind": {
+          "const": "table"
+        },
+        "section": {
+          "$ref": "common.schema.json#/$defs/SectionId"
+        },
+        "style": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "caption": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "w:tblCaption, or the text of a Caption paragraph right before the table."
+        },
+        "grid": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/Twips"
+          },
+          "description": "Column widths (w:tblGrid)."
+        },
+        "bidi": {
+          "type": "boolean"
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Row"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "grid",
+        "rows"
+      ],
+      "additionalProperties": false
+    },
+    "Row": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/RowAnchor"
+        },
+        "header": {
+          "type": "boolean",
+          "description": "Repeats as header row (w:tblHeader)."
+        },
+        "height": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "rev": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/Revision"
+            }
+          ],
+          "description": "rowIns / rowDel."
+        },
+        "cells": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Cell"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "id",
+        "cells"
+      ],
+      "additionalProperties": false
+    },
+    "Cell": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/CellAnchor"
+        },
+        "span": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "w:gridSpan."
+        },
+        "vmerge": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "restart",
+            "continue",
+            null
+          ]
+        },
+        "width": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "shade": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "common.schema.json#/$defs/Color"
+            }
+          ]
+        },
+        "valign": {
+          "type": "string",
+          "enum": [
+            "top",
+            "center",
+            "bottom"
+          ]
+        },
+        "borders": {
+          "type": "object",
+          "description": "Resolved borders of this cell: tcBorders, then the table style's conditional and whole-table borders, then the table's own w:tblBorders (outer edges for outer cells, insideH/insideV between cells). Absent = no borders at all; null edge = no line.",
+          "properties": {
+            "top": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/BorderLine"
+                }
+              ]
+            },
+            "right": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/BorderLine"
+                }
+              ]
+            },
+            "bottom": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/BorderLine"
+                }
+              ]
+            },
+            "left": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/BorderLine"
+                }
+              ]
+            }
+          },
+          "required": [
+            "top",
+            "right",
+            "bottom",
+            "left"
+          ],
+          "additionalProperties": false
+        },
+        "blocks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Block"
+          },
+          "minItems": 1,
+          "description": "A cell always ends with a paragraph."
+        }
+      },
+      "required": [
+        "id",
+        "span",
+        "vmerge",
+        "blocks"
+      ],
+      "additionalProperties": false
+    },
+    "BorderLine": {
+      "type": "object",
+      "properties": {
+        "style": {
+          "type": "string",
+          "description": "w:val (single, double, dashed, dotted, thick, ...)."
+        },
+        "size": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "w:sz, eighths of a point."
+        },
+        "color": {
+          "$ref": "common.schema.json#/$defs/Color"
+        }
+      },
+      "required": [
+        "style",
+        "size"
+      ],
+      "additionalProperties": false
+    },
+    "Comment": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/CommentId"
+        },
+        "parent": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "common.schema.json#/$defs/CommentId"
+            }
+          ],
+          "description": "Set on replies (w15:paraIdParent)."
+        },
+        "author": {
+          "type": "string"
+        },
+        "initials": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "date": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "common.schema.json#/$defs/DateTime"
+            }
+          ],
+          "description": "w:date; null when the comment has none."
+        },
+        "done": {
+          "type": "boolean"
+        },
+        "agent": {
+          "type": "boolean",
+          "description": "Written by this engine's configured agent author. Anything else is third-party content (DESIGN §12)."
+        },
+        "anchor": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "description": "Where the range sits; null on replies.",
+          "properties": {
+            "start": {
+              "$ref": "common.schema.json#/$defs/Anchor"
+            },
+            "end": {
+              "$ref": "common.schema.json#/$defs/Anchor"
+            },
+            "text": {
+              "type": "string",
+              "description": "The commented text (accepted mode)."
+            },
+            "startOffset": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "UTF-16 offset into start's text (the text model, projection.md §10) where the range begins. Absent when the range starts outside any paragraph text."
+            },
+            "endOffset": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "UTF-16 offset into end's text where the range ends (exclusive)."
+            }
+          },
+          "required": [
+            "start",
+            "end",
+            "text"
+          ],
+          "additionalProperties": false
+        },
+        "blocks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Block"
+          },
+          "minItems": 1,
+          "description": "The comment's paragraphs. Patches and ops address them with story id = the comment id (c1)."
+        }
+      },
+      "required": [
+        "id",
+        "parent",
+        "author",
+        "date",
+        "done",
+        "anchor",
+        "blocks"
+      ],
+      "additionalProperties": false
+    },
+    "ChangeSet": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/ChangeSetId"
+        },
+        "label": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "author": {
+          "type": "string"
+        },
+        "turn": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Host chat turn this change set belongs to."
+        },
+        "version": {
+          "$ref": "common.schema.json#/$defs/Version"
+        },
+        "revisions": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/RevisionId"
+          }
+        },
+        "untracked": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Sidecar-only changes Word cannot track (resize_image, set_alt_text, ...), as op names with their anchor."
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "open",
+            "accepted",
+            "rejected",
+            "partial"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "author",
+        "turn",
+        "revisions",
+        "status"
+      ],
+      "additionalProperties": false
+    },
+    "Asset": {
+      "type": "object",
+      "properties": {
+        "mime": {
+          "type": "string",
+          "enum": [
+            "image/png",
+            "image/jpeg",
+            "image/gif",
+            "image/webp",
+            "image/svg+xml"
+          ],
+          "description": "What the viewer receives; EMF/WMF/TIFF are converted to PNG."
+        },
+        "source": {
+          "type": "string",
+          "description": "Original media type in the package, when converted."
+        },
+        "px": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "minItems": 2,
+          "maxItems": 2,
+          "description": "Natural size in pixels [w, h]."
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "mime",
+        "px",
+        "bytes"
+      ],
+      "additionalProperties": false
+    },
+    "ImageBase": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/ImageAnchor"
+        },
+        "drawing": {
+          "type": "string",
+          "enum": [
+            "picture",
+            "chart",
+            "smartart",
+            "shape",
+            "ole",
+            "watermark"
+          ]
+        },
+        "asset": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "common.schema.json#/$defs/AssetId"
+            }
+          ],
+          "description": "Null for an external (never fetched) picture or a shape without a preview."
+        },
+        "external": {
+          "type": "boolean",
+          "description": "r:link target: shown as a placeholder, never fetched."
+        },
+        "w": {
+          "$ref": "common.schema.json#/$defs/Emu"
+        },
+        "h": {
+          "$ref": "common.schema.json#/$defs/Emu"
+        },
+        "wrap": {
+          "type": "string",
+          "enum": [
+            "inline",
+            "square",
+            "tight",
+            "through",
+            "topAndBottom",
+            "none",
+            "behind"
+          ]
+        },
+        "align": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "left",
+            "center",
+            "right",
+            null
+          ]
+        },
+        "alt": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "title": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "decorative": {
+          "type": "boolean"
+        },
+        "crop": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "description": "a:srcRect in 1/1000 percent.",
+          "properties": {
+            "l": {
+              "type": "integer"
+            },
+            "t": {
+              "type": "integer"
+            },
+            "r": {
+              "type": "integer"
+            },
+            "b": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "l",
+            "t",
+            "r",
+            "b"
+          ],
+          "additionalProperties": false
+        },
+        "rotation": {
+          "type": "integer",
+          "description": "60 000ths of a degree."
+        },
+        "flipH": {
+          "type": "boolean"
+        },
+        "flipV": {
+          "type": "boolean"
+        },
+        "caption": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Chart title or SmartArt summary for the placeholder card."
+        },
+        "textbox": {
+          "type": "string",
+          "pattern": "^tb[1-9][0-9]*$",
+          "description": "The text-box story this drawing hosts (stories[tb<n>]); the viewer draws the story inside the shape."
+        }
+      },
+      "required": [
+        "id",
+        "drawing",
+        "asset",
+        "w",
+        "h",
+        "wrap",
+        "alt",
+        "decorative",
+        "crop",
+        "rotation"
+      ],
+      "description": "Fields every drawing has, inline or as a block."
+    },
+    "Image": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/ImageBase"
+        }
+      ],
+      "unevaluatedProperties": false
+    }
+  }
+}

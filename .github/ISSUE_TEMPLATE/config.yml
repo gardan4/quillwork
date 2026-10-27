@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security vulnerability
+    url: https://github.com/gardan4/quillwork/security/advisories/new
+    about: Report security problems privately, not as an issue.

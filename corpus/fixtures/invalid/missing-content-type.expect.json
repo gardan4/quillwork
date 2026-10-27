@@ -1,0 +1,13 @@
+{
+ "body": null,
+ "error_codes": [
+  "package.word_document_missing"
+ ],
+ "features": [
+  "main part without content type"
+ ],
+ "fixture": "missing-content-type.docx",
+ "pages": 1,
+ "paragraph_count": null,
+ "valid": false
+}

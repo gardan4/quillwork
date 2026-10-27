@@ -1,0 +1,13 @@
+{
+  "spec_version": "0.1.0",
+  "base_version": 42,
+  "label": "Werkgever hernoemd",
+  "ops": [
+    {
+      "op": "find_and_replace",
+      "find": "Kinderopvang De Vlinder B.V.",
+      "replace": "Kinderopvang De Vlinder Groep B.V.",
+      "count": 4
+    }
+  ]
+}

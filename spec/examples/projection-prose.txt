@@ -1,0 +1,41 @@
+§ doc "Arbeidsovereenkomst voor onbepaalde tijd — R. Visser" · v7 · 3 pages (est.) · nl-NL · tracked changes: on · 0 open comments · 2 open revisions · view: accepted
+§ outline: [b100] Arbeidsovereenkomst voor onbepaalde tijd · [b104] 1 Indiensttreding · [b107] 2 Werkzaamheden · [b10b] 3 Arbeidstijden · [b10f] 4 Salaris en toeslagen · [b10k] 5 Vakantie en verlof · [b10p] 6 Ziekte · [b10t] 7 Geheimhouding · [b10x] 8 Einde van de overeenkomst
+§ window b100..b115 (blocks 1–35 of 35)
+
+[b100 H1] Arbeidsovereenkomst voor onbepaalde tijd
+[b101] De ondergetekenden, Stichting Kinderopvang De Zonnewijzer, gevestigd te Zwolle aan de Brinkweg 12, ingeschreven in het handelsregister onder nummer 00000000, hierna te noemen "werkgever", en R. Visser, wonende te Kampen, hierna te noemen "werknemer",
+[b102] verklaren te zijn overeengekomen dat werknemer bij werkgever in dienst treedt onder de voorwaarden die in deze overeenkomst zijn opgenomen. Op deze overeenkomst is de cao Kinderopvang van toepassing, zoals die van tijd tot tijd luidt.
+[b103] Waar in deze overeenkomst over werknemer wordt gesproken, wordt iedere werknemer bedoeld, ongeacht diens gender.
+[b104 H2 #1] Indiensttreding
+[b105 #1.1] Werknemer treedt met ingang van 1 september 2027 voor onbepaalde tijd in dienst van werkgever. De eerste twee maanden gelden als proeftijd, waarin beide partijen de overeenkomst met onmiddellijke ingang kunnen opzeggen.
+[b106 #1.2] Werknemer verklaart dat hij of zij niet gebonden is aan een concurrentiebeding of een andere afspraak die de uitvoering van deze overeenkomst in de weg staat, en overlegt bij indiensttreding een geldige verklaring omtrent het gedrag.
+[b107 H2 #2] Werkzaamheden
+[b108 #2.1] Werknemer wordt aangesteld in de functie van pedagogisch professional op de locatie Stadshagen. Een omschrijving van de werkzaamheden is opgenomen in de functiebeschrijving die als bijlage bij deze overeenkomst is gevoegd.
+[b109 #2.2] Werkgever kan werknemer in redelijkheid ook andere werkzaamheden opdragen die passen bij diens opleiding en ervaring, ook op een andere locatie binnen een straal van vijfentwintig kilometer.
+[b10a #2.3] Werknemer volgt de interne scholing die werkgever voor de functie verplicht stelt. De kosten daarvan komen voor rekening van werkgever en de scholing vindt zoveel mogelijk plaats onder werktijd.
+[b10b H2 #3] Arbeidstijden
+[b10c #3.1] De arbeidsduur bedraagt {--32--}{++30++}⟨r3,4 AI⟩ uur per week, verdeeld over vier dagen. Het rooster wordt ten minste vier weken vooraf bekendgemaakt en kan alleen in overleg met werknemer worden gewijzigd.
+[b10d #3.2] Werknemer is bereid om in geval van onvoorziene omstandigheden incidenteel meer uren te werken. Meeruren worden binnen drie maanden gecompenseerd in tijd of, als dat niet mogelijk is, uitbetaald tegen het geldende uurloon.
+[b10e #3.3] Pauzes gelden niet als arbeidstijd. Werknemer heeft bij een dienst van meer dan vijfenhalf uur recht op een pauze van ten minste een half uur.
+[b10f H2 #4] Salaris en toeslagen
+[b10g #4.1] Werknemer wordt ingedeeld in schaal 6 van de cao. Het salaris bedraagt bij indiensttreding € 2.912,00 bruto per maand bij een volledige werkweek en wordt naar rato vastgesteld.
+[b10h #4.2] Werknemer ontvangt jaarlijks in mei een vakantietoeslag van 8% en in december een eindejaarsuitkering van 8,3% van het in dat jaar verdiende salaris.
+[b10j #4.3] Reiskosten voor woon-werkverkeer worden vergoed volgens de regeling die werkgever daarvoor heeft vastgesteld. Werkgever betaalt het salaris uiterlijk op de laatste werkdag van de maand.
+[b10k H2 #5] Vakantie en verlof
+[b10m #5.1] Werknemer heeft per kalenderjaar recht op het wettelijke aantal vakantie-uren, vermeerderd met de bovenwettelijke uren uit de cao, naar rato van de arbeidsduur.
+[b10n #5.2] Vakantie wordt in overleg met de leidinggevende vastgesteld. Een aaneengesloten vakantie van drie weken in de zomerperiode wordt alleen geweigerd als de bezetting van de groep anders niet verantwoord is.
+[b10p H2 #6] Ziekte
+[b10q #6.1] Bij ziekte meldt werknemer zich voor half acht 's ochtends telefonisch bij de leidinggevende en volgt hij of zij het verzuimreglement van werkgever.
+[b10r #6.2] Gedurende de eerste twee ziektejaren betaalt werkgever het salaris door volgens de bepalingen van de cao, mits werknemer zich houdt aan de controlevoorschriften en meewerkt aan re-integratie.
+[b10s #6.3] Werkgever kan de loondoorbetaling opschorten zolang werknemer zonder deugdelijke grond weigert mee te werken aan een redelijk verzoek van de bedrijfsarts.
+[b10t H2 #7] Geheimhouding
+[b10v #7.1] Werknemer is verplicht tot geheimhouding van alles wat hij of zij in het kader van de functie te weten komt over kinderen, ouders en collega's, ook na het einde van de overeenkomst.
+[b10w #7.2] Werknemer gaat zorgvuldig om met persoonsgegevens en volgt het privacybeleid van werkgever. Een datalek wordt direct gemeld bij de functionaris gegevensbescherming.
+[b10x H2 #8] Einde van de overeenkomst
+[b10y #8.1] Deze overeenkomst kan door beide partijen schriftelijk worden opgezegd met inachtneming van de opzegtermijn uit de cao. Opzegging geschiedt tegen het einde van een kalendermaand.
+[b10z #8.2] De overeenkomst eindigt in ieder geval zonder dat opzegging is vereist op de dag waarop werknemer de AOW-gerechtigde leeftijd bereikt.
+[b110] Aldus in tweevoud opgemaakt en ondertekend te Zwolle op ⟪DATE \@ "d MMMM yyyy" → "15 augustus 2027"⟫.
+[t1 TABLE 2×2]
+  [t1.r1] Werkgever | Werknemer
+  [t1.r2] Stichting Kinderopvang De Zonnewijzer | R. Visser
+[b115] Bijlage: functiebeschrijving pedagogisch professional.

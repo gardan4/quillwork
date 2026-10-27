@@ -1,0 +1,10 @@
+§ doc "Run formatting" · v1 · 1 page (est.) · en-US · tracked changes: off · 0 open comments · 0 open revisions · view: markup
+§ outline: (none)
+§ window b100..b105 (blocks 1–6 of 6)
+
+[b100] A plain paragraph with no formatting at all.
+[b101] Mixed **bold**, *italic* and ***__bold italic underlined__*** runs.
+[b102] Inside one word: un**break**able, E=mc^2^, H~2~O and wo*rd*s.
+[b103] Colour red, size large, font Courier, highlighted, ~~strike~~ and small caps.
+[b104] Tab⇥separated and a line↵break in one paragraph.
+[b105] Paragraph formatting: centred, spaced, indented.

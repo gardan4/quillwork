@@ -1,0 +1,59 @@
+{
+  "name": "@quillwork/viewer",
+  "version": "0.1.0",
+  "description": "Framework-free viewer for Quillwork view models, with live patches, tracked-change review and a React 19 wrapper.",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gardan4/quillwork.git",
+    "directory": "js/viewer"
+  },
+  "homepage": "https://github.com/gardan4/quillwork/tree/main/js/viewer",
+  "bugs": "https://github.com/gardan4/quillwork/issues",
+  "type": "module",
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./react": {
+      "types": "./dist/react.d.ts",
+      "import": "./dist/react.js"
+    }
+  },
+  "scripts": {
+    "build": "vite build && tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "demo": "vite --config vite.demo.config.ts",
+    "size": "node scripts/size.mjs"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.43",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "ajv": "^8.20.0",
+    "ajv-formats": "^3.0.1",
+    "jsdom": "^26.1.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "typescript": "^5.8.3",
+    "vite": "^6.4.5",
+    "vitest": "^3.2.7"
+  }
+}

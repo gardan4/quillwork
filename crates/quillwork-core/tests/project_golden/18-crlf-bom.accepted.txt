@@ -1,0 +1,7 @@
+§ doc "CRLF and BOM" · v1 · 1 page (est.) · en-US · tracked changes: off · 0 open comments · 0 open revisions · view: accepted
+§ outline: (none)
+§ window b100..b102 (blocks 1–3 of 3)
+
+[b100]   two leading spaces and two trailing  
+[b101] Euro € and © via character references & an entity.
+[b102] Tab⇥after tab.

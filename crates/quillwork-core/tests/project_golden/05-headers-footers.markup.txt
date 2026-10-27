@@ -1,0 +1,20 @@
+§ doc "Headers and footers" · v1 · 1 page (est.) · en-US · tracked changes: off · 0 open comments · 0 open revisions · view: markup
+§ outline: (none)
+§ window b100..b102 (blocks 1–3 of 3)
+
+[b100] Page one: first-page header and footer.
+[b101] Page two: even-page header and footer.
+[b102] Page three: default (odd) header and footer.
+
+§ h1 header · s1 default
+[h1-00] Default header
+§ h2 header · s1 first
+[h2-00] First page header
+§ h3 header · s1 even
+[h3-00] Even page header
+§ f1 footer · s1 default
+[f1-00] Default footer, page ⟪PAGE \* MERGEFORMAT → "1"⟫
+§ f2 footer · s1 first
+[f2-00] First page footer, page ⟪PAGE \* MERGEFORMAT → "1"⟫
+§ f3 footer · s1 even
+[f3-00] Even page footer, page ⟪PAGE \* MERGEFORMAT → "1"⟫

@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://quillwork.example/spec/v0/patch.schema.json",
+  "title": "Quillwork view-model patch",
+  "description": "What turns view model base_version into view model version (DESIGN §5.3). The viewer applies it by id, in this order: removes, storyRemoves, moves, upserts, stories, comments, commentRemoves, commentOrder, changeSets, meta, sections, assets. A table is one unit: any change inside it upserts the whole table. Story c<n> in moves and upserts addresses comments[c<n>].blocks; the generator itself sends a changed comment whole in comments.",
+  "type": "object",
+  "properties": {
+    "spec_version": {"$ref": "common.schema.json#/$defs/SpecVersion"},
+    "base_version": {"$ref": "common.schema.json#/$defs/Version"},
+    "version": {"$ref": "common.schema.json#/$defs/Version"},
+    "removes": {
+      "type": "array",
+      "description": "Ids of top-level blocks (paragraph, table or image block) that no longer exist in any story.",
+      "items": {"type": "string"}
+    },
+    "moves": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/Position", "unevaluatedProperties": false}
+    },
+    "upserts": {
+      "type": "array",
+      "description": "Blocks to replace by id, or to insert at the given position when the id is new. In document order, so an upsert's after may name a block upserted earlier in the same list.",
+      "items": {"$ref": "#/$defs/Upsert"}
+    },
+    "storyRemoves": {
+      "type": "array",
+      "description": "Stories (footnote, header, text box, ...) that no longer exist. Applied after removes and before moves.",
+      "items": {"$ref": "common.schema.json#/$defs/StoryKeyId"}
+    },
+    "stories": {
+      "type": "object",
+      "description": "Stories created by this version (a new footnote), keyed by story id; their blocks are complete. A story that already exists is replaced whole.",
+      "propertyNames": {"$ref": "common.schema.json#/$defs/StoryKeyId"},
+      "additionalProperties": {"$ref": "view-model.schema.json#/$defs/Story"}
+    },
+    "comments": {"type": "array", "items": {"$ref": "view-model.schema.json#/$defs/Comment"}, "description": "Comments to replace or add, by id."},
+    "commentRemoves": {"type": "array", "items": {"$ref": "common.schema.json#/$defs/CommentId"}},
+    "commentOrder": {"type": "array", "items": {"$ref": "common.schema.json#/$defs/CommentId"}, "description": "Every comment id in its new order, sent only when applying comments and commentRemoves (which append new comments) would leave another order. Applied after commentRemoves."},
+    "changeSets": {"type": "array", "items": {"$ref": "view-model.schema.json#/$defs/ChangeSet"}, "description": "Change sets to replace or add, by id."},
+    "meta": {"$ref": "view-model.schema.json#/$defs/Meta", "description": "Full replacement when it changed."},
+    "sections": {"type": "array", "items": {"$ref": "view-model.schema.json#/$defs/Section"}, "description": "Full replacement of the section list when it changed."},
+    "assets": {
+      "type": "object",
+      "propertyNames": {"pattern": "^a_[0-9a-f]{16}$"},
+      "additionalProperties": {"$ref": "view-model.schema.json#/$defs/Asset"},
+      "description": "Assets referenced for the first time. Patches never remove assets; a viewer may drop entries nothing references any more."
+    }
+  },
+  "required": ["spec_version", "base_version", "version", "removes", "moves", "upserts"],
+  "additionalProperties": false,
+  "$defs": {
+    "Position": {
+      "type": "object",
+      "properties": {
+        "id": {"type": "string", "description": "Block id (paragraph, table or image anchor)."},
+        "story": {"$ref": "common.schema.json#/$defs/StoryId", "description": "b, a stories key, or a comment id (c<n> addresses comments[].blocks)."},
+        "after": {"type": ["string", "null"], "description": "Sibling block id it follows; null = first in its story."}
+      },
+      "required": ["id", "story", "after"]
+    },
+    "Upsert": {
+      "type": "object",
+      "properties": {
+        "story": {"$ref": "common.schema.json#/$defs/StoryId", "description": "b, a stories key, or a comment id (c<n> addresses comments[].blocks)."},
+        "after": {"type": ["string", "null"], "description": "Where a new block goes; ignored when the id already exists (use moves to relocate)."},
+        "block": {"$ref": "view-model.schema.json#/$defs/Block"}
+      },
+      "required": ["story", "after", "block"],
+      "additionalProperties": false
+    }
+  }
+}

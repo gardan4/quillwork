@@ -1,0 +1,19 @@
+§ doc "Lists" · v1 · 1 page (est.) · en-US · tracked changes: off · 0 open comments · 0 open revisions · view: accepted
+§ outline: (none)
+§ window b100..b10e (blocks 1–15 of 15)
+
+[b100] Numbered list:
+[b101 #1.] First item
+[b102 #2.] Second item
+[b103 #2.a. L1] Sub item a
+[b104 #2.b. L1] Sub item b
+[b105 #i) L2] Sub-sub item i
+[b106 #3.] Third item
+[b107] Bulleted list:
+[b108 #•] Bullet one
+[b109 #◦ L1] Nested bullet
+[b10a #▪ L2] Deeper bullet
+[b10b #•] Bullet two
+[b10c] Restarted numbering:
+[b10d #1.] Restart one
+[b10e #2.] Restart two

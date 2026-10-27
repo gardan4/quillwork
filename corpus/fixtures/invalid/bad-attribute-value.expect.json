@@ -1,0 +1,23 @@
+{
+ "body": {
+  "accept": [
+   "jc has an invalid value."
+  ],
+  "markup": [
+   "jc has an invalid value."
+  ],
+  "reject": [
+   "jc has an invalid value."
+  ]
+ },
+ "error_codes": [
+  "openxml.sch_attributevaluedatatypedetailed"
+ ],
+ "features": [
+  "invalid enum attribute value"
+ ],
+ "fixture": "bad-attribute-value.docx",
+ "pages": 1,
+ "paragraph_count": 1,
+ "valid": false
+}

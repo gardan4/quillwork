@@ -1,0 +1,229 @@
+{
+  "spec_version": "0.1.0",
+  "version": 1,
+  "meta": {
+    "title": "Comments",
+    "lang": "en-US",
+    "trackChanges": false,
+    "labels": [],
+    "pagesEstimate": 1,
+    "readOnly": null,
+    "flags": [],
+    "fonts": {
+      "Calibri": "Carlito"
+    }
+  },
+  "sections": [
+    {
+      "id": "s1",
+      "page": {
+        "w": 11906,
+        "h": 16838,
+        "margins": {
+          "top": 1440,
+          "right": 1440,
+          "bottom": 1440,
+          "left": 1440,
+          "header": 708,
+          "footer": 708
+        },
+        "cols": 1
+      },
+      "headers": {
+        "default": null,
+        "first": null,
+        "even": null
+      },
+      "footers": {
+        "default": null,
+        "first": null,
+        "even": null
+      },
+      "titlePage": false
+    }
+  ],
+  "blocks": [
+    {
+      "kind": "p",
+      "id": "b100",
+      "section": "s1",
+      "style": "Normal",
+      "styleName": "Normal",
+      "fmt": {
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Revenue grew as shown in the "
+        },
+        {
+          "k": "text",
+          "t": "figure below",
+          "comments": [
+            "c1"
+          ]
+        },
+        {
+          "k": "text",
+          "t": "."
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b101",
+      "section": "s1",
+      "style": "Normal",
+      "styleName": "Normal",
+      "fmt": {
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "A second paragraph with a "
+        },
+        {
+          "k": "text",
+          "t": "tpyo",
+          "comments": [
+            "c3"
+          ]
+        },
+        {
+          "k": "text",
+          "t": " in it."
+        }
+      ]
+    }
+  ],
+  "stories": {},
+  "comments": [
+    {
+      "id": "c1",
+      "parent": null,
+      "author": "Alice Reviewer",
+      "initials": "AR",
+      "date": "2026-01-02T10:00:00Z",
+      "done": false,
+      "agent": false,
+      "anchor": {
+        "start": "b100",
+        "end": "b100",
+        "text": "figure below",
+        "startOffset": 29,
+        "endOffset": 41
+      },
+      "blocks": [
+        {
+          "kind": "p",
+          "id": "c1-0",
+          "style": "CommentText",
+          "styleName": "annotation text",
+          "fmt": {
+            "spacing": {
+              "after": 160,
+              "line": 240,
+              "lineRule": "auto"
+            },
+            "font": "Calibri",
+            "size": 20
+          },
+          "inlines": [
+            {
+              "k": "text",
+              "t": "Please check this figure."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c2",
+      "parent": "c1",
+      "author": "Bob Author",
+      "initials": "BA",
+      "date": "2026-01-02T10:00:00Z",
+      "done": false,
+      "agent": false,
+      "anchor": null,
+      "blocks": [
+        {
+          "kind": "p",
+          "id": "c2-0",
+          "style": "CommentText",
+          "styleName": "annotation text",
+          "fmt": {
+            "spacing": {
+              "after": 160,
+              "line": 240,
+              "lineRule": "auto"
+            },
+            "font": "Calibri",
+            "size": 20
+          },
+          "inlines": [
+            {
+              "k": "text",
+              "t": "Checked, it is correct."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c3",
+      "parent": null,
+      "author": "Alice Reviewer",
+      "initials": "AR",
+      "date": "2026-01-02T10:00:00Z",
+      "done": false,
+      "agent": false,
+      "anchor": {
+        "start": "b101",
+        "end": "b101",
+        "text": "tpyo",
+        "startOffset": 26,
+        "endOffset": 30
+      },
+      "blocks": [
+        {
+          "kind": "p",
+          "id": "c3-0",
+          "style": "CommentText",
+          "styleName": "annotation text",
+          "fmt": {
+            "spacing": {
+              "after": 160,
+              "line": 240,
+              "lineRule": "auto"
+            },
+            "font": "Calibri",
+            "size": 20
+          },
+          "inlines": [
+            {
+              "k": "text",
+              "t": "Typo here?"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "changeSets": [],
+  "assets": {}
+}

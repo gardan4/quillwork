@@ -1,0 +1,96 @@
+## direct [{"after":"b103","op":"insert_paragraph","text":"Dear {name}, sign for [CLIENT NAME] here: .........."}]
+[
+  {
+    "anchor": "b107",
+    "message": "placeholder left in the text: \"{name}\"",
+    "rule": "leftover_placeholder",
+    "severity": "warning"
+  },
+  {
+    "anchor": "b107",
+    "message": "placeholder left in the text: \"[CLIENT NAME]\"",
+    "rule": "leftover_placeholder",
+    "severity": "warning"
+  },
+  {
+    "anchor": "b107",
+    "message": "blank to fill in: \"..........\"",
+    "rule": "leftover_placeholder",
+    "severity": "info"
+  }
+]
+
+## direct [{"anchor":"b106","find":"page","op":"replace_text","replace":"page  number"}]
+[
+  {
+    "anchor": "b106",
+    "message": "double space after \"This is page\"",
+    "rule": "double_space",
+    "severity": "info"
+  }
+]
+
+## direct [{"after":"b104","op":"insert_paragraph","style":"Heading3","text":"Deep heading"}]
+[
+  {
+    "anchor": "b108",
+    "message": "H3 follows H1; H2 is skipped",
+    "rule": "heading_order",
+    "severity": "warning"
+  }
+]
+
+## direct [{"anchor":"b102","find":"Introduction","op":"replace_text","replace":""}]
+[
+  {
+    "anchor": "b102",
+    "message": "empty paragraph left by an edit",
+    "rule": "empty_paragraph",
+    "severity": "info"
+  }
+]
+
+## track [{"anchor":"b105","op":"delete_block"}]
+[
+  {
+    "anchor": "b103",
+    "message": "REF ImportantClause points to b105, which is deleted with tracked changes",
+    "rule": "broken_ref",
+    "severity": "warning"
+  }
+]
+
+## lint
+§ lint: info empty_paragraph b102 — empty paragraph left by an edit
+§ lint: warning broken_ref b103 — REF ImportantClause points to b105, which is deleted with tracked changes
+§ lint: warning leftover_placeholder b107 — placeholder left in the text: "{name}"
+§ lint: warning leftover_placeholder b107 — placeholder left in the text: "[CLIENT NAME]"
+§ lint: info leftover_placeholder b107 — blank to fill in: ".........."
+§ lint: warning heading_order b108 — H3 follows H1; H2 is skipped
+§ lint: info double_space b106 — double space after "This is page"
+
+## direct [{"cell":"t1.r2.c1","op":"set_cell","text":"Fill  in {amount}"}]
+[
+  {
+    "anchor": "b103",
+    "message": "placeholder left in the text: \"{amount}\"",
+    "rule": "leftover_placeholder",
+    "severity": "warning"
+  },
+  {
+    "anchor": "b103",
+    "message": "double space after \"Fill\"",
+    "rule": "double_space",
+    "severity": "info"
+  }
+]
+
+## direct [{"after":"t1.r1","cells":["[NAME]",""],"op":"insert_row"}]
+[
+  {
+    "anchor": "b10f",
+    "message": "placeholder left in the text: \"[NAME]\"",
+    "rule": "leftover_placeholder",
+    "severity": "warning"
+  }
+]

@@ -1,0 +1,14 @@
+{
+  "spec_version": "0.1.0",
+  "ok": false,
+  "error": {
+    "code": "INVALID_OP",
+    "message": "width must be a number of centimetres or \"text-width\" or \"original\".",
+    "retryable": true,
+    "version": 42,
+    "op_index": 0,
+    "op": "insert_image",
+    "path": "/ops/0/width",
+    "usage": "insert_image {after|anchor+find?, asset, width?, alt|decorative:true}"
+  }
+}

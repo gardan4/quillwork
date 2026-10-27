@@ -1,0 +1,17 @@
+{
+  "name": "table",
+  "description": "Insert a table, or insert or delete rows, tracked. To change a cell's text use edit on its anchor (t2.r2.c3).",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "base_version": {"type": "integer"},
+      "label": {"type": ["string", "null"]},
+      "action": {"type": "string", "enum": ["insert_table", "insert_rows", "delete_row"]},
+      "anchor": {"type": "string", "description": "block to insert the table after, or a row (t2.r3)"},
+      "rows": {"type": ["array", "null"], "items": {"type": "array", "items": {"type": "string"}}, "description": "cell texts per row"},
+      "header_row": {"type": ["boolean", "null"]}
+    },
+    "required": ["base_version", "label", "action", "anchor", "rows", "header_row"],
+    "additionalProperties": false
+  }
+}

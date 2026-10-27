@@ -1,0 +1,54 @@
+{
+ "body": {
+  "accept": [
+   "Page one: first-page header and footer.",
+   "Page two: even-page header and footer.",
+   "Page three: default (odd) header and footer."
+  ],
+  "markup": [
+   "Page one: first-page header and footer.",
+   "Page two: even-page header and footer.",
+   "Page three: default (odd) header and footer."
+  ],
+  "reject": [
+   "Page one: first-page header and footer.",
+   "Page two: even-page header and footer.",
+   "Page three: default (odd) header and footer."
+  ]
+ },
+ "features": [
+  "header/footer default+first+even",
+  "titlePg",
+  "evenAndOddHeaders",
+  "PAGE fldSimple in footer"
+ ],
+ "fields": [
+  "PAGE \\* MERGEFORMAT",
+  "PAGE \\* MERGEFORMAT",
+  "PAGE \\* MERGEFORMAT"
+ ],
+ "fixture": "05-headers-footers.docx",
+ "pages": 3,
+ "paragraph_count": 3,
+ "stories": {
+  "word/footer1.xml": [
+   "Default footer, page 1"
+  ],
+  "word/footer2.xml": [
+   "First page footer, page 1"
+  ],
+  "word/footer3.xml": [
+   "Even page footer, page 1"
+  ],
+  "word/header1.xml": [
+   "Default header"
+  ],
+  "word/header2.xml": [
+   "First page header"
+  ],
+  "word/header3.xml": [
+   "Even page header"
+  ]
+ },
+ "valid": true
+}

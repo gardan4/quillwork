@@ -1,0 +1,12 @@
+{
+  "spec_version": "0.1.0",
+  "base_version": 42,
+  "ops": [
+    {
+      "op": "set_hyperlink",
+      "anchor": "b10f",
+      "find": "loonstrook",
+      "url": "https://www.example.org/loonstrook-uitleg"
+    }
+  ]
+}

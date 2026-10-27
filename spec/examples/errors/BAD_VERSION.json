@@ -1,0 +1,11 @@
+{
+  "spec_version": "0.1.0",
+  "ok": false,
+  "error": {
+    "code": "BAD_VERSION",
+    "message": "base_version 50 is newer than the document (v42).",
+    "retryable": true,
+    "version": 42,
+    "op_index": null
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "spec_version": "0.1.0",
+  "ok": true,
+  "base_version": 42,
+  "version": 43,
+  "change_set": null,
+  "changed": [
+    "[b10f] Werkgever betaalt het salaris aan werknemer uiterlijk op de laatste werkdag van de maand; werknemer ontvangt daarbij een digitale loonstrook."
+  ],
+  "removed": [],
+  "outline": null,
+  "patch": {
+    "spec_version": "0.1.0",
+    "base_version": 42,
+    "version": 43,
+    "removes": [],
+    "moves": [],
+    "upserts": [
+      {
+        "story": "b",
+        "after": "t1",
+        "block": {
+          "id": "b10f",
+          "kind": "p",
+          "section": "s1",
+          "style": "Normal",
+          "inlines": [
+            {
+              "t": "Werkgever betaalt het salaris aan werknemer uiterlijk op de laatste werkdag van de maand; werknemer ontvangt daarbij een digitale loonstrook."
+            }
+          ],
+          "fmt": {
+            "align": "both",
+            "spacing": {
+              "after": 120,
+              "line": 276,
+              "lineRule": "auto"
+            },
+            "font": "Calibri",
+            "size": 22
+          }
+        }
+      }
+    ],
+    "changeSets": []
+  },
+  "lint": [],
+  "warnings": []
+}

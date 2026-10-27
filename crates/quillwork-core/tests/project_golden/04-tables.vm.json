@@ -1,0 +1,719 @@
+{
+  "spec_version": "0.1.0",
+  "version": 1,
+  "meta": {
+    "title": "Tables",
+    "lang": "en-US",
+    "trackChanges": false,
+    "labels": [],
+    "pagesEstimate": 1,
+    "readOnly": null,
+    "flags": [],
+    "fonts": {
+      "Calibri": "Carlito"
+    }
+  },
+  "sections": [
+    {
+      "id": "s1",
+      "page": {
+        "w": 11906,
+        "h": 16838,
+        "margins": {
+          "top": 1440,
+          "right": 1440,
+          "bottom": 1440,
+          "left": 1440,
+          "header": 708,
+          "footer": 708
+        },
+        "cols": 1
+      },
+      "headers": {
+        "default": null,
+        "first": null,
+        "even": null
+      },
+      "footers": {
+        "default": null,
+        "first": null,
+        "even": null
+      },
+      "titlePage": false
+    }
+  ],
+  "blocks": [
+    {
+      "kind": "p",
+      "id": "b100",
+      "section": "s1",
+      "style": "Normal",
+      "styleName": "Normal",
+      "fmt": {
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Before the table."
+        }
+      ]
+    },
+    {
+      "kind": "table",
+      "id": "t1",
+      "section": "s1",
+      "style": "TableGrid",
+      "grid": [
+        3000,
+        3000,
+        3000
+      ],
+      "rows": [
+        {
+          "id": "t1.r1",
+          "cells": [
+            {
+              "id": "t1.r1.c1",
+              "span": 2,
+              "vmerge": null,
+              "width": 6000,
+              "borders": {
+                "top": {
+                  "style": "single",
+                  "size": 4
+                },
+                "right": {
+                  "style": "single",
+                  "size": 4
+                },
+                "bottom": {
+                  "style": "single",
+                  "size": 4
+                },
+                "left": {
+                  "style": "single",
+                  "size": 4
+                }
+              },
+              "blocks": [
+                {
+                  "kind": "p",
+                  "id": "b101",
+                  "style": "Normal",
+                  "styleName": "Normal",
+                  "fmt": {
+                    "spacing": {
+                      "after": 0,
+                      "line": 240,
+                      "lineRule": "auto"
+                    },
+                    "font": "Calibri",
+                    "size": 22
+                  },
+                  "inlines": [
+                    {
+                      "k": "text",
+                      "t": "A spans two columns"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "t1.r1.c2",
+              "span": 1,
+              "vmerge": null,
+              "width": 3000,
+              "borders": {
+                "top": {
+                  "style": "single",
+                  "size": 4
+                },
+                "right": {
+                  "style": "single",
+                  "size": 4
+                },
+                "bottom": {
+                  "style": "single",
+                  "size": 4
+                },
+                "left": {
+                  "style": "single",
+                  "size": 4
+                }
+              },
+              "blocks": [
+                {
+                  "kind": "p",
+                  "id": "b102",
+                  "style": "Normal",
+                  "styleName": "Normal",
+                  "fmt": {
+                    "spacing": {
+                      "after": 0,
+                      "line": 240,
+                      "lineRule": "auto"
+                    },
+                    "font": "Calibri",
+                    "size": 22
+                  },
+                  "inlines": [
+                    {
+                      "k": "text",
+                      "t": "C"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "t1.r2",
+          "cells": [
+            {
+              "id": "t1.r2.c1",
+              "span": 1,
+              "vmerge": "restart",
+              "width": 3000,
+              "borders": {
+                "top": {
+                  "style": "single",
+                  "size": 4
+                },
+                "right": {
+                  "style": "single",
+                  "size": 4
+                },
+                "bottom": {
+                  "style": "single",
+                  "size": 4
+                },
+                "left": {
+                  "style": "single",
+                  "size": 4
+                }
+              },
+              "blocks": [
+                {
+                  "kind": "p",
+                  "id": "b103",
+                  "style": "Normal",
+                  "styleName": "Normal",
+                  "fmt": {
+                    "spacing": {
+                      "after": 0,
+                      "line": 240,
+                      "lineRule": "auto"
+                    },
+                    "font": "Calibri",
+                    "size": 22
+                  },
+                  "inlines": [
+                    {
+                      "k": "text",
+                      "t": "D spans two rows"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "t1.r2.c2",
+              "span": 1,
+              "vmerge": null,
+              "width": 3000,
+              "borders": {
+                "top": {
+                  "style": "single",
+                  "size": 4
+                },
+                "right": {
+                  "style": "single",
+                  "size": 4
+                },
+                "bottom": {
+                  "style": "single",
+                  "size": 4
+                },
+                "left": {
+                  "style": "single",
+                  "size": 4
+                }
+              },
+              "blocks": [
+                {
+                  "kind": "p",
+                  "id": "b104",
+                  "style": "Normal",
+                  "styleName": "Normal",
+                  "fmt": {
+                    "spacing": {
+                      "after": 0,
+                      "line": 240,
+                      "lineRule": "auto"
+                    },
+                    "font": "Calibri",
+                    "size": 22
+                  },
+                  "inlines": [
+                    {
+                      "k": "text",
+                      "t": "E"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "t1.r2.c3",
+              "span": 1,
+              "vmerge": null,
+              "width": 3000,
+              "borders": {
+                "top": {
+                  "style": "single",
+                  "size": 4
+                },
+                "right": {
+                  "style": "single",
+                  "size": 4
+                },
+                "bottom": {
+                  "style": "single",
+                  "size": 4
+                },
+                "left": {
+                  "style": "single",
+                  "size": 4
+                }
+              },
+              "blocks": [
+                {
+                  "kind": "p",
+                  "id": "b105",
+                  "style": "Normal",
+                  "styleName": "Normal",
+                  "fmt": {
+                    "spacing": {
+                      "after": 0,
+                      "line": 240,
+                      "lineRule": "auto"
+                    },
+                    "font": "Calibri",
+                    "size": 22
+                  },
+                  "inlines": [
+                    {
+                      "k": "text",
+                      "t": "F"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "t1.r3",
+          "cells": [
+            {
+              "id": "t1.r3.c1",
+              "span": 1,
+              "vmerge": "continue",
+              "width": 3000,
+              "borders": {
+                "top": {
+                  "style": "single",
+                  "size": 4
+                },
+                "right": {
+                  "style": "single",
+                  "size": 4
+                },
+                "bottom": {
+                  "style": "single",
+                  "size": 4
+                },
+                "left": {
+                  "style": "single",
+                  "size": 4
+                }
+              },
+              "blocks": [
+                {
+                  "kind": "p",
+                  "id": "b106",
+                  "style": "Normal",
+                  "styleName": "Normal",
+                  "fmt": {
+                    "spacing": {
+                      "after": 0,
+                      "line": 240,
+                      "lineRule": "auto"
+                    },
+                    "font": "Calibri",
+                    "size": 22
+                  },
+                  "inlines": []
+                }
+              ]
+            },
+            {
+              "id": "t1.r3.c2",
+              "span": 1,
+              "vmerge": null,
+              "width": 3000,
+              "borders": {
+                "top": {
+                  "style": "single",
+                  "size": 4
+                },
+                "right": {
+                  "style": "single",
+                  "size": 4
+                },
+                "bottom": {
+                  "style": "single",
+                  "size": 4
+                },
+                "left": {
+                  "style": "single",
+                  "size": 4
+                }
+              },
+              "blocks": [
+                {
+                  "kind": "p",
+                  "id": "b107",
+                  "style": "Normal",
+                  "styleName": "Normal",
+                  "fmt": {
+                    "spacing": {
+                      "after": 0,
+                      "line": 240,
+                      "lineRule": "auto"
+                    },
+                    "font": "Calibri",
+                    "size": 22
+                  },
+                  "inlines": [
+                    {
+                      "k": "text",
+                      "t": "G"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "t1.r3.c3",
+              "span": 1,
+              "vmerge": null,
+              "width": 3000,
+              "borders": {
+                "top": {
+                  "style": "single",
+                  "size": 4
+                },
+                "right": {
+                  "style": "single",
+                  "size": 4
+                },
+                "bottom": {
+                  "style": "single",
+                  "size": 4
+                },
+                "left": {
+                  "style": "single",
+                  "size": 4
+                }
+              },
+              "blocks": [
+                {
+                  "kind": "p",
+                  "id": "b108",
+                  "style": "Normal",
+                  "styleName": "Normal",
+                  "fmt": {
+                    "spacing": {
+                      "after": 0,
+                      "line": 240,
+                      "lineRule": "auto"
+                    },
+                    "font": "Calibri",
+                    "size": 22
+                  },
+                  "inlines": [
+                    {
+                      "k": "text",
+                      "t": "H holds a nested table:"
+                    }
+                  ]
+                },
+                {
+                  "kind": "table",
+                  "id": "t2",
+                  "style": "TableGrid",
+                  "grid": [
+                    1300,
+                    1300
+                  ],
+                  "rows": [
+                    {
+                      "id": "t2.r1",
+                      "cells": [
+                        {
+                          "id": "t2.r1.c1",
+                          "span": 1,
+                          "vmerge": null,
+                          "width": 1300,
+                          "borders": {
+                            "top": {
+                              "style": "single",
+                              "size": 4
+                            },
+                            "right": {
+                              "style": "single",
+                              "size": 4
+                            },
+                            "bottom": {
+                              "style": "single",
+                              "size": 4
+                            },
+                            "left": {
+                              "style": "single",
+                              "size": 4
+                            }
+                          },
+                          "blocks": [
+                            {
+                              "kind": "p",
+                              "id": "b109",
+                              "style": "Normal",
+                              "styleName": "Normal",
+                              "fmt": {
+                                "spacing": {
+                                  "after": 0,
+                                  "line": 240,
+                                  "lineRule": "auto"
+                                },
+                                "font": "Calibri",
+                                "size": 22
+                              },
+                              "inlines": [
+                                {
+                                  "k": "text",
+                                  "t": "n11"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": "t2.r1.c2",
+                          "span": 1,
+                          "vmerge": null,
+                          "width": 1300,
+                          "borders": {
+                            "top": {
+                              "style": "single",
+                              "size": 4
+                            },
+                            "right": {
+                              "style": "single",
+                              "size": 4
+                            },
+                            "bottom": {
+                              "style": "single",
+                              "size": 4
+                            },
+                            "left": {
+                              "style": "single",
+                              "size": 4
+                            }
+                          },
+                          "blocks": [
+                            {
+                              "kind": "p",
+                              "id": "b10a",
+                              "style": "Normal",
+                              "styleName": "Normal",
+                              "fmt": {
+                                "spacing": {
+                                  "after": 0,
+                                  "line": 240,
+                                  "lineRule": "auto"
+                                },
+                                "font": "Calibri",
+                                "size": 22
+                              },
+                              "inlines": [
+                                {
+                                  "k": "text",
+                                  "t": "n12"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "t2.r2",
+                      "cells": [
+                        {
+                          "id": "t2.r2.c1",
+                          "span": 1,
+                          "vmerge": null,
+                          "width": 1300,
+                          "borders": {
+                            "top": {
+                              "style": "single",
+                              "size": 4
+                            },
+                            "right": {
+                              "style": "single",
+                              "size": 4
+                            },
+                            "bottom": {
+                              "style": "single",
+                              "size": 4
+                            },
+                            "left": {
+                              "style": "single",
+                              "size": 4
+                            }
+                          },
+                          "blocks": [
+                            {
+                              "kind": "p",
+                              "id": "b10b",
+                              "style": "Normal",
+                              "styleName": "Normal",
+                              "fmt": {
+                                "spacing": {
+                                  "after": 0,
+                                  "line": 240,
+                                  "lineRule": "auto"
+                                },
+                                "font": "Calibri",
+                                "size": 22
+                              },
+                              "inlines": [
+                                {
+                                  "k": "text",
+                                  "t": "n21"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": "t2.r2.c2",
+                          "span": 1,
+                          "vmerge": null,
+                          "width": 1300,
+                          "borders": {
+                            "top": {
+                              "style": "single",
+                              "size": 4
+                            },
+                            "right": {
+                              "style": "single",
+                              "size": 4
+                            },
+                            "bottom": {
+                              "style": "single",
+                              "size": 4
+                            },
+                            "left": {
+                              "style": "single",
+                              "size": 4
+                            }
+                          },
+                          "blocks": [
+                            {
+                              "kind": "p",
+                              "id": "b10c",
+                              "style": "Normal",
+                              "styleName": "Normal",
+                              "fmt": {
+                                "spacing": {
+                                  "after": 0,
+                                  "line": 240,
+                                  "lineRule": "auto"
+                                },
+                                "font": "Calibri",
+                                "size": 22
+                              },
+                              "inlines": [
+                                {
+                                  "k": "text",
+                                  "t": "n22"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "kind": "p",
+                  "id": "b10d",
+                  "style": "Normal",
+                  "styleName": "Normal",
+                  "fmt": {
+                    "spacing": {
+                      "after": 0,
+                      "line": 240,
+                      "lineRule": "auto"
+                    },
+                    "font": "Calibri",
+                    "size": 22
+                  },
+                  "inlines": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b10e",
+      "section": "s1",
+      "style": "Normal",
+      "styleName": "Normal",
+      "fmt": {
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "After the table."
+        }
+      ]
+    }
+  ],
+  "stories": {},
+  "comments": [],
+  "changeSets": [],
+  "assets": {}
+}

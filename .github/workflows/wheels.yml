@@ -1,0 +1,141 @@
+# Distributions for the two Python packages:
+# - `quillwork` (crates/quillwork-py): abi3 wheels for CPython 3.12+, manylinux_2_28 x86_64 and
+#   macOS arm64, plus an sdist (builds from source with a Rust toolchain);
+# - `quillwork-server` (python/quillwork_server): one pure-Python wheel and an sdist.
+# Every run uploads them as workflow artifacts named `py-quillwork-*` and `py-server`. A `v*` tag
+# push also attaches them to the GitHub Release of that tag (created when it doesn't exist).
+# This workflow publishes nothing; publish.yml calls it and uploads the artifacts to PyPI.
+# Actions are pinned to commit SHAs; the tag each SHA was taken from is in the trailing comment.
+name: wheels
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+  workflow_call:
+
+permissions:
+  contents: read
+
+concurrency:
+  # github.workflow is the caller's name when publish.yml calls this, so the two never cancel each other.
+  group: wheels-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  wheel:
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: linux-x86_64-manylinux_2_28
+            os: ubuntu-24.04
+            target: x86_64-unknown-linux-gnu
+            manylinux: "2_28"
+          - name: macos-arm64
+            os: macos-14
+            target: aarch64-apple-darwin
+            manylinux: auto # ignored on macOS
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Build wheel
+        uses: PyO3/maturin-action@e83996d129638aa358a18fbd1dfb82f0b0fb5d3b # v1.51.0
+        with:
+          maturin-version: "1.15.0"
+          target: ${{ matrix.target }}
+          manylinux: ${{ matrix.manylinux }}
+          args: --release --out dist -m crates/quillwork-py/Cargo.toml
+
+      - name: Wheel size
+        shell: bash
+        run: ls -l dist/
+
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: py-quillwork-${{ matrix.name }}
+          path: dist/*.whl
+          if-no-files-found: error
+
+  sdist:
+    name: quillwork sdist
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Build sdist
+        uses: PyO3/maturin-action@e83996d129638aa358a18fbd1dfb82f0b0fb5d3b # v1.51.0
+        with:
+          maturin-version: "1.15.0"
+          command: sdist
+          args: --out dist -m crates/quillwork-py/Cargo.toml
+
+      - name: Sdist contents
+        run: tar -tzf dist/*.tar.gz | sort
+
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: py-quillwork-sdist
+          path: dist/*.tar.gz
+          if-no-files-found: error
+
+  server:
+    name: quillwork-server
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
+        with:
+          version: "0.11.16"
+          enable-cache: false
+
+      - name: Build wheel and sdist
+        run: uv build python/quillwork_server --out-dir dist
+
+      - name: Contents
+        run: |
+          unzip -l dist/*.whl
+          tar -tzf dist/*.tar.gz | sort
+
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: py-server
+          path: |
+            dist/*.whl
+            dist/*.tar.gz
+          if-no-files-found: error
+
+  release:
+    name: attach to release
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+    needs: [wheel, sdist, server]
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          pattern: py-*
+          path: dist
+          merge-multiple: true
+
+      - name: Attach distributions
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          ls -l dist/
+          if ! gh release view "$TAG" >/dev/null 2>&1; then
+            gh release create "$TAG" --verify-tag --title "$TAG" --generate-notes
+          fi
+          gh release upload "$TAG" dist/* --clobber

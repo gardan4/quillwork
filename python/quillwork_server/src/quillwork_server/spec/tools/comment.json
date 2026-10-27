@@ -1,0 +1,17 @@
+{
+  "name": "comment",
+  "description": "Add a comment on a block or on text in it, or reply to, resolve, reopen or delete one.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "base_version": {"type": "integer"},
+      "action": {"type": "string", "enum": ["add", "reply", "resolve", "reopen", "delete"]},
+      "anchor": {"type": "string", "description": "block anchor for add, else the comment id (c5)"},
+      "find": {"type": ["string", "null"]},
+      "occurrence": {"type": ["integer", "null"]},
+      "text": {"type": ["string", "null"]}
+    },
+    "required": ["base_version", "action", "anchor", "find", "occurrence", "text"],
+    "additionalProperties": false
+  }
+}

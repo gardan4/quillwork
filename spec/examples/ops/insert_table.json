@@ -1,0 +1,28 @@
+{
+  "spec_version": "0.1.0",
+  "base_version": 42,
+  "label": "Tekenblok",
+  "ops": [
+    {
+      "op": "insert_table",
+      "after": "b10h",
+      "rows": 3,
+      "cols": 2,
+      "header_row": true,
+      "data": [
+        [
+          "Partij",
+          "Handtekening"
+        ],
+        [
+          "Werkgever",
+          ""
+        ],
+        [
+          "Werknemer",
+          ""
+        ]
+      ]
+    }
+  ]
+}

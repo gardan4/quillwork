@@ -1,0 +1,291 @@
+{
+  "spec_version": "0.1.0",
+  "version": 1,
+  "meta": {
+    "title": "Fields",
+    "lang": "en-US",
+    "trackChanges": false,
+    "labels": [],
+    "pagesEstimate": 1,
+    "readOnly": null,
+    "flags": [],
+    "fonts": {
+      "Calibri": "Carlito"
+    }
+  },
+  "sections": [
+    {
+      "id": "s1",
+      "page": {
+        "w": 11906,
+        "h": 16838,
+        "margins": {
+          "top": 1440,
+          "right": 1440,
+          "bottom": 1440,
+          "left": 1440,
+          "header": 708,
+          "footer": 708
+        },
+        "cols": 1
+      },
+      "headers": {
+        "default": null,
+        "first": null,
+        "even": null
+      },
+      "footers": {
+        "default": null,
+        "first": null,
+        "even": null
+      },
+      "titlePage": false
+    }
+  ],
+  "blocks": [
+    {
+      "kind": "p",
+      "id": "b100",
+      "section": "s1",
+      "style": "TOC1",
+      "styleName": "toc 1",
+      "fmt": {
+        "spacing": {
+          "after": 100,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Introduction",
+          "marks": {
+            "u": "single",
+            "color": "#0563C1"
+          },
+          "style": "Hyperlink",
+          "link": {
+            "bookmark": "_Toc100"
+          }
+        },
+        {
+          "k": "tab",
+          "link": {
+            "bookmark": "_Toc100"
+          }
+        },
+        {
+          "k": "field",
+          "t": "1",
+          "field": {
+            "type": "PAGEREF",
+            "instr": "PAGEREF _Toc100 \\h",
+            "editable": false
+          },
+          "link": {
+            "bookmark": "_Toc100"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b101",
+      "section": "s1",
+      "style": "TOC1",
+      "styleName": "toc 1",
+      "fmt": {
+        "spacing": {
+          "after": 100,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Details",
+          "marks": {
+            "u": "single",
+            "color": "#0563C1"
+          },
+          "style": "Hyperlink",
+          "link": {
+            "bookmark": "_Toc101"
+          }
+        },
+        {
+          "k": "tab",
+          "link": {
+            "bookmark": "_Toc101"
+          }
+        },
+        {
+          "k": "field",
+          "t": "1",
+          "field": {
+            "type": "PAGEREF",
+            "instr": "PAGEREF _Toc101 \\h",
+            "editable": false
+          },
+          "link": {
+            "bookmark": "_Toc101"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b102",
+      "section": "s1",
+      "style": "Heading1",
+      "styleName": "heading 1",
+      "heading": 1,
+      "fmt": {
+        "spacing": {
+          "before": 240,
+          "after": 0,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 32,
+        "b": true,
+        "keepNext": true
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Introduction"
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b103",
+      "section": "s1",
+      "style": "Normal",
+      "styleName": "Normal",
+      "fmt": {
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "See "
+        },
+        {
+          "k": "field",
+          "t": "the important clause",
+          "field": {
+            "type": "REF",
+            "instr": "REF ImportantClause \\h",
+            "editable": true
+          }
+        },
+        {
+          "k": "text",
+          "t": " below."
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b104",
+      "section": "s1",
+      "style": "Heading1",
+      "styleName": "heading 1",
+      "heading": 1,
+      "fmt": {
+        "spacing": {
+          "before": 240,
+          "after": 0,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 32,
+        "b": true,
+        "keepNext": true
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Details"
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b105",
+      "section": "s1",
+      "style": "Normal",
+      "styleName": "Normal",
+      "fmt": {
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Here is the important clause."
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b106",
+      "section": "s1",
+      "style": "Normal",
+      "styleName": "Normal",
+      "fmt": {
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "This is page "
+        },
+        {
+          "k": "field",
+          "t": "1",
+          "field": {
+            "type": "PAGE",
+            "instr": "PAGE",
+            "editable": false
+          }
+        },
+        {
+          "k": "text",
+          "t": "."
+        }
+      ]
+    }
+  ],
+  "stories": {},
+  "comments": [],
+  "changeSets": [],
+  "assets": {}
+}

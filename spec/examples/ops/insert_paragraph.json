@@ -1,0 +1,13 @@
+{
+  "spec_version": "0.1.0",
+  "base_version": 42,
+  "label": "Eindejaarsuitkering toegevoegd",
+  "ops": [
+    {
+      "op": "insert_paragraph",
+      "after": "b10f",
+      "text": "Werknemer heeft recht op een eindejaarsuitkering van 8,3% van het jaarsalaris.",
+      "style": "inherit"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+## {"op":"help"}
+§ read ops
+outline {}
+read {range?, mode?, budget?}
+find {query, regex?, story?, mode?}
+get_block {anchor}
+list_changes {change_set?, author?, status?}
+list_comments {open_only?}
+list_images {}
+get_image {image|asset}
+lint {}
+list_fields {}
+help {name?}
+§ edit ops
+replace_text {anchor, replace, find?, occurrence?, expect?}
+find_and_replace {find, replace, count, anchor?, expect?}
+insert_paragraph {after|before, text, style?, list?, expect?}
+delete_block {anchor, expect?}
+move_block {after|before, anchor, expect?}
+split_paragraph {anchor, at_text, occurrence?, expect?}
+merge_paragraphs {first, second, expect?}
+set_text_format {anchor, marks, find?, occurrence?, expect?}
+set_paragraph {anchor, style?, align?, indent?, spacing?, keep_with_next?, page_break_before?, expect?}
+insert_break {after, kind, section_type?, expect?}
+insert_footnote {anchor, find, text, occurrence?, endnote?, expect?} (not implemented)
+set_hyperlink {anchor, find, occurrence?, url?, bookmark?, remove?, expect?} (not implemented)
+insert_field {anchor, kind, find?, occurrence?, args?, expect?} (not implemented)
+set_list {anchor, list, level?, expect?}
+restart_numbering {anchor, start, expect?}
+change_level {delta|level, anchor, expect?}
+insert_table {after, rows, cols, header_row?, style?, data?, expect?}
+insert_row {after|before, cells?, expect?}
+delete_row {row, expect?}
+set_cell {cell, text, expect?}
+insert_column {table, at, cells?, confirm?, expect?}
+delete_column {table, column, confirm?, expect?}
+merge_cells {from, to, expect?}
+split_cell {cell, rows?, cols?, expect?}
+insert_image {asset, after?, anchor?, find?, occurrence?, width?, alt?, decorative?, wrap?, expect?} (not implemented)
+replace_image {image, asset, fit?, expect?} (not implemented)
+resize_image {image, width?, height?, scale?, expect?} (not implemented)
+set_alt_text {image, alt?, title?, decorative?, expect?} (not implemented)
+delete_image {image, expect?} (not implemented)
+anchor_image {image, wrap, align?, expect?} (not implemented)
+add_comment {anchor, text, find?, occurrence?, author?, expect?}
+reply_comment {comment, text, author?, expect?}
+edit_comment {comment, text, expect?}
+resolve_comment {comment, done, expect?}
+delete_comment {comment, expect?}
+accept {change_set|revision_ids|author|all, expect?}
+reject {change_set|revision_ids|author|all, expect?}
+compare {other, author?, expect?} (not implemented)
+fill {values, expect?} (not implemented)
+set_properties {properties, expect?} (not implemented)
+set_track_changes {on, expect?}
+
+## {"name":"list_changes","op":"help"}
+list_changes {change_set?, author?, status?}
+
+## {"name":"insert_field","op":"help"}
+insert_field {anchor, kind, find?, occurrence?, args?, expect?} (not implemented)
+

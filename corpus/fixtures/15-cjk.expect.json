@@ -1,0 +1,34 @@
+{
+ "body": {
+  "accept": [
+   "日本語の文章です。",
+   "这是中文段落。",
+   "한국어 문단입니다.",
+   "Mixed: 東京 is Tokyo."
+  ],
+  "markup": [
+   "日本語の文章です。",
+   "这是中文段落。",
+   "한국어 문단입니다.",
+   "Mixed: 東京 is Tokyo."
+  ],
+  "reject": [
+   "日本語の文章です。",
+   "这是中文段落。",
+   "한국어 문단입니다.",
+   "Mixed: 東京 is Tokyo."
+  ]
+ },
+ "features": [
+  "eastAsia fonts",
+  "eastAsia lang",
+  "Japanese",
+  "Chinese",
+  "Korean",
+  "mixed CJK/Latin"
+ ],
+ "fixture": "15-cjk.docx",
+ "pages": 1,
+ "paragraph_count": 4,
+ "valid": true
+}

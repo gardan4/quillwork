@@ -1,0 +1,244 @@
+{
+  "spec_version": "0.1.0",
+  "version": 1,
+  "meta": {
+    "title": "Headings",
+    "lang": "en-US",
+    "trackChanges": false,
+    "labels": [],
+    "pagesEstimate": 1,
+    "readOnly": null,
+    "flags": [],
+    "fonts": {
+      "Calibri": "Carlito"
+    }
+  },
+  "sections": [
+    {
+      "id": "s1",
+      "page": {
+        "w": 11906,
+        "h": 16838,
+        "margins": {
+          "top": 1440,
+          "right": 1440,
+          "bottom": 1440,
+          "left": 1440,
+          "header": 708,
+          "footer": 708
+        },
+        "cols": 1
+      },
+      "headers": {
+        "default": null,
+        "first": null,
+        "even": null
+      },
+      "footers": {
+        "default": null,
+        "first": null,
+        "even": null
+      },
+      "titlePage": false
+    }
+  ],
+  "blocks": [
+    {
+      "kind": "p",
+      "id": "b100",
+      "section": "s1",
+      "style": "Heading1",
+      "styleName": "heading 1",
+      "heading": 1,
+      "fmt": {
+        "spacing": {
+          "before": 240,
+          "after": 0,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 32,
+        "b": true,
+        "keepNext": true
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Document title"
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b101",
+      "section": "s1",
+      "style": "Normal",
+      "styleName": "Normal",
+      "fmt": {
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Intro text under heading one."
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b102",
+      "section": "s1",
+      "style": "Heading2",
+      "styleName": "heading 2",
+      "heading": 2,
+      "fmt": {
+        "spacing": {
+          "before": 240,
+          "after": 0,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 28,
+        "b": true,
+        "keepNext": true
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Section 1.1"
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b103",
+      "section": "s1",
+      "style": "Normal",
+      "styleName": "Normal",
+      "fmt": {
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Text under heading two."
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b104",
+      "section": "s1",
+      "style": "Heading3",
+      "styleName": "heading 3",
+      "heading": 3,
+      "fmt": {
+        "spacing": {
+          "before": 240,
+          "after": 0,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 24,
+        "b": true,
+        "keepNext": true
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Section 1.1.1"
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b105",
+      "section": "s1",
+      "style": "Normal",
+      "styleName": "Normal",
+      "fmt": {
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Text under heading three."
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b106",
+      "section": "s1",
+      "style": "Normal",
+      "styleName": "Normal",
+      "heading": 2,
+      "fmt": {
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Direct outline level 1 on a Normal paragraph"
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b107",
+      "section": "s1",
+      "style": "Heading1",
+      "styleName": "heading 1",
+      "heading": 1,
+      "fmt": {
+        "spacing": {
+          "before": 240,
+          "after": 0,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 32,
+        "b": true,
+        "keepNext": true
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Second chapter"
+        }
+      ]
+    }
+  ],
+  "stories": {},
+  "comments": [],
+  "changeSets": [],
+  "assets": {}
+}

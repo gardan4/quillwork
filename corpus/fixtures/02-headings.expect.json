@@ -1,0 +1,63 @@
+{
+ "body": {
+  "accept": [
+   "Document title",
+   "Intro text under heading one.",
+   "Section 1.1",
+   "Text under heading two.",
+   "Section 1.1.1",
+   "Text under heading three.",
+   "Direct outline level 1 on a Normal paragraph",
+   "Second chapter"
+  ],
+  "markup": [
+   "Document title",
+   "Intro text under heading one.",
+   "Section 1.1",
+   "Text under heading two.",
+   "Section 1.1.1",
+   "Text under heading three.",
+   "Direct outline level 1 on a Normal paragraph",
+   "Second chapter"
+  ],
+  "reject": [
+   "Document title",
+   "Intro text under heading one.",
+   "Section 1.1",
+   "Text under heading two.",
+   "Section 1.1.1",
+   "Text under heading three.",
+   "Direct outline level 1 on a Normal paragraph",
+   "Second chapter"
+  ]
+ },
+ "features": [
+  "heading styles 1-3",
+  "outlineLvl in style",
+  "direct outlineLvl"
+ ],
+ "fixture": "02-headings.docx",
+ "outline_levels": [
+  0,
+  null,
+  1,
+  null,
+  2,
+  null,
+  1,
+  0
+ ],
+ "pages": 1,
+ "paragraph_count": 8,
+ "styles": [
+  "Heading1",
+  null,
+  "Heading2",
+  null,
+  "Heading3",
+  null,
+  null,
+  "Heading1"
+ ],
+ "valid": true
+}

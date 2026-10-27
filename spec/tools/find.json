@@ -1,0 +1,13 @@
+{
+  "name": "find",
+  "description": "Search every story; returns the matching lines with their anchors.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "query": {"type": "string"},
+      "regex": {"type": ["boolean", "null"]}
+    },
+    "required": ["query", "regex"],
+    "additionalProperties": false
+  }
+}

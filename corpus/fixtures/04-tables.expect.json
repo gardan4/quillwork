@@ -1,0 +1,67 @@
+{
+ "body": {
+  "accept": [
+   "Before the table.",
+   "A spans two columns",
+   "C",
+   "D spans two rows",
+   "E",
+   "F",
+   "",
+   "G",
+   "H holds a nested table:",
+   "n11",
+   "n12",
+   "n21",
+   "n22",
+   "",
+   "After the table."
+  ],
+  "markup": [
+   "Before the table.",
+   "A spans two columns",
+   "C",
+   "D spans two rows",
+   "E",
+   "F",
+   "",
+   "G",
+   "H holds a nested table:",
+   "n11",
+   "n12",
+   "n21",
+   "n22",
+   "",
+   "After the table."
+  ],
+  "reject": [
+   "Before the table.",
+   "A spans two columns",
+   "C",
+   "D spans two rows",
+   "E",
+   "F",
+   "",
+   "G",
+   "H holds a nested table:",
+   "n11",
+   "n12",
+   "n21",
+   "n22",
+   "",
+   "After the table."
+  ]
+ },
+ "features": [
+  "table",
+  "gridSpan",
+  "vMerge restart/continue",
+  "nested table",
+  "cell ending in empty p"
+ ],
+ "fixture": "04-tables.docx",
+ "pages": 1,
+ "paragraph_count": 15,
+ "tables": 2,
+ "valid": true
+}

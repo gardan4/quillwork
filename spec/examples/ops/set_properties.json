@@ -1,0 +1,13 @@
+{
+  "spec_version": "0.1.0",
+  "base_version": 42,
+  "ops": [
+    {
+      "op": "set_properties",
+      "properties": {
+        "title": "Arbeidsovereenkomst voor bepaalde tijd — P. Bakker",
+        "creator": "Lindehof Kinderopvang B.V."
+      }
+    }
+  ]
+}

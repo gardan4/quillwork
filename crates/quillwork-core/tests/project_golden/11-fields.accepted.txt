@@ -1,0 +1,12 @@
+§ doc "Fields" · v1 · 1 page (est.) · en-US · tracked changes: off · 0 open comments · 0 open revisions · view: accepted
+§ outline: [b102] Introduction · [b104] Details
+§ window b100..b106 (blocks 1–7 of 7)
+
+[b100 TOC] ⟪TOC \o "1-3" \h \z \u → 2 entries⟫
+[b102 H1] Introduction
+[b103] See ⟪REF ImportantClause \h → "the important clause"⟫ below.
+[b104 H1] Details
+[b105] Here is the important clause.
+[b106] This is page ⟪PAGE → "1"⟫.
+
+§ refs: REF ImportantClause in b103 → b105 "the important clause"

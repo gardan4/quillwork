@@ -1,0 +1,12 @@
+{
+  "spec_version": "0.1.0",
+  "base_version": 42,
+  "ops": [
+    {
+      "op": "insert_footnote",
+      "anchor": "b10f",
+      "find": "laatste werkdag",
+      "text": "Zie de cao Kinderopvang voor de definitie van werkdag."
+    }
+  ]
+}

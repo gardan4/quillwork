@@ -1,0 +1,130 @@
+## {"op":"list_changes"}
+{
+  "change_sets": [],
+  "revisions": []
+}
+
+## {"op":"list_comments"}
+{
+  "comments": []
+}
+
+## {"op":"list_images"}
+{
+  "images": [
+    {
+      "alt": "A small gradient square",
+      "asset": "a_bc9854f99dbe38c1",
+      "crop": null,
+      "decorative": false,
+      "drawing": "picture",
+      "h": 914400,
+      "id": "img1",
+      "media": {
+        "bytes": 463,
+        "mime": "image/png",
+        "px": [
+          16,
+          16
+        ]
+      },
+      "para": "b100",
+      "rotation": 0,
+      "story": "b",
+      "w": 914400,
+      "wrap": "inline"
+    },
+    {
+      "alt": "An orange square floating right",
+      "asset": "a_a1d36585d17e7e40",
+      "crop": null,
+      "decorative": false,
+      "drawing": "picture",
+      "h": 914400,
+      "id": "img2",
+      "media": {
+        "bytes": 177,
+        "mime": "image/png",
+        "px": [
+          16,
+          16
+        ]
+      },
+      "para": "b101",
+      "rotation": 0,
+      "story": "b",
+      "w": 914400,
+      "wrap": "square"
+    }
+  ]
+}
+
+## {"op":"list_fields"}
+{
+  "controls": [],
+  "placeholders": []
+}
+
+## {"op":"lint"}
+§ lint: none
+
+## {"anchor":"b100","op":"get_block"}
+{
+  "block": {
+    "fmt": {
+      "font": "Calibri",
+      "size": 22,
+      "spacing": {
+        "after": 160,
+        "line": 259,
+        "lineRule": "auto"
+      }
+    },
+    "id": "b100",
+    "inlines": [
+      {
+        "k": "text",
+        "t": "An inline picture: "
+      },
+      {
+        "image": {
+          "alt": "A small gradient square",
+          "asset": "a_bc9854f99dbe38c1",
+          "crop": null,
+          "decorative": false,
+          "drawing": "picture",
+          "h": 914400,
+          "id": "img1",
+          "rotation": 0,
+          "w": 914400,
+          "wrap": "inline"
+        },
+        "k": "image"
+      },
+      {
+        "k": "text",
+        "t": " sits in the text."
+      }
+    ],
+    "kind": "p",
+    "section": "s1",
+    "style": "Normal",
+    "styleName": "Normal"
+  },
+  "story": "b"
+}
+
+## {"image":"img1","op":"get_image"}
+{
+  "asset": "a_bc9854f99dbe38c1",
+  "base64": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAB… (620 chars)",
+  "bytes": 463,
+  "image": "img1",
+  "mime": "image/png",
+  "needs_conversion": false,
+  "px": [
+    16,
+    16
+  ]
+}
+

@@ -1,0 +1,8 @@
+{
+  "spec_version": "0.1.0",
+  "ok": true,
+  "version": 42,
+  "text": "[b105 H2 #1] Functie en arbeidsduur\n[b106] Werknemer treedt op ⟪CTL tag=\"startdatum\" → \"1 maart 2027\"⟫ in dienst als pedagogisch medewerker{>>c1<<} voor {--40--}{++38++}⟨r12,13 AI⟩ uur per week.\n[b107 H2 #2] Salaris\n[b108] Het salaris bedraagt bij aanvang:",
+  "data": null,
+  "next": "t1.."
+}

@@ -1,0 +1,23 @@
+{
+ "body": {
+  "accept": [
+   "A macro-enabled document. The VBA project is a dummy and must be preserved, never run."
+  ],
+  "markup": [
+   "A macro-enabled document. The VBA project is a dummy and must be preserved, never run."
+  ],
+  "reject": [
+   "A macro-enabled document. The VBA project is a dummy and must be preserved, never run."
+  ]
+ },
+ "features": [
+  ".docm",
+  "macroEnabled main content type",
+  "vbaProject.bin (dummy)"
+ ],
+ "fixture": "17-macro.docm",
+ "macros": true,
+ "pages": 1,
+ "paragraph_count": 1,
+ "valid": true
+}

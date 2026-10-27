@@ -1,0 +1,24 @@
+{
+  "spec_version": "0.1.0",
+  "ok": false,
+  "error": {
+    "code": "NOT_FOUND",
+    "message": "\"36 uur\" is not in b106.",
+    "retryable": true,
+    "version": 42,
+    "op_index": 0,
+    "op": "replace_text",
+    "anchor": "b106",
+    "what": "text",
+    "current": [
+      "[b106] Werknemer treedt op ⟪CTL tag=\"startdatum\" → \"1 maart 2027\"⟫ in dienst als pedagogisch medewerker{>>c1<<} voor {--40--}{++38++}⟨r12,13 AI⟩ uur per week."
+    ],
+    "candidates": [
+      {
+        "anchor": "b106",
+        "occurrence": null,
+        "context": "…voor 38 uur per week."
+      }
+    ]
+  }
+}

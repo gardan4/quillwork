@@ -1,0 +1,7 @@
+{
+  "base_version": 42,
+  "action": "accept",
+  "targets": [
+    "cs_7"
+  ]
+}

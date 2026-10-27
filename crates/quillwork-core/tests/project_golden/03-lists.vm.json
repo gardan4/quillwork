@@ -1,0 +1,489 @@
+{
+  "spec_version": "0.1.0",
+  "version": 1,
+  "meta": {
+    "title": "Lists",
+    "lang": "en-US",
+    "trackChanges": false,
+    "labels": [],
+    "pagesEstimate": 1,
+    "readOnly": null,
+    "flags": [],
+    "fonts": {
+      "Calibri": "Carlito"
+    }
+  },
+  "sections": [
+    {
+      "id": "s1",
+      "page": {
+        "w": 11906,
+        "h": 16838,
+        "margins": {
+          "top": 1440,
+          "right": 1440,
+          "bottom": 1440,
+          "left": 1440,
+          "header": 708,
+          "footer": 708
+        },
+        "cols": 1
+      },
+      "headers": {
+        "default": null,
+        "first": null,
+        "even": null
+      },
+      "footers": {
+        "default": null,
+        "first": null,
+        "even": null
+      },
+      "titlePage": false
+    }
+  ],
+  "blocks": [
+    {
+      "kind": "p",
+      "id": "b100",
+      "section": "s1",
+      "style": "Normal",
+      "styleName": "Normal",
+      "fmt": {
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Numbered list:"
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b101",
+      "section": "s1",
+      "style": "ListParagraph",
+      "styleName": "List Paragraph",
+      "list": {
+        "label": "1.",
+        "level": 0,
+        "numId": 1
+      },
+      "fmt": {
+        "indent": {
+          "left": 720,
+          "hanging": 360
+        },
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "First item"
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b102",
+      "section": "s1",
+      "style": "ListParagraph",
+      "styleName": "List Paragraph",
+      "list": {
+        "label": "2.",
+        "level": 0,
+        "numId": 1
+      },
+      "fmt": {
+        "indent": {
+          "left": 720,
+          "hanging": 360
+        },
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Second item"
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b103",
+      "section": "s1",
+      "style": "ListParagraph",
+      "styleName": "List Paragraph",
+      "list": {
+        "label": "2.a.",
+        "level": 1,
+        "numId": 1
+      },
+      "fmt": {
+        "indent": {
+          "left": 1440,
+          "hanging": 360
+        },
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Sub item a"
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b104",
+      "section": "s1",
+      "style": "ListParagraph",
+      "styleName": "List Paragraph",
+      "list": {
+        "label": "2.b.",
+        "level": 1,
+        "numId": 1
+      },
+      "fmt": {
+        "indent": {
+          "left": 1440,
+          "hanging": 360
+        },
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Sub item b"
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b105",
+      "section": "s1",
+      "style": "ListParagraph",
+      "styleName": "List Paragraph",
+      "list": {
+        "label": "i)",
+        "level": 2,
+        "numId": 1
+      },
+      "fmt": {
+        "indent": {
+          "left": 2160,
+          "hanging": 360
+        },
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Sub-sub item i"
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b106",
+      "section": "s1",
+      "style": "ListParagraph",
+      "styleName": "List Paragraph",
+      "list": {
+        "label": "3.",
+        "level": 0,
+        "numId": 1
+      },
+      "fmt": {
+        "indent": {
+          "left": 720,
+          "hanging": 360
+        },
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Third item"
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b107",
+      "section": "s1",
+      "style": "Normal",
+      "styleName": "Normal",
+      "fmt": {
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Bulleted list:"
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b108",
+      "section": "s1",
+      "style": "ListParagraph",
+      "styleName": "List Paragraph",
+      "list": {
+        "label": "•",
+        "level": 0,
+        "numId": 2
+      },
+      "fmt": {
+        "indent": {
+          "left": 720,
+          "hanging": 360
+        },
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Bullet one"
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b109",
+      "section": "s1",
+      "style": "ListParagraph",
+      "styleName": "List Paragraph",
+      "list": {
+        "label": "◦",
+        "level": 1,
+        "numId": 2
+      },
+      "fmt": {
+        "indent": {
+          "left": 1440,
+          "hanging": 360
+        },
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Nested bullet"
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b10a",
+      "section": "s1",
+      "style": "ListParagraph",
+      "styleName": "List Paragraph",
+      "list": {
+        "label": "▪",
+        "level": 2,
+        "numId": 2
+      },
+      "fmt": {
+        "indent": {
+          "left": 2160,
+          "hanging": 360
+        },
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Deeper bullet"
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b10b",
+      "section": "s1",
+      "style": "ListParagraph",
+      "styleName": "List Paragraph",
+      "list": {
+        "label": "•",
+        "level": 0,
+        "numId": 2
+      },
+      "fmt": {
+        "indent": {
+          "left": 720,
+          "hanging": 360
+        },
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Bullet two"
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b10c",
+      "section": "s1",
+      "style": "Normal",
+      "styleName": "Normal",
+      "fmt": {
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Restarted numbering:"
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b10d",
+      "section": "s1",
+      "style": "ListParagraph",
+      "styleName": "List Paragraph",
+      "list": {
+        "label": "1.",
+        "level": 0,
+        "numId": 3
+      },
+      "fmt": {
+        "indent": {
+          "left": 720,
+          "hanging": 360
+        },
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Restart one"
+        }
+      ]
+    },
+    {
+      "kind": "p",
+      "id": "b10e",
+      "section": "s1",
+      "style": "ListParagraph",
+      "styleName": "List Paragraph",
+      "list": {
+        "label": "2.",
+        "level": 0,
+        "numId": 3
+      },
+      "fmt": {
+        "indent": {
+          "left": 720,
+          "hanging": 360
+        },
+        "spacing": {
+          "after": 160,
+          "line": 259,
+          "lineRule": "auto"
+        },
+        "font": "Calibri",
+        "size": 22
+      },
+      "inlines": [
+        {
+          "k": "text",
+          "t": "Restart two"
+        }
+      ]
+    }
+  ],
+  "stories": {},
+  "comments": [],
+  "changeSets": [],
+  "assets": {}
+}

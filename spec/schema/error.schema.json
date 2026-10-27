@@ -1,0 +1,447 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://quillwork.example/spec/v0/error.schema.json",
+  "title": "Quillwork error response",
+  "description": "Returned instead of a result when a request fails. A failed transaction changes nothing. Errors carry what the agent needs to retry without a separate read (spec/errors.md).",
+  "type": "object",
+  "properties": {
+    "spec_version": {
+      "$ref": "common.schema.json#/$defs/SpecVersion"
+    },
+    "ok": {
+      "const": false
+    },
+    "error": {
+      "$ref": "#/$defs/Error"
+    }
+  },
+  "required": [
+    "spec_version",
+    "ok",
+    "error"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "Code": {
+      "type": "string",
+      "enum": [
+        "STALE_ANCHOR",
+        "AMBIGUOUS",
+        "NOT_FOUND",
+        "IN_FIELD",
+        "INVALID_OP",
+        "UNSUPPORTED",
+        "CONFIRM_REQUIRED",
+        "PROTECTED",
+        "LIMIT",
+        "BAD_VERSION",
+        "CONFLICT",
+        "BAD_PACKAGE",
+        "INVARIANT",
+        "INTERNAL"
+      ]
+    },
+    "Candidate": {
+      "type": "object",
+      "properties": {
+        "anchor": {
+          "$ref": "common.schema.json#/$defs/Anchor"
+        },
+        "occurrence": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "description": "1-based occurrence of find in that block; null for whole-block suggestions."
+        },
+        "context": {
+          "type": "string",
+          "description": "The match with up to 30 characters either side, … where cut."
+        }
+      },
+      "required": [
+        "anchor",
+        "occurrence",
+        "context"
+      ],
+      "additionalProperties": false
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "$ref": "#/$defs/Code"
+        },
+        "message": {
+          "type": "string",
+          "description": "One short English sentence for the agent and the logs."
+        },
+        "retryable": {
+          "type": "boolean",
+          "description": "Retrying with corrected arguments (or, for CONFLICT, unchanged after a pause) can succeed."
+        },
+        "version": {
+          "$ref": "common.schema.json#/$defs/Version",
+          "description": "The document's current version: use it as base_version on the retry."
+        },
+        "op_index": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "description": "0-based index of the failing op in the transaction."
+        },
+        "op": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Name of the failing op."
+        },
+        "anchor": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "current": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "common.schema.json#/$defs/ProjectionLine"
+          },
+          "description": "Fresh projection lines of the target block (a table's lines for a row or cell), at version."
+        },
+        "candidates": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/$defs/Candidate"
+          },
+          "maxItems": 20
+        },
+        "what": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "anchor",
+            "text",
+            "comment",
+            "change_set",
+            "revision",
+            "asset",
+            "style",
+            "op",
+            "field",
+            "part",
+            null
+          ],
+          "description": "For NOT_FOUND: what was missing."
+        },
+        "reason": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "signed",
+            "encrypted",
+            "irm",
+            "strict",
+            "document_protection",
+            "locked_control",
+            "track_only",
+            "direct_only",
+            "preserve_only",
+            "field_result",
+            "beta",
+            "not_implemented",
+            "unsupported_target",
+            "merged_cells",
+            "nested_table",
+            "no_grid",
+            "unaligned_cells",
+            "uneven_split",
+            null
+          ],
+          "description": "For PROTECTED, UNSUPPORTED, CONFIRM_REQUIRED and IN_FIELD. beta: the op is marked beta in track mode and needs confirm: true. not_implemented: the op is in the catalogue but this engine build does not implement it yet. unsupported_target: the anchor names something the op can't act on (a header comment, an image outside a paragraph). merged_cells, nested_table, no_grid, unaligned_cells, uneven_split: table edits whose target table shape Word can't take the change on."
+        },
+        "limit": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "name": {
+              "type": "string",
+              "enum": [
+                "ops_per_transaction",
+                "text_chars",
+                "table_cells",
+                "image_pixels",
+                "image_bytes",
+                "zip_entries",
+                "uncompressed_bytes",
+                "compression_ratio",
+                "xml_depth",
+                "text_node_bytes",
+                "timeout_ms"
+              ]
+            },
+            "max": {
+              "type": "integer"
+            },
+            "actual": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "name",
+            "max",
+            "actual"
+          ],
+          "additionalProperties": false
+        },
+        "path": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "For INVALID_OP: JSON Pointer to the offending argument."
+        },
+        "usage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "For INVALID_OP: the op's one-line signature, as advanced_op help prints it."
+        },
+        "invariant": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "For INVARIANT: which invariant (DESIGN §10) would have broken."
+        }
+      },
+      "required": [
+        "code",
+        "message",
+        "retryable",
+        "version",
+        "op_index"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "code": {
+                "const": "STALE_ANCHOR"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "anchor",
+              "current"
+            ],
+            "properties": {
+              "anchor": {
+                "type": "string"
+              },
+              "current": {
+                "type": "array",
+                "minItems": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "code": {
+                "const": "AMBIGUOUS"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "anchor",
+              "candidates"
+            ],
+            "properties": {
+              "candidates": {
+                "type": "array",
+                "minItems": 2
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "code": {
+                "const": "NOT_FOUND"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "what"
+            ],
+            "properties": {
+              "what": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "code": {
+                "const": "IN_FIELD"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "anchor",
+              "current"
+            ],
+            "properties": {
+              "current": {
+                "type": "array",
+                "minItems": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "code": {
+                "const": "INVALID_OP"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "path",
+              "usage"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "code": {
+                "enum": [
+                  "PROTECTED",
+                  "UNSUPPORTED",
+                  "CONFIRM_REQUIRED"
+                ]
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "reason"
+            ],
+            "properties": {
+              "reason": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "code": {
+                "const": "LIMIT"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "limit"
+            ],
+            "properties": {
+              "limit": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "code": {
+                "const": "INVARIANT"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "invariant"
+            ],
+            "properties": {
+              "invariant": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "code": {
+                "enum": [
+                  "CONFLICT",
+                  "INTERNAL"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "retryable": {
+                "const": true
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "code": {
+                "enum": [
+                  "INVARIANT",
+                  "BAD_PACKAGE",
+                  "PROTECTED"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "retryable": {
+                "const": false
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

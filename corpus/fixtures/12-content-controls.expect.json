@@ -1,0 +1,33 @@
+{
+ "body": {
+  "accept": [
+   "Acme B.V.",
+   "Start date: 1-2-2026",
+   "Contract type: Full-time",
+   "☐ Agreed"
+  ],
+  "markup": [
+   "Acme B.V.",
+   "Start date: 1-2-2026",
+   "Contract type: Full-time",
+   "☐ Agreed"
+  ],
+  "reject": [
+   "Acme B.V.",
+   "Start date: 1-2-2026",
+   "Contract type: Full-time",
+   "☐ Agreed"
+  ]
+ },
+ "features": [
+  "block sdt (plain text)",
+  "inline sdt date",
+  "dropdown",
+  "w14:checkbox"
+ ],
+ "fixture": "12-content-controls.docx",
+ "pages": 1,
+ "paragraph_count": 4,
+ "sdt": 4,
+ "valid": true
+}

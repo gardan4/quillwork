@@ -1,0 +1,11 @@
+{
+  "spec_version": "0.1.0",
+  "ok": false,
+  "error": {
+    "code": "INTERNAL",
+    "message": "Unexpected engine error; the transaction was rolled back.",
+    "retryable": true,
+    "version": 42,
+    "op_index": null
+  }
+}

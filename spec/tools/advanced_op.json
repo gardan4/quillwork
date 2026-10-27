@@ -1,0 +1,14 @@
+{
+  "name": "advanced_op",
+  "description": "Run any other catalogue op: images, breaks, footnotes, links, fields, fill, properties, get_block, list_changes, lint... op 'help' lists them with their args.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "op": {"type": "string"},
+      "args": {"type": "string", "description": "JSON object of the op's args"},
+      "base_version": {"type": ["integer", "null"], "description": "required for ops that change the document"}
+    },
+    "required": ["op", "args", "base_version"],
+    "additionalProperties": false
+  }
+}

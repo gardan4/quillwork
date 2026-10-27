@@ -1,0 +1,37 @@
+{
+ "alternate_content": 1,
+ "body": {
+  "accept": [
+   "The paragraph that anchors a text box.",
+   "Another paragraph."
+  ],
+  "markup": [
+   "The paragraph that anchors a text box.",
+   "Another paragraph."
+  ],
+  "reject": [
+   "The paragraph that anchors a text box.",
+   "Another paragraph."
+  ]
+ },
+ "features": [
+  "mc:AlternateContent",
+  "wps text box (Choice)",
+  "VML v:textbox (Fallback)",
+  "w:txbxContent"
+ ],
+ "fixture": "10-textbox.docx",
+ "images": {
+  "anchor": 1,
+  "inline": 0,
+  "pictures": 0
+ },
+ "pages": 1,
+ "paragraph_count": 2,
+ "stories": {
+  "word/document.xml#textbox": [
+   "Text inside the box."
+  ]
+ },
+ "valid": true
+}

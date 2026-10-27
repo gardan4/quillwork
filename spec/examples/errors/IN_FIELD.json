@@ -1,0 +1,17 @@
+{
+  "spec_version": "0.1.0",
+  "ok": false,
+  "error": {
+    "code": "IN_FIELD",
+    "message": "\"1 februari 2027\" is a field result in b10h; edit the field or insert a new one.",
+    "retryable": true,
+    "version": 42,
+    "op_index": 0,
+    "op": "replace_text",
+    "anchor": "b10h",
+    "reason": "field_result",
+    "current": [
+      "[b10h] Aldus overeengekomen te Utrecht op ⟪DATE \\@ \"d MMMM yyyy\" → \"1 februari 2027\"⟫, met inachtneming van artikel ⟪REF _Ref4711 \\r \\h → \"1\"⟫."
+    ]
+  }
+}

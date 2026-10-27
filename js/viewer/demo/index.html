@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Quillwork viewer demo</title>
+    <style>
+      body { margin: 0; font: 13px system-ui, sans-serif; background: #f3f3f1; color: #1f1f1d; }
+      header { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 10px 16px; border-bottom: 1px solid #dcdcd6; background: #fff; position: sticky; top: 0; z-index: 20; }
+      header button, header select, header input { font: inherit; padding: 3px 10px; }
+      #status { color: #6b6b66; margin-left: auto; }
+      #log { font: 12px ui-monospace, monospace; white-space: pre-wrap; padding: 8px 16px; max-height: 140px; overflow: auto; border-top: 1px solid #dcdcd6; background: #fff; position: sticky; bottom: 0; }
+      @media (prefers-color-scheme: dark) { body, header, #log { background: #161615; color: #e6e6e1; border-color: #3a3a37; } }
+    </style>
+  </head>
+  <body>
+    <header>
+      <strong>Quillwork viewer</strong>
+      <button id="patch">Apply patch 41 → 42</button>
+      <button id="accept">Apply accept 42 → 43</button>
+      <button id="stale">Apply a stale patch</button>
+      <button id="reset">Reload v41</button>
+      <select id="theme" aria-label="Theme"><option>auto</option><option>light</option><option>dark</option></select>
+      <input id="hl" placeholder="highlight: b105..b107" aria-label="Highlight anchor" />
+      <span id="status"></span>
+    </header>
+    <div id="viewer"></div>
+    <div id="log" aria-live="polite"></div>
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

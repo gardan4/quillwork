@@ -1,0 +1,20 @@
+target/
+node_modules/
+.venv/
+__pycache__/
+*.pyc
+dist/
+/out/
+# Real client documents never live in this repo: see corpus/README.md
+/private-corpus/
+js/viewer/node_modules
+
+# OS and tool caches
+.DS_Store
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+
+# example outputs
+sample-contract.docx
+*.edited.docx
