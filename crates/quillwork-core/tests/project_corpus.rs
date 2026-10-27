@@ -84,22 +84,23 @@ fn validator(file: &str) -> jsonschema::Validator {
     let load = |f: &str| -> Value {
         serde_json::from_slice(&std::fs::read(schema_dir().join(f)).expect("schema")).expect("json")
     };
-    let mut o = jsonschema::options();
+    let mut registry = jsonschema::Registry::new();
     for f in ["common.schema.json", "view-model.schema.json", "patch.schema.json"] {
         let s = load(f);
         let id = s["$id"].as_str().expect("$id").to_owned();
-        o = o.with_resource(id, jsonschema::Resource::from_contents(s).expect("resource"));
+        registry = registry.add(id, s).expect("resource");
     }
-    o.build(&load(file)).expect("schema compiles")
+    let registry = registry.prepare().expect("registry");
+    jsonschema::options().with_registry(&registry).build(&load(file)).expect("schema compiles")
 }
 
 fn schema_errors(v: &jsonschema::Validator, json: &Value) -> Vec<String> {
-    v.iter_errors(json).take(5).map(|e| format!("{} at {}", e, e.instance_path)).collect()
+    v.iter_errors(json).take(5).map(|e| format!("{} at {}", e, e.instance_path())).collect()
 }
 
 /// Schema errors without the offending values (safe to print for private documents).
 fn schema_paths(v: &jsonschema::Validator, json: &Value) -> Vec<String> {
-    v.iter_errors(json).take(5).map(|e| format!("{} (schema {})", e.instance_path, e.schema_path)).collect()
+    v.iter_errors(json).take(5).map(|e| format!("{} (schema {})", e.instance_path(), e.schema_path())).collect()
 }
 
 // ------------------------------------------------------------------------------ goldens
