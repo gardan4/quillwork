@@ -7,6 +7,9 @@ name = "quillwork"
 description = "Lossless, AI-friendly editing of Word (.docx) documents"
 requires-python = ">=3.12"
 license = "Apache-2.0"
+# Explicit: without it maturin lists LICENSE in the sdist's metadata but leaves the file in
+# crates/quillwork-py/, and PyPI rejects the upload.
+license-files = ["LICENSE", "NOTICE"]
 readme = "README.md"
 keywords = ["docx", "word", "ooxml", "tracked-changes", "llm", "agents"]
 classifiers = [

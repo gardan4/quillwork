@@ -79,6 +79,22 @@ jobs:
       - name: Sdist contents
         run: tar -tzf dist/*.tar.gz | sort
 
+      # PyPI rejects an sdist whose metadata names a License-File the archive doesn't hold at that
+      # path; twine check doesn't look.
+      - name: License files present
+        run: |
+          python3 - dist/*.tar.gz <<'PY'
+          import sys, tarfile
+          with tarfile.open(sys.argv[1]) as t:
+              names = set(t.getnames())
+              root = t.getnames()[0].split("/")[0]
+              info = t.extractfile(f"{root}/PKG-INFO").read().decode()
+          wanted = [l.split(":", 1)[1].strip() for l in info.splitlines() if l.startswith("License-File:")]
+          missing = [f for f in wanted if f"{root}/{f}" not in names]
+          print("License-File:", wanted)
+          sys.exit(f"missing from the sdist: {missing}" if missing else 0)
+          PY
+
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: py-quillwork-sdist
