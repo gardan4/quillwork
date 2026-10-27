@@ -6,4 +6,4 @@ The library is :mod:`quillwork_server.core` (embed it in your application) and
 (``quillwork-server``).
 """
 
-__version__ = "0.0.2"
+__version__ = "0.0.3"

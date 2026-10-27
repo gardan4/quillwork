@@ -8,6 +8,17 @@ are listed under **Changed**.
 
 ## [Unreleased]
 
+## [0.0.3] - 2026-10-27
+
+The first release on PyPI: `pip install quillwork quillwork-server`. The 0.0.2 wheels of
+`quillwork` reached PyPI, but its source distribution and `quillwork-server` did not. No code
+changes since 0.0.2.
+
+### Fixed
+
+- The `quillwork` source distribution carries `LICENSE` and `NOTICE` at its root, where its
+  metadata says they are; PyPI rejected the 0.0.2 one without them.
+
 ## [0.0.2] - 2026-10-27
 
 First public release. Wheels for `quillwork` (CPython 3.12+ abi3, macOS arm64 and Linux x86_64)
@@ -35,5 +46,6 @@ never published.
   workflow for PyPI and crates.io.
 - The minimum supported Rust version is 1.88 (the `zip` dependency needs it).
 
-[Unreleased]: https://github.com/gardan4/quillwork/compare/v0.0.2...HEAD
+[Unreleased]: https://github.com/gardan4/quillwork/compare/v0.0.3...HEAD
+[0.0.3]: https://github.com/gardan4/quillwork/compare/v0.0.2...v0.0.3
 [0.0.2]: https://github.com/gardan4/quillwork/releases/tag/v0.0.2

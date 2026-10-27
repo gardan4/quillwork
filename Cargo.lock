@@ -690,7 +690,7 @@ dependencies = [
 
 [[package]]
 name = "quillwork-core"
-version = "0.0.2"
+version = "0.0.3"
 dependencies = [
  "crc32fast",
  "flate2",
@@ -707,7 +707,7 @@ dependencies = [
 
 [[package]]
 name = "quillwork-py"
-version = "0.0.2"
+version = "0.0.3"
 dependencies = [
  "pyo3",
  "pyo3-build-config",
@@ -718,7 +718,7 @@ dependencies = [
 
 [[package]]
 name = "quillwork-wasm"
-version = "0.0.2"
+version = "0.0.3"
 dependencies = [
  "quillwork-core",
 ]
