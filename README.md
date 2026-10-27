@@ -2,6 +2,8 @@
 
 Quillwork lets an AI agent edit Word documents without breaking them.
 
+![An AI agent changes one clause in a Word contract and adds another; the letterhead, numbering, table, styles and footer stay untouched](docs/quillwork-demo.gif)
+
 The agent reads a compact text view of the document, where every paragraph, table row and
 comment has a short anchor. It sends small JSON edits against those anchors. Quillwork writes
 each edit into the original `.docx` as a real Word tracked change. Every part of the file the
