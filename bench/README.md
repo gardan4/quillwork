@@ -9,6 +9,9 @@ python bench/fidelity.py > bench/results.md
 python bench/fidelity.py --json results.json corpus/fixtures/04-tables.docx   # one file, raw data
 ```
 
+The head-to-head against other editing engines (below) has its own script and dependencies; see
+[`results-compare.md`](results-compare.md#reproduce).
+
 ## What it measures
 
 `fidelity.py` runs each `.docx` in `corpus/synthetic/` and `corpus/fixtures/` through Quillwork
@@ -66,13 +69,55 @@ fixtures, and 1.8 times smaller on the two python-docx-made documents, whose XML
 lean. Plain text is smaller again. It drops the anchors, structure and markup an agent needs to
 make a targeted edit, so it is a floor rather than an alternative.
 
+## Head-to-head with other editing engines
+
+`fidelity_compare.py` runs the same corpus through four engines with the same metrics (it imports
+them from `fidelity.py`) and the same target word:
+
+- Quillwork;
+- [Adeu](https://github.com/dealfluence/adeu), a Python redlining engine built on python-docx;
+- [Docxodus](https://github.com/JSv4/Docxodus), a .NET engine, through its Python client
+  `docx-scalpel`;
+- python-docx, as above.
+
+Each engine makes its edit as a tracked change where it supports one. The script adds two checks
+that `fidelity.py` does not make. *Canonical* comparisons repeat each byte-level comparison after
+C14N and whitespace normalisation, which separates re-serialisation from real content change.
+*Validity* runs the Open XML SDK validator on every output, counting only errors the engine
+introduced.
+
+Recorded 2026-10-27 with quillwork 0.0.3, adeu 3.0.7, docx-scalpel 0.9.0 and python-docx 1.2.0.
+Method, caveats and per-file tables are in [`results-compare.md`](results-compare.md).
+
+| | Quillwork | Adeu | Docxodus | python-docx |
+|---|---|---|---|---|
+| Edit: right word changed, no other text changed | 19 of 19 | 19 of 19 | 19 of 19 | 19 of 19 |
+| Edit recorded as a tracked change | yes | yes | yes | no (overwrite) |
+| No-op: content preserved (canonical XML) | 19 of 19 | 19 of 19 | 19 of 19 | 19 of 19 |
+| No-op save byte-identical (whole file) | 19 of 19 | 0 of 19 | 0 of 19 | 0 of 19 |
+| Edit: zip entries changed besides `document.xml` | 0 | 2 to 12 | 2 to 8 | 0 to 12 |
+| Edit: paragraphs changed (byte-level) | exactly 1 | 1; 2 or 3 on 4 files | 1 to 1,472; every paragraph on 9 files | 1; 2 or 3 on 4 files |
+| Edit: new Open XML SDK errors | 0 | 2 per file | 0 | 0 |
+
+All four engines make the correct edit and lose no content on these files. The differences are
+at the byte level. The other three engines re-serialise parts they did not change, and Quillwork
+writes them back as they were. That matters for diffs, review tools and anything that hashes the
+file; it does not change what Word displays. Quillwork's one change outside the edited paragraph
+is a namespace declaration on the `document.xml` root, for the `w16du:dateUtc` attribute on its
+revisions. Adeu's validator errors come from the same attribute without that declaration. Word
+365 knows the attribute, and no Word version was tested against these files. Docxodus's one
+canonical change outside the paragraph turns Track Changes on in `settings.xml`.
+
+Adeu's read view takes fewer tokens than Quillwork's (0.23 to 0.99 times on the fixtures). It has
+no per-paragraph anchors, because Adeu addresses edits by text match. The corpus is small and
+mostly synthetic, and the benchmark was written by Quillwork's author. Corrections are welcome.
+
 ## Not measured here
 
 - Rendering. Nothing here checks that Word or LibreOffice draw the output identically. The
   `tools/oracle` harness does that with LibreOffice and an Open XML validator. It needs
   services this script does not install.
-- Other engines. Docxodus, safe-docx, Pandoc and "ask an LLM to rewrite the XML" are discussed
-  in `docs/DESIGN.md` as design context. No reproducible head-to-head numbers for them are
-  published yet, so the README makes no claims about them.
+- Other engines beyond the three above. safe-docx, Pandoc and "ask an LLM to rewrite the XML"
+  are discussed in `docs/DESIGN.md` as design context, with no measured numbers.
 - Speed. Engine time is a small fraction of an LLM turn, so it is a budget rather than a goal.
   `crates/quillwork-core/examples/xml_bench.rs` times the XML layer on its own.
