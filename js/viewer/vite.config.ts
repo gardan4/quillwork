@@ -3,13 +3,13 @@ import { defineConfig } from "vitest/config";
 export default defineConfig({
   build: {
     target: "es2022",
-    minify: "esbuild",
+    minify: true,
     sourcemap: true,
     lib: {
       entry: { index: "src/index.ts", react: "src/react.tsx" },
       formats: ["es"],
     },
-    rollupOptions: {
+    rolldownOptions: {
       external: ["react", "react/jsx-runtime", "react-dom"],
     },
   },

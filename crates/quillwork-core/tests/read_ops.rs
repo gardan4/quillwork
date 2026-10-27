@@ -65,7 +65,7 @@ fn schemas() -> Schemas {
     let load =
         |f: &str| -> Value { serde_json::from_slice(&std::fs::read(dir.join(f)).expect("schema")).expect("json") };
     let build = |root: Value| {
-        let mut o = jsonschema::options();
+        let mut registry = jsonschema::Registry::new();
         for f in [
             "common.schema.json",
             "view-model.schema.json",
@@ -75,9 +75,10 @@ fn schemas() -> Schemas {
         ] {
             let s = load(f);
             let id = s["$id"].as_str().expect("$id").to_owned();
-            o = o.with_resource(id, jsonschema::Resource::from_contents(s).expect("resource"));
+            registry = registry.add(id, s).expect("resource");
         }
-        o.build(&root).expect("schema compiles")
+        let registry = registry.prepare().expect("registry");
+        jsonschema::options().with_registry(&registry).build(&root).expect("schema compiles")
     };
     let ops = load("ops.schema.json")["$id"].as_str().unwrap().to_owned();
     let err = load("error.schema.json")["$id"].as_str().unwrap().to_owned();
@@ -93,7 +94,7 @@ fn schemas() -> Schemas {
 /// tests check, so `minimum` errors on version fields are skipped.
 fn schema_paths(v: &jsonschema::Validator, json: &Value) -> Vec<String> {
     v.iter_errors(json)
-        .map(|e| format!("{} (schema {})", e.instance_path, e.schema_path))
+        .map(|e| format!("{} (schema {})", e.instance_path(), e.schema_path()))
         .filter(|e| !(e.split(' ').next().is_some_and(|p| p.ends_with("version")) && e.ends_with("/minimum)")))
         .take(5)
         .collect()
