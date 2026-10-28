@@ -8,6 +8,28 @@ are listed under **Changed**.
 
 ## [Unreleased]
 
+### Changed
+
+- Validate optional Word request `spec_version` as SemVer and reject incompatible major/minor
+  versions before execution. Shared schemas now accept Rust's zero-origin counters without
+  changing Python/service version-1 uploads or historical sidecar counters.
+- Locked content-control refusals consistently return `PROTECTED` with reason `locked_control`.
+  Enforced document restrictions preserve supported comment/tracked-edit categories and refuse
+  unresolved forms, permission exceptions and restricted-style policies.
+
+### Fixed
+
+- Historical Word revision IDs stay reserved across reopen, and resolved change sets cannot
+  select unrelated imported revisions that reuse their numeric IDs.
+- Changes to table content or structure invalidate table/row/cell concurrency guards.
+- Nonempty text for a vertically merged continuation cell is refused atomically instead of
+  silently discarded.
+- Saving an insertion and then rejecting it removes it from exported bytes as well as the
+  live view, including synchronization into a reused package.
+- Table and review mutations respect locked content controls and enforced document policies.
+- The Word engine refuses non-Word main parts; sidecar versions restore in constant time,
+  and exhausted version/change-set counters are refused before mutation.
+
 ## [0.0.3] - 2026-10-27
 
 The first release on PyPI: `pip install quillwork quillwork-server`. The 0.0.2 wheels of

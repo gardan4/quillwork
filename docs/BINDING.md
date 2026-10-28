@@ -71,7 +71,7 @@ the core's list.
 | | |
 |---|---|
 | `Document.open(data, limits=None, *, sidecar=None, version=None)` | Open a .docx. `sidecar` (a `str` or a dict) restores the anchors, change sets and version a previous save wrote. The document opens at `max(version, the sidecar's version)`, and at 1 for a fresh upload. A `version` below the sidecar's raises `BadVersionError`; an unreadable sidecar raises `BadPackageError`. |
-| `version` | The current version. Every committed transaction adds one. |
+| `version` | The current version. Every committed transaction adds one. Python starts at 1; a fresh direct Rust `Engine::open` starts at 0. Both are valid nonnegative public document counters. |
 | `apply(tx)` → OpResult dict, `apply_text(tx)` → str | Apply a Transaction (`str` or dict) atomically. An `ok: false` result raises the matching `QuillworkError` subclass with the spec error dict in `.error`; `apply_text` returns the §9 text form of the result or the error instead of raising. |
 | `save()` → bytes, `sidecar()` → str, `save_with_sidecar()` → `(bytes, str)` | Persist. Keep the sidecar next to the .docx and pass it back to `open`. `sidecar()` is cached from the last save until the next apply, so `save()` then `sidecar()` serialises once. |
 | `change_sets()` → list of view-model `ChangeSet` dicts | The change-set log, rejected and accepted ones included. |

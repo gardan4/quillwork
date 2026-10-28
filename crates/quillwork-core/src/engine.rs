@@ -33,6 +33,7 @@ use crate::validate;
 use crate::wml::{PartIdx, WordDoc};
 use crate::xml::{self, ns};
 
+mod protection;
 mod reads;
 
 /// The spec version results and errors carry.
@@ -47,6 +48,57 @@ const TX_KEYS: &[&str] = &["spec_version", "base_version", "ops", "mode", "label
 
 /// The one-line signature of a transaction (the `usage` of request-level INVALID_OP errors).
 pub const TX_USAGE: &str = "{base_version, ops, mode?, label?, author?, turn?, projection_mode?, spec_version?}";
+
+/// SemVer identifiers are ASCII alphanumerics/hyphens. Numeric prerelease identifiers
+/// cannot have leading zeroes; build identifiers can. No numeric parsing is needed, so
+/// syntactically valid versions cannot overflow a machine integer.
+fn semver_identifiers(value: &str, prerelease: bool) -> bool {
+    value.split('.').all(|id| {
+        !id.is_empty()
+            && id.bytes().all(|c| c.is_ascii_alphanumeric() || c == b'-')
+            && !(prerelease && id.len() > 1 && id.starts_with('0') && id.bytes().all(|c| c.is_ascii_digit()))
+    })
+}
+
+// Keep request validation on the shared structured-error path; this helper never recurses.
+#[allow(clippy::result_large_err)]
+fn check_spec_version(value: Option<&Value>) -> std::result::Result<(), OpError> {
+    let Some(value) = value else { return Ok(()) };
+    let malformed = || OpError::invalid("/spec_version", "spec_version must be a valid SemVer string");
+    let value = value.as_str().ok_or_else(malformed)?;
+    let core = match value.split_once('+') {
+        Some((core, build)) if semver_identifiers(build, false) => core,
+        Some(_) => return Err(malformed()),
+        None => value,
+    };
+    let core = match core.split_once('-') {
+        Some((core, pre)) if semver_identifiers(pre, true) => core,
+        Some(_) => return Err(malformed()),
+        None => core,
+    };
+    let components: Vec<_> = core.split('.').collect();
+    if components.len() != 3
+        || !components
+            .iter()
+            .all(|s| !s.is_empty() && s.bytes().all(|c| c.is_ascii_digit()) && (s.len() == 1 || !s.starts_with('0')))
+    {
+        return Err(malformed());
+    }
+    let mut current = SPEC_VERSION.split('.');
+    let major = current.next().expect("spec major");
+    let minor = current.next().expect("spec minor");
+    let compatible_minor =
+        components[1].len() < minor.len() || (components[1].len() == minor.len() && components[1] <= minor);
+    if components[0] != major || !compatible_minor {
+        return Err(OpError::invalid(
+            "/spec_version",
+            format!(
+                "spec_version {value:?} is incompatible with {SPEC_VERSION}; major must equal {major} and minor must be <= {minor}"
+            ),
+        ));
+    }
+    Ok(())
+}
 
 /// One committed change set (one transaction's tracked revisions).
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -194,10 +246,11 @@ impl Engine {
                 }
             }
         };
-        while doc.version() < state.version {
-            doc.commit();
-        }
-        let ids = IdAlloc::scan(&doc);
+        doc.restore_version(state.version);
+        let mut ids = IdAlloc::scan(&doc);
+        ids.reserve(
+            state.change_sets.iter().flat_map(|c| c.revisions.iter().chain(&c.accepted).chain(&c.rejected).copied()),
+        );
         let baseline = error_counts(&validate::check(&doc));
         Ok(Engine {
             doc,
@@ -420,10 +473,8 @@ impl Engine {
                 return Err(bad(Some(op), &format!("/{k}"), format!("{op} takes no {k:?}")));
             }
         }
-        if let Some(sv) = obj.get("spec_version")
-            && !sv.is_string()
-        {
-            return Err(bad(Some(op), "/spec_version", "spec_version is a version string".into()));
+        if let Err(error) = check_spec_version(obj.get("spec_version")) {
+            return Err(bad(Some(op), "/spec_version", error.message));
         }
         if !matches!(op, "outline" | "read" | "find") {
             let (text, data) = match self.read_more(op, obj) {
@@ -578,6 +629,9 @@ impl Engine {
         let Some(obj) = tx.as_object() else {
             return Err(fail(OpError::invalid("", "a transaction is a JSON object {base_version, ops}"), None, None));
         };
+        if let Err(error) = check_spec_version(obj.get("spec_version")) {
+            return Err(fail(error, None, None));
+        }
         let ops_v = match obj.get("ops") {
             Some(Value::Array(a)) => a,
             _ => return Err(fail(OpError::invalid("/ops", "ops must be an array of ops"), None, None)),
@@ -659,6 +713,16 @@ impl Engine {
             }
         }
 
+        // Check exhaustion before making any changes: release arithmetic must not wrap the
+        // optimistic version or change-set counters back to an earlier identity.
+        if version.checked_add(1).is_none() || self.state.next_cs.checked_add(1).is_none() {
+            return Err(fail(
+                OpError::new("BAD_VERSION", "the document's version or change-set counter is exhausted"),
+                None,
+                None,
+            ));
+        }
+
         // ---- apply
         let outline_before = self.outline_now();
         // Bookmarks before the edit: a reference that loses its target to this transaction is
@@ -671,8 +735,20 @@ impl Engine {
         };
         // From here the document changes: nothing read before may be reused.
         self.cache_mut().clear();
-        let cs_map: HashMap<String, Vec<u32>> =
-            self.state.change_sets.iter().map(|c| (c.id.clone(), c.revisions.clone())).collect();
+        let cs_map: HashMap<String, Vec<u32>> = self
+            .state
+            .change_sets
+            .iter()
+            .map(|c| {
+                let open = c
+                    .revisions
+                    .iter()
+                    .filter(|id| !c.accepted.contains(id) && !c.rejected.contains(id))
+                    .copied()
+                    .collect();
+                (c.id.clone(), open)
+            })
+            .collect();
         let stamp = Stamp::new(author.clone(), self.now.unwrap_or_else(now_secs));
         let mut outcomes: Vec<EditOutcome> = Vec::new();
         let mut review: Vec<(bool, Vec<u32>)> = Vec::new();
@@ -689,11 +765,16 @@ impl Engine {
                 if name == "set_track_changes" {
                     tk.mode = Mode::Direct;
                 }
+                if let Err(e) = protection::document(&self.doc, name, tk.mode) {
+                    failure = Some((e, i, Vec::new()));
+                    break;
+                }
                 let op_base = op.get("base_version").and_then(Value::as_u64).unwrap_or(base);
                 if let Err((e, cur)) = guard(&self.doc, &self.anchors, &self.state.last_changed, i, name, op, op_base) {
                     failure = Some((e, i, cur));
                     break;
                 }
+                let controls = protection::Controls::capture(&self.doc, protection::comment_op(name));
                 let mut cx = Cx {
                     doc: &mut self.doc,
                     anchors: &mut self.anchors,
@@ -704,6 +785,10 @@ impl Engine {
                 };
                 match handlers::dispatch(&mut cx, name, op) {
                     Ok(out) => {
+                        if let Err(e) = controls.check(&self.doc) {
+                            failure = Some((e, i, Vec::new()));
+                            break;
+                        }
                         if matches!(name, "accept" | "reject") {
                             review.push((name == "accept", out.revisions.clone()));
                         }
@@ -750,6 +835,7 @@ impl Engine {
         }
 
         // ---- commit
+        let changed_tables = changed_tables(&self.doc, &self.anchors, &cp);
         let new_version = self.doc.commit();
         self.baseline = after;
         let present = present_ids(&self.doc);
@@ -826,6 +912,9 @@ impl Engine {
         removed.retain(|h| self.anchors.resolve(&self.doc, h).is_none());
         for h in changed.iter().chain(&removed) {
             self.state.last_changed.insert(h.clone(), new_version);
+        }
+        for h in changed_tables {
+            self.state.last_changed.insert(h, new_version);
         }
         let changed = self.in_document_order(changed);
         // The lines as the next read shows them; in the accepted view the transaction's own
@@ -909,9 +998,7 @@ impl Engine {
         if grew && let Some((bytes, sidecar)) = cp.package {
             let version = self.doc.version();
             if let Ok(mut doc) = WordDoc::open(bytes) {
-                while doc.version() < version {
-                    doc.commit();
-                }
+                doc.restore_version(version);
                 if let Ok(anchors) = Anchors::attach(&doc, &sidecar) {
                     self.doc = doc;
                     self.anchors = anchors;
@@ -980,6 +1067,32 @@ impl Engine {
         v.sort();
         v.into_iter().map(|(_, _, _, h)| h).collect()
     }
+}
+
+/// Invalidate table guards whenever their actual subtree changed, including edits to cell
+/// paragraphs, review, inserted rows, and deleted content. EditOutcome lists primarily
+/// paragraph anchors and cannot alone describe ancestor table changes or positional rebinds.
+fn changed_tables(doc: &WordDoc, anchors: &Anchors, before: &Checkpoint) -> HashSet<String> {
+    let mut changed = HashSet::new();
+    for (part, old) in &before.parts {
+        let new = doc.part(*part);
+        if !new.is_modified() && !old.is_modified() {
+            continue;
+        }
+        for node in old.descendants(old.root()).filter(|&n| old.is(n, ns::W, "tbl")) {
+            let Some(h) = before.anchors.handle_of(crate::wml::Loc::new(*part, node)) else { continue };
+            let same = match anchors.resolve(doc, h) {
+                Some(Target::Table { table }) => {
+                    old.node_to_bytes(node) == doc.part(table.part).node_to_bytes(table.node)
+                }
+                _ => false,
+            };
+            if !same {
+                changed.insert(h.to_owned());
+            }
+        }
+    }
+    changed
 }
 
 /// The handle an op targets (for `expect`, staleness and error anchors).

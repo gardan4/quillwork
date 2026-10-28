@@ -36,7 +36,7 @@ tree, the splicer or the anchor scheme.
 
 ## Build and test
 
-You need Rust 1.88 or newer, [uv](https://docs.astral.sh/uv/), Python 3.12 and Node 20 or
+You need Rust 1.88 or newer, [uv](https://docs.astral.sh/uv/), Python 3.12 and Node 22.12 or
 newer. CI (`.github/workflows/ci.yml`) runs exactly the commands below, so if they pass locally
 your pull request should pass too.
 

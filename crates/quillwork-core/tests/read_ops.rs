@@ -89,15 +89,9 @@ fn schemas() -> Schemas {
     }
 }
 
-/// Schema error paths only (safe to print for private documents). The engine numbers a freshly
-/// opened document version 0 where the schema's `Version` starts at 1; that is not what these
-/// tests check, so `minimum` errors on version fields are skipped.
+/// Schema error paths only (safe to print for private documents).
 fn schema_paths(v: &jsonschema::Validator, json: &Value) -> Vec<String> {
-    v.iter_errors(json)
-        .map(|e| format!("{} (schema {})", e.instance_path(), e.schema_path()))
-        .filter(|e| !(e.split(' ').next().is_some_and(|p| p.ends_with("version")) && e.ends_with("/minimum)")))
-        .take(5)
-        .collect()
+    v.iter_errors(json).map(|e| format!("{} (schema {})", e.instance_path(), e.schema_path())).take(5).collect()
 }
 
 // ------------------------------------------------------------------------------ goldens

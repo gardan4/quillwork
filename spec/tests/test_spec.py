@@ -207,6 +207,20 @@ def test_anchor_examples():
             assert errors_of(f"common.schema.json#/$defs/{kind}", v), f"{kind}: {v!r} should be invalid"
 
 
+def test_semver_and_document_counter_definitions():
+    for version in ["0.0.0", "0.1.42", "1.0.0", "0.1.0-alpha.1", "0.1.0-0", "0.1.0--",
+                    "0.1.0+build.001", "0.0.9-rc.2+build-a.01", "0.1.999999999999999999999999999999"]:
+        assert not errors_of("common.schema.json#/$defs/SpecVersion", version), version
+    for version in [None, True, 1, "", "nonsense", "0.1", "v0.1.0", "0.1.0.0", "00.1.0",
+                    "0.01.0", "0.1.00", " 0.1.0", "0.1.0\n", "0.1.0-", "0.1.0+", "0.1.0-01",
+                    "0.1.0-alpha..1", "0.1.0-a_1", "0.1.0+build..1", "0.1.0+build+other", "0.1.0-é"]:
+        assert errors_of("common.schema.json#/$defs/SpecVersion", version), version
+    for counter in [0, 1, 2, 2**64 - 1]:
+        assert not errors_of("common.schema.json#/$defs/Version", counter)
+    for counter in [-1, 0.5, "0", None, True]:
+        assert errors_of("common.schema.json#/$defs/Version", counter)
+
+
 # ---------------------------------------------------------------- projection
 
 PROJECTIONS = [EXAMPLES / "projection-accepted.txt", EXAMPLES / "projection-markup.txt"]
