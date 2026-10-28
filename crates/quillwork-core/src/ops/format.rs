@@ -1,7 +1,7 @@
 //! `set_text_format`: run formatting on a found span or a whole block, tracked as `w:rPrChange`.
 //!
-//! A mark set to `true` writes the toggle; `false` removes it, or writes `w:val="0"` when a style
-//! could switch it on; `null` removes the direct formatting so the style shows through.
+//! A mark set to `true` writes the toggle; `false` writes an explicit off value so even
+//! default styles cannot switch it on; `null` removes direct formatting so the style shows through.
 
 use serde::Deserialize;
 use serde_json::{Map, Value};
@@ -178,8 +178,8 @@ fn set_val(d: &mut Document, rpr: NodeId, local: &str, val: &str) -> crate::Resu
     Ok(el)
 }
 
-/// Apply `marks` to one `rPr`. `styled`: a character or paragraph style may switch toggles on.
-fn apply(d: &mut Document, rpr: NodeId, marks: &[Mark], styled: bool) -> crate::Result<()> {
+/// Apply `marks` to one `rPr`. Explicit off values must override named and default styles.
+fn apply(d: &mut Document, rpr: NodeId, marks: &[Mark], effective_align: Option<&str>) -> crate::Result<()> {
     for m in marks {
         match m {
             Mark::Toggle(locals, v) => {
@@ -189,16 +189,15 @@ fn apply(d: &mut Document, rpr: NodeId, marks: &[Mark], styled: bool) -> crate::
                             let el = tw::ensure_child(d, rpr, local, RPR_ORDER)?;
                             tw::remove_w(d, el, "val")?;
                         }
-                        Some(false) if styled => {
+                        Some(false) => {
                             set_val(d, rpr, local, "0")?;
                         }
-                        Some(false) | None => remove_el(d, rpr, local)?,
+                        None => remove_el(d, rpr, local)?,
                     }
                 }
             }
             Mark::Underline(v) => match v.as_deref() {
                 None => remove_el(d, rpr, "u")?,
-                Some("none") if !styled => remove_el(d, rpr, "u")?,
                 Some(s) => {
                     let el = set_val(d, rpr, "u", s)?;
                     if s == "none" {
@@ -212,7 +211,14 @@ fn apply(d: &mut Document, rpr: NodeId, marks: &[Mark], styled: bool) -> crate::
                     Some(true) => {
                         set_val(d, rpr, "vertAlign", kind)?;
                     }
-                    Some(false) | None => {
+                    Some(false) => {
+                        if current.as_deref().or(effective_align) == Some(*kind) {
+                            // Removing the direct element can expose the same inherited
+                            // alignment again. An explicit baseline overrides the style.
+                            set_val(d, rpr, "vertAlign", "baseline")?;
+                        }
+                    }
+                    None => {
                         if current.as_deref() == Some(*kind) {
                             remove_el(d, rpr, "vertAlign")?;
                         }
@@ -282,18 +288,13 @@ fn format_rpr(
     rpr: NodeId,
     own: bool,
     marks: &[Mark],
-    styled: bool,
+    effective_align: Option<&str>,
 ) -> crate::Result<()> {
     if tk.track() && !own && w_child(d, rpr, "rPrChange").is_none() {
         let id = tk.rev();
         tw::snapshot_rpr(d, rpr, id, &tk.stamp)?;
     }
-    apply(d, rpr, marks, styled)
-}
-
-fn is_styled(d: &Document, p: NodeId, rpr: Option<NodeId>) -> bool {
-    rpr.is_some_and(|r| w_child(d, r, "rStyle").is_some())
-        || w_child(d, p, "pPr").is_some_and(|ppr| w_child(d, ppr, "pStyle").is_some())
+    apply(d, rpr, marks, effective_align)
 }
 
 #[derive(Deserialize)]
@@ -312,6 +313,7 @@ pub fn set_text_format(cx: &mut Cx, op: &Value) -> OpResult<EditOutcome> {
     let index = cx.index;
     let marks = parse_marks(&a.marks, &|k| format!("/ops/{index}/{k}"))?;
     let r = resolve(cx.doc, cx.anchors, cx.index, "anchor", &a.anchor)?;
+    let sheet = crate::project::style_sheet(cx.doc)?;
     let mut tracker = Tracker::new(cx.anchors);
     let rev0 = cx.tk.revisions.len();
     match &a.find {
@@ -331,11 +333,12 @@ pub fn set_text_format(cx: &mut Cx, op: &Value) -> OpResult<EditOutcome> {
             }
             let d = cx.doc.part_mut(r.part);
             let runs = isolate(d, cx.tk, p, start, end, &a.anchor)?;
+            let para = sheet.resolve_paragraph_at(d, p);
             for run in runs {
+                let effective = sheet.resolve_run(d, run, &para);
                 let own = in_own_insert(d, cx.tk, run);
                 let rpr = tw::ensure_rpr(d, run)?;
-                let styled = is_styled(d, p, Some(rpr));
-                format_rpr(d, cx.tk, rpr, own, &marks, styled)?;
+                format_rpr(d, cx.tk, rpr, own, &marks, effective.vert_align.as_deref())?;
             }
             tracker.touch(cx.doc, r.part, p);
         }
@@ -348,22 +351,23 @@ pub fn set_text_format(cx: &mut Cx, op: &Value) -> OpResult<EditOutcome> {
             }
             let d = cx.doc.part_mut(r.part);
             for &p in &r.paras {
+                let para = sheet.resolve_paragraph_at(d, p);
                 for run in block_runs(d, p) {
                     let has_text = d.child_elements(run).any(|c| !is_w(d, c, "rPr"));
                     if !has_text {
                         continue;
                     }
+                    let effective = sheet.resolve_run(d, run, &para);
                     let own = in_own_insert(d, cx.tk, run);
                     let rpr = tw::ensure_rpr(d, run)?;
-                    let styled = is_styled(d, p, Some(rpr));
-                    format_rpr(d, cx.tk, rpr, own, &marks, styled)?;
+                    format_rpr(d, cx.tk, rpr, own, &marks, effective.vert_align.as_deref())?;
                 }
                 // The paragraph mark takes the formatting too (as selecting the paragraph in Word).
+                let effective = sheet.resolve_paragraph_mark(d, p, &para);
                 let ppr = tw::ensure_ppr(d, p)?;
                 let mark = tw::ensure_child(d, ppr, "rPr", tw::PPR_ORDER)?;
                 let own = tw::mark_revision(d, p, "ins").is_some_and(|m| cx.tk.is_own(d, m));
-                let styled = is_styled(d, p, Some(mark));
-                format_rpr(d, cx.tk, mark, own, &marks, styled)?;
+                format_rpr(d, cx.tk, mark, own, &marks, effective.vert_align.as_deref())?;
             }
             for &p in &r.paras {
                 tracker.touch(cx.doc, r.part, p);

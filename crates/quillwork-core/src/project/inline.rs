@@ -237,10 +237,11 @@ pub(crate) enum Link {
 #[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", default)]
 pub struct Marks {
-    #[serde(skip_serializing_if = "is_false")]
-    pub b: bool,
-    #[serde(skip_serializing_if = "is_false")]
-    pub i: bool,
+    /// Absent inherits paragraph formatting; false explicitly disables it.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub b: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub i: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub u: Option<String>,
     #[serde(skip_serializing_if = "is_false")]
@@ -251,15 +252,15 @@ pub struct Marks {
     pub sup: bool,
     #[serde(skip_serializing_if = "is_false")]
     pub sub: bool,
-    #[serde(skip_serializing_if = "is_false")]
-    pub caps: bool,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub caps: Option<bool>,
     #[serde(skip_serializing_if = "is_false")]
     pub small_caps: bool,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub font: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub size: Option<u32>,
-    /// `#RRGGBB`.
+    /// `#RRGGBB`, or `auto` to reset an inherited custom color.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub color: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -279,31 +280,42 @@ impl Marks {
         *self == Marks::default()
     }
 
-    /// Direct formatting of `run` relative to `base` (the paragraph style's run formatting).
+    /// Resolved run formatting. Font, size, color and b/i/caps inherit the paragraph
+    /// baseline; decorations and highlighting are emitted in full
+    /// because the paragraph view model does not carry those run properties.
     pub fn relative(run: &EffectiveRun, base: &EffectiveRun) -> Marks {
         let s = run.script.unwrap_or(Script::Ascii);
         let on = |v: Option<bool>| v.unwrap_or(false);
         let ul = |r: &EffectiveRun| r.underline.as_ref().and_then(|u| u.val.clone()).filter(|v| v != "none");
         let va = |r: &EffectiveRun| r.vert_align.clone().unwrap_or_default();
-        let color =
-            |r: &EffectiveRun| r.color.clone().filter(|c| c != "auto" && c.len() == 6).map(|c| c.to_ascii_uppercase());
+        let color = |r: &EffectiveRun| {
+            r.color.as_deref().and_then(|c| {
+                if c == "auto" {
+                    Some("auto".to_owned())
+                } else if c.len() == 6 && c.bytes().all(|b| b.is_ascii_hexdigit()) {
+                    Some(format!("#{}", c.to_ascii_uppercase()))
+                } else {
+                    None
+                }
+            })
+        };
         let hl = |r: &EffectiveRun| r.highlight.clone().filter(|h| h != "none");
         let lang = |r: &EffectiveRun| r.lang.as_ref().and_then(|l| l.val.clone());
         let u = ul(run);
         Marks {
-            b: run.bold_for(s) && !base.bold_for(s),
-            i: run.italic_for(s) && !base.italic_for(s),
-            u: if u.is_some() && ul(base).is_none() { u } else { None },
-            strike: on(run.strike) && !on(base.strike),
-            dstrike: on(run.dstrike) && !on(base.dstrike),
-            sup: va(run) == "superscript" && va(base) != "superscript",
-            sub: va(run) == "subscript" && va(base) != "subscript",
-            caps: on(run.caps) && !on(base.caps),
-            small_caps: on(run.small_caps) && !on(base.small_caps),
+            b: (run.bold_for(s) != base.bold_for(s)).then_some(run.bold_for(s)),
+            i: (run.italic_for(s) != base.italic_for(s)).then_some(run.italic_for(s)),
+            u,
+            strike: on(run.strike),
+            dstrike: on(run.dstrike),
+            sup: va(run) == "superscript",
+            sub: va(run) == "subscript",
+            caps: (on(run.caps) != on(base.caps)).then_some(on(run.caps)),
+            small_caps: on(run.small_caps),
             font: run.font_for(s).filter(|f| Some(*f) != base.font_for(s)).map(str::to_owned),
             size: run.size_for(s).filter(|z| Some(*z) != base.size_for(s) && *z >= 1),
-            color: color(run).filter(|c| Some(c) != color(base).as_ref()).map(|c| format!("#{c}")),
-            highlight: hl(run).filter(|h| Some(h) != hl(base).as_ref()),
+            color: color(run).filter(|c| Some(c) != color(base).as_ref()),
+            highlight: hl(run),
             rtl: on(run.rtl) && !on(base.rtl),
             lang: lang(run).filter(|l| Some(l) != lang(base).as_ref()),
         }
@@ -1138,8 +1150,8 @@ impl<'p> Keyed<'p> {
             p,
             keys: [rev_group, kind, fmt, fence, link],
             marks: [
-                text_like && m.b,
-                text_like && m.i,
+                text_like && m.b == Some(true),
+                text_like && m.i == Some(true),
                 text_like && m.u.is_some() && p.link.is_none(),
                 text_like && (m.strike || m.dstrike),
                 text_like && m.sup,

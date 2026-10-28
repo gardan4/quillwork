@@ -146,6 +146,8 @@ export interface ParagraphFormat {
 }
 
 export interface Marks {
+  /** b/i/caps/font/size/color inherit the paragraph baseline; decorations and highlighting are effective run values.
+   * For b/i/caps: false explicitly disables the inherited formatting. */
   b?: boolean;
   i?: boolean;
   /** Underline style: single, double, dotted, wave, none, ... */
@@ -158,7 +160,8 @@ export interface Marks {
   smallCaps?: boolean;
   font?: string;
   size?: HalfPoints;
-  color?: Color;
+  /** auto resets an inherited custom color to the viewer ink. */
+  color?: Color | "auto";
   /** Word highlight colour name (yellow, green, darkBlue, ...). */
   highlight?: string;
   rtl?: boolean;
