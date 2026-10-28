@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import threading
+from collections.abc import Callable
+from dataclasses import replace as replace_record
 from pathlib import Path
 from typing import Any
 
@@ -159,6 +161,55 @@ def test_patches_since(service: DocumentService, doc: str) -> None:
     assert service.patches_since(doc, 3).patches == []
     assert service.patches_since(doc, 0).reload
     assert service.patches_since(doc, 9).reload
+
+
+def test_patch_feed_is_bounded_to_the_head_sampled_before_a_concurrent_commit() -> None:
+    class RacingStore(MemoryStore):
+        before_records: Callable[[], None] | None = None
+
+        def records(self, document_id: str, after: int = 0) -> list[Any]:
+            callback, self.before_records = self.before_records, None
+            if callback is not None:
+                callback()
+            return super().records(document_id, after)
+
+    store = RacingStore()
+    service = DocumentService(FakeEngine(), store)
+    doc_id = service.upload(fake_bytes("one", "two")).id
+    first = service.apply(doc_id, replace("b100", "one", "ONE", 1))
+    store.before_records = lambda: service.apply(doc_id, replace("b101", "two", "TWO", 2))
+
+    feed = service.patches_since(doc_id, 1)
+
+    assert not feed.reload
+    assert feed.version == 2
+    assert feed.patches == [first["patch"]]
+    next_feed = service.patches_since(doc_id, feed.version)
+    assert next_feed.version == 3
+    assert [p["version"] for p in next_feed.patches] == [3]
+
+
+@pytest.mark.parametrize("broken", ["gap", "base", "version"])
+def test_patch_feed_reloads_when_history_is_not_a_continuous_chain(broken: str) -> None:
+    class BrokenHistoryStore(MemoryStore):
+        def records(self, document_id: str, after: int = 0) -> list[Any]:
+            records = super().records(document_id, after)
+            if after == 1:
+                if broken == "gap":
+                    return records[1:]
+                patch = dict(records[0].patch or {})
+                patch["base_version" if broken == "base" else "version"] = 99
+                records[0] = replace_record(records[0], patch=patch)
+            return records
+
+    service = DocumentService(FakeEngine(), BrokenHistoryStore())
+    doc_id = service.upload(fake_bytes("one", "two")).id
+    service.apply(doc_id, replace("b100", "one", "ONE", 1))
+    service.apply(doc_id, replace("b101", "two", "TWO", 2))
+
+    feed = service.patches_since(doc_id, 1)
+
+    assert feed.reload and feed.version == 3 and feed.patches == []
 
 
 def test_wait_wakes_on_a_new_version(service: DocumentService, doc: str) -> None:

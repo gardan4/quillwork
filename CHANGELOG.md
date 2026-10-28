@@ -30,6 +30,12 @@ are listed under **Changed**.
 - The Word engine refuses non-Word main parts; sidecar versions restore in constant time,
   and exhausted version/change-set counters are refused before mutation.
 
+- The reference service primes cold-writer patch baselines and returns coherent, continuous
+  patch feeds bounded by the sampled head version.
+- Agent table tools preserve requested row order. Idle SSE waits use separate bounded worker
+  capacity and release actual workers on disconnect/cancellation.
+- The locality oracle treats `[Content_Types].xml` as a literal allowed part name.
+
 ## [0.0.3] - 2026-10-27
 
 The first release on PyPI: `pip install quillwork quillwork-server`. The 0.0.2 wheels of

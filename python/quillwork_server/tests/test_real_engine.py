@@ -17,7 +17,12 @@ quillwork = pytest.importorskip("quillwork")
 
 from quillwork.errors import BadVersionError, StaleAnchorError  # noqa: E402
 
-from quillwork_server.core import DocumentService, MemoryStore, QuillworkEngine  # noqa: E402
+from quillwork_server.core import (  # noqa: E402
+    DocumentService,
+    MemoryStore,
+    QuillworkEngine,
+    ServiceConfig,
+)
 
 FILES = sorted(SYNTHETIC.glob("*.docx"))
 pytestmark = pytest.mark.skipif(not FILES, reason="no corpus/synthetic/*.docx")
@@ -122,6 +127,69 @@ def test_clean_export_import_and_restore() -> None:
 
 
 FIXTURES = SYNTHETIC.parent / "fixtures"
+
+
+@pytest.mark.parametrize("cold_path", ["second_service", "eviction", "import", "restore"])
+def test_cold_writers_publish_complete_patches(cold_path: str) -> None:
+    data = (FIXTURES / "01-run-formatting.docx").read_bytes()
+    store = MemoryStore()
+    writer = DocumentService(QuillworkEngine(), store, config=ServiceConfig(max_live_documents=1))
+    doc_id = writer.upload(data).id
+    reader = DocumentService(QuillworkEngine(), store)
+    reader.view_model(doc_id)
+    if cold_path == "second_service":
+        writer = DocumentService(QuillworkEngine(), store)
+    elif cold_path == "eviction":
+        writer.upload(data)
+    elif cold_path == "import":
+        writer.import_version(doc_id, data)
+    else:
+        writer.apply(doc_id, replace("b100", "plain", "initial", 1))
+        writer.restore(doc_id, 1)
+    before = reader.view_model(doc_id)
+    version = before["version"]
+
+    result = writer.apply(doc_id, replace("b100", "plain", "updated", version) | {"mode": "direct"})
+
+    after = reader.view_model(doc_id)
+    expected = next(block for block in after["blocks"] if block["id"] == "b100")
+    assert expected != next(block for block in before["blocks"] if block["id"] == "b100")
+    assert any(upsert["block"] == expected for upsert in result["patch"]["upserts"])
+    feed = reader.patches_since(doc_id, version)
+    assert not feed.reload
+    assert feed.patches == [result["patch"]]
+    assert feed.version == after["version"] == version + 1
+
+
+@pytest.mark.parametrize("mode", ["track", "direct"])
+def test_table_tool_keeps_requested_row_order_after_save_and_review(mode: str) -> None:
+    from quillwork_server.tools import ApplyCall, ToolRunner, compile_call
+
+    service = DocumentService(QuillworkEngine())
+    original = (FIXTURES / "04-tables.docx").read_bytes()
+    doc_id = service.upload(original).id
+    before = binding(service, doc_id).read("t1")
+    args = {
+        "base_version": 1,
+        "action": "insert_rows",
+        "anchor": "t1.r1",
+        "rows": [["FIRST"], ["SECOND"], ["THIRD"]],
+    }
+    if mode == "track":
+        result = ToolRunner(service).call(doc_id, "table", args)
+        assert not result.is_error, result.text
+    else:
+        compiled = compile_call("table", args)
+        assert isinstance(compiled, ApplyCall)
+        service.apply(doc_id, compiled.transaction | {"mode": "direct"})
+    reopened = binding(service, doc_id)
+    text = reopened.read("t1")
+    assert text.index("FIRST") < text.index("SECOND") < text.index("THIRD")
+    if mode == "track":
+        service.undo(doc_id, result.structured["change_set"])
+    else:
+        service.restore(doc_id, 1)
+    assert binding(service, doc_id).read("t1") == before
 
 
 def _advanced(runner: Any, doc_id: str, op: str, **args: Any) -> Any:
