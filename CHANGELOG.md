@@ -8,6 +8,8 @@ are listed under **Changed**.
 
 ## [Unreleased]
 
+## [0.0.4] - 2026-10-28
+
 ### Added
 
 - Experimental `pml::Presentation` / `quillwork.Presentation` for existing transitional PPTX
@@ -96,6 +98,7 @@ never published.
   workflow for PyPI and crates.io.
 - The minimum supported Rust version is 1.88 (the `zip` dependency needs it).
 
-[Unreleased]: https://github.com/gardan4/quillwork/compare/v0.0.3...HEAD
+[Unreleased]: https://github.com/gardan4/quillwork/compare/v0.0.4...HEAD
+[0.0.4]: https://github.com/gardan4/quillwork/compare/v0.0.3...v0.0.4
 [0.0.3]: https://github.com/gardan4/quillwork/compare/v0.0.2...v0.0.3
 [0.0.2]: https://github.com/gardan4/quillwork/releases/tag/v0.0.2

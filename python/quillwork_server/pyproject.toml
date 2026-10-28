@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "quillwork-server"
-version = "0.0.3"
+version = "0.0.4"
 description = "Reference service for Quillwork: document versions, agent tools, an MCP server and an HTTP API"
 requires-python = ">=3.12"
 license = "Apache-2.0"
@@ -19,7 +19,7 @@ classifiers = [
 ]
 # The library core (quillwork_server.core, quillwork_server.tools) needs only quillwork.
 # The front ends pull in their own extras so a host that embeds the library stays lean.
-dependencies = ["quillwork~=0.0.3"]  # same release line; 0.0.x may break between versions
+dependencies = ["quillwork~=0.0.4"]  # same release line; 0.0.x may break between versions
 
 [project.urls]
 Homepage = "https://github.com/gardan4/quillwork"
