@@ -136,8 +136,8 @@ function applyBorders(td: HTMLElement, b: NonNullable<Cell["borders"]>) {
 
 function applyMarks(ctx: Ctx, e: HTMLElement, m: Marks) {
   const s = e.style;
-  if (m.b) s.fontWeight = "bold";
-  if (m.i) s.fontStyle = "italic";
+  if (m.b !== undefined) s.fontWeight = m.b ? "bold" : "normal";
+  if (m.i !== undefined) s.fontStyle = m.i ? "italic" : "normal";
   const deco: string[] = [];
   if (m.u && m.u !== "none") {
     deco.push("underline");
@@ -153,11 +153,12 @@ function applyMarks(ctx: Ctx, e: HTMLElement, m: Marks) {
     s.verticalAlign = m.sup ? "super" : "sub";
     s.fontSize = "smaller";
   }
-  if (m.caps) s.textTransform = "uppercase";
+  if (m.caps !== undefined) s.textTransform = m.caps ? "uppercase" : "none";
   if (m.smallCaps) s.fontVariant = "small-caps";
   if (m.font) s.fontFamily = fontStack(ctx, m.font);
   if (m.size && !(m.sup || m.sub)) s.fontSize = `${m.size / 2}pt`;
-  if (m.color) setColor(e, m.color);
+  if (m.color === "auto") s.color = "var(--qw-ink)";
+  else if (m.color) setColor(e, m.color);
   if (m.highlight && m.highlight !== "none") {
     const c = HIGHLIGHT[m.highlight] ?? (/^#[0-9A-Fa-f]{6}$/.test(m.highlight) ? m.highlight : null);
     if (c) {

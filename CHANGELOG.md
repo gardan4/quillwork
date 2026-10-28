@@ -17,7 +17,16 @@ are listed under **Changed**.
   Enforced document restrictions preserve supported comment/tracked-edit categories and refuse
   unresolved forms, permission exceptions and restricted-style policies.
 
+- Rust view-model `Marks.b`, `i` and `caps` are optional booleans: absence inherits;
+  `false` explicitly disables inherited formatting. Run color may be `auto` to reset an
+  inherited custom color; the viewer and schema implement the same convention.
+
 ### Fixed
+
+- View-model/viewer formatting preserves explicit off values, effective inherited decorations,
+  automatic color resets and default-style overrides. Formatting `false` requests turn off
+  inherited properties while `null` removes direct formatting; superscript/subscript resets
+  preserve the opposite alignment.
 
 - Historical Word revision IDs stay reserved across reopen, and resolved change sets cannot
   select unrelated imported revisions that reuse their numeric IDs.

@@ -7,6 +7,55 @@ let view: QuillworkView | undefined;
 afterEach(() => view?.destroy());
 
 describe("render the example", () => {
+  it("renders explicit off marks independently of inherited paragraph formatting", () => {
+    const vm = exampleVm();
+    const paragraph = vm.blocks.find((b) => b.id === "b100");
+    if (!paragraph || paragraph.kind !== "p") throw new Error("missing example paragraph");
+    paragraph.fmt = { ...paragraph.fmt, b: true, i: true, caps: true };
+    paragraph.inlines = [
+      { k: "text", t: "off", marks: { b: false, i: false, caps: false } },
+      { k: "text", t: "inherited" },
+      { k: "text", t: "on", marks: { b: true, i: true, caps: true } },
+    ];
+    view = render(mount(), vm);
+    const rendered = byId(view.root, "b100")!;
+    expect(rendered.style.fontWeight).toBe("bold");
+    expect(rendered.style.fontStyle).toBe("italic");
+    expect(rendered.style.textTransform).toBe("uppercase");
+    const [off, inherited, on] = Array.from(rendered.querySelectorAll<HTMLElement>(".qw-t"));
+    expect([off.style.fontWeight, off.style.fontStyle, off.style.textTransform]).toEqual(["normal", "normal", "none"]);
+    expect([inherited.style.fontWeight, inherited.style.fontStyle, inherited.style.textTransform]).toEqual(["", "", ""]);
+    expect([on.style.fontWeight, on.style.fontStyle, on.style.textTransform]).toEqual(["bold", "italic", "uppercase"]);
+  });
+
+  it("renders effective style decorations and resets without erasing paragraph shading", () => {
+    const vm = exampleVm();
+    const paragraph = vm.blocks.find((b) => b.id === "b100");
+    if (!paragraph || paragraph.kind !== "p") throw new Error("missing example paragraph");
+    paragraph.fmt = { font: "Calibri", size: 28, color: "#AA0000", shade: "#DDEEFF" };
+    paragraph.inlines = [
+      { k: "text", t: "styled", marks: { u: "double", strike: true, dstrike: true, smallCaps: true, sup: true, highlight: "yellow" } },
+      { k: "text", t: "reset", marks: { color: "auto", font: "Arial", size: 22 } },
+    ];
+    view = render(mount(), vm);
+    const rendered = byId(view.root, "b100")!;
+    const [styled, reset] = Array.from(rendered.querySelectorAll<HTMLElement>(".qw-t"));
+    expect(styled.style.textDecorationLine).toBe("underline line-through");
+    expect(styled.style.textDecorationStyle).toBe("double");
+    expect(styled.style.fontVariant).toBe("small-caps");
+    expect(styled.style.verticalAlign).toBe("super");
+    expect(styled.style.getPropertyValue("--_bg")).toBe("#FFFF00");
+    expect(reset.style.textDecorationLine).toBe("");
+    expect(reset.style.fontVariant).toBe("");
+    expect(reset.style.verticalAlign).toBe("");
+    expect(reset.style.color).toBe("var(--qw-ink)");
+    expect(reset.style.fontFamily).toContain("Arial");
+    expect(reset.style.fontSize).toBe("11pt");
+    expect(reset.classList.contains("qw-bg")).toBe(false);
+    expect(rendered.style.getPropertyValue("--_bg")).toBe("#DDEEFF");
+    expect(rendered.style.getPropertyValue("--_c")).toBe("#AA0000");
+  });
+
   it("builds headings, paragraphs, list labels and resolved formatting", () => {
     view = render(mount(), exampleVm());
     const root = view.root;

@@ -517,7 +517,7 @@
     },
     "Marks": {
       "type": "object",
-      "description": "Run formatting that differs from the paragraph's resolved formatting.",
+      "description": "Resolved run formatting. Font, size, color and b/i/caps inherit the paragraph baseline; false disables b/i/caps. Decorations and highlighting are effective values independent of the paragraph.",
       "properties": {
         "b": {
           "type": "boolean"
@@ -554,7 +554,11 @@
           "$ref": "common.schema.json#/$defs/HalfPoints"
         },
         "color": {
-          "$ref": "common.schema.json#/$defs/Color"
+          "description": "A resolved color, or auto to reset an inherited custom color to viewer ink.",
+          "anyOf": [
+            { "$ref": "common.schema.json#/$defs/Color" },
+            { "const": "auto" }
+          ]
         },
         "highlight": {
           "type": "string"
