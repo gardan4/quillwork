@@ -1,28 +1,28 @@
 # Review / comments / tables / validate: notes for the spec owners
 
 Notes from building `edit::{review, comments, tables}` and `validate`. Each item is a proposed
-schema or spec change, a decision taken where the spec was silent, or a known gap.
+schema or spec change, a decision taken where the spec was silent, or a known gap. Items
+marked **Resolved** are kept for the record and point to where the spec now covers them.
 
 ## Proposed schema / spec changes
 
-1. **`edit_comment`** is not in `ops.schema.json`. It is implemented as
-   `edit_comment {comment, text}` (replaces the comment body and keeps the author, date and
-   threading). Proposal: add `Op_edit_comment` with `comment` and `text` both required.
-2. **`change_set` needs the sidecar.** `accept`/`reject`/`list_changes` take `change_set`, but
-   change-set → revision-id mapping lives in the host sidecar (DESIGN §7.4). The edit functions
-   take the resolved ids as `change_set_revisions: Vec<u32>`, which the engine fills from the
-   sidecar. Passing `change_set` without it is `INVALID_OP`. Proposal: document that the engine
-   resolves `change_set` before dispatch.
+1. **Resolved.** **`edit_comment`** is now `Op_edit_comment` in `ops.schema.json`, with
+   `comment` and `text` both required, and has an example in `spec/examples/ops/`. It replaces
+   the comment body and keeps the author, date and threading.
+2. **Resolved.** **`change_set` needs the sidecar.** `spec/errors.md` now states that the engine
+   resolves a `change_set` to its revision ids from its session log, and that an id it never
+   issued is missing. The edit functions still take the resolved ids as
+   `change_set_revisions: Vec<u32>`.
 3. **`list_changes.status`**: the document alone only knows `open` revisions. `accepted` /
    `rejected` return an empty list. History would need the change-set log.
 4. **`accept`/`reject` result**: `EditOutcome.revisions` lists the ids *resolved*, not created.
    A move resolves as a pair (moveFrom + moveTo, and their range markers), so accepting one move
    id resolves two. Proposal: spec it in OpResult.
-5. **Structured reasons on errors.** `Error::Edit { code, message }` has no reason field, so
-   `UNSUPPORTED` reasons go in as a message prefix (`merged_cells: …`, `direct_only: …`,
-   `no_grid`, `nested_table`, `unaligned_cells`, `uneven_split`), and so do
-   `CONFIRM_REQUIRED` reasons (`beta: …`). Proposal: add `reason: Option<&'static str>` to
-   `Error::Edit` and to the error schema.
+5. **Resolved in the envelope.** **Structured reasons on errors.** `error.schema.json` now has
+   a `reason` field whose enum includes `merged_cells`, `direct_only`, `no_grid`,
+   `nested_table`, `unaligned_cells`, `uneven_split` and `beta`. Internally,
+   `Error::Edit { code, message }` still carries the reason as a message prefix;
+   `split_reason` in `src/ops/mod.rs` moves it into the envelope's `reason` field.
 6. **Guards are the engine's job.** The edit functions read only `guards.mode`. `expect` and
    `base_version` are left to the engine, as is the per-op `author` override precedence (the
    comment ops honour `args.author` over the session author).
@@ -106,9 +106,9 @@ schema or spec change, a decision taken where the spec was silent, or a known ga
 
 ## Oracle issues found (tools/oracle, not mine)
 
-- `locality.DEFAULT_ALLOWED_PARTS` contains `[Content_Types].xml`, which `fnmatch` reads as a
-  character class, so a content-types change is always a `part_changed` violation. It should be
-  escaped as `[[]Content_Types].xml`, or compared by exact name first.
+- **Resolved.** `locality.DEFAULT_ALLOWED_PARTS` listed `[Content_Types].xml`, which `fnmatch`
+  reads as a character class, so a content-types change was always a `part_changed` violation.
+  It is now escaped as `[[]Content_Types].xml`.
 - The text oracle does not model `w:cellIns` / `w:cellDel`: the reject view of an inserted
   column still shows an empty cell, and the accept view of a deleted column does too. It also
   cannot merge an inserted paragraph mark when the next block is a table. The views match once
