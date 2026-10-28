@@ -9,7 +9,8 @@ fn validator(root: Value) -> jsonschema::Validator {
         ["common.schema.json", "view-model.schema.json", "patch.schema.json", "ops.schema.json", "error.schema.json"]
     {
         let schema: Value = serde_json::from_slice(&std::fs::read(dir.join(file)).unwrap()).unwrap();
-        registry = registry.add(schema["$id"].as_str().unwrap().to_owned(), schema).unwrap();
+        let id = schema["$id"].as_str().unwrap().to_owned();
+        registry = registry.add(&id, schema).unwrap();
     }
     let registry = registry.prepare().unwrap();
     jsonschema::options().with_registry(&registry).build(&root).unwrap()
