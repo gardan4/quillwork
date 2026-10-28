@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://quillwork.example/spec/presentation/v0/transaction.schema.json",
+  "title": "Presentation text transaction",
+  "description": "Separate PPTX candidate-editing contract. Maximum 200 ops and 1,000,000 combined UTF-8 find/replace bytes. Session versions restart at 1; use base_sha256 across reopen.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["base_version", "ops"],
+  "properties": {
+    "spec_version": {"const": "0.1.0"},
+    "base_version": {"type": "integer", "minimum": 1},
+    "base_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "ops": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 200,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["op", "anchor", "find", "replace"],
+        "properties": {
+          "op": {"const": "replace_text"},
+          "anchor": {"type": "string", "pattern": "^s[0-9]+(?:\\.n)?\\.sh[0-9]+(?:\\.r[1-9][0-9]*\\.c[1-9][0-9]*)?\\.p[1-9][0-9]*$"},
+          "find": {"type": "string", "minLength": 1},
+          "replace": {"type": "string", "pattern": "^[^\\r\\n\\t]*$"},
+          "expect": {"type": "string"},
+          "occurrence": {"type": "integer", "minimum": 1}
+        }
+      }
+    }
+  }
+}

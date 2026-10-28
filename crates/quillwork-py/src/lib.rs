@@ -16,6 +16,7 @@ use pyo3::prelude::*;
 mod document;
 mod errors;
 mod package;
+mod presentation;
 mod xml;
 
 /// `quillwork._native`
@@ -30,6 +31,7 @@ fn native(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<xml::XmlLimits>()?;
     m.add_class::<xml::XmlDocument>()?;
     m.add_class::<document::JsonDocument>()?;
+    m.add_class::<presentation::JsonPresentation>()?;
     m.add_function(wrap_pyfunction!(xml::conventional_namespaces, m)?)?;
     Ok(())
 }

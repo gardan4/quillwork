@@ -3,6 +3,10 @@
 The `quillwork` wheel is the Rust core behind a PyO3 module. Host applications and the
 `quillwork-server` package (`python/quillwork_server`) consume it as a pinned wheel.
 
+The separate experimental `quillwork.Presentation` API handles existing PowerPoint text and
+template fill. See the [PowerPoint guide](POWERPOINT.md) and
+[presentation contract](../spec/presentation/README.md); the Word API below remains distinct.
+
 - Crate: `crates/quillwork-py` (PyO3 0.30.1, maturin 1.15, mixed Rust/Python layout).
 - Wheel: `abi3`, CPython **3.12+**, so there is one wheel per platform. DESIGN §2 first said
   `abi3-py310`. It is 3.12 because the first host application runs 3.12, and because the 3.12

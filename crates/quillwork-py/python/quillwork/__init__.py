@@ -1,10 +1,11 @@
-"""Quillwork: lossless, AI-friendly editing of Word (.docx) documents.
+"""Quillwork: lossless, AI-friendly Word and PowerPoint editing.
 
 Layers, bottom up:
 
 - :class:`Package` - the .docx zip (OPC). Unedited parts round-trip byte for byte.
 - :class:`XmlDocument` - one XML part, lossless; nodes are ``int`` handles.
 - :class:`Document` - the op language (JSON per ``spec/schema``): transactions, save + sidecar.
+- :class:`Presentation` - existing PPTX text, literal template fill and candidate review.
 
 Errors are :class:`QuillworkError` subclasses (:mod:`quillwork.errors`).
 """
@@ -35,6 +36,7 @@ from .errors import (
     XmlParseError,
     XmlValueError,
 )
+from .presentation import Presentation
 
 __all__ = [
     "SPEC_VERSION",
@@ -46,12 +48,13 @@ __all__ = [
     "Limits",
     "NotFoundError",
     "Package",
+    "Presentation",
     "ProtectedError",
     "QuillworkError",
     "Relationship",
     "UnsupportedError",
-    "XmlDocument",
     "XmlDoctypeError",
+    "XmlDocument",
     "XmlError",
     "XmlLimits",
     "XmlNodeError",

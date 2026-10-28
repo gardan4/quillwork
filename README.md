@@ -1,6 +1,6 @@
 # Quillwork
 
-Quillwork lets an AI agent edit Word documents without breaking them.
+Quillwork lets an AI agent edit Word documents and existing PowerPoint decks while preserving their design.
 
 ![An AI agent changes one clause in a Word contract and adds another; the letterhead, numbering, table, styles and footer stay untouched](docs/quillwork-demo.gif)
 
@@ -13,6 +13,11 @@ and accepts or rejects the agent's changes like any colleague's.
 
 Status: **alpha (0.0.x)**. The API, the op language and the sidecar format can still change
 between releases. See [Limitations](#limitations).
+
+**PowerPoint support (unreleased):** `quillwork.Presentation` fills an existing branded `.pptx`
+template or changes its text, tables and speaker notes. It preserves the deck's assets and
+formatting and returns a source/candidate report for application-owned review. See the
+[PowerPoint guide](docs/POWERPOINT.md); the Word tracked-change API below is separate.
 
 ## Why
 
@@ -172,14 +177,18 @@ numbers.
 
 ## Limitations
 
-- **Format:** `.docx` and `.docm` only. Encrypted or password-protected files are refused.
-  There is no `.doc`, `.odt`, `.xlsx` or `.pptx` support.
+- **Format:** the Word API handles `.docx` and `.docm`. The separate, unreleased presentation
+  API handles transitional `.pptx` text editing and literal template fill. There is no `.doc`,
+  `.odt`, `.xlsx`, `.potx` or `.pptm` support. Encrypted files are refused.
 - **Not implemented yet:** footnote and endnote insertion, hyperlinks, inserting fields, all
   image edits (images can be read and listed), document compare, template fill, and document
   properties. `doc.help()` marks each of these as `(not implemented)`, and the engine rejects
   them.
-- **Known issue:** inserting a row after a vertically merged row can drop text from the merged
-  cell.
+- **Merged rows:** inserting nonempty continuation text into a vertically merged column is
+  refused; use an empty continuation cell or change the merge first.
+- **Presentations:** no slide creation, image/chart editing, native tracked changes, HTTP/MCP
+  routing or viewer support yet. Text can overflow its existing box; render candidates before
+  approval. See the [presentation contract](spec/presentation/README.md).
 - **Bindings:** Python and Rust only. The WASM binding (`crates/quillwork-wasm`) is a
   placeholder. The viewer is written but not yet published to npm.
 - **Anchors:** anchors survive across sessions only when you keep the sidecar from
