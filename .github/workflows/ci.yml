@@ -92,6 +92,8 @@ jobs:
           ruff check examples bench
           python examples/make_sample.py "$RUNNER_TEMP/sample-contract.docx"
           python examples/edit_contract.py "$RUNNER_TEMP/sample-contract.docx"
+          python corpus/synthetic/gen_presentation.py "$RUNNER_TEMP/business-template.pptx"
+          python examples/fill_presentation.py "$RUNNER_TEMP/business-template.pptx" "$RUNNER_TEMP/business-proposal.pptx"
       - name: Benchmark
         run: python bench/fidelity.py --json "$RUNNER_TEMP/bench.json"
 

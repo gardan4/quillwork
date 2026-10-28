@@ -6,6 +6,10 @@ the binding is wrong. Design background: [docs/DESIGN.md](../docs/DESIGN.md) §5
 
 `spec_version`: **0.1.0**
 
+This catalogue describes Word operations. The separate experimental
+[presentation contract](presentation/README.md) defines PowerPoint candidate editing;
+it does not use the Word viewer, tool schemas or tracked-change operations below.
+
 ## What's here
 
 | Path | What |

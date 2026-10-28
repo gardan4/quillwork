@@ -8,6 +8,15 @@ are listed under **Changed**.
 
 ## [Unreleased]
 
+### Added
+
+- Experimental `pml::Presentation` / `quillwork.Presentation` for existing transitional PPTX
+  decks: anchored text discovery, atomic run-preserving replacement in shapes, groups, tables
+  and notes, literal Python template fill, and original/candidate hashes with text review.
+  Includes a synthetic business template, walkthrough, transaction schema and documented host
+  approval workflow. Slide creation, layout reflow, images/charts and reference-server/viewer
+  integration are outside this first API.
+
 ### Changed
 
 - Validate optional Word request `spec_version` as SemVer and reject incompatible major/minor

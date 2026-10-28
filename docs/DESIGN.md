@@ -846,20 +846,23 @@ change in the version they sent back?") and a strong open-source selling point. 
 | Converters | LibreOffice/Gotenberg runs in its own container: no network, read-only rootfs, CPU/memory/time caps, one document per call. |
 | Resource use | Per-call timeouts; op batch size caps; projection token budgets. |
 
-## 13. PowerPoint next; Excel later and not promised (same core)
+## 13. PowerPoint foundation; Excel later and not promised
 
-The OPC layer, assets, security, validation framework, the service, change sets and the viewer shell are
-shared. What differs:
+The experimental PowerPoint text API now reuses the OPC and raw-span XML layers. Its
+[implemented contract](../spec/presentation/README.md) and [business workflow](POWERPOINT.md)
+cover existing text, literal template fill and hash-bound candidate reports. The Word service,
+viewer and native change sets are separate. The table below is a broader design roadmap;
+slide structure, a presentation viewer, comments and sidecar history remain future work.
 
 | | PowerPoint (`.pptx`) | Excel (`.xlsx`) |
 |---|---|---|
-| Model | presentation → slides → shape tree (`p:sp`, `p:pic`, `p:graphicFrame`, `p:grpSp`); text bodies `a:txBody/a:p/a:r`; layouts and masters; placeholders by `type`/`idx` | workbook → sheets → rows/cells; shared strings; styles (`cellXfs`); formulas; defined names; tables; charts |
+| Model | presentation → slides → shape tree (`p:sp`, `p:pic`, `p:graphicFrame`, `p:grpSp`); shape text bodies `p:txBody/a:p/a:r`, table cell text bodies `a:txBody/a:p/a:r`; layouts and masters; placeholders by `type`/`idx` | workbook → sheets → rows/cells; shared strings; styles (`cellXfs`); formulas; defined names; tables; charts |
 | Projection | Slide by slide: title, placeholders and shapes with anchors (`s3.sh5`), speaker notes, images with alt text | Per sheet: used range as a table with cell refs, formulas shown as `=…` next to cached values, named ranges, tables |
 | Ops | Replace text in a shape; add, delete, duplicate or reorder slides (from a layout); set notes; insert or replace image; table cells; chart data | Set a cell value or formula; insert or delete rows/cols (refs shifted); format; add sheet; table ops; chart data |
 | Review | **No native tracked changes.** Change sets live only in the sidecar. The UI shows before/after per slide (our renderer) and offers accept/reject; reject restores the pre-change XML from the snapshot. Comments: modern pptx comments (`ppt/comments/modernComment_*.xml`). | **No usable native tracking** (shared-workbook revisions are legacy). Same sidecar change sets, with a cell-level diff view (old → new, highlighted). Threaded comments + notes. |
 | Viewer | Our own slide renderer: absolutely positioned shapes, text, images. Thumbnails from LibreOffice for exactness. | A grid renderer with formatting and frozen panes; formulas recalculated by LibreOffice on export (or a formula engine later). |
 | Gotchas | Slide ids in `p:sldIdLst` start at 256; adding a slide touches the id list, rels, content types and `p14:sectionLst`. Placeholders inherit through layout and master. `a:normAutofit fontScale` means the renderer must shrink overflowing text. | Delete `calcChain.xml` whenever formulas change, or Excel repairs the file; set `calcPr fullCalcOnLoad="1"`. Inserting rows shifts every reference: formulas, merges, conditional formats, validations, tables, defined names, charts. Threaded comments need the legacy comment plus its `vmlDrawing` as a fallback. |
-| Libraries | python-pptx (MIT) is the only real editing library and is in maintenance; we use our own OPC core plus its ideas. | openpyxl **drops** charts and images it loads, so it can't be our model either; the same raw-XML approach as Word. |
+| Implementation | Reuse the existing OPC/XML preservation layers; validate compatibility independently of the editor. | Any future implementation needs preservation tests for formulas, charts, images and unknown parts before choosing a model. |
 | Effort | Medium. The slide renderer is the big part. | Medium-high. Formula reference shifting is the hard part. |
 
 ## 14. Testing
