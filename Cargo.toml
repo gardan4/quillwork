@@ -3,7 +3,7 @@ resolver = "3"
 members = ["crates/quillwork-core", "crates/quillwork-py", "crates/quillwork-wasm"]
 
 [workspace.package]
-version = "0.0.3"
+version = "0.0.4"
 edition = "2024"
 license = "Apache-2.0"
 rust-version = "1.88"

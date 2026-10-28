@@ -55,7 +55,7 @@ def sse(text: str) -> list[tuple[str, dict[str, Any]]]:
 
 def test_health_needs_no_auth(service: DocumentService) -> None:
     c = TestClient(create_app(service, authenticate=api_key_auth(KEY)))
-    assert c.get("/health").json() == {"ok": True, "version": "0.0.3", "engine": "fake"}
+    assert c.get("/health").json() == {"ok": True, "version": "0.0.4", "engine": "fake"}
 
 
 def test_api_key_auth(service: DocumentService, doc: str) -> None:
