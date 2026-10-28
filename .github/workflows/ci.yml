@@ -1,6 +1,7 @@
-# Checks every pull request and every push to main. The commands match CONTRIBUTING.md.
-# Only public files are tested: QUILLWORK_PRIVATE_CORPUS points at an empty directory, so the
-# private-corpus cases skip. Actions are pinned to commit SHAs; the tag is in the trailing comment.
+# Checks every pull request and every push to main, and publish.yml calls it on the release tag.
+# The commands match CONTRIBUTING.md. Only public files are tested: QUILLWORK_PRIVATE_CORPUS
+# points at an empty directory, so the private-corpus cases skip. Actions are pinned to commit
+# SHAs; the tag is in the trailing comment.
 name: ci
 
 on:
@@ -8,6 +9,7 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  workflow_call:
 
 permissions:
   contents: read

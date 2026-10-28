@@ -2,7 +2,8 @@
 #
 # Run it by hand: Actions > publish > Run workflow, and pick the release tag (v0.0.3, ...) as the
 # ref. It refuses any ref that is not a v* tag, or a tag that does not match the versions in
-# Cargo.toml and python/quillwork_server/pyproject.toml.
+# Cargo.toml and python/quillwork_server/pyproject.toml. The full CI suite (ci.yml) runs on the
+# tag commit first; nothing is built or published unless it passes.
 #
 # No API tokens are stored. Both registries use trusted publishing (OIDC): the registry trusts
 # this repository, this workflow file and the named GitHub environment. Set-up, once:
@@ -55,8 +56,14 @@ jobs:
           echo "tag $want, Cargo.toml $cargo_v, quillwork-server $server_v"
           test "$cargo_v" = "$want" && test "$server_v" = "$want"
 
-  build:
+  ci:
     needs: check
+    uses: ./.github/workflows/ci.yml
+    permissions:
+      contents: read
+
+  build:
+    needs: [check, ci]
     uses: ./.github/workflows/wheels.yml
     # wheels.yml declares contents: write for its release job, and a called workflow may not ask
     # for more than its caller grants. That job only runs on a tag push, so here it is skipped.
@@ -110,7 +117,7 @@ jobs:
   crates:
     name: crates.io quillwork-core
     if: inputs.crates
-    needs: check
+    needs: [check, ci]
     runs-on: ubuntu-24.04
     environment:
       name: crates-io
