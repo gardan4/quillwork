@@ -127,7 +127,10 @@ fn field_error(handle: &str) -> OpError {
 }
 
 pub(crate) fn locked_error(handle: &str) -> OpError {
-    OpError::in_field(handle, "locked_control", format!("{handle}: that text is in a locked content control"))
+    OpError {
+        reason: Some("locked_control".into()),
+        ..OpError::new("PROTECTED", format!("{handle}: that text is in a locked content control")).with_anchor(handle)
+    }
 }
 
 /// Check that bytes `[hs, he)` of `p` (or the insertion point `hs == he`) can be edited.

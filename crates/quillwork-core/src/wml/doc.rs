@@ -115,6 +115,32 @@ impl WordDoc {
             .unwrap_or_else(|| "word/document.xml".to_owned());
         let main_doc = parse_part(parts, &main_name, limits)?
             .ok_or_else(|| Error::Wml(format!("main document part {main_name:?} not found")))?;
+        // All Office formats use officeDocument relationships. Following one is not proof
+        // that its target can be interpreted or edited as WordprocessingML.
+        if !main_doc.is(main_doc.root(), ns::W, "document") {
+            return Err(Error::Wml("the main part is not a WordprocessingML document".into()));
+        }
+        match parts.part(opc::CONTENT_TYPES_PART) {
+            Ok(bytes) => {
+                let types = opc::ContentTypes::parse(&bytes)?;
+                let word_main = matches!(
+                    types.content_type_of(&main_name),
+                    Some(
+                        "application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"
+                            | "application/vnd.ms-word.document.macroEnabled.main+xml"
+                            | "application/vnd.openxmlformats-officedocument.wordprocessingml.template.main+xml"
+                            | "application/vnd.ms-word.template.macroEnabledTemplate.main+xml"
+                    )
+                );
+                if !word_main {
+                    return Err(Error::Wml("the main part does not have a Word content type".into()));
+                }
+            }
+            // The minimal in-memory Parts interface also serves standalone model tests.
+            // Real OPC packages always have a content-types part (Package::open checks it).
+            Err(Error::NotFound(_)) => {}
+            Err(e) => return Err(e),
+        }
         let main_rels = parts.rels(&main_name)?;
 
         let mut loaded =
@@ -167,7 +193,7 @@ impl WordDoc {
     /// Write every modified part into the kept package and return the saved `.docx` bytes.
     /// With no modifications the result is the input, byte for byte.
     pub fn save(&mut self) -> Result<Vec<u8>> {
-        let mods = self.modified_parts();
+        let mods = self.edited_parts();
         let pkg = self.pkg.as_mut().ok_or_else(|| Error::Wml("save needs a document opened from a package".into()))?;
         for (name, bytes) in mods {
             pkg.set_part(&name, bytes)?;
@@ -186,10 +212,8 @@ impl WordDoc {
             pkg.add_part(name, self.part(idx).to_bytes(), content_type)?;
             pkg.add_relationship_to_part(&main, rel_type, name)?;
         }
-        for (name, bytes) in self.modified_parts() {
-            if !self.added.iter().any(|(n, _, _)| *n == name) {
-                pkg.set_part(&name, bytes)?;
-            }
+        for (name, bytes) in self.edited_parts() {
+            pkg.set_part(&name, bytes)?;
         }
         Ok(())
     }
@@ -324,6 +348,12 @@ impl WordDoc {
 
     // ------------------------------------------------------------------ changes
 
+    // Synchronizing to a previously saved package must include trees returned to their
+    // original bytes: the package can still contain an earlier candidate for that part.
+    fn edited_parts(&self) -> Vec<(String, Vec<u8>)> {
+        self.parts.iter().filter(|p| p.doc.is_modified()).map(|p| (p.name.clone(), p.doc.to_bytes())).collect()
+    }
+
     /// Parts whose serialization differs from their source bytes, as (part name, new bytes).
     pub fn modified_parts(&self) -> Vec<(String, Vec<u8>)> {
         self.parts
@@ -339,6 +369,11 @@ impl WordDoc {
     /// The committed-mutation counter. Starts at 0 on load.
     pub fn version(&self) -> u64 {
         self.version
+    }
+
+    /// Restore the host's persisted counter without replaying historical commits.
+    pub(crate) fn restore_version(&mut self, version: u64) {
+        self.version = version;
     }
 
     /// Record one committed mutation (a transaction of edits) and return the new version.

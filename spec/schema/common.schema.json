@@ -6,13 +6,14 @@
   "$defs": {
     "SpecVersion": {
       "type": "string",
-      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$",
-      "description": "Semver of the spec this payload conforms to."
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*)?(?:\\+[0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*)?$",
+      "not": {"pattern": "[^0-9A-Za-z.+-]"},
+      "description": "SemVer of the spec this payload conforms to, including optional prerelease/build identifiers."
     },
     "Version": {
       "type": "integer",
-      "minimum": 1,
-      "description": "Document version. Upload creates version 1; every committed transaction adds one."
+      "minimum": 0,
+      "description": "Document version. A fresh Rust engine starts at 0; Python and service uploads start at 1. Every committed transaction adds one. Persisted counters retain their identity."
     },
     "StoryId": {
       "type": "string",

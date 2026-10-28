@@ -74,6 +74,15 @@ python spec/tools/export.py mcp                # [{name, description, inputSchem
 
 Every request may and every response must carry `spec_version` (semver). The engine accepts any
 request whose major version equals its own and whose minor version is ≤ its own.
+Malformed or incompatible versions return `INVALID_OP` at `/spec_version` before the
+request runs. Prerelease and build identifiers follow SemVer syntax; compatibility uses
+only the stated major/minor rule. Omitting `spec_version` uses the engine's current spec.
+
+Document `version` is a separate, nonnegative optimistic-concurrency counter. A fresh Rust
+`Engine::open` starts at 0; Python `Document.open` and service uploads start at 1. Each
+committed transaction increments the current counter, and reopening a Rust sidecar preserves
+its stored counter, including 0. Hosts should use the version returned by their API rather
+than assume an initial value. Python's existing minimum-1 upload convention remains unchanged.
 
 - **Patch** (0.1.x): wording, examples, descriptions, tests. No payload that was valid becomes
   invalid or vice versa.

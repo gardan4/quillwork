@@ -535,6 +535,23 @@ pub fn insert_row(
         let rows = Table(tbl.node).rows(d);
         let at = rows.iter().position(|r| r.0 == tr).unwrap_or(0);
         let next_row = if after { rows.get(at + 1).map(|r| r.0) } else { Some(tr) };
+        let continues: Vec<bool> = cells
+            .iter()
+            .map(|&(tc, start, _)| {
+                next_row
+                    .and_then(|nr| cell_at(d, nr, start))
+                    .is_some_and(|(c, _, _)| Cell(c).v_merge(d) == VMerge::Continue)
+                    && (!after || Cell(tc).v_merge(d) != VMerge::None)
+            })
+            .collect();
+        for (i, &continued) in continues.iter().enumerate() {
+            if continued && texts.get(i).is_some_and(|s| !s.is_empty()) {
+                return Err(unsupported(
+                    "merged_cells",
+                    format!("cell {} continues a vertical merge; supply empty text or insert outside the merge", i + 1),
+                ));
+            }
+        }
 
         let new_tr = wq.el(d, "tr", &[])?;
         if after {
@@ -566,14 +583,10 @@ pub fn insert_row(
             let id = rv.id(alloc_rev);
             mark_row(d, &wq, new_tr, "ins", id, author, date)?;
         }
-        for (i, &(tc, start, _)) in cells.iter().enumerate() {
-            let continues = next_row
-                .and_then(|nr| cell_at(d, nr, start))
-                .is_some_and(|(c, _, _)| Cell(c).v_merge(d) == VMerge::Continue)
-                && (!after || Cell(tc).v_merge(d) != VMerge::None);
-            let text = if continues { "" } else { texts.get(i).map(String::as_str).unwrap_or("") };
+        for (i, &(tc, _, _)) in cells.iter().enumerate() {
+            let text = texts.get(i).map(String::as_str).unwrap_or("");
             let c = new_cell(d, &wq, Place::Append(new_tr), tc, true, None, text, track.then_some(&mut rv), alloc_rev)?;
-            if continues {
+            if continues[i] {
                 let tcpr = tcpr_of(d, &wq, c)?;
                 let vm = wq.el(d, "vMerge", &[])?;
                 put_tcpr_child(d, tcpr, vm)?;
