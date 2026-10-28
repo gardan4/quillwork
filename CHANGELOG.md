@@ -53,6 +53,10 @@ are listed under **Changed**.
 - Agent table tools preserve requested row order. Idle SSE waits use separate bounded worker
   capacity and release actual workers on disconnect/cancellation.
 - The locality oracle treats `[Content_Types].xml` as a literal allowed part name.
+- `quillwork-server` without an API key answers only to loopback `Host` and `Origin` values
+  (plus `--allowed-host` / `QUILLWORK_ALLOWED_HOSTS`), so a page on another site cannot read
+  or edit local documents through DNS rebinding or a cross-site request. `create_app` takes
+  the same check as `allowed_hosts`.
 
 ## [0.0.3] - 2026-10-27
 

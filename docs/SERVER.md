@@ -34,10 +34,18 @@ Every setting is an environment variable and most are also a flag (the flag wins
 | `QUILLWORK_MAX_UPLOAD_BYTES` | | 50 MiB | Largest upload or import. |
 | `QUILLWORK_MAX_OPS` | | 200 | Ops per transaction. |
 | `QUILLWORK_HOST` / `QUILLWORK_PORT` | `--host` / `--port` | `127.0.0.1` / `8765` | Listen address. |
+| `QUILLWORK_ALLOWED_HOSTS` | `--allowed-host` (repeatable) | none | Extra `Host` names the HTTP API answers to (comma-separated in the variable). |
 
 Both servers refuse to listen beyond localhost without protection: `quillwork-server` needs an
 API key, and `quillwork-mcp --transport http` has no auth hook at all, so it only binds to
 localhost (put a proxy that authenticates in front of it if you need more).
+
+Without an API key, `quillwork-server` also answers only to requests whose `Host` (and
+`Origin`, when a browser sends one) is `127.0.0.1`, `localhost`, `::1` or an allowed host, and
+returns 403 otherwise. That keeps a web page on another site from reading or editing local
+documents through DNS rebinding or a cross-site request. With an API key, `Host` is checked only
+when allowed hosts are configured, so authenticated reverse proxies keep working.
+`create_app(..., allowed_hosts=[...])` applies the same check in an embedding app.
 
 ## Embed it
 

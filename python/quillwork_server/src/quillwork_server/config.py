@@ -39,6 +39,8 @@ class Settings:
     max_ops_per_transaction: int = _DEFAULTS.max_ops_per_transaction
     host: str = "127.0.0.1"
     port: int = 8765
+    #: HTTP: extra Host names to answer to (``QUILLWORK_ALLOWED_HOSTS``, comma-separated).
+    allowed_hosts: tuple[str, ...] = ()
 
     @classmethod
     def from_env(cls, env: Mapping[str, str] | None = None) -> Settings:
@@ -52,6 +54,9 @@ class Settings:
             max_upload_bytes=int(env.get("QUILLWORK_MAX_UPLOAD_BYTES", base.max_upload_bytes)),
             max_ops_per_transaction=int(env.get("QUILLWORK_MAX_OPS", base.max_ops_per_transaction)),
             host=env.get("QUILLWORK_HOST", base.host),
+            allowed_hosts=tuple(
+                h.strip() for h in env.get("QUILLWORK_ALLOWED_HOSTS", "").split(",") if h.strip()
+            ),
             port=int(env.get("QUILLWORK_PORT", base.port)),
         )
 

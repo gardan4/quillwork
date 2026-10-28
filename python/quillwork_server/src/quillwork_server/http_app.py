@@ -9,17 +9,21 @@ from __future__ import annotations
 
 import argparse
 import json
-from collections.abc import AsyncIterator, Awaitable, Callable
+from collections.abc import AsyncIterator, Awaitable, Callable, Collection
 from dataclasses import dataclass
 from functools import partial
 from typing import Any, Final
+from urllib.parse import urlsplit
 
 import anyio
 from quillwork.errors import QuillworkError
 from starlette.applications import Starlette
+from starlette.datastructures import Headers
+from starlette.middleware import Middleware
 from starlette.requests import Request
 from starlette.responses import JSONResponse, PlainTextResponse, Response, StreamingResponse
 from starlette.routing import Route
+from starlette.types import ASGIApp, Receive, Scope, Send
 
 from . import __version__
 from .config import Settings, add_arguments, from_args
@@ -32,6 +36,10 @@ DOCX: Final = "application/vnd.openxmlformats-officedocument.wordprocessingml.do
 # disconnect/cancellation release an actual worker without abandoning a running thread.
 SSE_WAIT_WORKERS: Final = 40
 SSE_WAIT_SLICE: Final = 0.25
+#: Host names an unauthenticated local server answers to. A page on another site can reach a
+#: loopback port (DNS rebinding, cross-site requests); checking Host and Origin keeps it from
+#: reading or changing documents that way.
+LOOPBACK_HOSTS: Final = ("127.0.0.1", "localhost", "::1")
 
 #: HTTP status per spec error code. The body always carries the full error.
 STATUS: Final[dict[str, int]] = {
@@ -97,6 +105,35 @@ def open_access(author: str = "user") -> Authenticate:
 Handler = Callable[[Request, Principal], Awaitable[Response]]
 
 
+def _host_name(host: str) -> str:
+    """``localhost:8765`` -> ``localhost``, ``[::1]:8765`` -> ``::1``."""
+    host = host.strip().lower()
+    if host.startswith("["):
+        return host[1:].split("]", 1)[0]
+    return host.rsplit(":", 1)[0] if host.count(":") == 1 else host
+
+
+class _AllowedHosts:
+    """Answer 403 unless ``Host`` (and ``Origin``, when sent) names an allowed host."""
+
+    def __init__(self, app: ASGIApp, hosts: Collection[str]) -> None:
+        self.app = app
+        self.hosts = frozenset(_host_name(h) for h in hosts)
+
+    def _allowed(self, headers: Headers) -> bool:
+        if _host_name(headers.get("host", "")) not in self.hosts:
+            return False
+        origin = headers.get("origin")
+        return origin is None or (urlsplit(origin).hostname or "") in self.hosts
+
+    async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
+        if scope["type"] in ("http", "websocket") and not self._allowed(Headers(scope=scope)):
+            response = JSONResponse({"ok": False, "error": "host not allowed"}, status_code=403)
+            await response(scope, receive, send)
+            return
+        await self.app(scope, receive, send)
+
+
 class _HttpError(Exception):
     def __init__(self, status: int, body: JSON) -> None:
         self.status = status
@@ -111,9 +148,11 @@ class QuillworkHTTP:
         authenticate: Authenticate | None = None,
         agent_author: str = "AI",
         sse_keepalive: float = 15.0,
+        allowed_hosts: Collection[str] | None = None,
     ) -> None:
         self.service = service
         self.authenticate = authenticate or open_access()
+        self.allowed_hosts = allowed_hosts
         self.runner = ToolRunner(service, author=agent_author)
         if sse_keepalive <= 0:
             raise ValueError("sse_keepalive must be positive")
@@ -141,7 +180,10 @@ class QuillworkHTTP:
             Route("/documents/{id}/assets/{asset}", r(self.asset), methods=["GET"]),
             Route("/documents/{id}/images", r(self.image), methods=["POST"]),
         ]
-        return Starlette(routes=routes)
+        middleware = []
+        if self.allowed_hosts is not None:
+            middleware.append(Middleware(_AllowedHosts, hosts=self.allowed_hosts))
+        return Starlette(routes=routes, middleware=middleware)
 
     # -- plumbing ----------------------------------------------------------------------------
 
@@ -454,26 +496,53 @@ def create_app(
     authenticate: Authenticate | None = None,
     agent_author: str = "AI",
     sse_keepalive: float = 15.0,
+    allowed_hosts: Collection[str] | None = None,
 ) -> Starlette:
-    """The ASGI app. ``authenticate`` is the auth hook (default: none; see :func:`api_key_auth`)."""
+    """The ASGI app. ``authenticate`` is the auth hook (default: none; see :func:`api_key_auth`).
+
+    ``allowed_hosts``: when set, a request whose ``Host`` or ``Origin`` names another host gets
+    403. ``None`` (the default) leaves host checks to the host app or its proxy.
+    """
     return QuillworkHTTP(
-        service, authenticate=authenticate, agent_author=agent_author, sse_keepalive=sse_keepalive
+        service,
+        authenticate=authenticate,
+        agent_author=agent_author,
+        sse_keepalive=sse_keepalive,
+        allowed_hosts=allowed_hosts,
     ).app()
+
+
+def served_hosts(api_key: str, extra: Collection[str] = ()) -> tuple[str, ...] | None:
+    """The ``allowed_hosts`` of the command-line server.
+
+    Without a key the server is local-only, so it answers to the loopback names plus ``extra``.
+    With a key every request is authenticated; Host is checked only when ``extra`` names hosts.
+    """
+    if not api_key:
+        return (*LOOPBACK_HOSTS, *extra)
+    return tuple(extra) or None
 
 
 def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(prog="quillwork-server", description=__doc__)
     add_arguments(parser)
     parser.add_argument("--api-key", help="require this key (default: $QUILLWORK_API_KEY)")
+    parser.add_argument(
+        "--allowed-host",
+        action="append",
+        dest="allowed_hosts",
+        help="also answer to this Host name (repeatable; default: $QUILLWORK_ALLOWED_HOSTS)",
+    )
     args = parser.parse_args(argv)
     settings: Settings = from_args(args)
     key = args.api_key or settings.api_key
-    if not key and settings.host not in ("127.0.0.1", "localhost", "::1"):
+    if not key and settings.host not in LOOPBACK_HOSTS:
         parser.error("refusing to listen beyond localhost without --api-key / QUILLWORK_API_KEY")
     app = create_app(
         settings.service(),
         authenticate=api_key_auth(key) if key else None,
         agent_author=settings.author,
+        allowed_hosts=served_hosts(key, args.allowed_hosts or settings.allowed_hosts),
     )
     import uvicorn
 
