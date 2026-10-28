@@ -12,10 +12,18 @@ import pytest
 from conftest import PARAGRAPHS
 from starlette.testclient import TestClient
 
+from quillwork_server.config import Settings
 from quillwork_server.core import DocumentService, ServiceConfig
 from quillwork_server.core.fake import FakeEngine, fake_bytes
 from quillwork_server.core.store import MemoryStore
-from quillwork_server.http_app import DOCX, Principal, QuillworkHTTP, api_key_auth, create_app
+from quillwork_server.http_app import (
+    DOCX,
+    Principal,
+    QuillworkHTTP,
+    api_key_auth,
+    create_app,
+    served_hosts,
+)
 
 PNG = b"\x89PNG\r\n\x1a\n" + b"\x00" * 32
 KEY = "s3cret-key"
@@ -61,6 +69,37 @@ def test_api_key_auth(service: DocumentService, doc: str) -> None:
     out = c.post(f"/documents/{doc}/ops", json=tx(1, "b101", "world", "there"), headers=headers)
     assert out.status_code == 200
     assert service.versions(doc)[-1].author == "Carol"
+
+
+def test_local_server_refuses_foreign_host_and_origin(service: DocumentService, doc: str) -> None:
+    local = TestClient(create_app(service, allowed_hosts=served_hosts("")))
+    export = f"/documents/{doc}/export?variant=original"
+    rebound = local.get(
+        export, headers={"Host": "attacker.example", "Origin": "http://attacker.example"}
+    )
+    assert rebound.status_code == 403 and b"Hello world" not in rebound.content
+    cross_site = local.post(
+        f"/documents/{doc}/ops",
+        json=tx(1, "b101", "world", "there"),
+        headers={"Host": "127.0.0.1:8765", "Origin": "https://attacker.example"},
+    )
+    assert cross_site.status_code == 403 and len(service.versions(doc)) == 1
+    for host in ("127.0.0.1:8765", "localhost", "LOCALHOST:8765", "[::1]:8765"):
+        assert local.get(export, headers={"Host": host}).status_code == 200, host
+    same_origin = {"Host": "localhost:8765", "Origin": "http://localhost:8765"}
+    assert local.get("/documents", headers=same_origin).status_code == 200
+
+
+def test_served_hosts() -> None:
+    loopback = ("127.0.0.1", "localhost", "::1")
+    assert served_hosts("") == loopback
+    assert served_hosts("", ["docs.internal"]) == (*loopback, "docs.internal")
+    # A key authenticates every request; Host is checked only when names are configured, so a
+    # reverse proxy that rewrites Host keeps working.
+    assert served_hosts(KEY) is None
+    assert served_hosts(KEY, ["docs.example.com"]) == ("docs.example.com",)
+    env = {"QUILLWORK_ALLOWED_HOSTS": " a.example, ,b.example"}
+    assert Settings.from_env(env).allowed_hosts == ("a.example", "b.example")
 
 
 def test_upload_info_list(client: TestClient) -> None:
