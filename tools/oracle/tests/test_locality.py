@@ -90,6 +90,20 @@ def test_other_parts(tmp_path):
     assert locality(src, styles, allowed_parts=["word/styles.xml"])["ok"]
 
 
+def test_default_content_types_allowance_is_literal_and_strict_mode_still_checks_it(tmp_path):
+    src = FIXTURES / "01-run-formatting.docx"
+    edited = rewrite(src, tmp_path / "content-types.docx", lambda d: d + b"\n",
+                     part="[Content_Types].xml")
+    assert locality(src, edited)["ok"]
+    strict = locality(src, edited, allowed_parts=[])
+    assert strict["violations"] == [{"kind": "part_changed", "part": "[Content_Types].xml"}]
+
+    from quillwork_oracle.locality import DEFAULT_ALLOWED_PARTS, _allowed
+
+    assert not _allowed("C.xml", DEFAULT_ALLOWED_PARTS)
+    assert _allowed("word/header1.xml", ["word/header*.xml"])
+
+
 def test_tracked_change_stats(tmp_path):
     src = FIXTURES / "01-run-formatting.docx"
     d = Package.open(str(src)).data["word/document.xml"]

@@ -28,6 +28,10 @@ from .core.types import JSON
 from .tools import ORDER, ToolRunner, render_read
 
 DOCX: Final = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+# Blocking notifier subscriptions use their own bounded worker capacity. Short waits let
+# disconnect/cancellation release an actual worker without abandoning a running thread.
+SSE_WAIT_WORKERS: Final = 40
+SSE_WAIT_SLICE: Final = 0.25
 
 #: HTTP status per spec error code. The body always carries the full error.
 STATUS: Final[dict[str, int]] = {
@@ -111,7 +115,10 @@ class QuillworkHTTP:
         self.service = service
         self.authenticate = authenticate or open_access()
         self.runner = ToolRunner(service, author=agent_author)
+        if sse_keepalive <= 0:
+            raise ValueError("sse_keepalive must be positive")
         self.sse_keepalive = sse_keepalive
+        self._wait_limiter = anyio.CapacityLimiter(SSE_WAIT_WORKERS)
 
     def app(self) -> Starlette:
         r = self._route
@@ -374,6 +381,20 @@ class QuillworkHTTP:
         aid = await self._call(lambda: self.service.put_asset(doc_id, data))
         return JSONResponse({"asset": aid}, status_code=201)
 
+    async def _wait_for_change(self, request: Request, doc_id: str, after: int) -> int | None:
+        deadline = anyio.current_time() + self.sse_keepalive
+        while not await request.is_disconnected():
+            remaining = deadline - anyio.current_time()
+            if remaining <= 0:
+                return None
+            new = await anyio.to_thread.run_sync(
+                partial(self.service.wait, doc_id, after, min(remaining, SSE_WAIT_SLICE)),
+                limiter=self._wait_limiter,
+            )
+            if new is not None:
+                return new
+        return None
+
     async def events(self, request: Request, who: Principal) -> Response:
         """SSE: one ``patch`` event per new version, or ``reload`` when there is no patch.
 
@@ -405,7 +426,9 @@ class QuillworkHTTP:
                 seen = max(seen, feed.version)
                 if until is not None and seen >= until:
                     return
-                new = await self._call(partial(self.service.wait, doc_id, seen, self.sse_keepalive))
+                new = await self._wait_for_change(request, doc_id, seen)
+                if await request.is_disconnected():
+                    return
                 if new is None:
                     yield ": keep-alive\n\n"
 

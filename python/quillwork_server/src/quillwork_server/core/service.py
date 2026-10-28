@@ -294,10 +294,26 @@ class DocumentService:
         head = self._head(document_id)
         if since < 1 or since > head:
             return PatchFeed(since, head, [], reload=True)
-        records = self.versions(document_id, after=since)
-        if any(r.patch is None for r in records):
+        # A writer may commit between these reads. Bound the feed to the sampled head so
+        # its advertised version and its terminal patch agree, even across processes.
+        records = [r for r in self.versions(document_id, after=since) if r.version <= head]
+        patches: list[JSON] = []
+        previous = since
+        for record in records:
+            patch = record.patch
+            if (
+                record.version != previous + 1
+                or record.parent != previous
+                or patch is None
+                or patch.get("base_version") != previous
+                or patch.get("version") != record.version
+            ):
+                return PatchFeed(since, head, [], reload=True)
+            patches.append(patch)
+            previous = record.version
+        if previous != head:
             return PatchFeed(since, head, [], reload=True)
-        return PatchFeed(since, head, [r.patch for r in records if r.patch is not None])
+        return PatchFeed(since, head, patches)
 
     def wait(self, document_id: str, after: int, timeout: float) -> int | None:
         """Block until the head passes ``after`` (or ``timeout``); return the new head or None."""
@@ -422,6 +438,10 @@ class DocumentService:
                 if live.version != head:  # someone dropped/replaced it between the calls
                     raise HeadMoved(document_id, live.version, head)
                 try:
+                    # The real engine emits full patches only after this instance has a VM
+                    # baseline. Persisted feeds must also work after restart, cache eviction,
+                    # or a write made by a different process.
+                    live.doc.view_model()
                     result = live.doc.apply(tx)
                 except QuillworkError:
                     raise  # the engine's transactions are atomic: the live doc is still `head`

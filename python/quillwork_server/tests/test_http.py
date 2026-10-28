@@ -3,8 +3,11 @@
 from __future__ import annotations
 
 import json
+import threading
+from types import SimpleNamespace
 from typing import Any
 
+import anyio
 import pytest
 from conftest import PARAGRAPHS
 from starlette.testclient import TestClient
@@ -12,7 +15,7 @@ from starlette.testclient import TestClient
 from quillwork_server.core import DocumentService, ServiceConfig
 from quillwork_server.core.fake import FakeEngine, fake_bytes
 from quillwork_server.core.store import MemoryStore
-from quillwork_server.http_app import DOCX, api_key_auth, create_app
+from quillwork_server.http_app import DOCX, Principal, QuillworkHTTP, api_key_auth, create_app
 
 PNG = b"\x89PNG\r\n\x1a\n" + b"\x00" * 32
 KEY = "s3cret-key"
@@ -190,3 +193,79 @@ def test_events_stream_patches_then_reload(client: TestClient, doc: str) -> None
     assert events == [("hello", {"version": 3}), ("reload", {"version": 4})]
 
     assert client.get("/documents/nope/events").status_code == 404
+
+
+@pytest.mark.parametrize("ending", ["disconnect", "cancel"])
+def test_idle_event_waits_leave_request_workers_free_and_release_real_workers(ending: str) -> None:
+    class WaitingService(DocumentService):
+        def __init__(self) -> None:
+            super().__init__(FakeEngine())
+            self.waiting = threading.Event()
+            self.release = threading.Event()
+            self.active = 0
+            self.guard = threading.Lock()
+
+        def wait(self, document_id: str, after: int, timeout: float) -> int | None:
+            with self.guard:
+                self.active += 1
+            try:
+                self.waiting.set()
+                self.release.wait(timeout)
+                return None
+            finally:
+                with self.guard:
+                    self.active -= 1
+
+    async def run() -> None:
+        service = WaitingService()
+        doc_id = service.upload(fake_bytes("one")).id
+        http = QuillworkHTTP(service, sse_keepalive=2.0)
+        disconnected = False
+
+        async def is_disconnected() -> bool:
+            return disconnected
+
+        request = SimpleNamespace(
+            path_params={"id": doc_id},
+            query_params={"since": "1"},
+            headers={},
+            is_disconnected=is_disconnected,
+        )
+        ordinary = anyio.to_thread.current_default_thread_limiter()
+        previous_tokens = ordinary.total_tokens
+        ordinary.total_tokens = 1
+        response = await http.events(request, Principal("test", "test"))
+        stream = response.body_iterator
+        await anext(stream)
+        stopped = anyio.Event()
+
+        async def pull() -> None:
+            try:
+                await anext(stream)
+            except StopAsyncIteration:
+                stopped.set()
+
+        try:
+            with anyio.fail_after(2):
+                async with anyio.create_task_group() as group:
+                    group.start_soon(pull)
+                    with anyio.fail_after(1):
+                        while not service.waiting.is_set():
+                            await anyio.sleep(0)
+                    assert ordinary.borrowed_tokens == 0
+                    with anyio.fail_after(1):
+                        result = await http.list_documents(request, Principal("test", "test"))
+                    assert result.status_code == 200
+                    if ending == "disconnect":
+                        disconnected = True
+                        with anyio.fail_after(1):
+                            await stopped.wait()
+                    else:
+                        group.cancel_scope.cancel()
+            assert service.active == 0
+        finally:
+            service.release.set()
+            ordinary.total_tokens = previous_tokens
+            await stream.aclose()
+
+    anyio.run(run)

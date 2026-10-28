@@ -420,9 +420,9 @@ def _table(args: JSON) -> ApplyCall:
         op["data"] = rows
         ops = [op]
     elif action == "insert_rows":
-        # One insert_row per row, each after the same reference row, in order (the spec is
-        # asked to define that several inserts after one row keep their order; docs/SERVER.md).
-        ops = [{"op": "insert_row", "after": anchor, "cells": row} for row in _rows(args)]
+        # Each insertion goes immediately after the same reference row. Apply them from
+        # last to first so their final document order matches the caller's rows.
+        ops = [{"op": "insert_row", "after": anchor, "cells": row} for row in reversed(_rows(args))]
     elif action == "delete_row":
         ops = [{"op": "delete_row", "row": anchor}]
     else:

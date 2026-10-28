@@ -27,7 +27,7 @@ from lxml import etree
 from .ooxml import W14_NS, W_NS, Package, w
 
 DEFAULT_ALLOWED_PARTS = [
-    "[Content_Types].xml",
+    "[[]Content_Types].xml",  # fnmatch: a literal opening bracket, not a character class
     "word/_rels/document.xml.rels",
     "word/comments.xml",
     "word/commentsExtended.xml",
