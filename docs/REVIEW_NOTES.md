@@ -54,9 +54,9 @@ marked **Resolved** are kept for the record and point to where the spec now cove
   `insert_table` adds at the end of the body).
 - Rejecting an inserted footnote or endnote reference leaves the note itself in
   `footnotes.xml`. Word does the same; the note is orphaned but harmless.
-- The in-crate `TextMode::AcceptAll` view (`wml::text`, not mine) keeps an empty line for a
-  paragraph whose mark is deleted, where accepting merges it. The oracle's accept view merges it
-  correctly. Worth aligning.
+- **Resolved.** The in-crate `TextMode::AcceptAll` view (`wml::text`) kept an empty line for a
+  paragraph whose mark is deleted, where accepting merges it. It now runs that paragraph on into
+  the next (and reject-all does the same for an inserted mark), as `view::paragraph_texts` does.
 
 ## Comments
 

@@ -114,8 +114,8 @@ fn table_paras(doc: &WordDoc, anchors: &Anchors, table: &str) -> Vec<usize> {
         .collect()
 }
 
-/// Main-part text, empty lines dropped: the in-crate AcceptAll view keeps an empty line for a
-/// paragraph whose mark is deleted, where accepting merges it (the oracle checks exact lines).
+/// Main-part text, empty lines dropped: the text oracle does not model `w:cellIns`/`w:cellDel`
+/// and keeps an empty line for a removed cell (the oracle checks exact lines).
 fn main_text(doc: &WordDoc, mode: TextMode) -> String {
     let d = doc.part(doc.main_part());
     text::text(d, d.root(), mode).lines().filter(|l| !l.is_empty()).collect::<Vec<_>>().join("\n")
