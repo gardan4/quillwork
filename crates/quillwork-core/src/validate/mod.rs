@@ -15,6 +15,8 @@
 //!   attribute names a relationship of its part;
 //! - order: `pPr` / `rPr` / `tcPr` / `tblPr` / `trPr` first in their parent, `sectPr` last in
 //!   the body, children of `pPr` / `rPr` / `tcPr` / `tblPr` / `trPr` / `sectPr` in schema order;
+//!   children of `w:settings`, `w:styles`, `w:docDefaults`, `w:style` and `w:tblStylePr` in schema
+//!   order (warnings);
 //! - values: `jc`, `vAlign`, `vMerge` enums and on/off toggles;
 //! - tracked changes: no `w:t` in a deletion, no `w:ins` in a `w:ins` (or `del` in `del`),
 //!   `w:delText` only inside a deletion;
@@ -34,6 +36,7 @@ use serde::Serialize;
 use crate::anchors::Anchors;
 use crate::edit::{is_ignored_branch, walk};
 use crate::opc::{self, Package};
+use crate::ops::handlers::SETTINGS_ORDER;
 use crate::wml::{Loc, PartIdx, PartKind, WordDoc};
 use crate::xml::{Document, NodeId, ns};
 
@@ -422,15 +425,57 @@ const TRPR: &[&str] = &[
     "ins|del",
     "trPrChange",
 ];
+/// Children of `w:styles`, `w:docDefaults`, `w:style` (CT_Style) and `w:tblStylePr`.
+const STYLES: &[&str] = &["docDefaults", "latentStyles", "style"];
+const DOC_DEFAULTS: &[&str] = &["rPrDefault", "pPrDefault"];
+const STYLE: &[&str] = &[
+    "name",
+    "aliases",
+    "basedOn",
+    "next",
+    "link",
+    "autoRedefine",
+    "hidden",
+    "uiPriority",
+    "semiHidden",
+    "unhideWhenUsed",
+    "qFormat",
+    "locked",
+    "personal",
+    "personalCompose",
+    "personalReply",
+    "rsid",
+    "pPr",
+    "rPr",
+    "tblPr",
+    "trPr",
+    "tcPr",
+    "tblStylePr",
+];
+const TBL_STYLE_PR: &[&str] = &["pPr", "rPr", "tblPr", "trPr", "tcPr"];
+/// Part-level parents: order is a warning until it is calibrated on more real documents, and
+/// repeats are not checked (`w:style`, `w:tblStylePr`, `w:activeWritingStyle`, ... repeat by
+/// design).
+const LENIENT: &[&str] = &["settings", "styles", "docDefaults", "style", "tblStylePr"];
 
 /// (parent local name, child local name) → rank.
 fn order_table() -> &'static HashMap<(&'static str, &'static str), usize> {
     static T: OnceLock<HashMap<(&'static str, &'static str), usize>> = OnceLock::new();
     T.get_or_init(|| {
         let mut m = HashMap::new();
-        for (parent, list) in
-            [("pPr", PPR), ("rPr", RPR), ("tcPr", TCPR), ("tblPr", TBLPR), ("sectPr", SECTPR), ("trPr", TRPR)]
-        {
+        for (parent, list) in [
+            ("pPr", PPR),
+            ("rPr", RPR),
+            ("tcPr", TCPR),
+            ("tblPr", TBLPR),
+            ("sectPr", SECTPR),
+            ("trPr", TRPR),
+            ("settings", SETTINGS_ORDER),
+            ("styles", STYLES),
+            ("docDefaults", DOC_DEFAULTS),
+            ("style", STYLE),
+            ("tblStylePr", TBL_STYLE_PR),
+        ] {
             for (rank, item) in list.iter().enumerate() {
                 for name in item.split('|') {
                     m.insert((parent, name), rank);
@@ -896,6 +941,11 @@ impl<'a> Checker<'a> {
             "tblPr" => self.child_order(idx, d, n, "tblPr"),
             "sectPr" => self.child_order(idx, d, n, "sectPr"),
             "trPr" => self.child_order(idx, d, n, "trPr"),
+            "settings" if kind == PartKind::Settings => self.child_order(idx, d, n, "settings"),
+            "styles" if kind == PartKind::Styles => self.child_order(idx, d, n, "styles"),
+            "docDefaults" if kind == PartKind::Styles => self.child_order(idx, d, n, "docDefaults"),
+            "style" if kind == PartKind::Styles => self.child_order(idx, d, n, "style"),
+            "tblStylePr" if kind == PartKind::Styles => self.child_order(idx, d, n, "tblStylePr"),
             "numbering" => self.numbering_order(idx, d, q, n),
             "jc" => {
                 let table = d
@@ -1089,12 +1139,18 @@ impl<'a> Checker<'a> {
             if let Some((pr, pl)) = prev
                 && rank < pr
             {
-                // rPr order is lenient in practice (Word reads any order); the rest is strict.
-                let sev = if parent == "rPr" { Severity::Warning } else { Severity::Error };
+                // rPr order is lenient in practice (Word reads any order) and part-level order is
+                // not calibrated yet; the rest is strict.
+                let sev =
+                    if parent == "rPr" || LENIENT.contains(&parent) { Severity::Warning } else { Severity::Error };
                 self.push(sev, "order.child_order", idx, c, format!("w:{l} must come before w:{pl} in w:{parent}"));
                 return;
             }
-            if rank == prev.map_or(usize::MAX, |p| p.0) && parent != "trPr" && parent != "sectPr" {
+            if rank == prev.map_or(usize::MAX, |p| p.0)
+                && parent != "trPr"
+                && parent != "sectPr"
+                && !LENIENT.contains(&parent)
+            {
                 self.push(
                     Severity::Error,
                     "order.child_duplicate",

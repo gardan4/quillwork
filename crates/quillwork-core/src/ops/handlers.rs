@@ -167,8 +167,8 @@ fn review(cx: &mut Cx, op: &Value, accept: bool) -> OpResult<EditOutcome> {
 const SETTINGS_REL: &str = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings";
 const SETTINGS_CT: &str = "application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml";
 
-/// CT_Settings child order (ECMA-376 Part 1, 17.15.1.78).
-const SETTINGS_ORDER: &[&str] = &[
+/// CT_Settings child order (ECMA-376 Part 1, 17.15.1.78). The validator checks against it too.
+pub(crate) const SETTINGS_ORDER: &[&str] = &[
     "writeProtection",
     "view",
     "zoom",

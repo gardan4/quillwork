@@ -95,8 +95,11 @@ marked **Resolved** are kept for the record and point to where the spec now cove
 
 - Rules and codes are in `src/validate/mod.rs`. Severity calibration: zero errors on all 18
   fixtures, 2 synthetic documents and 6 private documents.
-- Not checked yet: child order in `settings.xml` and `styles.xml`, and full XSD types
-  (only `jc`, table `jc`, `vAlign`, `vMerge`, on/off toggles and `w15:done` are typed).
+- Not checked yet: full XSD types (only `jc`, table `jc`, `vAlign`, `vMerge`, on/off toggles
+  and `w15:done` are typed).
+- Child order in `settings.xml` (`w:settings`) and `styles.xml` (`w:styles`, `w:docDefaults`,
+  `w:style`, `w:tblStylePr`) is a warning until it is calibrated on more real documents.
+  Repeats are not checked there.
   The full rule list is in the module doc of `src/validate/mod.rs`.
   `rPr` child order is a warning: Word tolerates most orders there and real documents violate it.
 - `w:t` inside `w:moveFrom` is valid (Word writes moved-away text that way). Only `w:del` requires
