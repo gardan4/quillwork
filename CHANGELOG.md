@@ -8,6 +8,11 @@ are listed under **Changed**.
 
 ## [Unreleased]
 
+### Added
+
+- The validator checks child order in `settings.xml` and `styles.xml` against the schema, as
+  warnings (`order.child_order`).
+
 ### Fixed
 
 - Story text in the accept-all view runs a paragraph whose mark is deleted on into the next

@@ -284,6 +284,43 @@ fn numbering_order() {
 }
 
 #[test]
+fn settings_and_styles_order() {
+    const SETTINGS_REL: &str = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings";
+    const STYLES_REL: &str = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles";
+    let parts = |settings: &str, styles: &str| {
+        doc_with(
+            P,
+            &[
+                ("word/settings.xml", SETTINGS_REL, &format!(r#"<w:settings {NS}>{settings}</w:settings>"#)),
+                ("word/styles.xml", STYLES_REL, &format!(r#"<w:styles {NS}>{styles}</w:styles>"#)),
+            ],
+        )
+    };
+    // Schema order, with repeated and foreign children: no findings.
+    let ok = parts(
+        r#"<w:zoom w:percent="100"/><w:activeWritingStyle w:lang="en-US"/><w:activeWritingStyle w:lang="nl-NL"/><w:proofState w:spelling="clean"/><w:defaultTabStop w:val="720"/><w:compat/><w:rsids/><m:mathPr xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math"/><w:themeFontLang w:val="en-US"/><w:decimalSymbol w:val="."/><w:listSeparator w:val=","/>"#,
+        r#"<w:docDefaults><w:rPrDefault/><w:pPrDefault/></w:docDefaults><w:latentStyles/><w:style w:styleId="a"><w:name w:val="A"/><w:basedOn w:val="b"/><w:qFormat/><w:pPr/><w:rPr/></w:style><w:style w:styleId="t"><w:name w:val="T"/><w:tblPr/><w:tblStylePr w:type="firstRow"><w:pPr/><w:rPr/><w:tcPr/></w:tblStylePr><w:tblStylePr w:type="lastRow"><w:rPr/></w:tblStylePr></w:style>"#,
+    );
+    let r = check(&ok);
+    assert!(r.findings.is_empty(), "{:?}", r.findings);
+
+    // Each out-of-order parent gives one warning, never an error.
+    let bad = parts(
+        r#"<w:defaultTabStop w:val="720"/><w:zoom w:percent="100"/>"#,
+        r#"<w:style w:styleId="a"><w:basedOn w:val="b"/><w:name w:val="A"/></w:style><w:docDefaults><w:pPrDefault/><w:rPrDefault/></w:docDefaults><w:style w:styleId="t"><w:tblStylePr w:type="firstRow"><w:rPr/><w:pPr/></w:tblStylePr></w:style>"#,
+    );
+    let r = check(&bad);
+    assert!(r.is_ok(), "{:?}", r.findings);
+    assert_eq!(codes(&r), ["Warning:order.child_order"; 5], "{:?}", r.findings);
+    let msgs: Vec<&str> = r.findings.iter().map(|f| f.message.as_str()).collect();
+    assert!(msgs.contains(&"w:zoom must come before w:defaultTabStop in w:settings"), "{msgs:?}");
+    assert!(msgs.contains(&"w:docDefaults must come before w:style in w:styles"), "{msgs:?}");
+    assert!(msgs.contains(&"w:name must come before w:basedOn in w:style"), "{msgs:?}");
+    assert!(msgs.contains(&"w:rPrDefault must come before w:pPrDefault in w:docDefaults"), "{msgs:?}");
+    assert!(msgs.contains(&"w:pPr must come before w:rPr in w:tblStylePr"), "{msgs:?}");
+}
+
+#[test]
 fn anchors_name_the_paragraph() {
     let d = doc(r#"<w:p><w:r><w:t>a</w:t></w:r></w:p><w:p><w:pPr><w:jc w:val="nope"/></w:pPr></w:p>"#);
     let a = Anchors::mint(&d);
