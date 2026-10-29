@@ -8,6 +8,12 @@ are listed under **Changed**.
 
 ## [Unreleased]
 
+### Fixed
+
+- Story text in the accept-all view runs a paragraph whose mark is deleted on into the next
+  instead of keeping an empty line, and reject-all does the same for an inserted mark. It now
+  matches the per-paragraph view.
+
 ## [0.0.4] - 2026-10-28
 
 ### Added

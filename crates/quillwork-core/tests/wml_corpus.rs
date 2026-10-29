@@ -15,7 +15,7 @@ use quillwork_core::anchors::Anchors;
 use quillwork_core::wml::view::{
     bookmarks, comment_markers, deep_blocks, drawings, paragraph_texts, paragraphs, revisions, sdts, tables,
 };
-use quillwork_core::wml::{Block, Numbering, RevisionKind, StoryKind, TextMode, WordDoc, fields};
+use quillwork_core::wml::{Block, Numbering, RevisionKind, StoryKind, TextMode, WordDoc, fields, text};
 
 const W: &str = "http://schemas.openxmlformats.org/wordprocessingml/2006/main";
 const M: &str = "http://schemas.openxmlformats.org/officeDocument/2006/math";
@@ -208,6 +208,15 @@ fn check(label: &str, bytes: Vec<u8>) -> Counts {
                     c.labelled += 1;
                 }
             }
+        }
+        // A story's text is its paragraph texts joined with `\n`, in every view: a deleted
+        // (accept) or inserted (reject) paragraph mark runs the paragraph on into the next.
+        for mode in [TextMode::AsIs, TextMode::AcceptAll, TextMode::RejectAll] {
+            assert!(
+                text::text(d, st.root, mode) == paragraph_texts(d, st.root, mode).join("\n"),
+                "{label}: story text differs from its paragraph texts in {mode:?} (story {:?})",
+                st.prefix()
+            );
         }
         // Text against the roxmltree oracle, matched by source offset.
         let name = doc.part_name(st.part).to_owned();

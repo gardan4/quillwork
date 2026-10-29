@@ -5,10 +5,14 @@
 //! - `w:tab`/`w:ptab` → `\t`; `w:br`/`w:cr` → `\n`; `w:noBreakHyphen` → U+2011;
 //!   `w:softHyphen` → U+00AD; `w:sym` → the character in `@w:char`.
 //! - Accept-all skips `w:del`/`w:moveFrom` subtrees; reject-all skips `w:ins`/`w:moveTo`.
+//! - Paragraphs are joined with `\n`, except after a paragraph whose mark is deleted (accept-all)
+//!   or inserted (reject-all): that paragraph runs on into the next, as in
+//!   [`paragraph_texts`](super::view::paragraph_texts).
 //! - Never descended: property elements, field codes (`w:instrText`, `w:delInstrText`), text
 //!   boxes (their own stories), drawings, ignored `mc:AlternateContent` branches.
 
 use super::tree::{Step, is_ignored_branch, is_props, w_attr, walk};
+use super::view::{Paragraph, RevisionKind};
 use crate::xml::{Document, NodeId, ns};
 
 /// Which view of tracked changes text is read in.
@@ -63,6 +67,8 @@ fn rev_local(doc: &Document, n: NodeId) -> Option<&str> {
 /// Core walker: calls `emit(element, text)` for every piece of text below `n` in `mode`.
 pub(crate) fn visit(doc: &Document, n: NodeId, mode: TextMode, mut emit: impl FnMut(NodeId, &str)) {
     let mut paras = 0usize;
+    // The last paragraph's mark goes away in `mode`, so the next paragraph continues it.
+    let mut runs_on = false;
     // `n` itself may be a text element (a lone `w:t`).
     if leaf(doc, n, mode, &mut emit) {
         return;
@@ -81,10 +87,15 @@ pub(crate) fn visit(doc: &Document, n: NodeId, mode: TextMode, mut emit: impl Fn
                     return Step::Over;
                 }
                 "p" => {
-                    if paras > 0 {
+                    if paras > 0 && !runs_on {
                         emit(c, "\n");
                     }
                     paras += 1;
+                    runs_on = matches!(
+                        (mode, Paragraph(c).mark_revision(doc).map(|r| r.kind)),
+                        (TextMode::AcceptAll, Some(RevisionKind::ParaMarkDel))
+                            | (TextMode::RejectAll, Some(RevisionKind::ParaMarkIns))
+                    );
                     return Step::Into;
                 }
                 l if is_props(l) => return Step::Over,
