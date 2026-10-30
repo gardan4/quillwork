@@ -8,8 +8,8 @@ Views:
   reject  the document as if every tracked change were rejected.
 
 A paragraph whose mark is removed in a view (accept: deleted mark; reject: inserted mark) merges into the next
-paragraph of the same container, as Word does. Table rows whose trPr carries w:ins / w:del are dropped in the view
-that removes them.
+paragraph of the same container, as Word does. Table rows whose trPr carries w:ins / w:del, and cells whose tcPr
+carries w:cellIns / w:cellDel, are dropped in the view that removes them.
 
 Stories: the main part, headers/footers (by part name), `<part>#textbox` (text boxes inside that part, Choice branch
 of mc:AlternateContent only), `word/footnotes.xml#<id>`, `word/endnotes.xml#<id>`, `word/comments.xml#<id>`.
@@ -269,7 +269,8 @@ class _Walker:
                     for tc in _row_cells(tr):
                         cell: list = []
                         self._blocks(tc, story, counter, cell)
-                        row_items.append(("cell", _merge(cell, self.mode)))
+                        if not self._cell_removed(tc):
+                            row_items.append(("cell", _merge(cell, self.mode)))
                     if not drop:
                         items.extend(row_items)
                 items.append(("table", None))
@@ -286,6 +287,13 @@ class _Walker:
                 ch = c.find("{%s}Choice" % MC_NS)
                 if ch is not None:
                     self._blocks(ch, story, counter, items)
+
+    def _cell_removed(self, tc) -> bool:
+        """A tracked column cell the view removes: cellIns on reject, cellDel on accept."""
+        tcpr = tc.find(w("tcPr"))
+        if tcpr is None or self.mode == "markup":
+            return False
+        return tcpr.find(w("cellIns" if self.mode == "reject" else "cellDel")) is not None
 
     def _para(self, p, story, counter):
         idx = counter[0]
