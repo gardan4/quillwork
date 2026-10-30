@@ -1,4 +1,4 @@
-versions: quillwork 0.0.1, python-docx 1.2.0, tiktoken 0.14.0, python 3.12.13
+versions: quillwork 0.0.4, python-docx 1.2.0, tiktoken 0.14.0, python 3.12.13
 
 | file | no-op: Quillwork file / entries | no-op: python-docx file / entries / parts | edit: other entries changed (Q / pd) | edit: paragraphs changed (Q / pd) |
 |---|---|---|---|---|
