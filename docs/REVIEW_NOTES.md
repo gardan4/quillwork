@@ -112,7 +112,8 @@ marked **Resolved** are kept for the record and point to where the spec now cove
 - **Resolved.** `locality.DEFAULT_ALLOWED_PARTS` listed `[Content_Types].xml`, which `fnmatch`
   reads as a character class, so a content-types change was always a `part_changed` violation.
   It is now escaped as `[[]Content_Types].xml`.
-- The text oracle does not model `w:cellIns` / `w:cellDel`: the reject view of an inserted
-  column still shows an empty cell, and the accept view of a deleted column does too. It also
-  cannot merge an inserted paragraph mark when the next block is a table. The views match once
-  empty lines are dropped. The actual accept/reject round trips match exactly.
+- **Resolved.** The text oracle did not model `w:cellIns` / `w:cellDel`: the reject view of an
+  inserted column still showed an empty cell, and the accept view of a deleted column did too.
+  It now drops those cells. Its accept and reject views match the engine's accept-all and
+  reject-all output exactly on every tracked table edit, including an inserted table (a
+  paragraph before a table keeps its own line, as in the engine and Word).
