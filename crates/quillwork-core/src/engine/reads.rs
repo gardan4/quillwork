@@ -24,6 +24,8 @@ use crate::xml::ns;
 pub(super) enum Answer {
     Text(String),
     Data(Value),
+    /// Text plus data (`help`: the signatures and the capabilities list).
+    Both(String, Value),
 }
 
 /// Most findings `lint` lists before it cuts the list.
@@ -895,9 +897,20 @@ impl Revs {
 
 // ------------------------------------------------------------------------------ help
 
+/// An op's capability status: `implemented`, `beta` (runs, but a tracked edit needs
+/// `confirm: true`) or `unsupported` (in the catalogue, not run by this engine).
+fn capability(name: &str) -> &'static str {
+    if READ_USAGE.iter().any(|(n, _)| *n == name) || handlers::IMPLEMENTED.contains(&name) {
+        if handlers::BETA.contains(&name) { "beta" } else { "implemented" }
+    } else {
+        "unsupported"
+    }
+}
+
 /// `help`: the read ops' and edit ops' one-line signatures (the `usage` INVALID_OP carries),
-/// or one op's.
+/// or one op's, with `data.capabilities` listing the same ops as `{op, kind, status}`.
 fn help(obj: &Map<String, Value>) -> Result<Answer, OpError> {
+    let cap = |name: &str, kind: &str| json!({ "op": name, "kind": kind, "status": capability(name) });
     let line = |name: &str| -> Option<String> {
         if let Some((_, u)) = READ_USAGE.iter().find(|(n, _)| *n == name) {
             return Some((*u).to_owned());
@@ -916,10 +929,18 @@ fn help(obj: &Map<String, Value>) -> Result<Answer, OpError> {
             out.extend(READ_USAGE.iter().map(|(_, u)| (*u).to_owned()));
             out.push("§ edit ops".to_owned());
             out.extend(ops::OPS.iter().filter_map(|s| line(s.name)));
-            Ok(Answer::Text(out.join("\n")))
+            let caps: Vec<Value> = READ_USAGE
+                .iter()
+                .map(|(n, _)| cap(n, "read"))
+                .chain(ops::OPS.iter().map(|s| cap(s.name, "edit")))
+                .collect();
+            Ok(Answer::Both(out.join("\n"), json!({ "capabilities": caps })))
         }
         Some(Value::String(n)) if !n.is_empty() => match line(n) {
-            Some(l) => Ok(Answer::Text(l)),
+            Some(l) => {
+                let kind = if READ_USAGE.iter().any(|(r, _)| r == n) { "read" } else { "edit" };
+                Ok(Answer::Both(l, json!({ "capabilities": [cap(n, kind)] })))
+            }
             None => Err(bad("help", "/name", format!("unknown op {n:?}; help with no name lists them all"))),
         },
         Some(_) => Err(bad("help", "/name", "name is an op name (replace_text, list_changes, …)")),

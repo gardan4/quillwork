@@ -291,7 +291,7 @@ it.
 - The `outline` op returns the header line and the outline line only. `find` returns the header
   line and the hit lines (§11). All read ops answer at the current version and come back as
   `ReadResult` (`text`, `data`, `next`, `version`): `outline`, `read`, `find`, `lint` and `help`
-  in `text`, the others in `data` (shapes below). Every argument is checked: an unknown key, a
+  in `text`, the others in `data` (shapes below); `help` also fills `data`. Every argument is checked: an unknown key, a
   wrong type or a bad value is `INVALID_OP` with `path` and the op's `usage`.
 
 ### Read ops that answer in data
@@ -314,6 +314,12 @@ can match them up by id.
 `help {}` lists every op's signature, one per line, under `§ read ops` and `§ edit ops`; an edit op
 the engine does not run yet ends in ` (not implemented)`. `help {name}` returns that one line. An
 unknown name is `INVALID_OP`.
+
+Both forms also answer in `data`, for an agent that plans before it edits:
+`{capabilities: [{op, kind, status}]}`, one entry per line of `text` in the same order. `kind` is
+`read` or `edit`; `status` is `implemented`, `beta` (runs, but a tracked edit needs
+`confirm: true`, see `CONFIRM_REQUIRED`) or `unsupported` (in the catalogue, refused as
+`UNSUPPORTED` `not_implemented`).
 
 ### `lint`
 
