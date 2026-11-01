@@ -489,7 +489,7 @@ The view model is a resolved, render-ready tree. The viewer never sees XML.
 
 | Op | Notes |
 |---|---|
-| `insert_table {after, rows, cols, header_row?, style?: "inherit"\|<id>, data?}` | Inherits the document's most-used table style. Width = text width. Tracked as inserted paragraph marks + `w:trPr/w:ins` per row. |
+| `insert_table {after, rows, cols, header_row?, style?: "inherit"\|<id>, data?}` | Table style is automatic: the document's most-used one, else `TableGrid`, else single borders. `style` is the *cell paragraph* style, not a table style. Width = text width. Tracked as inserted paragraph marks + `w:trPr/w:ins` per row. |
 | `insert_row {table, after_row, cells?}` / `delete_row` | `w:trPr/w:ins` / `w:trPr/w:del` (Word's tracked row changes); the new row clones the reference row's `trPr`/`tcPr`. |
 | `set_cell {table.rR.cC, text}` | Delegates to `replace_text` / `insert_paragraph` inside the cell's story. |
 | `insert_column` / `delete_column` | Word has no tracked column op: per-row cell insert/delete with `w:cellIns`/`w:cellDel`, plus `tblGridChange`. Marked **beta**; Word's support for tracked cell insertion is uneven, so the default in track mode is to warn and ask. |

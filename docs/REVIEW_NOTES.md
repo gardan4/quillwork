@@ -87,7 +87,7 @@ marked **Resolved** are kept for the record and point to where the spec now cove
   width minus side margins, default 9026 twips). Table style: the document's most-used one, else
   `TableGrid` if defined, else explicit single borders. The schema's `style` is read as the
   *cell paragraph* style (`inherit` | `P` | `H1`..`H9` | `LI` | a style id or name); there is no
-  table-style argument. Proposal: say so in the schema, or add `table_style`. An empty
+  table-style argument (the schema says so). An empty
   paragraph follows the table when nothing, another table or the body `sectPr` follows, so
   adjacent tables do not fuse.
 
