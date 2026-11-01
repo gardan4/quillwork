@@ -473,6 +473,8 @@ def test_runner_lint_fields_block_and_help(runner: ToolRunner, service: Document
     assert out.structured["data"]["block"]["id"] == "b101"
     out = advanced(runner, d, "help", name="list_changes")
     assert "list_changes {change_set?, author?, status?}" in out.text
+    caps = out.structured["data"]["capabilities"]
+    assert caps == [{"op": "list_changes", "kind": "read", "status": "implemented"}]
     out = advanced(runner, d, "get_image", asset="a_0000000000000000")
     assert out.is_error and out.structured["error"]["code"] == "NOT_FOUND"
     clean = service.upload(fake_bytes("# Title", "Plain text"), document_id="c").id

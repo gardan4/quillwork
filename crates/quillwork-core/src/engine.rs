@@ -480,6 +480,7 @@ impl Engine {
             let (text, data) = match self.read_more(op, obj) {
                 Ok(reads::Answer::Text(t)) => (Value::String(t), Value::Null),
                 Ok(reads::Answer::Data(d)) => (Value::Null, d),
+                Ok(reads::Answer::Both(t, d)) => (Value::String(t), d),
                 Err(e) => return Err(envelope(&e, version, None, Some(op))),
             };
             return Ok(json!({

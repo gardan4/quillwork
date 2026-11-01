@@ -437,10 +437,17 @@ class FakeDocument:
         return "\n".join(lines) or "§ lint: none"
 
     def _help(self, name: Any) -> JSON:
+        def cap(op: str) -> JSON:
+            kind = "read" if op in READ_OPS else "edit"
+            done = op in READ_OPS or op in _FAKE_WRITES
+            return {"op": op, "kind": kind, "status": "implemented" if done else "unsupported"}
+
         if name is None:
             reads = [_USAGE.get(n, n) for n in sorted(READ_OPS)]
             writes = [_USAGE.get(n, n) for n in sorted(_FAKE_WRITES)]
-            return self._read_result("\n".join(["§ read ops", *reads, "§ edit ops", *writes]), None)
+            caps = [cap(n) for n in [*sorted(READ_OPS), *sorted(_FAKE_WRITES)]]
+            text = "\n".join(["§ read ops", *reads, "§ edit ops", *writes])
+            return self._read_result(text, {"capabilities": caps})
         if not isinstance(name, str) or not name:
             raise self._invalid(
                 "name is an op name (replace_text, list_changes, …)", "/name", "help"
@@ -452,7 +459,7 @@ class FakeDocument:
         line = _USAGE.get(name, name)
         if name not in READ_OPS and name not in _FAKE_WRITES:
             line += " (not implemented)"
-        return self._read_result(line, None)
+        return self._read_result(line, {"capabilities": [cap(name)]})
 
     def apply(self, transaction: JSON) -> JSON:
         tx = transaction

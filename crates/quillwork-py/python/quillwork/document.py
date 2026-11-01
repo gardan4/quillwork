@@ -196,7 +196,8 @@ class Document:
         return self._data({"op": "list_fields"})
 
     def help(self, name: str | None = None) -> str:
-        """One-line signatures of every op, or of ``name``."""
+        """One-line signatures of every op, or of ``name``. ``read_op({"op": "help"})["data"]``
+        has the same ops as a ``capabilities`` list of ``{op, kind, status}``."""
         request: JsonObject = {"op": "help"}
         if name is not None:
             request["name"] = name

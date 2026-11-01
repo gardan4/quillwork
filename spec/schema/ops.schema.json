@@ -353,7 +353,7 @@
             "object",
             "null"
           ],
-          "description": "Structured result (get_block, list_*, get_image)."
+          "description": "Structured result (get_block, list_*, get_image; help's capabilities)."
         },
         "next": {
           "oneOf": [
@@ -2401,7 +2401,7 @@
     },
     "Op_help": {
       "type": "object",
-      "description": "One-line signatures of every op, or of one.",
+      "description": "One-line signatures of every op, or of one, in text; data.capabilities lists the same ops as {op, kind: read|edit, status: implemented|beta|unsupported}.",
       "allOf": [
         {
           "$ref": "#/$defs/ReadCommon"

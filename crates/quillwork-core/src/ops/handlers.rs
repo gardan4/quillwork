@@ -46,6 +46,9 @@ pub const IMPLEMENTED: &[&str] = &[
     "set_track_changes",
 ];
 
+/// Implemented ops that are beta: a tracked edit needs `confirm: true` (`CONFIRM_REQUIRED`).
+pub const BETA: &[&str] = &["insert_column", "delete_column"];
+
 /// Ops that may add a package part (numbering, settings, the comment parts). A transaction that
 /// holds one snapshots the package so a rollback can drop the new parts.
 pub const MAY_ADD_PARTS: &[&str] = &[

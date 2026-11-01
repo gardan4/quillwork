@@ -608,3 +608,30 @@ fn result_text_carries_outline_and_lint() {
     let t = e.apply_text(&tx.to_string());
     assert!(!t.contains("§ outline:") && !t.contains("§ lint:"), "{t}");
 }
+
+#[test]
+fn help_lists_capabilities() {
+    let e = engine(&fixture("01-run-formatting"));
+    let r = ok(&e, json!({"op": "help"}));
+    let caps = r["data"]["capabilities"].as_array().expect("capabilities");
+    let status = |op: &str| -> (String, String) {
+        let c = caps.iter().find(|c| c["op"] == op).unwrap_or_else(|| panic!("{op} missing"));
+        (c["kind"].as_str().unwrap().to_owned(), c["status"].as_str().unwrap().to_owned())
+    };
+    assert_eq!(status("list_changes"), ("read".into(), "implemented".into()));
+    assert_eq!(status("replace_text"), ("edit".into(), "implemented".into()));
+    assert_eq!(status("insert_column"), ("edit".into(), "beta".into()));
+    assert_eq!(status("insert_field"), ("edit".into(), "unsupported".into()));
+    // One entry per signature line in the text, and an op marked not implemented there is
+    // unsupported here.
+    let text = r["text"].as_str().unwrap();
+    assert_eq!(caps.len(), text.lines().filter(|l| !l.starts_with('§')).count());
+    for c in caps {
+        let line = text.lines().find(|l| l.split(' ').next() == c["op"].as_str()).unwrap();
+        assert_eq!(line.ends_with("(not implemented)"), c["status"] == "unsupported", "{line}");
+    }
+
+    let r = ok(&e, json!({"op": "help", "name": "insert_field"}));
+    assert_eq!(r["data"], json!({"capabilities": [{"op": "insert_field", "kind": "edit", "status": "unsupported"}]}));
+    assert!(r["text"].as_str().unwrap().ends_with("(not implemented)"));
+}
