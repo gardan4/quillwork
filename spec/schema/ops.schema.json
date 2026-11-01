@@ -1189,7 +1189,7 @@
     },
     "Op_insert_table": {
       "type": "object",
-      "description": "Inherits the document's most-used table style; width = text width; tracked per row.",
+      "description": "Table style is chosen automatically: the document's most-used table style, else TableGrid if defined, else explicit single borders. There is no table-style argument. Width = text width; tracked per row.",
       "allOf": [
         {
           "$ref": "#/$defs/Guards"
@@ -1216,7 +1216,7 @@
         "style": {
           "type": "string",
           "minLength": 1,
-          "description": "\"inherit\" (default: clone the anchor's pPr), a projection KIND (P, H1-H9, LI) or a style id or name."
+          "description": "Paragraph style of the new cell paragraphs, not the table style: \"inherit\" (default: clone the anchor's pPr), a projection KIND (P, H1-H9, LI) or a style id or name."
         },
         "data": {
           "type": "array",
