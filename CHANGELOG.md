@@ -16,6 +16,14 @@ are listed under **Changed**.
   `{op, kind, status}` per op, where `status` is `implemented`, `beta` or `unsupported`, so an
   agent can plan without parsing the signature text.
 
+### Changed
+
+- `reject` of a tracked cell merge (`w:cellMerge`) or numbering change (`w:numberingChange`) is
+  refused with `UNSUPPORTED` (`unsupported_target`) and leaves the document unchanged. It used
+  to drop the marker and report success without restoring the old merge or numbering, which the
+  file does not keep. The error lists the revision ids; accept them, or reject the other
+  revisions by `revision_ids`.
+
 ### Fixed
 
 - Story text in the accept-all view runs a paragraph whose mark is deleted on into the next
