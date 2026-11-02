@@ -41,9 +41,10 @@ marked **Resolved** are kept for the record and point to where the spec now cove
 
 - `tblGridChange` is not in `wml::view::RevisionKind`. `review` lists it itself as kind
   `gridChange`. Accepting drops the change; rejecting restores the old grid.
-- `cellMerge` and `numberingChange` (and `w:numPr/w:ins`) are resolved by dropping the marker on
-  both accept and reject. On reject the old merge state or numbering is **not** restored: the
-  marker carries no old value for the merge, and `numberingChange` has only a legacy text form.
+- `cellMerge` and `numberingChange` are resolved by dropping the marker on accept. Reject is
+  refused with `UNSUPPORTED` `unsupported_target` (listing the revision ids) and changes
+  nothing: the marker carries no old value for the merge, and `numberingChange` has only a
+  legacy text form, so the old state cannot be restored. `w:numPr/w:ins` is dropped on both.
 - Tracked **columns** (`cellIns` / `cellDel`) are beta and need `confirm: true` in track mode,
   else `CONFIRM_REQUIRED` (reason `beta`). Rejecting a `cellIns` or accepting a `cellDel` removes
   the cell and shrinks `tblGrid` by its span. `tblW` is not rescaled.
