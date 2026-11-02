@@ -13,7 +13,7 @@
 //! | row inserted (`trPr/ins`)        | drop the marker              | remove the row                 |
 //! | row deleted (`trPr/del`)         | remove the row               | drop the marker                |
 //! | `cellIns` / `cellDel`            | drop marker / remove cell    | remove cell / drop marker      |
-//! | `cellMerge`, `numberingChange`   | drop the marker              | drop the marker (not restored) |
+//! | `cellMerge`, `numberingChange`   | drop the marker              | refused: `UNSUPPORTED`         |
 //!
 //! A move is resolved as a whole: selecting either half selects both (by move range name) and
 //! the `move*RangeStart/End` markers go with it. Revisions are applied in reverse document
@@ -495,6 +495,29 @@ pub fn apply(doc: &mut WordDoc, anchors: &mut Anchors, args: &ReviewArgs, accept
     for (it, s) in items.iter().zip(selected.iter_mut()) {
         if is_move(it.k) && it.move_name.as_deref().is_some_and(|n| move_names.contains(n)) {
             *s = true;
+        }
+    }
+
+    // The file keeps no old value for a merge or a numbering change, so a reject could only drop
+    // the marker and report success without restoring anything. Refuse before touching the
+    // document.
+    if !accept {
+        let mut ids: Vec<i64> = items
+            .iter()
+            .zip(&selected)
+            .filter(|(it, s)| **s && matches!(it.k, K::CellMerge | K::Numbering))
+            .map(|(it, _)| it.id.unwrap_or(-1))
+            .collect();
+        if !ids.is_empty() {
+            ids.sort_unstable();
+            ids.dedup();
+            return Err(err(
+                "UNSUPPORTED",
+                format!(
+                    "unsupported_target: reject cannot restore the old cell merge or numbering of revision {ids:?} \
+                     (the file keeps no old value); accept them, or reject the others by revision_ids"
+                ),
+            ));
         }
     }
 
@@ -994,6 +1017,27 @@ mod tests {
         let out = apply(&mut wd, &mut an, &args, true).unwrap();
         assert_eq!(out.revisions, vec![1, 2]);
         assert_eq!(body_xml(&wd), "<w:p></w:p><w:p><w:r><w:t>M</w:t></w:r></w:p>");
+    }
+
+    #[test]
+    fn reject_refuses_unrestorable_markers() {
+        let merge = r#"<w:tbl><w:tblPr/><w:tblGrid><w:gridCol w:w="100"/></w:tblGrid><w:tr><w:tc><w:tcPr><w:cellMerge w:id="7" w:author="A" w:date="d" w:vMerge="cont"/></w:tcPr><w:p><w:r><w:t>a</w:t></w:r></w:p></w:tc></w:tr></w:tbl>"#;
+        let num = r#"<w:p><w:pPr><w:numPr><w:ilvl w:val="0"/><w:numId w:val="1"/><w:numberingChange w:id="8" w:author="A" w:date="d" w:original="%1."/></w:numPr></w:pPr><w:r><w:t>n</w:t></w:r></w:p>"#;
+        let body = format!("{merge}{num}{INS_DEL}");
+        let mut wd = doc(&body);
+        let mut an = Anchors::mint(&wd);
+        let before = body_xml(&wd);
+        let all = ReviewArgs { all: Some(true), ..Default::default() };
+        let e = apply(&mut wd, &mut an, &all, false).unwrap_err().to_string();
+        assert!(e.starts_with("UNSUPPORTED: unsupported_target: ") && e.contains("[7, 8]"), "{e}");
+        assert_eq!(body_xml(&wd), before, "a refused reject leaves the document unchanged");
+        // The other revisions can still be rejected by id, and accept still drops the markers.
+        let others = ReviewArgs { revision_ids: Some(vec![1, 2]), ..Default::default() };
+        apply(&mut wd, &mut an, &others, false).unwrap();
+        assert!(body_xml(&wd).contains(">old<"));
+        apply(&mut wd, &mut an, &all, true).unwrap();
+        let x = body_xml(&wd);
+        assert!(!x.contains("cellMerge") && !x.contains("numberingChange"), "{x}");
     }
 
     #[test]

@@ -627,7 +627,8 @@ empty paragraph behind. The rule, for `delete_block`, `insert_paragraph`, `move_
 
 These are implemented structurally, per revision type. Accepting an insert unwraps it; rejecting it removes
 the content. Deletes are the mirror image. Accepting a format change drops `*Change`; rejecting it restores
-the snapshot. A paragraph-mark delete merges the paragraph with the next one; before a table or a block content control the paragraph stays (§7.3). A move resolves both ends.
+the snapshot. A paragraph-mark delete merges the paragraph with the next one; before a table or a block content control the paragraph stays (§7.3). A move resolves both ends. A tracked cell merge or numbering change carries no old value, so rejecting one is refused
+(`UNSUPPORTED`) rather than reported as done.
 
 Scopes: one revision, one change set, by author, or all.
 
