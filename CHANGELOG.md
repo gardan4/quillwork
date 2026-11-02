@@ -24,6 +24,11 @@ are listed under **Changed**.
   file does not keep. The error lists the revision ids; accept them, or reject the other
   revisions by `revision_ids`.
 
+### Removed
+
+- The empty `crates/quillwork-wasm` placeholder is removed from the workspace. It never held
+  code and was never published; a WASM binding will come back as a real crate.
+
 ### Fixed
 
 - Story text in the accept-all view runs a paragraph whose mark is deleted on into the next
@@ -42,9 +47,6 @@ are listed under **Changed**.
   integration are outside this first API.
 
 ### Changed
-
-- The empty `crates/quillwork-wasm` placeholder is removed from the workspace. It never held
-  code and was never published; a WASM binding will come back as a real crate.
 
 - Validate optional Word request `spec_version` as SemVer and reject incompatible major/minor
   versions before execution. Shared schemas now accept Rust's zero-origin counters without
