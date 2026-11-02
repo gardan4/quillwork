@@ -1,6 +1,6 @@
 [workspace]
 resolver = "3"
-members = ["crates/quillwork-core", "crates/quillwork-py", "crates/quillwork-wasm"]
+members = ["crates/quillwork-core", "crates/quillwork-py"]
 
 [workspace.package]
 version = "0.0.4"
