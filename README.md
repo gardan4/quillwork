@@ -189,8 +189,8 @@ numbers.
 - **Presentations:** no slide creation, image/chart editing, native tracked changes, HTTP/MCP
   routing or viewer support yet. Text can overflow its existing box; render candidates before
   approval. See the [presentation contract](spec/presentation/README.md).
-- **Bindings:** Python and Rust only. The WASM binding (`crates/quillwork-wasm`) is a
-  placeholder. The viewer is written but not yet published to npm.
+- **Bindings:** Python and Rust only. There is no WASM binding yet. The viewer is written but
+  not yet published to npm.
 - **Anchors:** anchors survive across sessions only when you keep the sidecar from
   `save_with_sidecar()` and pass it back to `open()`. Without it, anchors are re-minted from
   the document.

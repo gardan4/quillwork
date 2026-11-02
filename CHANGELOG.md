@@ -35,6 +35,9 @@ are listed under **Changed**.
 
 ### Changed
 
+- The empty `crates/quillwork-wasm` placeholder is removed from the workspace. It never held
+  code and was never published; a WASM binding will come back as a real crate.
+
 - Validate optional Word request `spec_version` as SemVer and reject incompatible major/minor
   versions before execution. Shared schemas now accept Rust's zero-origin counters without
   changing Python/service version-1 uploads or historical sidecar counters.

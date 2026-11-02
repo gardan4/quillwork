@@ -610,13 +610,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "quillwork-wasm"
-version = "0.0.4"
-dependencies = [
- "quillwork-core",
-]
-
-[[package]]
 name = "quote"
 version = "1.0.47"
 source = "registry+https://github.com/rust-lang/crates.io-index"
