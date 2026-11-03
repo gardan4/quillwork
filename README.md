@@ -102,13 +102,36 @@ every op with its parameters.
 
 ### MCP server (Claude Desktop, Claude Code and other MCP clients)
 
+Run it without installing anything first ([uv](https://docs.astral.sh/uv/) fetches the packages):
+
 ```sh
-quillwork-mcp                       # stdio
+uvx --from 'quillwork-server[mcp]' quillwork-mcp --store ~/quillwork-docs     # stdio
 ```
+
+Add it to Claude Code:
+
+```sh
+claude mcp add quillwork -- uvx --from 'quillwork-server[mcp]' quillwork-mcp --store ~/quillwork-docs
+```
+
+Or to any client that takes an `mcpServers` config (after `pip install 'quillwork-server[mcp]'`):
 
 ```json
 { "mcpServers": { "quillwork": { "command": "quillwork-mcp", "args": ["--store", "/path/to/docs"] } } }
 ```
+
+Without `--store` the documents live in memory and are gone when the server stops.
+
+Try it on the synthetic sample contract:
+
+1. Make the file: `uvx --with python-docx python examples/make_sample.py` writes
+   `sample-contract.docx` (every name in it is made up).
+2. Ask the agent: *"Open sample-contract.docx with quillwork and read it."* It uploads the file
+   with `open_document` and calls `read_document`, which shows each block with an anchor
+   (`[b104 #2.] The hourly rate is EUR 95, excluding VAT.`).
+3. Ask: *"Change the hourly rate to EUR 110 and export the redline."* The `edit` comes back as a
+   tracked change (`EUR {--95--}{++110++}`), and `export_document` returns the `.docx` with the
+   change for review in Word.
 
 This exposes eight agent tools (`read_document`, `find`, `edit`, `format`, `table`, `comment`,
 `review`, `advanced_op`) plus open, list and export. Their schemas are in
