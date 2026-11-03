@@ -1,9 +1,11 @@
 # Distributions for the two Python packages:
 # - `quillwork` (crates/quillwork-py): abi3 wheels for CPython 3.12+, manylinux_2_28 x86_64 and
-#   macOS arm64, plus an sdist (builds from source with a Rust toolchain);
+#   arm64, macOS arm64 and x86_64, and Windows x86_64, plus an sdist (builds from source with a
+#   Rust toolchain). Each wheel is built and smoke-tested on a native runner of its platform;
 # - `quillwork-server` (python/quillwork_server): one pure-Python wheel and an sdist.
-# Every run uploads them as workflow artifacts named `py-quillwork-*` and `py-server`. A `v*` tag
-# push also attaches them to the GitHub Release of that tag (created when it doesn't exist).
+# Every run (tag push, dispatch, or a PR that touches the packaging files) uploads them as workflow
+# artifacts named `py-quillwork-*` and `py-server`. A `v*` tag push also attaches them to the
+# GitHub Release of that tag (created when it doesn't exist).
 # This workflow publishes nothing; publish.yml calls it and uploads the artifacts to PyPI.
 # Actions are pinned to commit SHAs; the tag each SHA was taken from is in the trailing comment.
 name: wheels
@@ -11,6 +13,13 @@ name: wheels
 on:
   push:
     tags: ["v*"]
+  # A PR that changes how the wheels are built gets them built and smoke-tested before merge.
+  pull_request:
+    paths:
+      - .github/workflows/wheels.yml
+      - crates/quillwork-py/Cargo.toml
+      - crates/quillwork-py/pyproject.toml
+      - python/quillwork_server/pyproject.toml
   workflow_dispatch:
   workflow_call:
 
@@ -34,10 +43,22 @@ jobs:
             os: ubuntu-24.04
             target: x86_64-unknown-linux-gnu
             manylinux: "2_28"
+          - name: linux-arm64-manylinux_2_28
+            os: ubuntu-24.04-arm
+            target: aarch64-unknown-linux-gnu
+            manylinux: "2_28"
           - name: macos-arm64
             os: macos-14
             target: aarch64-apple-darwin
-            manylinux: auto # ignored on macOS
+            manylinux: auto # ignored off Linux
+          - name: macos-x86_64
+            os: macos-15-intel
+            target: x86_64-apple-darwin
+            manylinux: auto
+          - name: windows-x86_64
+            os: windows-2025
+            target: x86_64-pc-windows-msvc
+            manylinux: auto
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -54,6 +75,32 @@ jobs:
       - name: Wheel size
         shell: bash
         run: ls -l dist/
+
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
+        with:
+          version: "0.11.16"
+          enable-cache: false
+
+      # Install the wheel into a clean 3.12 venv (outside the checkout, so the source tree can't
+      # shadow it) and round-trip a corpus fixture through the native module.
+      - name: Smoke test
+        shell: bash
+        run: |
+          uv venv --python 3.12 "$RUNNER_TEMP/smoke"
+          uv pip install --python "$RUNNER_TEMP/smoke" dist/*.whl
+          py="$RUNNER_TEMP/smoke/bin/python"
+          [ -x "$py" ] || py="$RUNNER_TEMP/smoke/Scripts/python.exe"
+          cd "$RUNNER_TEMP"
+          "$py" - "$GITHUB_WORKSPACE/corpus/fixtures/01-run-formatting.docx" <<'PY'
+          import sys
+          from pathlib import Path
+          import quillwork
+          data = Path(sys.argv[1]).read_bytes()
+          doc = quillwork.Document.open(data)
+          out = doc.save()
+          quillwork.Document.open(out)
+          print(quillwork.__version__, quillwork._native.__file__, len(out), "bytes")
+          PY
 
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:

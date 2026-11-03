@@ -15,6 +15,9 @@ are listed under **Changed**.
 - `help` also answers in `data` with a machine-readable `capabilities` list: one
   `{op, kind, status}` per op, where `status` is `implemented`, `beta` or `unsupported`, so an
   agent can plan without parsing the signature text.
+- `quillwork` wheels for Linux arm64 (manylinux 2.28), macOS x86_64 and Windows x86_64, next to
+  the Linux x86_64 and macOS arm64 ones. Each wheel is installed and smoke-tested on its own
+  platform in CI before it is uploaded.
 
 ### Changed
 

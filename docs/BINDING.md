@@ -250,10 +250,12 @@ uvx maturin build --release -m crates/quillwork-py/Cargo.toml --out dist   # hos
   `$QUILLWORK_PRIVATE_CORPUS`, else from a `quillwork-private-corpus` folder in a parent directory
   (the root itself when it holds `.docx` files, else its first subfolder that does). When found, its files join the round-trip, edit-locality and example tests, labelled
   `private-<index>`. Assertions print booleans and part names, never document text.
-- **CI** (`.github/workflows/wheels.yml`). On `v*` tags, or when run by hand, it builds a linux x86_64
-  `manylinux_2_28` wheel and a macOS arm64 wheel with `PyO3/maturin-action`, then uploads them as
-  workflow artifacts. Actions are pinned to commit SHAs, and nothing is published. DESIGN §15 also wants
-  Linux arm64 and Windows wheels; add those rows to the matrix when a consumer needs them.
+- **CI** (`.github/workflows/wheels.yml`). On `v*` tags, on PRs that change the packaging files
+  (`wheels.yml`, the two `pyproject.toml` files, `crates/quillwork-py/Cargo.toml`), or when run by hand, it builds `manylinux_2_28` wheels
+  for Linux x86_64 and arm64, macOS arm64 and x86_64 wheels, and a Windows x86_64 wheel with
+  `PyO3/maturin-action`, each on a native runner of its platform. Each wheel is installed into a clean
+  Python 3.12 venv and round-trips a corpus fixture (smoke test), then all are uploaded as workflow
+  artifacts. Actions are pinned to commit SHAs, and nothing is published.
 - **Local manylinux without the action.**
 
   ```sh
