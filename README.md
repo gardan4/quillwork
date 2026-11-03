@@ -68,8 +68,9 @@ pip install quillwork                    # the engine (Python binding)
 pip install 'quillwork-server[mcp]'      # optional: MCP server and agent tools
 ```
 
-Prebuilt wheels cover macOS arm64 and Linux x86_64 (manylinux 2.28). On other platforms pip
-builds from source, which needs a Rust toolchain (1.88 or newer). The same wheels are attached
+Prebuilt wheels cover Linux x86_64 and arm64 (manylinux 2.28), macOS arm64 and x86_64, and
+Windows x86_64 (from the first release after 0.0.4; 0.0.4 and earlier have macOS arm64 and Linux
+x86_64 only). On other platforms pip builds from source, which needs a Rust toolchain (1.88 or newer). The same wheels are attached
 to each [GitHub release](https://github.com/gardan4/quillwork/releases).
 
 ## Quickstart
