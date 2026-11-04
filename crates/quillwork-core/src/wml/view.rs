@@ -91,28 +91,48 @@ pub fn paragraphs(doc: &Document, root: NodeId) -> Vec<Paragraph> {
 /// The story's paragraphs as read in `mode`: like [`paragraphs`] mapped to their text, except
 /// that a paragraph whose mark is a tracked deletion (accept-all) or insertion (reject-all)
 /// does not end there and runs on into the next one. In [`TextMode::AsIs`] every paragraph
-/// stands alone.
+/// stands alone. A paragraph never runs on across a table boundary (into a table, out of one,
+/// or into another cell): see [`runs_on_into`].
 pub fn paragraph_texts(doc: &Document, root: NodeId, mode: TextMode) -> Vec<String> {
     let mut out = Vec::new();
-    let mut carry: Option<String> = None;
+    let mut carry: Option<(Paragraph, String)> = None;
     for p in paragraphs(doc, root) {
-        let mut t = carry.take().unwrap_or_default();
+        let mut t = match carry.take() {
+            Some((prev, t)) if runs_on_into(doc, prev.0, p.0) => t,
+            Some((_, t)) => {
+                out.push(t);
+                String::new()
+            }
+            None => String::new(),
+        };
         t.push_str(&p.text(doc, mode));
-        let joins = matches!(
-            (mode, p.mark_revision(doc).map(|r| r.kind)),
-            (TextMode::AcceptAll, Some(RevisionKind::ParaMarkDel))
-                | (TextMode::RejectAll, Some(RevisionKind::ParaMarkIns))
-        );
-        if joins {
-            carry = Some(t);
+        if mark_removed(doc, p.0, mode) {
+            carry = Some((p, t));
         } else {
             out.push(t);
         }
     }
-    if let Some(t) = carry {
+    if let Some((_, t)) = carry {
         out.push(t);
     }
     out
+}
+
+/// Whether paragraph `p`'s mark goes away in `mode` (deleted under accept-all, inserted under
+/// reject-all), so that `p` runs on into the next paragraph.
+pub(crate) fn mark_removed(doc: &Document, p: NodeId, mode: TextMode) -> bool {
+    matches!(
+        (mode, Paragraph(p).mark_revision(doc).map(|r| r.kind)),
+        (TextMode::AcceptAll, Some(RevisionKind::ParaMarkDel)) | (TextMode::RejectAll, Some(RevisionKind::ParaMarkIns))
+    )
+}
+
+/// Whether a paragraph `prev` whose mark is removed runs on into `next`, the next paragraph in
+/// document order. Only when both sit in the same table cell (or both outside any table): a
+/// paragraph before a table, at the end of a cell or before a nested table keeps its own line,
+/// as in Word, `edit::review` and the text oracle.
+pub(crate) fn runs_on_into(doc: &Document, prev: NodeId, next: NodeId) -> bool {
+    Paragraph(prev).cell(doc) == Paragraph(next).cell(doc)
 }
 
 /// Every table of a story in document order, nested tables included.

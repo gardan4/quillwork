@@ -37,6 +37,9 @@ are listed under **Changed**.
 - Story text in the accept-all view runs a paragraph whose mark is deleted on into the next
   instead of keeping an empty line, and reject-all does the same for an inserted mark. It now
   matches the per-paragraph view.
+- That run-on stops at a table boundary in both text views: a paragraph whose mark is removed
+  before a table, at the end of a cell or before a nested table keeps its own line instead of
+  running into the next cell. This matches Word and the review engine.
 
 ## [0.0.4] - 2026-10-28
 
