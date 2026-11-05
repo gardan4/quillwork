@@ -266,10 +266,18 @@ uvx maturin build --release -m crates/quillwork-py/Cargo.toml --out dist   # hos
       -m crates/quillwork-py/Cargo.toml --out dist --target-dir target/manylinux'
   ```
 
-Wheel sizes (0.0.1, release profile: fat LTO, stripped) are in the table below. DESIGN §2 estimated
-0.3 to 0.6 MB.
+Wheel sizes (release profile: fat LTO, stripped) are in the table below, measured on the CI
+wheels of 3 Nov 2026 (version 0.0.4 plus the Unreleased changes). The two 0.0.4 wheels on
+PyPI are within 1% of these. DESIGN §2 estimated 0.3 to 0.6 MB; the 0.0.1 wheels were 434 KB
+(macOS arm64) and 489 KB (Linux x86_64), and since 0.0.2 they are about 2.1 to 2.5 MB.
 
-| Wheel | Size |
-|---|---|
-| `cp312-abi3-macosx_11_0_arm64` | 434 KB (855 KB `.so`) |
-| `cp312-abi3-manylinux_2_28_x86_64` | 489 KB (952 KB `.so`); its pytest run in the container: 111 passed, 1 skipped (mypy) |
+| Wheel | Wheel | Native module |
+|---|---|---|
+| `cp312-abi3-macosx_11_0_arm64` | 2.18 MB | 4.35 MB `.so` |
+| `cp312-abi3-macosx_10_12_x86_64` | 2.36 MB | 4.89 MB `.so` |
+| `cp312-abi3-manylinux_2_28_aarch64` | 2.26 MB | 4.59 MB `.so` |
+| `cp312-abi3-manylinux_2_28_x86_64` | 2.45 MB | 5.34 MB `.so` |
+| `cp312-abi3-win_amd64` | 2.46 MB | 5.81 MB `.pyd` |
+
+Check a wheel with `unzip -l dist/*.whl`; the `Wheel size` step of `wheels.yml` prints them on each
+run.
