@@ -894,7 +894,7 @@ slide structure, a presentation viewer, comments and sidecar history remain futu
 | Item | Decision |
 |---|---|
 | Licence | **Apache-2.0**: permissive like MIT, plus an explicit patent grant, which matters near the Office formats. Not copyleft, so companies can adopt it. |
-| Layout | One monorepo: `spec/`; `crates/quillwork-core` (engine), `crates/quillwork-py` (PyO3 → the `quillwork` wheel), `crates/quillwork-wasm` (`@quillwork/core-wasm`, planned, not in the workspace yet); `python/quillwork-mcp`, `python/quillwork-server`; `js/viewer` (`@quillwork/viewer` + `@quillwork/react`); `corpus/`, `docs/`, `bench/`. Wheels are built for Linux (x86-64, arm64), macOS and Windows by maturin in CI. |
+| Layout | One monorepo: `spec/`; `crates/quillwork-core` (engine), `crates/quillwork-py` (PyO3 → the `quillwork` wheel); `python/quillwork_server` (the `quillwork-server` package, with the `quillwork-mcp` MCP server and the `quillwork-server` HTTP API); `js/viewer` (`@quillwork/viewer`, React component at `@quillwork/viewer/react`); `tools/oracle`, `corpus/`, `examples/`, `docs/`, `bench/`. A WASM binding (`@quillwork/core-wasm`) is future work and will come as its own crate. Wheels are built for Linux (x86-64, arm64), macOS (arm64, x86-64) and Windows (x86-64) by maturin in CI. |
 | Boundary | Nothing host-specific inside: no auth, tenants, memory paths, billing or prompts. Each host has a thin adapter of its own. |
 | Where it lives | Its own repo from day one, consumed by hosts as a pinned dependency. |
 | Naming | No "Word", "Office" or "docx" in the product name (Microsoft trademarks). "Quillwork" is a working name. |
