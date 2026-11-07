@@ -1,0 +1,32 @@
+# Fast local checks before each commit: `pip install pre-commit && pre-commit install`.
+# They mirror the matching steps in .github/workflows/ci.yml; CI stays the source of truth.
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.17.4
+    hooks:
+      # CI lints the server, the examples and the benchmark, and checks formatting of the server.
+      - id: ruff-check
+        files: ^(python/quillwork_server|examples|bench)/
+      - id: ruff-format
+        args: [--check]
+        files: ^python/quillwork_server/
+
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.30.1
+    hooks:
+      - id: gitleaks
+
+  - repo: local
+    hooks:
+      - id: cargo-fmt
+        name: cargo fmt
+        entry: cargo fmt --all --check
+        language: system
+        types: [rust]
+        pass_filenames: false
+      - id: cargo-clippy
+        name: cargo clippy
+        entry: cargo clippy --workspace --all-targets -- -D warnings
+        language: system
+        types: [rust]
+        pass_filenames: false

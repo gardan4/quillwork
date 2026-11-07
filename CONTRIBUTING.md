@@ -47,6 +47,9 @@ only uses the public files, point the variable at an empty directory:
 mkdir -p /tmp/qw-empty && export QUILLWORK_PRIVATE_CORPUS=/tmp/qw-empty
 ```
 
+Optionally, `pip install pre-commit && pre-commit install` runs the fast checks (rustfmt,
+clippy, ruff and a gitleaks secret scan) before each commit; `.pre-commit-config.yaml` lists them.
+
 ### Rust
 
 ```sh
