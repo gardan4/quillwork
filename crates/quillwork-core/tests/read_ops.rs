@@ -635,3 +635,36 @@ fn help_lists_capabilities() {
     assert_eq!(r["data"], json!({"capabilities": [{"op": "insert_field", "kind": "edit", "status": "unsupported"}]}));
     assert!(r["text"].as_str().unwrap().ends_with("(not implemented)"));
 }
+
+/// `help` and the spec name the same ops with the same kind: every `MutatingOp` in
+/// `ops.schema.json` is an `edit` capability and every `ReadOp` a `read` one, and nothing else.
+/// An op added to the engine or to the spec alone fails here.
+#[test]
+fn help_capabilities_match_the_spec() {
+    let path = xml_support::workspace_root().join("spec/schema/ops.schema.json");
+    let schema: Value = serde_json::from_slice(&std::fs::read(path).expect("schema")).expect("json");
+    let defs = &schema["$defs"];
+    let mut spec: Vec<(String, String)> = Vec::new();
+    for (group, kind) in [("MutatingOp", "edit"), ("ReadOp", "read")] {
+        for r in defs[group]["oneOf"].as_array().unwrap_or_else(|| panic!("{group}.oneOf")) {
+            let name = r["$ref"].as_str().and_then(|s| s.strip_prefix("#/$defs/")).expect("local $ref");
+            let op = defs[name]["properties"]["op"]["const"].as_str().unwrap_or_else(|| panic!("{name} op const"));
+            spec.push((op.to_owned(), kind.to_owned()));
+        }
+    }
+    spec.sort();
+
+    let e = engine(&fixture("01-run-formatting"));
+    let r = ok(&e, json!({"op": "help"}));
+    let mut help: Vec<(String, String)> = r["data"]["capabilities"]
+        .as_array()
+        .expect("capabilities")
+        .iter()
+        .map(|c| (c["op"].as_str().unwrap().to_owned(), c["kind"].as_str().unwrap().to_owned()))
+        .collect();
+    help.sort();
+
+    let only_spec: Vec<_> = spec.iter().filter(|o| !help.contains(o)).collect();
+    let only_help: Vec<_> = help.iter().filter(|o| !spec.contains(o)).collect();
+    assert!(only_spec.is_empty() && only_help.is_empty(), "only in spec: {only_spec:?}; only in help: {only_help:?}");
+}
